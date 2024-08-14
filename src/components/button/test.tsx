@@ -62,17 +62,3 @@ export default function Home() {
         </div>
     );
 }
-
-/*
-
-            <button
-                className={cn(`button`, {
-                    ["button_blue"]: bear > 10,
-                })}
-                onClick={increaseBear}
-            >
-                {bear}
-            </button>
-            <Button className={cn("button")}>Save changes</Button>
-     
-*/

@@ -1,0 +1,74 @@
+@mixin size($width, $height, $padding, $radius) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    border-radius: $radius;
+}
+
+.button {
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    // subtitle1-semibold
+    color: #fff;
+
+    &.large {
+        @include size(auto, 3.25rem, 0.875rem 1.25rem, 0.5rem);
+    }
+    &.small {
+        @include size(auto, auto, 0.75rem 1rem, 0.5rem);
+    }
+    &.xSmall {
+        @include size(auto, 2rem, 0.375rem 0.75rem, 0.625rem);
+    }
+    &.full {
+        @include size(100%, 3.25rem, 0.875rem 1.25rem, 0.5rem);
+    }
+}
+.green {
+    background-color: $green-500;
+
+    &:active {
+        background-color: $green-600;
+    }
+
+    &:disabled {
+        background-color: $green-100;
+        cursor: not-allowed;
+    }
+}
+.gray {
+    background-color: $gray-700;
+    &:active {
+        background-color: $gray-800;
+    }
+
+    &:disabled {
+        background-color: $gray-200;
+        cursor: not-allowed;
+    }
+}
+.white {
+    background-color: $white;
+    color: $gray-800;
+    border: 1px solid $gray-800;
+
+    &:active {
+        color: $gray-700;
+        background-color: $gray-50;
+        border-color: $gray-500;
+    }
+
+    &:disabled {
+        color: $gray-300;
+        border-color: $gray-200;
+        cursor: not-allowed;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
