@@ -1,25 +1,144 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-Medium';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-Semibold';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
+@mixin font-style($weight, $size, $line-height) {
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
 }
 
-@font-face {
-    font-family: 'Pretendard-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
+.h1 {
+  @include font-style(700, 26px, 135%);
+}
+
+.title1 {
+  &-bold {
+    @include font-style(700, 24px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 24px, 135%);
+  }
+}
+
+.title2 {
+  &-bold {
+    @include font-style(700, 20px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 20px, 135%);
+  }
+}
+
+.title3 {
+  &-semibold {
+    @include font-style(600, 18px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 18px, 135%);
+  }
+}
+
+.subtitle1 {
+  &-semibold {
+    @include font-style(600, 16px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 16px, 135%);
+  }
+}
+
+.subtitle2 {
+  &-semibold {
+    @include font-style(600, 14px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 14px, 135%);
+  }
+}
+
+.body1 {
+  &-semibold {
+    @include font-style(600, 16px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 16px, 135%);
+  }
+}
+
+.body2 {
+  &-semibold {
+    @include font-style(600, 14px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 14px, 135%);
+  }
+}
+
+.caption1 {
+  &-semibold {
+    @include font-style(600, 13px, 150%);
+  }
+  &-regular {
+    @include font-style(400, 13px, 150%);
+  }
+}
+
+.caption2 {
+  &-semibold {
+    @include font-style(600, 12px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 12px, 135%);
+  }
+}
+
+.label1 {
+  &-semibold {
+    @include font-style(600, 18px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 18px, 135%);
+  }
+}
+
+.label2 {
+  &-semibold {
+    @include font-style(600, 16px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 16px, 135%);
+  }
+}
+
+.label3 {
+  &-medium {
+    @include font-style(500, 14px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 14px, 135%);
+  }
+}
+
+.label4 {
+  &-semibold {
+    @include font-style(600, 12px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 12px, 135%);
+  }
+}
+
+.label5 {
+  &-semibold {
+    @include font-style(600, 11px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 11px, 135%);
+  }
+}
+
+.label6 {
+  &-semibold {
+    @include font-style(600, 10px, 135%);
+  }
+  &-regular {
+    @include font-style(400, 10px, 135%);
+  }
 }
