@@ -12,8 +12,11 @@ const cn = classNames.bind(style);
 export default function Home() {
     const { bear, increaseBear } = useStore();
 
-    return (
-        <div>
+    return <div></div>;
+}
+
+/*
+
             <button
                 className={cn(`button`, {
                     ["button_blue"]: bear > 10,
@@ -23,6 +26,5 @@ export default function Home() {
                 {bear}
             </button>
             <Button className={cn("button")}>Save changes</Button>
-        </div>
-    );
-}
+     
+*/
