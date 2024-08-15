@@ -1,0 +1,52 @@
+@import "@/styles/color.scss";
+
+.snackbar_item {
+  position: absolute;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: $gray-800;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.625rem;
+  &.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &.bottom {
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &.full {
+    width: 90%;
+  }
+  &.enter {
+    animation: enter 500ms ease-out forwards;
+  }
+  &.show {
+    opacity: 1;
+  }
+  &.exit {
+    animation: exit 500ms ease-out forwards;
+  }
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
