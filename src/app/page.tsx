@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { Button } from "@headlessui/react";
 import classNames from "classnames/bind";
 
 import HomeIcon from "@/assets/tabBar/icon-home.svg";
+import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
 import { useStore } from "@/stores/test";
@@ -14,6 +17,7 @@ import style from "./page.module.scss";
 const cn = classNames.bind(style);
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
   const { bear, increaseBear } = useStore();
 
   const { values, errors, handleChange, handleError, validateAll } = useInput({
@@ -67,6 +71,20 @@ export default function Home() {
         </div>
         <button type="submit">Submit</button>
       </form>
+
+      <button onClick={() => setIsOpen(true)}>Open</button>
+      <Dialog
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="제목입니다."
+        description="내용입니다."
+        buttons={
+          <>
+            <Button>취소</Button>
+            <Button>확인</Button>
+          </>
+        }
+      />
     </div>
   );
 }
