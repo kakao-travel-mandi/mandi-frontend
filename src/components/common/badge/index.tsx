@@ -4,7 +4,7 @@ import styles from "./badge.module.scss";
 
 interface BadgeProps {
   text: string;
-  color: "gray" | "green" | "red" | "gray-deep" | "green-deep";
+  color: "gray" | "green" | "red" | "green-deep";
   Rounded?: "small" | "large";
   font?: string;
   onClick?: () => void;
