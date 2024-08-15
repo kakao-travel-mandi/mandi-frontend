@@ -20,11 +20,11 @@ const tabData = [
   { id: 5, title: "내정보", icon: <User />, url: "/user" },
 ];
 
-type TabItemProps = {
+interface TabItemProps {
   title: string;
   icon: React.ReactNode;
   url: string;
-};
+}
 
 const TabItem = ({ title, icon, url }: TabItemProps) => {
   // const router = useRouter();
