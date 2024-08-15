@@ -1,3 +1,4 @@
+import { Button as HeadlessButton } from "@headlessui/react";
 import classNames from "classnames/bind";
 
 import styles from "./button.module.scss";
@@ -27,7 +28,7 @@ export const Button = ({
     ...rest
 }: ButtonProps) => {
     return (
-        <button
+        <HeadlessButton
             type={type}
             onClick={onClick}
             className={cn("button", size, color, font, className)}
@@ -35,6 +36,6 @@ export const Button = ({
             {...rest}
         >
             {children}
-        </button>
+        </HeadlessButton>
     );
 };

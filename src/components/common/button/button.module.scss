@@ -1,3 +1,5 @@
+@use "/src/styles/color.scss" as *;
+
 @mixin size($width, $height, $padding, $radius) {
     width: $width;
     height: $height;
@@ -64,11 +66,4 @@
         border-color: $gray-200;
         cursor: not-allowed;
     }
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
 }
