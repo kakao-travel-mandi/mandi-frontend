@@ -3,6 +3,7 @@
 import { Button } from "@headlessui/react";
 import classNames from "classnames/bind";
 
+import HomeIcon from "@/assets/tabBar/icon-home.svg";
 import { useStore } from "@/stores/test";
 
 import style from "./page.module.scss";
@@ -10,19 +11,20 @@ import style from "./page.module.scss";
 const cn = classNames.bind(style);
 
 export default function Home() {
-    const { bear, increaseBear } = useStore();
+  const { bear, increaseBear } = useStore();
 
-    return (
-        <div>
-            <button
-                className={cn(`button`, {
-                    ["button_blue"]: bear > 10,
-                })}
-                onClick={increaseBear}
-            >
-                {bear}
-            </button>
-            <Button className={cn("button")}>Save changes</Button>
-        </div>
-    );
+  return (
+    <div>
+      <button
+        className={cn(`button`, {
+          ["button_blue"]: bear > 10,
+        })}
+        onClick={increaseBear}
+      >
+        {bear}
+      </button>
+      <Button className={cn("button")}>Save changes</Button>
+      <HomeIcon />
+    </div>
+  );
 }
