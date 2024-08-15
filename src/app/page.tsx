@@ -6,6 +6,7 @@ import { Button } from "@headlessui/react";
 import classNames from "classnames/bind";
 
 import HomeIcon from "@/assets/tabBar/icon-home.svg";
+import BottomSheet from "@/components/common/Bottomsheet";
 import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
@@ -17,7 +18,9 @@ import style from "./page.module.scss";
 const cn = classNames.bind(style);
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
+
   const { bear, increaseBear } = useStore();
 
   const { values, errors, handleChange, handleError, validateAll } = useInput({
@@ -72,10 +75,10 @@ export default function Home() {
         <button type="submit">Submit</button>
       </form>
 
-      <button onClick={() => setIsOpen(true)}>Open</button>
+      <button onClick={() => setIsOpenDialog(true)}>Open</button>
       <Dialog
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        isOpen={isOpenDialog}
+        onClose={() => setIsOpenDialog(false)}
         title="제목입니다."
         description="내용입니다."
         buttons={
@@ -85,6 +88,14 @@ export default function Home() {
           </>
         }
       />
+
+      <button onClick={() => setBottomSheetOpen(true)}>Open BottomSheet</button>
+      <BottomSheet
+        isOpen={isBottomSheetOpen}
+        onClose={() => setBottomSheetOpen(false)}
+      >
+        <p>콘텐츠 박스</p>
+      </BottomSheet>
     </div>
   );
 }

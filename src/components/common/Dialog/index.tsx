@@ -12,6 +12,7 @@ import classNames from "classnames/bind";
 import styles from "./Dialog.module.scss";
 
 const cn = classNames.bind(styles);
+
 const BLOCK = "dialog";
 
 interface DialogProps {
@@ -30,7 +31,7 @@ const Dialog = ({
   buttons,
 }: DialogProps) => {
   return (
-    <HeadlessDialog open={isOpen} onClose={onClose} transition>
+    <HeadlessDialog open={isOpen} onClose={onClose}>
       <DialogBackdrop className={cn(`${BLOCK}__backdrop`)} />
       <div className={cn(`${BLOCK}__container`)}>
         <DialogPanel className={cn(`${BLOCK}__panel`)}>
