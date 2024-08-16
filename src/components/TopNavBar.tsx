@@ -8,15 +8,15 @@ import styles from "./TopNavBar.module.scss";
 
 const cx = classNames.bind(styles);
 
-type TextActionButtonProps = {
+interface TextActionButtonProps {
   text: string;
   onClick: () => void;
-};
+}
 
-type IconActionButtonProps = {
+interface IconActionButtonProps {
   icon: React.ReactNode;
   onClick: () => void;
-};
+}
 
 const TextButton = ({ text, onClick }: TextActionButtonProps) => {
   return (
@@ -33,12 +33,12 @@ const IconButton = ({ icon, onClick }: IconActionButtonProps) => {
   );
 };
 
-type TopNavBarProps = {
+interface TopNavBarProps {
   logo?: boolean;
   title?: string;
   actions?: (TextActionButtonProps | IconActionButtonProps)[];
   back?: boolean;
-};
+}
 
 export const TopNavBar = ({
   logo: icon,
@@ -47,7 +47,6 @@ export const TopNavBar = ({
   back,
 }: TopNavBarProps) => {
   const router = useRouter();
-
   const handleBack = () => router.back();
 
   return (
