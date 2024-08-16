@@ -3,6 +3,7 @@
 import { Button } from "@headlessui/react";
 import classNames from "classnames/bind";
 
+import HomeIcon from "@/assets/tabBar/icon-home.svg";
 import { useStore } from "@/stores/test";
 
 import style from "./page.module.scss";
@@ -23,6 +24,7 @@ export default function Home() {
         {bear}
       </button>
       <Button className={cn("button")}>Save changes</Button>
+      <HomeIcon />
     </div>
   );
 }
