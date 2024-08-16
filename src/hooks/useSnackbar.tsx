@@ -1,17 +1,10 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { SnackbarItem } from "@/components/SnackbarItem";
+import { SNACKBAR_DURATION } from "@/constants/snackbar";
 
-// TODO: 시간 2초로 다시 변경하기
-const SNACKBAR_DURATION = 2000;
-
+// TODO: 훅에서 쓰이는 타입은?
 type SnackbarStatus = "open" | "close" | null;
 
 export type Snackbar = {
@@ -19,6 +12,7 @@ export type Snackbar = {
   setStatus: Dispatch<SetStateAction<SnackbarStatus>>;
 } & UseSnackbar;
 
+// TODO: 훅도 interface?
 export type UseSnackbar = {
   content: string;
   type?: "alert" | "check";
@@ -35,11 +29,13 @@ export const useSnackbar = ({
   const [status, setStatus] = useState<SnackbarStatus>(null);
 
   const openSnackbar = useCallback(() => {
-    setStatus("open");
-    setTimeout(() => {
-      setStatus("close");
-    }, SNACKBAR_DURATION);
-  }, []);
+    if (status === null) {
+      setStatus("open");
+      setTimeout(() => {
+        setStatus("close");
+      }, SNACKBAR_DURATION);
+    }
+  }, [status]);
 
   return {
     snackbar: !!status

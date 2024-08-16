@@ -1,4 +1,5 @@
-@import "@/styles/color.scss";
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
 
 .snackbar_item {
   position: absolute;
@@ -10,6 +11,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.625rem;
+  @extend .body2-semibold;
   &.center {
     top: 50%;
     left: 50%;
@@ -48,5 +50,16 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+.alert {
+  path {
+    fill: $red;
+  }
+}
+.check {
+  path {
+    fill: $green-500;
   }
 }
