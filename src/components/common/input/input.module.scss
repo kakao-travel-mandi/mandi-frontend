@@ -54,6 +54,9 @@
     align-items: center;
     justify-content: center;
 
+    > span {
+    }
+
     &--left {
       left: 16px;
     }

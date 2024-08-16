@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import {useState} from 'react';
 
 import {
   Field,
   Input as HeadlessInput,
   Description as Helper,
   Label,
-} from "@headlessui/react";
-import classNames from "classnames/bind";
-import Image from "next/image";
+} from '@headlessui/react';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
 
-import styles from "./input.module.scss";
+import styles from './input.module.scss';
 
 const cn = classNames.bind(styles);
 
-const BLOCK = "field";
+const BLOCK = 'field';
 
 interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onError"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onError'> {
   value: string;
   label?: string;
   helper?: string;
@@ -34,14 +34,14 @@ interface InputProps
 
 const Input = ({
   value,
-  label = "",
-  helper = "",
-  placeholder = "",
+  label = '',
+  helper = '',
+  placeholder = '',
   leftIcon,
   rightIcon,
-  type = "text",
+  type = 'text',
   style,
-  error = "",
+  error = '',
   onError,
   onDelete,
   ...props
@@ -123,4 +123,4 @@ const Input = ({
 
 export default Input;
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
