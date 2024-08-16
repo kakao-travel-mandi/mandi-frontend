@@ -1,6 +1,7 @@
 import { Button as HeadlessButton } from "@headlessui/react";
 import classNames from "classnames/bind";
-import Image from "next/image";
+
+import IconArrowDown from "@/assets/icon/icon-arrow-down-small-mono.svg";
 
 import styles from "./chip.module.scss";
 
@@ -30,9 +31,7 @@ export const Chip = ({
       disabled={disabled}
     >
       {children}
-      {action && (
-        <Image src="/icon/icon-arrow-down-small-mono.svg" alt="Check" width={14} height={14} className="actionImg" />
-      )}
+      {action && <IconArrowDown width="14" height="14" />}
     </HeadlessButton>
   );
 };
