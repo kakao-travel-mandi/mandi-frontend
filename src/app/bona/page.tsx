@@ -1,13 +1,20 @@
+
 "use client";
 import classNames from "classnames/bind";
 
 import { useSnackbar } from "@/hooks/useSnackbar";
+
+import classNames from "classnames/bind";
+
+import { TabBar } from "@/components/TabBar";
+
 
 import styles from "./page.module.scss";
 
 const cx = classNames.bind(styles);
 
 export default function Page() {
+
   const { snackbar, open } = useSnackbar({
     content: "스낵바 테스트",
     full: false,
@@ -27,6 +34,13 @@ export default function Page() {
         </div>
         {/* 스낵바 이용할 때, 루트 필요 */}
         <div id="snackbarRoot" />
+
+  return (
+    <div className={cx("container")}>
+      <div className={cx("phone")}>
+        <div className={cx("page")}></div>
+        <TabBar />
+
       </div>
     </div>
   );
