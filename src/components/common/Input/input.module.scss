@@ -5,6 +5,7 @@
     .field__icon--right {
       opacity: 1;
       transition: opacity 0.3s ease;
+      cursor: pointer;
     }
   }
 
@@ -60,13 +61,12 @@
     &--right {
       right: 16px;
       opacity: 0;
-      cursor: pointer;
     }
   }
 
   &__input {
     width: 100%;
-    min-width: 335px;
+    min-width: 300px;
     border: 1px solid color.$gray-300;
     border-radius: 8px;
     padding: 11px 16px;

@@ -49,7 +49,15 @@ export default function Home() {
       <HomeIcon />
 
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            width: "300px",
+            // margin: "",
+          }}
+        >
           <Input
             name="username"
             label="Username"
@@ -63,13 +71,19 @@ export default function Home() {
             onError={(value) => handleError("username", value)}
             onDelete={() => handleChange("username", "")}
           />
+
           <Input
             name="email"
             label="Email"
+            helper="이메일을 입력해주세요"
             value={values.email}
+            error={errors.email}
+            placeholder="이메일을 입력해주세요"
+            leftIcon="/icon/icon-search-mono.svg"
+            rightIcon="/icon/icon-xcircle.svg"
             onChange={(e) => handleChange("email", e.target.value)}
             onError={(value) => handleError("email", value)}
-            error={errors.email}
+            onDelete={() => handleChange("email", "")}
           />
         </div>
         <button type="submit">Submit</button>
@@ -81,12 +95,7 @@ export default function Home() {
         onClose={() => setIsOpenDialog(false)}
         title="제목입니다."
         description="내용입니다."
-        buttons={
-          <>
-            <Button>취소</Button>
-            <Button>확인</Button>
-          </>
-        }
+        buttons={<>children</>}
       />
 
       <button onClick={() => setBottomSheetOpen(true)}>Open BottomSheet</button>
