@@ -5,6 +5,11 @@ import { useState } from "react";
 import { Button } from "@headlessui/react";
 import classNames from "classnames/bind";
 
+
+import Pencil from "@/assets/icon/icon-pencil-square.svg";
+import HomeIcon from "@/assets/tabBar/icon-home.svg";
+import { Menubox } from "@/components/Menubox";
+
 import Back from "@/assets/icon/icon-arrow-left-small-mono.svg";
 import HomeIcon from "@/assets/tabBar/icon-home.svg";
 import { TopNavBar } from "@/components/TopNavBar";
@@ -12,6 +17,7 @@ import BottomSheet from "@/components/common/Bottomsheet";
 import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
+
 import { useStore } from "@/stores/test";
 import { handleInputValidate } from "@/utils/validate";
 
@@ -49,6 +55,25 @@ export default function Home() {
       </button>
       <Button className={cn("button")}>Save changes</Button>
       <HomeIcon />
+
+
+      <Menubox
+        triggerButton={<Button>Open</Button>}
+        items={[
+          { content: "Item 1" },
+          { content: "Item 2" },
+          { content: "Item 3" },
+        ]}
+      />
+      <Menubox
+        triggerButton={<Button>Open</Button>}
+        items={[
+          { content: "Item 1", icon: <Pencil /> },
+          { content: "Item 2", icon: <Pencil /> },
+          { content: "Item 3", icon: <Pencil /> },
+        ]}
+      />
+
       <>
         <TopNavBar logo={true} />
         <TopNavBar
@@ -250,6 +275,7 @@ export default function Home() {
       >
         <p>콘텐츠 박스</p>
       </BottomSheet>
+
     </div>
   );
 }
