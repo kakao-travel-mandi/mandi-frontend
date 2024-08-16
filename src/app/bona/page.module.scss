@@ -7,6 +7,8 @@
 }
 
 .phone {
+  // snackbar 기준
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: white;
