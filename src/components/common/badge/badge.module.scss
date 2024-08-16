@@ -1,0 +1,31 @@
+@use "/src/styles/color.scss" as *;
+.badge {
+  display: inline-flex;
+  padding: 0.125rem 0.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+
+  &.green {
+    background: $green-50;
+    color: $green-500;
+  }
+  &.green-deep {
+    background: $green-500;
+    color: $white;
+  }
+  &.red {
+    background: $red-light;
+    color: $red;
+  }
+  &.gray {
+    background: $gray-100;
+    color: $gray-700;
+  }
+  &.round-small {
+    border-radius: 0.25rem;
+  }
+  &.round-large {
+    border-radius: 6.25rem;
+  }
+}
