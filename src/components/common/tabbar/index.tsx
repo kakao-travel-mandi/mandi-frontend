@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {Button, TabGroup, TabList} from '@headlessui/react';
 import classNames from 'classnames/bind';
@@ -35,8 +35,12 @@ interface TabBarProps {
 export const TabBar = ({defaultIndex = 0, onChange}: TabBarProps) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex);
 
+  useEffect(() => {
+    setSelectedIndex(defaultIndex);
+  }, [defaultIndex]);
+
   const handleChange = (index: number) => {
-    console.log('index', index);
+    // console.log('index', index);
     setSelectedIndex(index);
     onChange?.(index);
   };
