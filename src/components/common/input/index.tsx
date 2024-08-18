@@ -19,19 +19,55 @@ const BLOCK = 'field';
 
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onError'> {
+  /**
+   * 입력 값
+   */
   value: string;
+  /**
+   * 라벨
+   */
   label?: string;
+  /**
+   * 헬퍼 텍스트
+   */
   helper?: string;
+  /**
+   * 플레이스홀더
+   */
   placeholder?: string;
+  /**
+   * 왼쪽 아이콘
+   */
   leftIcon?: string;
+  /**
+   * 오른쪽 아이콘
+   */
   rightIcon?: string;
+  /**
+   * 스타일
+   */
   style?: React.CSSProperties;
+  /**
+   * 타입
+   */
   type?: string;
+  /**
+   * 에러 메세지
+   */
   error?: string;
+  /**
+   * 에러 처리 함수
+   */
   onError?: (value: string) => void;
+  /**
+   * 삭제 함수
+   */
   onDelete?: () => void;
 }
 
+/**
+ * 인풋 컴포넌트
+ */
 const Input = ({
   value,
   label = '',
