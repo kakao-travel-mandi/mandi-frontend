@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: 'Mandi',
   manifest: '/manifest.json',
   viewport:
-    'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
+    'minimum-scale=1, initial-scale=1, maximum-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover user-scalable=no',
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={Pretendard.className}>{children}</body>
     </html>
   );
