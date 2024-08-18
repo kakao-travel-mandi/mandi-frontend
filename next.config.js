@@ -1,18 +1,25 @@
-const path = require("path");
+const path = require('path');
 
-module.exports = {
+const prod = process.env.NODE_ENV === 'production';
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: prod ? false : true,
+});
+
+module.exports = withPWA({
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, 'styles')],
   },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: [
         {
-          loader: "@svgr/webpack",
+          loader: '@svgr/webpack',
         },
       ],
     });
     return config;
   },
-};
+});
