@@ -1,12 +1,12 @@
-import { Button as HeadlessButton } from "@headlessui/react";
-import classNames from "classnames/bind";
+import {Button as HeadlessButton} from '@headlessui/react';
+import classNames from 'classnames/bind';
 
-import IconArrowDown from "@/assets/icon/icon-arrow-down-small-mono.svg";
+import IconArrowDown from '@/assets/icon/icon-arrow-down-small-mono.svg';
 
-import styles from "./chip.module.scss";
+import styles from './chip.module.scss';
 
 interface ChipProps {
-  type?: "submit" | "button" | "reset";
+  type?: 'submit' | 'button' | 'reset';
   children: string;
   font?: string;
   className?: string;
@@ -19,15 +19,19 @@ const cx = classNames.bind(styles);
 
 export const Chip = ({
   children,
-  type = "button",
-  font = "label3-medium",
+  type = 'button',
+  font = 'label3-medium',
   disabled = false,
   action = false,
 }: ChipProps) => {
   return (
     <HeadlessButton
       type={type}
-      className={cx("chip", action ? font === "label4-semibold" : font === "label3-medium", action && "action")}
+      className={cx(
+        'chip',
+        action ? font === 'label4-semibold' : font === 'label3-medium',
+        action && 'chip__action',
+      )}
       disabled={disabled}
     >
       {children}

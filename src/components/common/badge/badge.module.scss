@@ -6,26 +6,26 @@
   align-items: center;
   gap: 0.625rem;
 
-  &.green {
+  &.badge__green {
     background: $green-50;
     color: $green-500;
   }
-  &.green-deep {
+  &.badge__greenDeep {
     background: $green-500;
     color: $white;
   }
-  &.red {
+  &.badge__red {
     background: $red-light;
     color: $red;
   }
-  &.gray {
+  &.badge__gray {
     background: $gray-100;
     color: $gray-700;
   }
-  &.round-small {
+  &.badge__round__small {
     border-radius: 0.25rem;
   }
-  &.round-large {
+  &.badge__round__large {
     border-radius: 6.25rem;
   }
 }
