@@ -21,11 +21,11 @@ const cx = classNames.bind(styles);
 export const Tabs = ({ tabs, className, font = "subtitle2-semibold", version = 1 }: TabsProps) => {
   return (
     <TabGroup className={cx(className, font)}>
-      <div className={cx("tabsContainer")}>
+      <div className={cx("tabs")}>
         <TabList
-          className={cx("tabsHeader", {
-            versionThree: version === 3,
-            versionFour: version === 4,
+          className={cx("tabs__header", {
+            tabs__header__vThree: version === 3,
+            tabs__header__vFour: version === 4,
           })}
         >
           {tabs.map((tab, index) => (
@@ -33,12 +33,12 @@ export const Tabs = ({ tabs, className, font = "subtitle2-semibold", version = 1
               key={index}
               className={({ selected }) =>
                 cx(
-                  "tab",
-                  { tabActive: selected },
+                  "tabs__tab",
+                  { tabs__header__active: selected },
                   {
-                    versionTwo: version === 2,
-                    versionThree: version === 3,
-                    versionFour: version === 4,
+                    tabs__header__active__vTwo : version === 2,
+                    tabs__header__active__vThree: version === 3,
+                    tabs__header__active__vFour: version === 4,
                   }
                 )
               }
@@ -47,7 +47,7 @@ export const Tabs = ({ tabs, className, font = "subtitle2-semibold", version = 1
             </Tab>
           ))}
         </TabList>
-        <TabPanels className={cx("tabsContent")}>
+        <TabPanels >
           {tabs.map((tab, index) => (
             <TabPanel key={index}>{tab.content}</TabPanel>
           ))}
