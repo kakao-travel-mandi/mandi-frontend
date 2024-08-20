@@ -1,41 +1,56 @@
 @use "@/styles/color.scss" as *;
 @use "@/styles/font.scss" as *;
 
-.snackbar_item {
+.snackbar-item {
   position: absolute;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   background-color: $gray-800;
-  color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 0.625rem;
-  @extend .body2-semibold;
-  &.center {
+  opacity: 0;
+ 
+  &--center {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  &.bottom {
+  &--bottom {
     bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
   }
-  &.full {
+  &--full {
     width: 90%;
   }
-  &.enter {
-    animation: enter 500ms ease-out forwards;
+  &--enter {
+    animation: enter 200ms ease-out forwards;
   }
-  &.show {
+  &--show {
     opacity: 1;
   }
-  &.exit {
-    animation: exit 500ms ease-out forwards;
+  &--exit {
+    animation: exit 200ms ease-out forwards;
+  }
+  &__icon {
+    &--alert {
+      path{
+        fill: $red;
+      }
+    }
+    &--check {
+      path{
+        fill: $green-500;
+      }
+    }
+  }
+  &__message {
+    @extend .body2-semibold;
+    color: white;
   }
 }
-
 @keyframes enter {
   0% {
     opacity: 0;
@@ -50,16 +65,5 @@
   }
   100% {
     opacity: 0;
-  }
-}
-
-.alert {
-  path {
-    fill: $red;
-  }
-}
-.check {
-  path {
-    fill: $green-500;
   }
 }

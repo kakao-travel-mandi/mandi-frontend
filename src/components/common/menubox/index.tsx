@@ -1,39 +1,31 @@
-import { forwardRef } from "react";
+import {forwardRef} from 'react';
 
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import classNames from "classnames/bind";
+import {Menu, MenuButton, MenuItems} from '@headlessui/react';
+import classNames from 'classnames/bind';
 
-import styles from "./Menubox.module.scss";
+import {ListItem, ListItemProps} from './ListItem';
+import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
 
-type ListItemProps = {
-  content: string;
-  icon?: React.ReactNode;
-  onClick?: () => void;
-};
+const BLOCK = 'menubox';
 
-const ListItem = ({ content, icon, onClick }: ListItemProps) => {
-  return (
-    <MenuItem>
-      <button onClick={onClick} className={cx("listItem")}>
-        {content}
-        {icon}
-      </button>
-    </MenuItem>
-  );
-};
-
-type MenuboxProps = {
-  translateX?: number; // 기본적으로 아래 오른쪽 맞춤인데, 좌우 미세 조정할 수 있게 하는 props
+interface MenuboxProps {
   triggerButton: React.ReactNode;
   items: ListItemProps[];
-};
+  align?: 'center' | 'start' | 'end';
+  translateX?: number; // 기본적으로 아래 오른쪽 맞춤인데, 좌우 미세 조정할 수 있게 하는 props
+}
 
-export const Menubox = ({ translateX, triggerButton, items }: MenuboxProps) => {
+export const Menubox = ({
+  translateX,
+  triggerButton,
+  items,
+  align = 'end',
+}: MenuboxProps) => {
   const Trigger = forwardRef(function Trigger(props, ref: any) {
     return (
-      <div ref={ref} {...props} className={cx("button")}>
+      <div ref={ref} {...props} className={cx(`${BLOCK}__trigger-button`)}>
         {triggerButton}
       </div>
     );
@@ -43,8 +35,8 @@ export const Menubox = ({ translateX, triggerButton, items }: MenuboxProps) => {
     <Menu>
       <MenuButton as={Trigger} />
       <MenuItems
-        anchor="bottom end"
-        className={cx("menuItems")}
+        anchor={`bottom ${align}`}
+        className={cx(BLOCK)}
         style={{
           transform: `translateX(${translateX}px)`,
         }}
