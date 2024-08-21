@@ -1,0 +1,42 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.top-navbar {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $gray-300;
+  box-sizing: border-box;
+  min-height: 1.5rem;
+  background-color: white;
+
+  &__leading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__height {
+    display: inline-block;
+    height: 1.5rem;
+    flex-grow: 1;
+  }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $gray-800;
+    @extend .subtitle1-semibold;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+  }
+}

@@ -1,7 +1,7 @@
 @use "@/styles/color.scss" as *;
 @use "@/styles/font.scss" as *;
 
-.menuItems {
+.menubox {
   width: 8.25rem;
   border-radius: 0.5rem;
   border: 1px solid $gray-300;
@@ -11,20 +11,8 @@
   flex-direction: column;
   --anchor-gap: 4px;
 
-  &:focus {
-    outline: none;
+  &__trigger-button {
+    display: inline-block;
   }
 }
 
-.listItem {
-  padding: 0.625rem 0.75rem;
-  color: $gray-800;
-  @extend .label3-regular;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.button {
-  display: inline-block;
-}

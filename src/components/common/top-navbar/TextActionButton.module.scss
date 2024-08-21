@@ -1,0 +1,7 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.text-action-button {
+  @extend .subtitle1-semibold;
+  color: $gray-500;
+}

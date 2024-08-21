@@ -8,12 +8,24 @@ const cn = classNames.bind(styles);
 
 const BLOCK = 'bottomsheet';
 
-interface BottomSheetProps {
+export interface BottomSheetProps {
+  /**
+   * 바텀 시트 내용
+   */
   children: ReactNode;
+  /**
+   * 바텀 시트 열림 여부
+   */
   isOpen: boolean;
+  /**
+   * 바텀 시트 닫힘 함수
+   */
   onClose: () => void;
 }
 
+/**
+ * 바텀 시트 컴포넌트
+ */
 const BottomSheet = ({children, isOpen, onClose}: BottomSheetProps) => {
   return (
     <div
