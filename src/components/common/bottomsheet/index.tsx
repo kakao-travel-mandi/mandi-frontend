@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
+import {ReactNode} from 'react';
 
-import classNames from "classnames/bind";
+import classNames from 'classnames/bind';
 
-import styles from "./bottomsheet.module.scss";
+import styles from './bottomsheet.module.scss';
 
 const cn = classNames.bind(styles);
 
-const BLOCK = "bottomsheet";
+const BLOCK = 'bottomsheet';
 
 interface BottomSheetProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ interface BottomSheetProps {
   onClose: () => void;
 }
 
-const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
+const BottomSheet = ({children, isOpen, onClose}: BottomSheetProps) => {
   return (
     <div
       className={cn(BLOCK, {

@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
-
-import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
+import Image from 'next/image';
 
 import styles from './badgePageIcon.module.scss';
 
@@ -8,14 +7,16 @@ const cx = classNames.bind(styles);
 
 export interface BadgePageIconProps {
   text: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  src: string;
+  alt: string;
   disable?: boolean;
   onClick?: () => void;
 }
 
 const BadgePageIcon = ({
   text,
-  Icon,
+  src,
+  alt,
   disable = false,
   onClick,
 }: BadgePageIconProps) => {
@@ -28,9 +29,14 @@ const BadgePageIcon = ({
         )}
       >
         {disable ? (
-          <IconLockClosed width="22" height="28" />
+          <Image
+            src="/icon/icon-lock-closed.svg"
+            width={22}
+            height={28}
+            alt="lockIcon"
+          />
         ) : (
-          <Icon width="40" height="40" />
+          <Image src={src} width={40} height={40} alt={alt} />
         )}
       </div>
 
