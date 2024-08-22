@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
-import Image from 'next/image';
+
+import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
 
 import styles from './badgePageIcon.module.scss';
 
@@ -7,16 +8,14 @@ const cx = classNames.bind(styles);
 
 export interface BadgePageIconProps {
   text: string;
-  src: string;
-  alt: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   disable?: boolean;
   onClick?: () => void;
 }
 
 const BadgePageIcon = ({
   text,
-  src,
-  alt,
+  icon: Icon, // icon 프롭을 Icon으로 변환
   disable = false,
   onClick,
 }: BadgePageIconProps) => {
@@ -29,14 +28,9 @@ const BadgePageIcon = ({
         )}
       >
         {disable ? (
-          <Image
-            src="/icon/icon-lock-closed.svg"
-            width={22}
-            height={28}
-            alt="lockIcon"
-          />
+          <IconLockClosed width="22" height="28" />
         ) : (
-          <Image src={src} width={40} height={40} alt={alt} />
+          <Icon width="40" height="40" />
         )}
       </div>
 
@@ -44,4 +38,5 @@ const BadgePageIcon = ({
     </div>
   );
 };
+
 export default BadgePageIcon;

@@ -1,5 +1,13 @@
 import {Meta, StoryObj} from '@storybook/react';
 
+import IconHappyFace from '@/assets/icon/icon-happy-face.svg';
+import IconHoleCup from '@/assets/icon/icon-hole-cup.svg';
+import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
+import IconMountain from '@/assets/icon/icon-mountain.svg';
+import IconNote from '@/assets/icon/icon-note.svg';
+import IconWorking from '@/assets/icon/icon-working.svg';
+import IconWrite from '@/assets/icon/icon-write.svg';
+
 import BadgePageIcon from './index';
 
 const meta: Meta<typeof BadgePageIcon> = {
@@ -10,9 +18,9 @@ const meta: Meta<typeof BadgePageIcon> = {
       control: 'text',
       description: 'The text to display below the icon.',
     },
-    src: {
-      control: 'text',
-      description: 'The SVG icon path to display.',
+    icon: {
+      control: 'object',
+      description: 'The SVG icon component to display.',
     },
     disable: {
       control: 'boolean',
@@ -26,7 +34,7 @@ const meta: Meta<typeof BadgePageIcon> = {
   },
   args: {
     text: 'Default Text',
-    src: '/icon/icon-happy-face.svg',
+    icon: IconHappyFace,
     disable: false,
   },
 };
@@ -38,7 +46,7 @@ type Story = StoryObj<typeof BadgePageIcon>;
 export const start: Story = {
   args: {
     text: '만디 스타터',
-    src: '/icon/icon-mountain.svg',
+    icon: IconMountain,
     disable: false,
   },
 };
@@ -46,7 +54,7 @@ export const start: Story = {
 export const collector: Story = {
   args: {
     text: '코스 수집가',
-    src: '/icon/icon-note.svg',
+    icon: IconNote,
     disable: false,
   },
 };
@@ -54,40 +62,36 @@ export const collector: Story = {
 export const share: Story = {
   args: {
     text: '공유의 기쁨',
-    src: '/icon/icon-write.svg',
+    icon: IconWrite,
     disable: false,
   },
 };
-
 export const completed: Story = {
   args: {
     text: '완주의 시작',
-    src: '/icon/icon-hole-cup.svg',
+    icon: IconHoleCup,
     disable: false,
   },
 };
-
 export const working: Story = {
   args: {
     text: '걸어서 만보',
-    src: '/icon/icon-working.svg',
+    icon: IconWorking,
     disable: false,
   },
 };
-
 export const holic: Story = {
   args: {
     text: '만디홀릭',
-    src: '/icon/icon-happy-face.svg',
+    icon: IconHappyFace,
     disable: false,
   },
 };
-
 export const Disabled: Story = {
   args: {
     text: '잠긴 상태',
-    src: '/icon/icon-happy-face.svg',
+    icon: IconHappyFace,
     disable: true,
   },
-  render: args => <BadgePageIcon {...args} />,
+  render: args => <BadgePageIcon {...args} icon={IconLockClosed} />,
 };
