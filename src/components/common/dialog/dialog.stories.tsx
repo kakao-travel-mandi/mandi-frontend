@@ -7,7 +7,7 @@ import {Button} from '../button';
 import Dialog from '.';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'Common/Dialog',
+  title: 'components/Dialog',
   component: Dialog,
   argTypes: {
     isOpen: {control: 'boolean'},
@@ -30,14 +30,14 @@ type Story = StoryFn<typeof Dialog>;
 const Template: Story = args => {
   const [isOpen, setIsOpen] = useState(args.isOpen);
 
-  useEffect(() => {
-    setIsOpen(args.isOpen);
-  }, [args.isOpen]);
-
   const handleClose = () => {
     setIsOpen(false);
     args.onClose();
   };
+
+  useEffect(() => {
+    setIsOpen(args.isOpen);
+  }, [args.isOpen]);
 
   return (
     <Dialog
@@ -62,11 +62,36 @@ Default.args = {
       }}
     >
       <Button size="full" color="green">
-        Dialog Button
+        Confrim
+      </Button>
+      <Button size="full" color="white">
+        Cancle
       </Button>
     </div>
   ),
-  isOpen: true,
+  isOpen: false,
+  onClose: () => {
+    console.log('Dialog closed');
+  },
+};
+
+export const withOneButton: Story = Template.bind({});
+withOneButton.args = {
+  title: 'Dialog Title',
+  description: 'Dialog Content',
+  buttons: (
+    <div
+      style={{
+        display: 'flex',
+        gap: '10px',
+      }}
+    >
+      <Button size="full" color="green">
+        Confrim
+      </Button>
+    </div>
+  ),
+  isOpen: false,
   onClose: () => {
     console.log('Dialog closed');
   },
