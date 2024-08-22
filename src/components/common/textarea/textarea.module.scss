@@ -1,0 +1,62 @@
+@use "@/styles/color.scss";
+
+.textarea {
+  &__label {
+    color: color.$gray-700;
+    margin-bottom: 4px;
+
+    &--error {
+      color: color.$red;
+    }
+  }
+
+  &__helper {
+    color: color.$gray-700;
+    margin-top: 8px;
+    display: none;
+    transition: height 0.3s ease;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  &__error {
+    color: color.$red;
+    margin-top: 8px;
+    display: none;
+    transition: height 0.3s ease;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  &__form {
+    width: 100%;
+    min-width: 300px;
+    border: 1px solid color.$gray-300;
+    border-radius: 8px;
+    padding: 11px 16px;
+    transition: all 0.3s ease;
+    color: color.$gray-500;
+    border-color: color.$gray-100;
+    background-color: color.$gray-50;
+    resize: none;
+
+ 
+
+    &--focused {
+      border-color: color.$gray-400;
+      background-color: color.$gray-100;
+    }
+
+    &--value {
+      color: color.$gray-700;
+    }
+
+    &--error {
+      background-color: color.$red-light;
+    }
+  }
+}
