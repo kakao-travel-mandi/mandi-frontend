@@ -1,6 +1,11 @@
 'use client';
 
-import {useState} from 'react';
+import {
+  CSSProperties,
+  InputHTMLAttributes,
+  ReactElement,
+  useState,
+} from 'react';
 
 import {
   Field,
@@ -9,16 +14,15 @@ import {
   Label,
 } from '@headlessui/react';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
 
 import styles from './input.module.scss';
 
 const cn = classNames.bind(styles);
 
-const BLOCK = 'field';
+const BLOCK = 'input';
 
 interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onError'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onError' | 'onChange'> {
   /**
    * 입력 값
    */
@@ -38,15 +42,15 @@ interface InputProps
   /**
    * 왼쪽 아이콘
    */
-  leftIcon?: string;
+  leftIcon?: ReactElement;
   /**
    * 오른쪽 아이콘
    */
-  rightIcon?: string;
+  rightIcon?: ReactElement;
   /**
    * 스타일
    */
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   /**
    * 타입
    */
@@ -56,13 +60,9 @@ interface InputProps
    */
   error?: string;
   /**
-   * 에러 처리 함수
+   * 변경 함수
    */
-  onError?: (value: string) => void;
-  /**
-   * 삭제 함수
-   */
-  onDelete?: () => void;
+  onChange?: (value: string) => void;
 }
 
 /**
@@ -78,14 +78,13 @@ const Input = ({
   type = 'text',
   style,
   error = '',
-  onError,
-  onDelete,
+  onChange,
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <Field className={cn(BLOCK)} style={style}>
+    <Field>
       {label && (
         <Label
           className={cn(`label4-regular`, `${BLOCK}__label`, {
@@ -97,42 +96,41 @@ const Input = ({
       )}
       <div className={cn(`${BLOCK}__wrapper`)}>
         {leftIcon && (
-          <Image
-            src={leftIcon}
-            alt="left icon"
-            width={20}
-            height={20}
+          <div
             className={cn(`${BLOCK}__icon`, `${BLOCK}__icon--left`, {
               [`${BLOCK}__icon--error`]: !!error,
             })}
-          />
+          >
+            {leftIcon}
+          </div>
         )}
         <HeadlessInput
           value={value}
           type={type}
           placeholder={placeholder}
-          className={cn(`body1-regular`, `${BLOCK}__input`, {
-            [`${BLOCK}__input--leftIcon`]: !!leftIcon,
-            [`${BLOCK}__input--rightIcon`]: !!rightIcon,
-            [`${BLOCK}__input--focused`]: isFocused,
-            [`${BLOCK}__input--value`]: !!value.trim(),
-            [`${BLOCK}__input--error`]: !!error,
+          className={cn(`body1-regular`, `${BLOCK}__form`, {
+            [`${BLOCK}__form--leftIcon`]: !!leftIcon,
+            [`${BLOCK}__form--rightIcon`]: !!rightIcon,
+            [`${BLOCK}__form--focused`]: isFocused,
+            [`${BLOCK}__form--value`]: !!value.trim(),
+            [`${BLOCK}__form--error`]: !!error,
           })}
+          style={style}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          onChange={e => onChange?.(e.target.value)}
           {...props}
         />
-        {rightIcon && onDelete && (
-          <Image
-            src={rightIcon}
-            alt="right icon"
-            width={20}
-            height={20}
+        {rightIcon && onChange && (
+          <div
             className={cn(`${BLOCK}__icon`, `${BLOCK}__icon--right`, {
               [`${BLOCK}__icon--error`]: !!error,
+              [`${BLOCK}__icon--focused`]: isFocused,
             })}
-            onClick={onDelete}
-          />
+            onClick={() => onChange?.('')}
+          >
+            {rightIcon}
+          </div>
         )}
       </div>
       {helper && !error && (

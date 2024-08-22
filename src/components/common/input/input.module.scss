@@ -1,13 +1,7 @@
 @use "@/styles/color.scss";
 
-.field {
-  &:focus-within {
-    .field__icon--right {
-      opacity: 1;
-      transition: opacity 0.3s ease;
-      cursor: pointer;
-    }
-  }
+.input {
+
 
   &__label {
     color: color.$gray-700;
@@ -64,10 +58,17 @@
     &--right {
       right: 16px;
       opacity: 0;
+
+    }
+
+    &--focused {
+      opacity: 1;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
     }
   }
 
-  &__input {
+  &__form {
     width: 100%;
     min-width: 300px;
     border: 1px solid color.$gray-300;

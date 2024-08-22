@@ -40,7 +40,7 @@ const BottomSheet = ({children, isOpen, onClose}: BottomSheetProps) => {
         })}
       >
         <div className={cn(`${BLOCK}__handle`)}></div>
-        <div className={cn(`${BLOCK}__content`)}>{children}</div>
+        {children}
         <div className={cn(`${BLOCK}__bottom`)}></div>
       </div>
     </div>
