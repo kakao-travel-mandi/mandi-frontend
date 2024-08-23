@@ -5,4 +5,8 @@ export interface useSnackbarProps {
   type?: 'alert' | 'check';
   full?: boolean;
   position?: 'center' | 'bottom';
+  icon?: {
+    svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+    fill?: string;
+  };
 }

@@ -11,7 +11,7 @@ import classNames from 'classnames/bind';
 
 import Check from '@/assets/icon/icon-check-circle.svg';
 import Alert from '@/assets/icon/icon-exclamation-circle.svg';
-import { SnackbarStatus, useSnackbarProps } from '@/types/snackbar';
+import {SnackbarStatus, useSnackbarProps} from '@/types/snackbar';
 
 import styles from './SnackbarItem.module.scss';
 
@@ -31,40 +31,45 @@ export const SnackbarItem = ({
   position,
   type,
   full,
+  icon,
 }: SnackbarItemProps) => {
   const elemRef = useRef<HTMLDivElement>(null);
   const [animationClassName, setAnimationClassName] = useState<string[]>([]);
 
-  // console.log(status);
-  // console.log(animationClassName);
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
     if (elemRef.current?.className.includes('enter') && status === 'open') {
       setAnimationClassName([`${BLOCK}--show`]);
     } else {
       setStatus(null);
     }
-    // enter => show => show exit
   };
 
   useEffect(() => {
-    setAnimationClassName(status === 'open' ? 
-       [`${BLOCK}--enter`]: [`${BLOCK}--show`, `${BLOCK}--exit`,]);
+    setAnimationClassName(
+      status === 'open'
+        ? [`${BLOCK}--enter`]
+        : [`${BLOCK}--show`, `${BLOCK}--exit`],
+    );
   }, [status]);
 
   return (
     <div
       ref={elemRef}
       className={cx(BLOCK, animationClassName, {
-        [`${BLOCK}--full`]:full,
+        [`${BLOCK}--full`]: full,
         [`${BLOCK}--center`]: position === 'center',
         [`${BLOCK}--bottom`]: position === 'bottom',
-      },
-    )}
+      })}
       onAnimationEnd={handleAnimationEnd}
     >
-      {type === 'alert' && <Alert className={cx(`${BLOCK}__icon`,`${BLOCK}__icon--alert`)} />}
-      {type === 'check' && <Check className={cx(`${BLOCK}__icon`,`${BLOCK}__icon--check`)} />}
-      <span className={cx(`${BLOCK}__message`)} >{content}</span>
+      {type === 'alert' && (
+        <Alert className={cx(`${BLOCK}__icon`, `${BLOCK}__icon--alert`)} />
+      )}
+      {type === 'check' && (
+        <Check className={cx(`${BLOCK}__icon`, `${BLOCK}__icon--check`)} />
+      )}
+      {icon && <icon.svg className={cx(`${BLOCK}__icon`)} fill={icon.fill} />}
+      <span className={cx(`${BLOCK}__message`)}>{content}</span>
     </div>
   );
 };
