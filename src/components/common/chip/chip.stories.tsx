@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 
-import { Chip } from './index'; // Chip 컴포넌트의 경로를 확인하고 조정하세요.
+import Chip from './index'; // Chip 컴포넌트의 경로를 확인하고 조정하세요.
 
 export default {
   title: 'components/Chip',

@@ -1,0 +1,8 @@
+@use "/src/styles/color.scss" as *;
+.container{
+  color: $gray-800;
+  text-align: justify;
+  ol {
+    padding-left: 1rem; /* 숫자와 항목의 간격을 조정합니다. */
+  }
+}
