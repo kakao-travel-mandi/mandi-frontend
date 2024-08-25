@@ -73,6 +73,7 @@ Error.args = {
 export const WithLabel: Story = Template.bind({});
 WithLabel.args = {
   value: 'Initial value',
+  placeholder: 'Enter text',
   label: 'Label Text',
   disabled: false,
   onChange: (value: string) => {
@@ -83,6 +84,7 @@ WithLabel.args = {
 export const WithHelper: Story = Template.bind({});
 WithHelper.args = {
   value: 'Initial value',
+  placeholder: 'Enter text',
   label: 'Label Text',
   helper: 'Helper Text',
   disabled: false,
