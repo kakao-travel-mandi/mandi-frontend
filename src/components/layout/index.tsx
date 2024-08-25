@@ -14,21 +14,21 @@ const BLOCK = 'layout';
 export const Layout = ({
   back,
   title,
-  isTopNav,
-  isTabBar,
+  hasTopNav,
+  hasTabBar,
   children,
 }: {
   back?: boolean;
   title?: string;
-  isTopNav: boolean;
-  isTabBar: boolean;
+  hasTopNav: boolean;
+  hasTabBar: boolean;
   children: ReactNode;
 }) => {
   return (
     <main className={cx(BLOCK)}>
-      {isTopNav && <TopNavBar back={back} title={title} />}
+      {hasTopNav && <TopNavBar back={back} title={title} />}
       {children}
-      {isTabBar && <TabBar className={cx(`${BLOCK}__tabbar`)} />}
+      {hasTabBar && <TabBar className={cx(`${BLOCK}__tabbar`)} />}
     </main>
   );
 };
