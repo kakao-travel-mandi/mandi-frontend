@@ -2,8 +2,9 @@
 
 import {useEffect, useState} from 'react';
 
-import {Button, TabGroup, TabList} from '@headlessui/react';
+import {TabGroup, TabList} from '@headlessui/react';
 import classNames from 'classnames/bind';
+import {usePathname} from 'next/navigation';
 
 import Scrap from '@/assets/tabBar/icon-bookmark.svg';
 import Home from '@/assets/tabBar/icon-home.svg';
@@ -24,23 +25,32 @@ const tabData = [
   {id: 2, title: '코스', icon: <Course />, url: '/course'},
   {id: 3, title: '스크랩', icon: <Scrap />, url: '/scrap'},
   {id: 4, title: '랭킹', icon: <Ranking />, url: '/ranking'},
-  {id: 5, title: '내정보', icon: <User />, url: '/user'},
+  {id: 5, title: '내정보', icon: <User />, url: '/my-info'},
 ];
 
 interface TabBarProps {
   defaultIndex?: number;
+  className?: string;
   onChange?: (index: number) => void;
 }
 
-export const TabBar = ({defaultIndex = 0, onChange}: TabBarProps) => {
+export const TabBar = ({
+  defaultIndex = 0,
+  onChange,
+  className,
+}: TabBarProps) => {
+  const pathname = usePathname();
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex);
 
   useEffect(() => {
-    setSelectedIndex(defaultIndex);
-  }, [defaultIndex]);
+    const currentPath = pathname;
+    const currentIndex = tabData.findIndex(tab => tab.url === currentPath);
+    if (currentIndex !== -1) {
+      setSelectedIndex(currentIndex);
+    }
+  }, [pathname]);
 
   const handleChange = (index: number) => {
-    // console.log('index', index);
     setSelectedIndex(index);
     onChange?.(index);
   };
@@ -49,7 +59,7 @@ export const TabBar = ({defaultIndex = 0, onChange}: TabBarProps) => {
     <TabGroup
       selectedIndex={selectedIndex}
       onChange={handleChange}
-      className={cx(BLOCK)}
+      className={cx(BLOCK, className)}
     >
       <TabList className={cx(`${BLOCK}__tab-list`)}>
         {tabData.map((item, index) => {
