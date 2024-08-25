@@ -1,5 +1,11 @@
+import Layout from '@/components/layout';
+
 const Ranking = () => {
-  return <div>Ranking</div>;
+  return (
+    <Layout isTopNav={true} isTabBar={false} back={true} title='Ranking'>
+      <div>Ranking</div>
+    </Layout>
+  );
 };
 
 export default Ranking;
