@@ -1,10 +1,13 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {Menubox} from '.';
-import {Button} from '../button';
+
 
 import Bell from '@/assets/icon/bell.svg';
 import Pencil from '@/assets/icon/icon-pencil.svg';
 import Trashcan from '@/assets/icon/icon-trash.svg';
+
+import {Button} from '../button';
+
+import {Menubox} from '.';
 
 const meta = {
   title: 'Components/MenuBox',
@@ -28,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),
@@ -44,7 +47,7 @@ export const Default: Story = {
 export const WithIconList: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),
@@ -72,7 +75,7 @@ export const WithIconList: Story = {
 export const WithTranslateX: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),
