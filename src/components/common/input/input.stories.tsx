@@ -47,6 +47,7 @@ const Template: Story = args => {
 export const Default: Story = Template.bind({});
 Default.args = {
   value: '',
+  maxLength: 20,
   placeholder: 'Enter text',
   disabled: false,
   style: {
