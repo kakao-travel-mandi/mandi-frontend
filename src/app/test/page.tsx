@@ -1,9 +1,7 @@
 'use client';
 import classNames from 'classnames/bind';
 
-import Badge from '@/components/common/badge';
-import {Button} from '@/components/common/button';
-import {Chip} from '@/components/common/chip';
+import StarScope from '@/components/star-scope';
 
 import styles from './test.module.scss';
 
@@ -15,11 +13,8 @@ export default function Home() {
   };
   return (
     <div className={cn('container')}>
-      <Chip>테스트</Chip>
-      <Chip action={true}>테스트</Chip>
-      <Button color="green" size="small">
-        안녕
-      </Button>
+      <StarScope score={2} isReadOnly={true} />
+      <StarScope score={2} />
     </div>
   );
 }
