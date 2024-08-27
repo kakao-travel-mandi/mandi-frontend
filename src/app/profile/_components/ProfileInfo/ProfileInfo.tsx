@@ -10,13 +10,17 @@ const cx = classNames.bind(styles);
 
 const BLOCK = 'profile';
 
-export const ProfileInfo = () => {
+interface ProfileInfoProps {
+  className?: string;
+}
+
+export const ProfileInfo = ({className}: ProfileInfoProps) => {
   // TODO: 라우팅 방식 정해야함
   const router = useRouter();
   const handleClick = () => router.push('/profile/edit-profile');
 
   return (
-    <div className={cx(BLOCK)} onClick={handleClick}>
+    <div className={cx(BLOCK, className)} onClick={handleClick}>
       <div className={cx(`${BLOCK}__avatar`)}>
         <Image
           src={'/pwa-icon-192x192.png'}
@@ -31,7 +35,7 @@ export const ProfileInfo = () => {
           Explore Busan like a local with my expert tips and guides!
         </div>
       </div>
-      <ArrowRight className={cx(`${BLOCK}__more-icon`)} />
+      <ArrowRight className={cx(`${BLOCK}__right-icon`)} />
     </div>
   );
 };
