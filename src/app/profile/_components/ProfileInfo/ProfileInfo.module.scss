@@ -1,0 +1,37 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.profile {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+
+  &__avatar {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid $gray-200;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
+  }
+  &__name{
+    @extend .label2-semibold;
+    color: $gray-900;
+  }
+  &__introduction{
+    @extend .label4-regular;
+    color: $gray-600;
+  }
+  &__more-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    fill: $gray-400;
+  }
+}

@@ -1,0 +1,14 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.info {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statics {
+  display: flex;
+  gap: 0.5rem;
+}
