@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import IconStar from '@/assets/icon/icon-star.svg';
 
-import styles from './star-scope.module.scss';
+import styles from './starScope.module.scss';
 
 interface StarScopeProps {
   score: number;

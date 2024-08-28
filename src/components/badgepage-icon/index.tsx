@@ -28,9 +28,9 @@ const BadgePageIcon = ({
         )}
       >
         {disable ? (
-          <IconLockClosed width="22" height="28" />
+          <IconLockClosed width='22' height='28' />
         ) : (
-          <Icon width="40" height="40" />
+          <Icon width='40' height='40' />
         )}
       </div>
 

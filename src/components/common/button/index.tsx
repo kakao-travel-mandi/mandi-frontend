@@ -16,7 +16,7 @@ interface ButtonProps {
 
 const cn = classNames.bind(styles);
 
-export const Button = ({
+const Button = ({
   children,
   size,
   color,
@@ -42,3 +42,4 @@ export const Button = ({
     </HeadlessButton>
   );
 };
+export default Button;
