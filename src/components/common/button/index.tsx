@@ -39,3 +39,5 @@ const Button = ({
     </HeadlessButton>
   );
 };
+
+export default Button;

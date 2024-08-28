@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -7,11 +7,12 @@ import IconClock from '@/assets/icon/icon-clock.svg';
 import IconEllipsisHorizontal from '@/assets/icon/icon-ellipsis-horizontal.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconMapPin from '@/assets/icon/icon-map-pin.svg';
-import IconTrash from '@/assets/icon/icon-trash.svg';
 import Badge from '@/components/common/badge';
-import {Menubox} from '@/components/common/menubox';
+import { Menubox } from '@/components/common/menubox';
 
 import style from './modalSectionUP.module.scss';
+
+import IconTrash from '@/assets/icon/icon-trash.svg';
 
 export interface ModalReviewSectionUpProps {
   img: string;
@@ -60,12 +61,6 @@ const ModalReviewSectionUp = ({
               <Badge color='gray' text={channel[1]} />
             </div>
           </div>
-
-          <Menubox
-            translateX={16}
-            triggerButton={<IconEllipsisVertical />}
-            items={item}
-          />
         </div>
       ) : (
         <div className={cx('container')}>
