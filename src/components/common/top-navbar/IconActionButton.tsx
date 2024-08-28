@@ -7,14 +7,14 @@ const cx = classNames.bind(styles);
 const BLOCK = 'icon-action-button';
 
 export interface IconActionButtonProps {
-  icon: React.ReactNode;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   onClick: () => void;
 }
 
-export const IconButton = ({icon, onClick}: IconActionButtonProps) => {
+export const IconButton = ({icon: Icon, onClick}: IconActionButtonProps) => {
   return (
     <button className={cx(BLOCK)} onClick={onClick}>
-      {icon}
+      <Icon />
     </button>
   );
 };

@@ -22,21 +22,11 @@
   }
 
   &__icon {
-    path {
-      fill: $gray-500;
-    }
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: $gray-500;
     &--selected {
-      path{
-        fill: $gray-800;
-      }
+      fill: $gray-800;
     }
   }
-  // &[aria-selected="true"] {
-  //   path {
-  //     fill: $gray-700;
-  //   }
-  //   span {
-  //     color: $gray-800;
-  //   }
-  // }
 }
