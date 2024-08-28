@@ -1,17 +1,14 @@
-import {Button as HeadlessButton} from '@headlessui/react';
+import { Button as HeadlessButton } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
 import styles from './button.module.scss';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   size: 'large' | 'small' | 'xSmall' | 'full';
   color: 'green' | 'gray' | 'white';
-  type?: 'submit' | 'button' | 'reset';
   font?: string;
   className?: string;
-  disabled?: boolean;
-  onClick?: () => void;
 }
 
 const cn = classNames.bind(styles);
@@ -42,4 +39,3 @@ const Button = ({
     </HeadlessButton>
   );
 };
-export default Button;

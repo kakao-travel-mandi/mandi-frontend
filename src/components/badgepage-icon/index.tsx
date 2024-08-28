@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 
 import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
 
-import styles from './badgePageIcon.module.scss';
+import styles from './badgepage-icon.module.scss';
 
 const cx = classNames.bind(styles);
 

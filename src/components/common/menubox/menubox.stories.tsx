@@ -1,10 +1,12 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {Menubox} from '.';
+
+import Trashcan from '@/assets/icon/icon-bin-mono 1.svg';
+import AirPlane from '@/assets/icon/icon-paper-airplane.svg';
+import Pencil from '@/assets/icon/icon-pencil-mono.svg';
+
 import {Button} from '../button';
 
-import Bell from '@/assets/icon/bell.svg';
-import Pencil from '@/assets/icon/icon-pencil.svg';
-import Trashcan from '@/assets/icon/icon-trash.svg';
+import {Menubox} from '.';
 
 const meta = {
   title: 'Components/MenuBox',
@@ -28,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),
@@ -44,24 +46,24 @@ export const Default: Story = {
 export const WithIconList: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),
     items: [
       {
         content: 'Item 1',
-        icon: <Bell />,
+        icon: AirPlane,
         onClick: () => console.log('Item 1 clicked'),
       },
       {
         content: 'Item 2',
-        icon: <Pencil />,
+        icon: Pencil,
         onClick: () => console.log('Item 2 clicked'),
       },
       {
         content: 'Item 3',
-        icon: <Trashcan />,
+        icon: Trashcan,
         onClick: () => console.log('Item 3 clicked'),
       },
     ],
@@ -72,7 +74,7 @@ export const WithIconList: Story = {
 export const WithTranslateX: Story = {
   args: {
     triggerButton: (
-      <Button size="xSmall" color="green">
+      <Button size='xSmall' color='green'>
         Open
       </Button>
     ),

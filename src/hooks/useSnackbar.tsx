@@ -10,6 +10,7 @@ export const useSnackbar = ({
   type,
   full = false,
   position = 'center',
+  icon,
 }: useSnackbarProps) => {
   const [status, setStatus] = useState<SnackbarStatus>(null);
 
@@ -32,6 +33,7 @@ export const useSnackbar = ({
             full={full}
             position={position}
             type={type}
+            icon={icon}
           />,
           document.querySelector('#snackbarRoot')!,
         )
