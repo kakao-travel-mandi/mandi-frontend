@@ -35,15 +35,13 @@
     animation: exit 200ms ease-out forwards;
   }
   &__icon {
+    width: 1rem;
+    height: 1rem;
     &--alert {
-      path{
-        fill: $red;
-      }
+      fill: $red;
     }
     &--check {
-      path{
-        fill: $green-500;
-      }
+      fill: $green-500;
     }
   }
   &__message {

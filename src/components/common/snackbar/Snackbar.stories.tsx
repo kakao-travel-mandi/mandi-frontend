@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 
 import {Meta, StoryObj} from '@storybook/react';
 
+import HomeIcon from '@/assets/tabBar/icon-bookmark.svg';
 import {useSnackbar} from '@/hooks/useSnackbar';
 import {useSnackbarProps} from '@/types/snackbar';
 
@@ -11,7 +12,7 @@ const SnackbarStory = (args: useSnackbarProps) => {
   const {snackbar, open} = useSnackbar(args);
   return (
     <div>
-      <Button color="green" size="large" onClick={open}>
+      <Button color='green' size='large' onClick={open}>
         Open Snackbar
       </Button>
       {snackbar}
@@ -28,6 +29,7 @@ const meta = {
     type: {control: 'radio', options: ['alert', 'check', undefined] as const},
     full: {control: 'boolean'},
     position: {control: 'radio', options: ['center', 'bottom'] as const},
+    icon: {control: 'object' } ,
   },
   decorators: [
     Story => {
@@ -69,5 +71,17 @@ export const Check: Story = {
     type: 'check',
     full: false,
     position: 'center',
+  },
+};
+
+export const CustomIcon: Story = {
+  args: {
+    content: 'custom icon snackbar',
+    full: false,
+    position: 'center',
+    icon: {
+      svg: HomeIcon,
+      fill: '#008E6D',
+    },
   },
 };

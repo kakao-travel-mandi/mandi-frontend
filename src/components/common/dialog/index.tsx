@@ -54,14 +54,10 @@ const Dialog = ({
       <div className={cn(`${BLOCK}__container`)}>
         <DialogPanel className={cn(`${BLOCK}__panel`)}>
           <div className={cn(`${BLOCK}__panel__content`)}>
-            <DialogTitle
-              className={cn(`title3-semibold`, `${BLOCK}__panel__title`)}
-            >
+            <DialogTitle className={cn(`${BLOCK}__panel__title`)}>
               {title}
             </DialogTitle>
-            <Description
-              className={cn(`body2-regular`, `${BLOCK}__panel__description`)}
-            >
+            <Description className={cn(`${BLOCK}__panel__description`)}>
               {description}
             </Description>
           </div>

@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-
-import Bell from '@/assets/icon/bell.svg';
-import Pencil from '@/assets/icon/icon-pencil.svg';
-import Trashcan from '@/assets/icon/icon-trash.svg';
+import Trashcan from '@/assets/icon/icon-bin-mono 1.svg';
+import AirPlane from '@/assets/icon/icon-paper-airplane.svg';
+import Pencil from '@/assets/icon/icon-pencil-mono.svg';
 
 import {Button} from '../button';
 
@@ -54,17 +53,17 @@ export const WithIconList: Story = {
     items: [
       {
         content: 'Item 1',
-        icon: <Bell />,
+        icon: AirPlane,
         onClick: () => console.log('Item 1 clicked'),
       },
       {
         content: 'Item 2',
-        icon: <Pencil />,
+        icon: Pencil,
         onClick: () => console.log('Item 2 clicked'),
       },
       {
         content: 'Item 3',
-        icon: <Trashcan />,
+        icon: Trashcan,
         onClick: () => console.log('Item 3 clicked'),
       },
     ],

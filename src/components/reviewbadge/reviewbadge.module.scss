@@ -1,0 +1,11 @@
+@use "/src/styles/color.scss" as *;
+
+.reviewbadge{
+  display: flex;
+  padding: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  background: $gray-100;
+}
