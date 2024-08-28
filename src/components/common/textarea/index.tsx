@@ -22,10 +22,7 @@ const cn = classNames.bind(styles);
 const BLOCK = 'textarea';
 
 interface TextareaProps
-  extends Omit<
-    TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'onError' | 'onChange'
-  > {
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   /**
    * 입력 값
    */
@@ -35,21 +32,13 @@ interface TextareaProps
    */
   label?: string;
   /**
-   * 헬퍼 텍스트
-   */
-  helper?: string;
-  /**
    * 플레이스홀더
    */
   placeholder?: string;
   /**
-   * 왼쪽 아이콘
+   * 최대 길이
    */
-  leftIcon?: ReactElement;
-  /**
-   * 오른쪽 아이콘
-   */
-  rightIcon?: ReactElement;
+  maxLength?: number;
   /**
    * 스타일
    */
@@ -74,10 +63,8 @@ interface TextareaProps
 const Textarea = ({
   value,
   label = '',
-  helper = '',
   placeholder = '',
-  leftIcon,
-  rightIcon,
+  maxLength,
   type = 'text',
   style,
   error = '',
@@ -109,24 +96,16 @@ const Textarea = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onChange={e => onChange?.(e.target.value)}
+        maxLength={maxLength}
         {...props}
       />
-      {helper && !error && (
+      {!!maxLength && (
         <Helper
-          className={cn(`label4-regular`, `${BLOCK}__helper`, {
-            [`${BLOCK}__helper--visible`]: !error,
+          className={cn(`label4-regular`, `${BLOCK}__max-length`, {
+            [`${BLOCK}__max-length--error`]: !!error,
           })}
         >
-          {helper}
-        </Helper>
-      )}
-      {error && (
-        <Helper
-          className={cn(`label4-regular`, `${BLOCK}__error`, {
-            [`${BLOCK}__error--visible`]: !!error,
-          })}
-        >
-          {error}
+          {value.length}/{maxLength}
         </Helper>
       )}
     </Field>
