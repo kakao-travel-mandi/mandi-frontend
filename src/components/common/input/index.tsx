@@ -1,9 +1,11 @@
 'use client';
 
 import {
+  ChangeEvent,
   CSSProperties,
   InputHTMLAttributes,
   ReactElement,
+  useEffect,
   useState,
 } from 'react';
 
@@ -28,9 +30,14 @@ interface InputProps
    */
   value: string;
   /**
+   * 최대 길이
+   */
+  maxLength?: number;
+  /**
    * 라벨
    */
   label?: string;
+
   /**
    * 헬퍼 텍스트
    */
@@ -63,6 +70,10 @@ interface InputProps
    * 변경 함수
    */
   onChange?: (value: string) => void;
+  /**
+   * 에러 함수
+   */
+  onError?: (error: string) => void;
 }
 
 /**
@@ -70,6 +81,7 @@ interface InputProps
  */
 const Input = ({
   value,
+  maxLength,
   label = '',
   helper = '',
   placeholder = '',
@@ -79,15 +91,24 @@ const Input = ({
   style,
   error = '',
   onChange,
+  onError,
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (maxLength && value.length > maxLength) return;
+
+    onChange?.(value);
+  };
+
   return (
-    <Field>
+    <Field style={style}>
       {label && (
         <Label
-          className={cn(`label4-regular`, `${BLOCK}__label`, {
+          className={cn(`${BLOCK}__label`, {
             [`${BLOCK}__label--error`]: !!error,
           })}
         >
@@ -106,19 +127,19 @@ const Input = ({
         )}
         <HeadlessInput
           value={value}
+          maxLength={maxLength}
           type={type}
           placeholder={placeholder}
-          className={cn(`body1-regular`, `${BLOCK}__form`, {
+          className={cn(`${BLOCK}__form`, {
             [`${BLOCK}__form--leftIcon`]: !!leftIcon,
             [`${BLOCK}__form--rightIcon`]: !!rightIcon,
             [`${BLOCK}__form--focused`]: isFocused,
             [`${BLOCK}__form--value`]: !!value.trim(),
             [`${BLOCK}__form--error`]: !!error,
           })}
-          style={style}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          onChange={e => onChange?.(e.target.value)}
+          onChange={handleChange}
           {...props}
         />
         {rightIcon && onChange && (
@@ -133,24 +154,32 @@ const Input = ({
           </div>
         )}
       </div>
-      {helper && !error && (
-        <Helper
-          className={cn(`label4-regular`, `${BLOCK}__helper`, {
-            [`${BLOCK}__helper--visible`]: !error,
-          })}
-        >
-          {helper}
-        </Helper>
-      )}
-      {error && (
-        <Helper
-          className={cn(`label4-regular`, `${BLOCK}__error`, {
-            [`${BLOCK}__error--visible`]: !!error,
-          })}
-        >
-          {error}
-        </Helper>
-      )}
+      <div className={cn(`${BLOCK}__bottom-wrapper`)}>
+        {helper && !error && (
+          <Helper
+            className={cn(`${BLOCK}__helper`, {
+              [`${BLOCK}__helper--visible`]: !error,
+            })}
+          >
+            {helper}
+          </Helper>
+        )}
+        {error && (
+          <Helper
+            className={cn(`${BLOCK}__error`, {
+              [`${BLOCK}__error--visible`]: !!error,
+            })}
+          >
+            {error}
+          </Helper>
+        )}
+        {maxLength && (
+          <div className={cn(`${BLOCK}__length`)}>
+            <span>{value.length}/</span>
+            <span>{maxLength}</span>
+          </div>
+        )}
+      </div>
     </Field>
   );
 };

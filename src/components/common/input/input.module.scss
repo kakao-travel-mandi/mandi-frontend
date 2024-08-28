@@ -1,19 +1,25 @@
-@use "@/styles/color.scss";
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
 
 .input {
 
+  &__field {
+    position: relative;
+  }
 
   &__label {
-    color: color.$gray-700;
+    @extend .label4-regular;
+    color: $gray-700;
     margin-bottom: 4px;
 
     &--error {
-      color: color.$red;
+      color: $red;
     }
   }
 
   &__helper {
-    color: color.$gray-700;
+    @extend .label4-regular;
+    color: $gray-700;
     margin-top: 8px;
     display: none;
     transition: height 0.3s ease;
@@ -24,7 +30,8 @@
   }
 
   &__error {
-    color: color.$red;
+    @extend .label4-regular;
+    color: $red;
     margin-top: 8px;
     display: none;
     transition: height 0.3s ease;
@@ -34,10 +41,31 @@
     }
   }
 
+ &__length {
+    @extend .label4-regular;
+    color: $gray-700;
+    display: flex;
+    justify-content: flex-end;
+
+    &--error {
+      color: $red;
+    }
+  }
+
   &__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+  }
+
+  &__bottom-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:nth-child(2) {
+      margin-left: auto;
+    }
   }
 
   &__icon {
@@ -69,15 +97,16 @@
   }
 
   &__form {
+    @extend .body1-regular;
     width: 100%;
     min-width: 300px;
-    border: 1px solid color.$gray-300;
+    border: 1px solid $gray-300;
     border-radius: 8px;
     padding: 11px 16px;
     transition: all 0.3s ease;
-    color: color.$gray-500;
-    border-color: color.$gray-100;
-    background-color: color.$gray-50;
+    color: $gray-500;
+    border-color: $gray-100;
+    background-color: $gray-50;
 
     &--leftIcon {
       padding-left: 46px;
@@ -88,16 +117,18 @@
     }
 
     &--focused {
-      border-color: color.$gray-400;
-      background-color: color.$gray-100;
+      border-color: $gray-400;
+      background-color: $gray-100;
     }
 
     &--value {
-      color: color.$gray-700;
+      color: $gray-700;
     }
 
     &--error {
-      background-color: color.$red-light;
+      background-color: $red-light;
     }
   }
+
+ 
 }

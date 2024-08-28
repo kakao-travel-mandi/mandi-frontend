@@ -1,4 +1,5 @@
-@use "@/styles/color.scss";
+@use "@/styles/color.scss" as *;
+
 
 .bottomsheet {
   position: fixed;
@@ -59,7 +60,7 @@
       content: "";
       width: 78px;
       height: 6px;
-      background-color: color.$gray-100;
+      background-color: $gray-100;
       border-radius: 10px;
     }
   }
