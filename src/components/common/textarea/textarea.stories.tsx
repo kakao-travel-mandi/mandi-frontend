@@ -78,11 +78,11 @@ WithLabel.args = {
   },
 };
 
-export const WithHelper: Story = Template.bind({});
-WithHelper.args = {
+export const WithMaxLength: Story = Template.bind({});
+WithMaxLength.args = {
   value: 'Initial value',
   label: 'Label Text',
-  helper: 'Helper Text',
+  maxLength: 100,
   disabled: false,
   onChange: (value: string) => {
     console.log('Textarea changed:', value);
