@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <body className={Pretendard.className}>{children}</body>
     </html>
   );

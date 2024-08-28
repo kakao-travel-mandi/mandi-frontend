@@ -1,7 +1,6 @@
-import {useRef} from 'react';
-
 import {Tab} from '@headlessui/react';
 import classNames from 'classnames/bind';
+import {useRouter} from 'next/navigation';
 
 import styles from './TabItem.module.scss';
 
@@ -15,6 +14,7 @@ interface TabItemProps {
   url: string;
   selected?: boolean;
 }
+
 
 export const TabItem = ({title, icon: Icon, url, selected}: TabItemProps) => {
   // const router = useRouter();
