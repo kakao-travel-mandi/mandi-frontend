@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 
 import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
 
-import styles from './badgePageIcon.module.scss';
+import styles from './badgepage-icon.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -28,9 +28,9 @@ const BadgePageIcon = ({
         )}
       >
         {disable ? (
-          <IconLockClosed width="22" height="28" />
+          <IconLockClosed width='22' height='28' />
         ) : (
-          <Icon width="40" height="40" />
+          <Icon width='40' height='40' />
         )}
       </div>
 
