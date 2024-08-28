@@ -3,20 +3,17 @@ import classNames from 'classnames/bind';
 
 import styles from './button.module.scss';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   size: 'large' | 'small' | 'xSmall' | 'full';
   color: 'green' | 'gray' | 'white';
-  type?: 'submit' | 'button' | 'reset';
   font?: string;
   className?: string;
-  disabled?: boolean;
-  onClick?: () => void;
 }
 
 const cn = classNames.bind(styles);
 
-export const Button = ({
+const Button = ({
   children,
   size,
   color,
@@ -42,3 +39,5 @@ export const Button = ({
     </HeadlessButton>
   );
 };
+
+export default Button;

@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: '타이틀',
+    title: 'Title',
     back: false,
     actions: [],
   },
@@ -28,25 +28,25 @@ export const Default: Story = {
 
 export const Back: Story = {
   args: {
-    title: '타이틀',
+    title: 'Title',
     back: true,
   },
 };
 
 export const Logo: Story = {
   args: {
-    title: '타이틀',
+    title: 'Title',
     logo: true,
   },
 };
 
 export const Actions: Story = {
   args: {
-    title: '타이틀',
+    title: 'Title',
     actions: [
       {
-        icon: <Bell />,
-        onClick: () => console.log('벨 클릭!'),
+        icon: Bell,
+        onClick: () => console.log('Clicked bell!'),
       },
     ],
   },
@@ -54,11 +54,11 @@ export const Actions: Story = {
 
 export const TextAction: Story = {
   args: {
-    title: '타이틀',
+    title: 'Title',
     actions: [
       {
-        text: '텍스트',
-        onClick: () => console.log('검색 클릭!'),
+        text: 'search',
+        onClick: () => console.log('Clicked search!'),
       },
     ],
   },

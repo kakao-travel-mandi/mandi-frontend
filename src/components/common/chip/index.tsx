@@ -17,7 +17,7 @@ interface ChipProps {
 
 const cx = classNames.bind(styles);
 
-export const Chip = ({
+const Chip = ({
   children,
   type = 'button',
   font = 'label3-medium',
@@ -35,7 +35,8 @@ export const Chip = ({
       disabled={disabled}
     >
       {children}
-      {action && <IconArrowDown width="14" height="14" />}
+      {action && <IconArrowDown width='14' height='14' />}
     </HeadlessButton>
   );
 };
+export default Chip;

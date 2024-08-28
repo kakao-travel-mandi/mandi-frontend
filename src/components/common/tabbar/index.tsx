@@ -7,9 +7,9 @@ import classNames from 'classnames/bind';
 import {usePathname} from 'next/navigation';
 
 import Scrap from '@/assets/tabBar/icon-bookmark.svg';
+import Community from '@/assets/tabBar/icon-chat-bubble-oval-left-ellipsis.svg';
 import Home from '@/assets/tabBar/icon-home.svg';
 import Course from '@/assets/tabBar/icon-map.svg';
-import Ranking from '@/assets/tabBar/icon-ranking.svg';
 import User from '@/assets/tabBar/icon-user-mono.svg';
 import {PATHNAME} from '@/constants/pathname';
 
@@ -22,11 +22,11 @@ const BLOCK = 'tab-bar';
 
 // TODO: 라우팅 구조 정하고 url 수정하기
 const tabData = [
-  {id: 1, title: '홈', icon: <Home />, url: PATHNAME.HOME},
-  {id: 2, title: '코스', icon: <Course />, url: PATHNAME.COURSE},
-  {id: 3, title: '스크랩', icon: <Scrap />, url: PATHNAME.SCRAP},
-  {id: 4, title: '랭킹', icon: <Ranking />, url: PATHNAME.RANKING},
-  {id: 5, title: '내정보', icon: <User />, url: PATHNAME.MY_INFO},
+  {id: 1, title: 'Home', icon: Home, url: '/home'},
+  {id: 2, title: 'Course', icon: Course, url: '/course'},
+  {id: 3, title: 'Scrap', icon: Scrap, url: '/scrap'},
+  {id: 4, title: 'Community', icon: Community, url: '/community'},
+  {id: 5, title: 'My', icon: User, url: '/user'},
 ];
 
 interface TabBarProps {
