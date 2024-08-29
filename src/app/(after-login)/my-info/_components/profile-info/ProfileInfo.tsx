@@ -17,7 +17,7 @@ interface ProfileInfoProps {
 export const ProfileInfo = ({className}: ProfileInfoProps) => {
   // TODO: 라우팅 방식 정해야함
   const router = useRouter();
-  const handleClick = () => router.push('/profile/edit-profile');
+  const handleClick = () => router.push('/my-info/edit-profile');
 
   return (
     <div className={cx(BLOCK, className)} onClick={handleClick}>

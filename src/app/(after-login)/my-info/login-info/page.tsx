@@ -1,17 +1,16 @@
 'use client';
 
-import {useState} from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import GoogleIcon from '@/assets/provider/Google.svg';
 import KakaoIcon from '@/assets/provider/Kakao.svg';
-import {Button} from '@/components/common/button';
+import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import {TopNavBar} from '@/components/common/top-navbar';
-
-import {SizedBox} from '../../../components/common/SizedBox/SizedBox';
+import { SizedBox } from '@/components/common/sizedbox/SizedBox';
+import { TopNavBar } from '@/components/common/top-navbar';
 
 import styles from './page.module.scss';
 
@@ -37,7 +36,7 @@ export default function Page() {
 
   const handleLogoutMenuClick = () => setLogoutConfirmDialog(true);
   const handleDeleteAccountMenuClick = () =>
-    router.push('/profile/delete-account');
+    router.push('/my-info/delete-account');
 
   // TODO: 모달 창의 로그아웃 confirm 버튼 눌렀을 때의 동작 구현
   const handleDialogConfirm = () => {};

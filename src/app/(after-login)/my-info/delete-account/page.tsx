@@ -1,17 +1,16 @@
 'use client';
 
-import {useState} from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import CdIcon from '@/assets/colored-icon/cd.svg';
 import TrashcanIcon from '@/assets/colored-icon/trashcan.svg';
-import {Button} from '@/components/common/button';
+import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import {TopNavBar} from '@/components/common/top-navbar';
-
-import {SizedBox} from '../../../components/common/SizedBox/SizedBox';
+import { SizedBox } from '@/components/common/sizedbox/SizedBox';
+import { TopNavBar } from '@/components/common/top-navbar';
 
 import styles from './page.module.scss';
 
@@ -59,7 +58,7 @@ export default function Page() {
       </div>
       <SizedBox height='2rem' />
       <ul className={cx(`${BLOCK}__list`)}>
-        {reviewList.map(({icon: Icon, text}, index) => (
+        {reviewList.map(({ icon: Icon, text }, index) => (
           <li key={index} className={cx(`${BLOCK}__list-item`)}>
             <Icon className={cx(`${BLOCK}__list-item__icon`)} />
             <p className={cx(`${BLOCK}__list-item__text`)}>{text}</p>
