@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
-
 import { Meta, StoryObj } from '@storybook/react';
 
-import HomeIcon from '@/assets/tabBar/icon-bookmark.svg';
+import HomeIcon from '@/assets/tabbar/icon-bookmark.svg';
 import { SnackbarItemProps, useSnackbar } from '@/hooks/useSnackbar';
 
 import Button from '../button';

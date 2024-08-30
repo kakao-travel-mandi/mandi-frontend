@@ -3,8 +3,8 @@ import {forwardRef} from 'react';
 import {Menu, MenuButton, MenuItems} from '@headlessui/react';
 import classNames from 'classnames/bind';
 
-import {ListItem, ListItemProps} from './list-item';
 import styles from './index.module.scss';
+import {ListItem, ListItemProps} from './list-item';
 
 const cx = classNames.bind(styles);
 

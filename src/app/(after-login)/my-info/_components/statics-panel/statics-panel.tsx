@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import styles from './StaticsPanel.module.scss';
+import styles from './statics-panel.module.scss';
 
 const BLOCK = 'statics-panel';
 

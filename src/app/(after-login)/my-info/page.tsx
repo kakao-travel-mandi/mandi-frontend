@@ -6,8 +6,8 @@ import Flag from '@/assets/colored-icon/flag.svg';
 import Pencil from '@/assets/colored-icon/pencil.svg';
 import Layout from '@/components/layout';
 
-import { ProfileInfo } from './_components/profile-info/ProfileInfo';
-import { StaticsPanel } from './_components/statics-panel/StaticsPanel';
+import { ProfileInfo } from './_components/profile-info/profile-info';
+import { StaticsPanel } from './_components/statics-panel/statics-panel';
 import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);

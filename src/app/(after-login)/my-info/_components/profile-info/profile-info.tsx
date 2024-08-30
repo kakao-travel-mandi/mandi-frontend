@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import ArrowRight from '@/assets/icon/icon-arrow-right-small-mono.svg';
 
-import styles from './ProfileInfo.module.scss';
+import styles from './profile-info.module.scss';
 
 const cx = classNames.bind(styles);
 

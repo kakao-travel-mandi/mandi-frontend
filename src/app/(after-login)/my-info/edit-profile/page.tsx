@@ -13,12 +13,12 @@ import IconXCircle from '@/assets/icon/icon-xcircle.svg';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import Input from '@/components/common/input';
+import { SizedBox } from '@/components/common/sizedbox';
 import Textarea from '@/components/common/textarea';
 import Layout from '@/components/layout';
 import { useImagePreview } from '@/hooks/usePreviewImage';
 
 import styles from './page.module.scss';
-import { SizedBox } from '@/components/common/sizedbox';
 
 const cx = classNames.bind(styles);
 type FormInputs = {
