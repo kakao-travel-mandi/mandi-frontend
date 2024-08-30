@@ -19,9 +19,16 @@ interface TopNavBarProps {
   title?: string;
   actions?: (TextActionButtonProps | IconActionButtonProps)[];
   back?: boolean;
+  onClickBack?: () => void;
 }
 
-export const TopNavBar = ({logo, title, actions, back}: TopNavBarProps) => {
+export const TopNavBar = ({
+  logo,
+  title,
+  actions,
+  back,
+  onClickBack,
+}: TopNavBarProps) => {
   const router = useRouter();
   const handleBack = () => router.back();
 
@@ -29,7 +36,12 @@ export const TopNavBar = ({logo, title, actions, back}: TopNavBarProps) => {
     <div className={cx(BLOCK)}>
       <div className={cx(`${BLOCK}__leading`)}>
         {logo && <Mandi />}
-        {back && <IconButton icon={Back} onClick={handleBack} />}
+        {back && (
+          <IconButton
+            icon={Back}
+            onClick={() => (onClickBack ? onClickBack() : handleBack())}
+          />
+        )}
       </div>
       <div className={cx(`${BLOCK}__height`)} />
       <div className={cx(`${BLOCK}__title`)}>{title}</div>

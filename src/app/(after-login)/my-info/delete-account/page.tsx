@@ -11,6 +11,7 @@ import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox/SizedBox';
 import { TopNavBar } from '@/components/common/top-navbar';
+import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
 
@@ -34,15 +35,20 @@ export default function Page() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const handleDialogClose = () => setDeleteDialogOpen(false);
 
-  const handleContinueClick = () => router.back();
+  // my-info로 이동
+  const handleContinueClick = () => router.push('/my-info');
   const handleDeleteClick = () => setDeleteDialogOpen(true);
 
-  // TODO: 계정 삭제 API 호출
+  // TODO: 계정 삭제 API 호출 후, 로그인 페이지로 이동
   const deleteAccount = () => {};
 
   return (
-    <>
-      <TopNavBar title='Delete Account' back />
+    <Layout
+      title='Delete Account'
+      hasTopNav={true}
+      back={true}
+      hasTabBar={false}
+    >
       <SizedBox height='2.75rem' />
       <div className={cx(BLOCK)}>
         <h2 className={cx(`${BLOCK}__title`)}>
@@ -95,17 +101,12 @@ export default function Page() {
             <Button size='full' color='gray' onClick={handleDialogClose}>
               Cancel
             </Button>
-            <Button
-              size='full'
-              color='green'
-              onClick={deleteAccount}
-              className='bg-red'
-            >
+            <Button size='full' color='green' onClick={deleteAccount}>
               Delete Account
             </Button>
           </div>
         }
       />
-    </>
+    </Layout>
   );
 }

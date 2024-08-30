@@ -11,6 +11,7 @@ import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox/SizedBox';
 import { TopNavBar } from '@/components/common/top-navbar';
+import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
 
@@ -43,8 +44,12 @@ export default function Page() {
   const handleDialogCancel = () => setLogoutConfirmDialog(false);
 
   return (
-    <div>
-      <TopNavBar title='Login Information' back />
+    <Layout
+      title='Login Information'
+      hasTopNav={true}
+      back={true}
+      hasTabBar={false}
+    >
       <SizedBox height='0.625rem' />
       <div className={cx(`account-info`)}>
         <span className={cx(`account-info__label`)}>Login Account</span>
@@ -99,6 +104,6 @@ export default function Page() {
           </div>
         }
       />
-    </div>
+    </Layout>
   );
 }
