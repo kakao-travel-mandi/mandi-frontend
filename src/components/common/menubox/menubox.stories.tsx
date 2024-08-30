@@ -1,12 +1,12 @@
-import {Meta, StoryObj} from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Trashcan from '@/assets/icon/icon-bin-mono 1.svg';
 import AirPlane from '@/assets/icon/icon-paper-airplane.svg';
 import Pencil from '@/assets/icon/icon-pencil-mono.svg';
 
-import {Button} from '../button';
+import Button from '../button';
 
-import {Menubox} from '.';
+import { Menubox } from '.';
 
 const meta = {
   title: 'Components/MenuBox',
@@ -16,7 +16,7 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    translateX: {control: 'number'},
+    translateX: { control: 'number' },
     align: {
       control: 'radio',
       options: ['end', 'center', 'start'],
@@ -35,9 +35,9 @@ export const Default: Story = {
       </Button>
     ),
     items: [
-      {content: 'Item 1', onClick: () => console.log('Item 1 clicked')},
-      {content: 'Item 2', onClick: () => console.log('Item 2 clicked')},
-      {content: 'Item 3', onClick: () => console.log('Item 3 clicked')},
+      { content: 'Item 1', onClick: () => console.log('Item 1 clicked') },
+      { content: 'Item 2', onClick: () => console.log('Item 2 clicked') },
+      { content: 'Item 3', onClick: () => console.log('Item 3 clicked') },
     ],
     align: 'end',
   },
@@ -79,9 +79,9 @@ export const WithTranslateX: Story = {
       </Button>
     ),
     items: [
-      {content: 'Item 1', onClick: () => console.log('Item 1 clicked')},
-      {content: 'Item 2', onClick: () => console.log('Item 2 clicked')},
-      {content: 'Item 3', onClick: () => console.log('Item 3 clicked')},
+      { content: 'Item 1', onClick: () => console.log('Item 1 clicked') },
+      { content: 'Item 2', onClick: () => console.log('Item 2 clicked') },
+      { content: 'Item 3', onClick: () => console.log('Item 3 clicked') },
     ],
     translateX: 15,
     align: 'end',

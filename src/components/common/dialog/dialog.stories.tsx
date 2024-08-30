@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-import {Meta, StoryFn} from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
-import {Button} from '../button';
+import Button from '../button';
 
 import Dialog from '.';
 
@@ -10,7 +10,7 @@ const meta: Meta<typeof Dialog> = {
   title: 'components/Dialog',
   component: Dialog,
   argTypes: {
-    isOpen: {control: 'boolean'},
+    isOpen: { control: 'boolean' },
   },
   tags: ['autodocs'],
   parameters: {
@@ -61,10 +61,10 @@ Default.args = {
         gap: '10px',
       }}
     >
-      <Button size="full" color="green">
+      <Button size='full' color='green'>
         Confrim
       </Button>
-      <Button size="full" color="white">
+      <Button size='full' color='white'>
         Cancle
       </Button>
     </div>
@@ -86,7 +86,7 @@ withOneButton.args = {
         gap: '10px',
       }}
     >
-      <Button size="full" color="green">
+      <Button size='full' color='green'>
         Confrim
       </Button>
     </div>

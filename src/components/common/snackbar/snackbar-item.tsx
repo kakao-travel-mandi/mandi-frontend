@@ -1,56 +1,44 @@
-import {
-  AnimationEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { AnimationEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
 import Check from '@/assets/icon/icon-check-circle.svg';
 import Alert from '@/assets/icon/icon-exclamation-circle.svg';
-import {SnackbarStatus, useSnackbarProps} from '@/types/snackbar';
+import { useSnackbarStore } from '@/stores/snackbar';
+import { Snackbar } from '@/types/snackbar';
 
-import styles from './SnackbarItem.module.scss';
+import styles from './snackbar-item.module.scss';
 
 const BLOCK = 'snackbar-item';
 
 const cx = classNames.bind(styles);
 
-interface SnackbarItemProps extends useSnackbarProps {
-  status: SnackbarStatus;
-  setStatus: Dispatch<SetStateAction<SnackbarStatus>>;
-}
-
 export const SnackbarItem = ({
-  status,
-  setStatus,
+  id,
+  isOpen,
   content,
-  position,
   type,
+  position,
   full,
   icon,
-}: SnackbarItemProps) => {
+}: Snackbar) => {
+  const removeSnackbar = useSnackbarStore(state => state.removeSnackbar);
   const elemRef = useRef<HTMLDivElement>(null);
   const [animationClassName, setAnimationClassName] = useState<string[]>([]);
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
-    if (elemRef.current?.className.includes('enter') && status === 'open') {
+    if (elemRef.current?.className.includes(`${BLOCK}--enter`)) {
       setAnimationClassName([`${BLOCK}--show`]);
     } else {
-      setStatus(null);
+      removeSnackbar(id);
     }
   };
 
   useEffect(() => {
     setAnimationClassName(
-      status === 'open'
-        ? [`${BLOCK}--enter`]
-        : [`${BLOCK}--show`, `${BLOCK}--exit`],
+      isOpen ? [`${BLOCK}--enter`] : [`${BLOCK}--show`, `${BLOCK}--exit`],
     );
-  }, [status]);
+  }, [isOpen]);
 
   return (
     <div

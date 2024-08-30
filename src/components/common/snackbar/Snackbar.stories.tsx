@@ -1,22 +1,38 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 
-import {Meta, StoryObj} from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import HomeIcon from '@/assets/tabBar/icon-bookmark.svg';
-import {useSnackbar} from '@/hooks/useSnackbar';
-import {useSnackbarProps} from '@/types/snackbar';
+import { SnackbarItemProps, useSnackbar } from '@/hooks/useSnackbar';
 
-import {Button} from '../button';
+import Button from '../button';
 
-const SnackbarStory = (args: useSnackbarProps) => {
-  const {snackbar, open} = useSnackbar(args);
+import { SnackbarRoot } from './snackbar-root';
+
+const SnackbarStory = ({
+  content,
+  type,
+  full,
+  position,
+}: SnackbarItemProps) => {
+  const { createSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    createSnackbar({
+      content: content || 'This is a snackbar message',
+      type: type || 'alert',
+      full: full || false,
+      position: position || 'center',
+    });
+  };
+
   return (
-    <div>
-      <Button color='green' size='large' onClick={open}>
+    <>
+      <Button color='green' size='large' onClick={handleClick}>
         Open Snackbar
       </Button>
-      {snackbar}
-    </div>
+      <SnackbarRoot />
+    </>
   );
 };
 
@@ -25,25 +41,12 @@ const meta = {
   component: SnackbarStory,
   tags: ['autodocs'],
   argTypes: {
-    content: {control: 'text'},
-    type: {control: 'radio', options: ['alert', 'check', undefined] as const},
-    full: {control: 'boolean'},
-    position: {control: 'radio', options: ['center', 'bottom'] as const},
-    icon: {control: 'object' } ,
+    content: { control: 'text' },
+    type: { control: 'radio', options: ['alert', 'check', undefined] as const },
+    full: { control: 'boolean' },
+    position: { control: 'radio', options: ['center', 'bottom'] as const },
+    icon: { control: 'object' },
   },
-  decorators: [
-    Story => {
-      useEffect(() => {
-        const snackbarRoot = document.createElement('div');
-        snackbarRoot.id = 'snackbarRoot';
-        document.body.appendChild(snackbarRoot);
-        return () => {
-          document.body.removeChild(snackbarRoot);
-        };
-      }, []);
-      return <Story />;
-    },
-  ],
 } satisfies Meta<typeof SnackbarStory>;
 export default meta;
 type Story = StoryObj<typeof meta>;

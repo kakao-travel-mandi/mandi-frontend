@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-import {Meta, StoryFn} from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
-import {Button} from '../button';
+import Button from '../button';
 
 import BottomSheet from './index';
 
@@ -10,7 +10,7 @@ const meta: Meta<typeof BottomSheet> = {
   title: 'components/BottomSheet',
   component: BottomSheet,
   argTypes: {
-    isOpen: {control: 'boolean'},
+    isOpen: { control: 'boolean' },
   },
   tags: ['autodocs'],
   parameters: {
@@ -58,7 +58,7 @@ Default.args = {
       }}
     >
       <div>Bottom Sheet Content</div>
-      <Button size="full" color="green">
+      <Button size='full' color='green'>
         Confrim
       </Button>
     </div>

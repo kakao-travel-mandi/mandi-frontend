@@ -1,43 +1,35 @@
-import {useCallback, useState} from 'react';
-import {createPortal} from 'react-dom';
+import { useCallback } from 'react';
 
-import {SnackbarItem} from '@/components/common/snackbar/SnackbarItem';
-import {SNACKBAR_DURATION} from '@/constants/snackbar';
-import {SnackbarStatus, useSnackbarProps} from '@/types/snackbar';
+import { SNACKBAR_DURATION } from '@/constants/snackbar';
+import { useSnackbarStore } from '@/stores/snackbar';
+import { Snackbar } from '@/types/snackbar';
 
-export const useSnackbar = ({
-  content,
-  type,
-  full = false,
-  position = 'center',
-  icon,
-}: useSnackbarProps) => {
-  const [status, setStatus] = useState<SnackbarStatus>(null);
-
-  const openSnackbar = useCallback(() => {
-    if (status === null) {
-      setStatus('open');
-      setTimeout(() => {
-        setStatus('close');
-      }, SNACKBAR_DURATION);
-    }
-  }, [status]);
-
-  return {
-    snackbar: !!status
-      ? createPortal(
-          <SnackbarItem
-            status={status}
-            setStatus={setStatus}
-            content={content}
-            full={full}
-            position={position}
-            type={type}
-            icon={icon}
-          />,
-          document.querySelector('#snackbarRoot')!,
-        )
-      : null,
-    open: openSnackbar,
+export interface SnackbarItemProps {
+  content: string;
+  type?: 'alert' | 'check';
+  full?: boolean;
+  position?: 'center' | 'bottom';
+  icon?: {
+    svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+    fill?: string;
   };
+}
+export const useSnackbar = () => {
+  const { removeSnackbar, upsertSnackbar } = useSnackbarStore(state => state);
+  const createSnackbar = useCallback((snackbar: SnackbarItemProps) => {
+    const newItem: Snackbar = {
+      id: String(Date.now()),
+      isOpen: true,
+      ...snackbar,
+    };
+    upsertSnackbar(newItem); // 스낵바 추가
+    setTimeout(() => {
+      upsertSnackbar({ ...newItem, isOpen: false });
+    }, SNACKBAR_DURATION);
+  }, [upsertSnackbar]);
+  const deleteSnackbar = useCallback((id: string) => {
+    removeSnackbar(id);
+  }, [removeSnackbar]);
+
+  return { createSnackbar, deleteSnackbar };
 };
