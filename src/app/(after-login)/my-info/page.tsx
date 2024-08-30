@@ -2,7 +2,8 @@
 
 import classNames from 'classnames/bind';
 
-import Bell from '@/assets/icon/bell.svg';
+import Flag from '@/assets/colored-icon/flag.svg';
+import Pencil from '@/assets/colored-icon/pencil.svg';
 import Layout from '@/components/layout';
 
 import { ProfileInfo } from './_components/profile-info/ProfileInfo';
@@ -10,14 +11,19 @@ import { StaticsPanel } from './_components/statics-panel/StaticsPanel';
 import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
+type StaticsPanel = {
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  value: number;
+};
 const staticsPanelData = [
   {
-    icon: <Bell />,
+    icon: Pencil,
     title: 'My course review',
     value: 3,
   },
   {
-    icon: <Bell />,
+    icon: Flag,
     title: 'Completed Courses',
     value: 3,
   },

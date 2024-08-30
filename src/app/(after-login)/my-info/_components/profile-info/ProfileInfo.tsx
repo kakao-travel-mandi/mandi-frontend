@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import ArrowRight from '@/assets/icon/icon-arrow-right-small-mono.svg';
 
@@ -14,7 +14,7 @@ interface ProfileInfoProps {
   className?: string;
 }
 
-export const ProfileInfo = ({className}: ProfileInfoProps) => {
+export const ProfileInfo = ({ className }: ProfileInfoProps) => {
   // TODO: 라우팅 방식 정해야함
   const router = useRouter();
   const handleClick = () => router.push('/my-info/edit-profile');
@@ -35,7 +35,11 @@ export const ProfileInfo = ({className}: ProfileInfoProps) => {
           Explore Busan like a local with my expert tips and guides!
         </div>
       </div>
-      <ArrowRight className={cx(`${BLOCK}__right-icon`)} />
+      <ArrowRight
+        width={12}
+        height={12}
+        className={cx(`${BLOCK}__right-icon`)}
+      />
     </div>
   );
 };
