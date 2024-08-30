@@ -31,7 +31,7 @@ const staticsPanelData = [
 
 const MyInfo = () => {
   return (
-    <Layout hasTopNav={true} hasTabBar={false} back={true} title='My'>
+    <Layout hasTopNav={true} hasTabBar={true} back={true} title='My'>
       <div className={cx(`user-info`)}>
         <ProfileInfo className={cx(`user-info__profile`)} />
         <div className={cx(`user-info__statics`)}>

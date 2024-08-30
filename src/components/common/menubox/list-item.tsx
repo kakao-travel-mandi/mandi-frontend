@@ -3,7 +3,7 @@ import React from 'react';
 import {MenuItem} from '@headlessui/react';
 import classNames from 'classnames/bind';
 
-import styles from './ListItem.module.scss';
+import styles from './list-item.module.scss';
 
 const cx = classNames.bind(styles);
 

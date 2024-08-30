@@ -9,11 +9,11 @@ import CdIcon from '@/assets/colored-icon/cd.svg';
 import TrashcanIcon from '@/assets/colored-icon/trashcan.svg';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import { SizedBox } from '@/components/common/sizedbox/SizedBox';
 import { TopNavBar } from '@/components/common/top-navbar';
 import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
+import { SizedBox } from '@/components/common/sizedbox';
 
 const BLOCK = 'delete-confirmation';
 const cx = classNames.bind(styles);

@@ -13,7 +13,7 @@ import Course from '@/assets/tabBar/icon-map.svg';
 import User from '@/assets/tabBar/icon-user-mono.svg';
 import {PATHNAME} from '@/constants/pathname';
 
-import {TabItem} from './TabItem';
+import {TabItem} from './tab-item';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);

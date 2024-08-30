@@ -2,7 +2,7 @@ import {Tab} from '@headlessui/react';
 import classNames from 'classnames/bind';
 import {useRouter} from 'next/navigation';
 
-import styles from './TabItem.module.scss';
+import styles from './tab-item.module.scss';
 
 const cx = classNames.bind(styles);
 
