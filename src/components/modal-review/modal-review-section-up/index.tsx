@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
@@ -7,23 +5,22 @@ import IconClock from '@/assets/icon/icon-clock.svg';
 import IconEllipsisHorizontal from '@/assets/icon/icon-ellipsis-horizontal.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconMapPin from '@/assets/icon/icon-map-pin.svg';
+import IconTrash from '@/assets/icon/icon-trash.svg';
 import Badge from '@/components/common/badge';
 import { Menubox } from '@/components/common/menubox';
 
-import style from './modalSectionUP.module.scss';
-
-import IconTrash from '@/assets/icon/icon-trash.svg';
+import styles from './modalSectionUP.module.scss';
 
 export interface ModalReviewSectionUpProps {
   img: string;
   title: string;
   channel: [string, string];
-  time?: number;
+  time?: number | string;
   distance?: number;
   modal?: 'write' | 'unWrite' | 'complete-course';
 }
 
-const cx = classNames.bind(style);
+const cx = classNames.bind(styles);
 
 const ModalReviewSectionUp = ({
   modal,
@@ -33,13 +30,6 @@ const ModalReviewSectionUp = ({
   time,
   distance,
 }: ModalReviewSectionUpProps) => {
-  const item = [
-    {
-      content: '삭제',
-      icon: <IconTrash />,
-      onClick: () => alert('삭제되었습니다(수정필요)'),
-    },
-  ];
   return (
     <>
       {modal === 'write' ? (
@@ -61,6 +51,16 @@ const ModalReviewSectionUp = ({
               <Badge color='gray' text={channel[1]} />
             </div>
           </div>
+          <Menubox
+            triggerButton={<IconEllipsisVertical />}
+            items={[
+              {
+                content: 'Delete',
+                icon: IconTrash,
+                onClick: () => alert('삭제되었습니다(수정필요)'),
+              },
+            ]}
+          />
         </div>
       ) : (
         <div className={cx('container')}>

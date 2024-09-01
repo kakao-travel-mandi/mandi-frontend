@@ -1,43 +1,25 @@
-import {Meta, StoryObj} from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Button from './index'; // Button 컴포넌트의 경로를 확인하고 조정하세요.
+import Button from './index';
 
 export default {
-  title: 'components/Button',
+  title: 'Components/Button',
   component: Button,
   argTypes: {
     size: {
-      control: {
-        type: 'select',
-        options: ['large', 'small', 'xSmall', 'full'],
-      },
+      control: 'select',
+      options: ['large', 'small', 'xSmall', 'full'],
     },
     color: {
-      control: {
-        type: 'select',
-        options: ['green', 'gray', 'white'],
-      },
+      control: 'select',
+      options: ['gray__one', 'gray__two', 'green', 'white', 'red'],
     },
     type: {
-      control: {
-        type: 'select',
-        options: ['submit', 'button', 'reset'],
-      },
-    },
-    font: {
-      control: {
-        type: 'text',
-      },
-    },
-    className: {
-      control: {
-        type: 'text',
-      },
+      control: 'select',
+      options: ['submit', 'button', 'reset'],
     },
     disabled: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
     },
     onClick: {
       action: 'clicked',
@@ -49,7 +31,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    children: '테스트1',
+    children: 'Default Button',
     size: 'large',
     color: 'green',
     font: 'subtitle1-semibold',
@@ -57,11 +39,12 @@ export const Default: Story = {
     disabled: false,
   },
 };
+
 export const DisabledButton: Story = {
   args: {
-    children: '테스트2',
+    children: 'Disabled Button',
     size: 'large',
-    color: 'white',
+    color: 'gray__one',
     font: 'subtitle1-semibold',
     type: 'button',
     disabled: true,
