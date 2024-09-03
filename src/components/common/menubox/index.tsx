@@ -35,7 +35,7 @@ export const Menubox = ({
     <Menu>
       <MenuButton as={Trigger} />
       <MenuItems
-        anchor={`bottom ${align}`}
+        anchor={`bottom ${align}` as any}
         className={cx(BLOCK)}
         style={{
           transform: `translateX(${translateX}px)`,
