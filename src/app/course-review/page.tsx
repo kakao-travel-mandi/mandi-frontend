@@ -1,5 +1,3 @@
-'use client';
-
 import Tabs from '@/components/common/taps';
 import Layout from '@/components/layout';
 import ReviewLayout from '@/components/review-layout';
