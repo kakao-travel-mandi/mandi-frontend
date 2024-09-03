@@ -1,5 +1,5 @@
 import Layout from '@/components/layout';
-import ListReviewCourse from '@/components/list-review-course';
+import ReviewCourseList from '@/components/review-course-list/index';
 import ReviewLayout from '@/components/review-layout';
 
 import { dummyModalReviewsDataCompleteCourse } from './dummy';
@@ -12,7 +12,7 @@ const Review = () => {
       back={true}
       title='My course review'
     >
-      <ListReviewCourse completedCourses={0} totalDistance={0} />
+      <ReviewCourseList completedCourses={0} totalDistance={0} />
       <div>
         <ReviewLayout
           modal='complete-course'

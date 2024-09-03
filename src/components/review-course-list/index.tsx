@@ -12,7 +12,7 @@ interface ListReviewCourseProps {
 
 const cx = classNames.bind(styles);
 
-const ListReviewCourse = ({
+const ReviewCourseList = ({
   completedCourses,
   totalDistance,
 }: ListReviewCourseProps) => {
@@ -36,4 +36,4 @@ const ListReviewCourse = ({
   );
 };
 
-export default ListReviewCourse;
+export default ReviewCourseList;
