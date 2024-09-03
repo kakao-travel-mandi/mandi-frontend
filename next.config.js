@@ -25,4 +25,12 @@ module.exports = withPWA({
     });
     return config;
   },
+  images:{
+    remotePatterns:[
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com'
+      }
+    ]
+  }
 });
