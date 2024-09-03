@@ -1,0 +1,34 @@
+@use "/src/styles/color.scss" as *;
+
+.container{
+  display: flex;
+  padding: 2rem 1.25rem 0.5rem 1.25rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  align-self: stretch;
+  border-radius: 2rem 2rem 0rem 0rem;
+  border: 1px solid $gray-600;
+  background: $white;
+  margin-top: auto;
+}
+.container__icon{
+  display: flex;
+  padding: 1.3125rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  background: $green-50;
+  width: 5.125rem;
+  height: 5.125rem
+}
+.container__text{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.5rem;
+  
+}
+.container__icon__disable{
+  background: $gray-100;
+}
