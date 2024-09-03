@@ -1,5 +1,8 @@
 import localFont from 'next/font/local';
 
+import AuthContext from '@/context/AuthContext';
+import QueryProvider from '@/queries/QueryProvider';
+
 import type { Metadata } from 'next';
 
 import '@/styles/globals.scss';
@@ -257,7 +260,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={Pretendard.className}>{children}</body>
+      <AuthContext>
+        <body className={Pretendard.className}>
+          <QueryProvider>{children}</QueryProvider>
+        </body>
+      </AuthContext>
     </html>
   );
 }

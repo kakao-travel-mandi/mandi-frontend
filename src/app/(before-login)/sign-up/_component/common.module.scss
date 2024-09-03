@@ -1,0 +1,76 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+
+.step {
+
+   &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 20px;
+  }
+
+  &__title {
+   @extend .title1-bold;
+  }
+
+  &__input {
+    margin-bottom: 20px;
+  }
+
+  &__button-container {
+    display: flex;
+    gap: 11px;
+  }
+
+  &__button {
+    margin-bottom: 20px;
+  }
+
+
+  &__select-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &--controller {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &--item {
+      @extend .subtitle1-regular;
+      cursor: pointer;
+      display: flex;
+      padding: 16px;
+      align-items: center;
+      gap: 16px;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid $gray-50;
+      background: $gray-50;
+
+      &:hover,
+      &--selected {
+        border: 1px solid $green-500;
+        background: $green-50;
+      }
+
+      & p {
+        flex: 1;
+      }
+    }
+  }
+
+  &__controller {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+}
+
