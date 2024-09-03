@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import HomeIcon from '@/assets/tabbar/icon-bookmark.svg';
 import { SnackbarItemProps, useSnackbar } from '@/hooks/useSnackbar';
 
 import Button from '../button';
@@ -72,17 +71,5 @@ export const Check: Story = {
     type: 'check',
     full: false,
     position: 'center',
-  },
-};
-
-export const CustomIcon: Story = {
-  args: {
-    content: 'custom icon snackbar',
-    full: false,
-    position: 'center',
-    icon: {
-      svg: HomeIcon,
-      fill: '#008E6D',
-    },
   },
 };
