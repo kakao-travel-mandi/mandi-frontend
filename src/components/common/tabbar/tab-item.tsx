@@ -1,6 +1,6 @@
-import {Tab} from '@headlessui/react';
+import { Tab } from '@headlessui/react';
 import classNames from 'classnames/bind';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import styles from './tab-item.module.scss';
 
@@ -15,13 +15,12 @@ interface TabItemProps {
   selected?: boolean;
 }
 
-
-export const TabItem = ({title, icon: Icon, url, selected}: TabItemProps) => {
-  // const router = useRouter();
-  // const handleClick = () => router.push(url);
+export const TabItem = ({ title, icon: Icon, url, selected }: TabItemProps) => {
+  const router = useRouter();
+  const handleClick = () => router.push(url);
 
   return (
-    <Tab className={cx(BLOCK)}>
+    <Tab className={cx(BLOCK)} onClick={handleClick}>
       <Icon
         className={cx(`${BLOCK}__icon`, selected && `${BLOCK}__icon--selected`)}
       />

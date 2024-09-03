@@ -26,7 +26,7 @@ const tabData = [
   { id: 2, title: 'Course', icon: Course, url: '/course' },
   { id: 3, title: 'Scrap', icon: Scrap, url: '/scrap' },
   { id: 4, title: 'Community', icon: Community, url: '/community' },
-  { id: 5, title: 'My', icon: User, url: '/user' },
+  { id: 5, title: 'My', icon: User, url: '/my-info' },
 ];
 
 interface TabBarProps {
