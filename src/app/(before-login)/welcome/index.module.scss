@@ -1,0 +1,49 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.welcome {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0px 20px;
+    position: relative;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+
+    h2 {
+      @extend .subtitle2-semibold;
+      color: $green-500;
+    }
+
+    h1 {
+      @extend .title1-bold;
+      color: #191F28;
+    }
+  }
+
+
+
+  &__button-container {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
+
+}

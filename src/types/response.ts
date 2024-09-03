@@ -1,14 +1,28 @@
 import { AxiosResponse } from 'axios';
 
-import { GetBearType } from './test';
-
 interface BaseResponse extends AxiosResponse {
-  code: number;
-  message: string;
+  success: boolean;
+  error: {
+    message: string;
+    status: number;
+    errorCode: string;
+  };
 }
 
-export interface GetListResponse extends BaseResponse {
-  data: GetBearType;
+export interface SignupResponse extends BaseResponse {
+  response: {
+    accessToken: string;
+    refreshToken: string;
+    isSignUp: boolean;
+  } | null;
+}
+
+export interface LoginResponse extends BaseResponse {
+  response: {
+    accessToken: string;
+    refreshToken: string;
+    isSignUp: boolean;
+  };
 }
 
 export interface GetMyInfoResponse extends BaseResponse {

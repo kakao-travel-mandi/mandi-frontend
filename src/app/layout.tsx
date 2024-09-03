@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 
-import { SnackbarRoot } from '@/components/common/snackbar/snackbar-root';
+import AuthContext from '@/context/AuthContext';
+import QueryProvider from '@/queries/QueryProvider';
 
 import type { Metadata } from 'next';
 
@@ -259,10 +260,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={Pretendard.className}>
-        {children}
-        <SnackbarRoot />
-      </body>
+      <AuthContext>
+        <body className={Pretendard.className}>
+          <QueryProvider>{children}</QueryProvider>
+        </body>
+      </AuthContext>
     </html>
   );
 }

@@ -2,64 +2,100 @@
 
 import { useEffect, useState } from 'react';
 
-import { redirect } from 'next/navigation';
+import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
 
-import Mountain from '@/assets/icon/icon-mandi-image.svg';
+import Google from '@/assets/icon/icon-google.svg';
+import LoginMandi from '@/assets/icon/icon-login-mandi.svg';
+import Mountain from '@/assets/icon/icon-login-mountain.svg';
 import Splash from '@/assets/icon/icon-splash.svg';
 import Layout from '@/components/layout';
-import { getUser } from '@/utils/auth';
+import { useLoginMutation } from '@/queries/authQuery';
+
+import styles from './page.module.scss';
+
+const cn = classNames.bind(styles);
+
+const BLOCK = 'main';
 
 const Main = () => {
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const [fade, setFade] = useState(false);
-  const user = getUser();
+
+  const { data: session } = useSession();
+
+  const { mutate: login } = useLoginMutation({
+    onSuccess: data => {
+      if (data.response.isSignUp) router.push('/home');
+      else router.push('/sign-up');
+    },
+    onError: code => {
+      console.error(code);
+    },
+  });
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signIn('google', {
+        callbackUrl: '/',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    if (!user) {
-      redirect('/home');
-    } else {
-      setTimeout(() => {
-        setFade(true);
-        setTimeout(() => setLoading(false), 500); // 0.3초 후에 loading을 false로 설정
-      }, 800); // 1초 후에 fade를 true로 설정
-    }
-  }, [user]);
+    setTimeout(() => {
+      setFade(true);
+      setTimeout(() => setIsLoading(false), 500);
+    }, 800);
+  }, []);
 
-  if (loading) {
-    return (
-      <Layout hasTopNav={false} hasTabBar={false}>
+  useEffect(() => {
+    if (session) {
+      login({ token: session.accessToken });
+    }
+  }, [session]);
+
+  return (
+    <Layout hasTopNav={false} back={false} hasTabBar={false}>
+      {isLoading ? (
         <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            opacity: fade ? 0 : 1,
-            transition: 'opacity 0.5s ease-in',
-          }}
+          className={cn(`${BLOCK}__container`, {
+            [`${BLOCK}__container--loading`]: fade,
+            [`${BLOCK}__container--loaded`]: !fade,
+          })}
         >
           <Splash />
         </div>
-      </Layout>
-    );
-  }
+      ) : (
+        <div
+          className={cn(`${BLOCK}__container`, {
+            [`${BLOCK}__container--loading`]: !fade,
+            [`${BLOCK}__container--loaded`]: fade,
+          })}
+        >
+          <div className={cn(`${BLOCK}__icons`)}>
+            <Mountain />
+            <LoginMandi />
+          </div>
+          <div className={cn(`${BLOCK}__footer`)}>
+            <p className={cn(`${BLOCK}__footer-text`)}>
+              Sign in with social accounts
+            </p>
 
-  return (
-    <Layout hasTopNav={false} hasTabBar={false}>
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          opacity: fade ? 1 : 0,
-          transition: 'opacity 0.5s ease-in',
-        }}
-      >
-        <button>로그인</button>
-      </div>
+            <button
+              className={cn(`${BLOCK}__button`)}
+              onClick={handleGoogleLogin}
+            >
+              <Google />
+              <p className={cn(`${BLOCK}__button-text`)}>Login with Google</p>
+            </button>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
