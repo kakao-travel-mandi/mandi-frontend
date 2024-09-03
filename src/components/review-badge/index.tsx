@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import styles from './reviewbadge.module.scss';
+import styles from './reviewBadge.module.scss';
 
 export interface ReviewBadgeProps {
   icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
