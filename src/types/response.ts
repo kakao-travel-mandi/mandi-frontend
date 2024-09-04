@@ -24,3 +24,16 @@ export interface LoginResponse extends BaseResponse {
     isSignUp: boolean;
   };
 }
+
+export interface BadgeResponse extends BaseResponse {
+  response: {
+    totalBadgeCount: number;
+    userBadgeCount: number;
+    badges: {
+      id: number;
+      name: string;
+      requirements: string;
+      imgUrl: string;
+    }[];
+  };
+}

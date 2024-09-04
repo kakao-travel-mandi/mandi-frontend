@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -8,6 +8,7 @@ import BadgePageIcon from '@/components/badgepage-icon';
 import BadgePageIconInfo from '@/components/badgepage-icon/badgepage-icon-info';
 import BottomSheet from '@/components/common/bottomsheet';
 import Layout from '@/components/layout';
+import { useBadgesMutation } from '@/queries/badgeQuery';
 
 import styles from './myBadge.module.scss';
 
@@ -15,7 +16,14 @@ const cx = classNames.bind(styles);
 
 const MyBadge = () => {
   const [isSheetOpen, setSheetOpen] = useState(false);
-
+  const { mutate, data, error, isError } = useBadgesMutation({
+    onSuccess: data => {
+      console.log('Badges fetched successfully:', data);
+    },
+    onError: error => {
+      console.error('Error fetching badges:', error);
+    },
+  });
   const toggleSheet = () => {
     setSheetOpen(prev => !prev);
   };
@@ -32,6 +40,16 @@ const MyBadge = () => {
     setSelectedBadge(info);
     toggleSheet();
   };
+
+  useEffect(() => {
+    mutate('1');
+  }, [mutate]);
+
+  if (isError) {
+    return <div>Error: {error?.message}</div>;
+  }
+  console.log(data?.response.badges[0].imgUrl);
+
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} title='My Badges'>
       <div className={cx('container')}>
