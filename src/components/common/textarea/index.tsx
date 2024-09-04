@@ -2,7 +2,7 @@
 
 import {
   CSSProperties,
-  ReactElement,
+  forwardRef,
   TextareaHTMLAttributes,
   useState,
 } from 'react';
@@ -60,57 +60,66 @@ interface TextareaProps
 /**
  * 텍스트 에리어 컴포넌트
  */
-const Textarea = ({
-  value,
-  label = '',
-  placeholder = '',
-  maxLength,
-  type = 'text',
-  style,
-  error = '',
-  onChange,
-  ...props
-}: TextareaProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    {
+      value = '',
+      label = '',
+      placeholder = '',
+      maxLength,
+      type = 'text',
+      style,
+      error = '',
+      onChange,
+      ...props
+    },
+    ref,
+  ) => {
+    const [isFocused, setIsFocused] = useState(false);
 
-  return (
-    <Field>
-      {label && (
-        <Label
-          className={cn(`label4-regular`, `${BLOCK}__label`, {
-            [`${BLOCK}__label--error`]: !!error,
+    console.log(value, onChange);
+    console.log(maxLength);
+
+    return (
+      <Field>
+        {label && (
+          <Label
+            className={cn(`label4-regular`, `${BLOCK}__label`, {
+              [`${BLOCK}__label--error`]: !!error,
+            })}
+          >
+            {label}
+          </Label>
+        )}
+        <HeadlessTextarea
+          ref={ref}
+          value={value}
+          placeholder={placeholder}
+          className={cn(`body1-regular`, `${BLOCK}__form`, {
+            [`${BLOCK}__form--focused`]: isFocused,
+            [`${BLOCK}__form--value`]: !!value.trim(),
+            [`${BLOCK}__form--error`]: !!error,
           })}
-        >
-          {label}
-        </Label>
-      )}
-      <HeadlessTextarea
-        value={value}
-        placeholder={placeholder}
-        className={cn(`body1-regular`, `${BLOCK}__form`, {
-          [`${BLOCK}__form--focused`]: isFocused,
-          [`${BLOCK}__form--value`]: !!value.trim(),
-          [`${BLOCK}__form--error`]: !!error,
-        })}
-        style={style}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        onChange={e => onChange?.(e.target.value)}
-        maxLength={maxLength}
-        {...props}
-      />
-      {!!maxLength && (
-        <Helper
-          className={cn(`label4-regular`, `${BLOCK}__max-length`, {
-            [`${BLOCK}__max-length--error`]: !!error,
-          })}
-        >
-          {value.length}/{maxLength}
-        </Helper>
-      )}
-    </Field>
-  );
-};
+          style={style}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChange={e => onChange?.(e.target.value)}
+          maxLength={maxLength}
+          {...props}
+        />
+        {!!maxLength && (
+          <Helper
+            className={cn(`label4-regular`, `${BLOCK}__max-length`, {
+              [`${BLOCK}__max-length--error`]: !!error,
+            })}
+          >
+            {value.length}/{maxLength}
+          </Helper>
+        )}
+      </Field>
+    );
+  },
+);
 
 export default Textarea;
 

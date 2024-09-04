@@ -1,5 +1,5 @@
 .layout {
-  height: inherit;
+  height: 100%;
   position: relative;
 
   &__tabbar {
@@ -8,4 +8,25 @@
     left: 0;
     right: 0;
   }
+
+ 
+  &__content {
+    position: relative;
+    height: 100%;
+
+    &--top-nav {
+      height: calc(100vh - 56px);
+    }
+
+    &--tabbar {
+      height: calc(100vh - 52.5px);
+    }
+
+    &--both-nav {
+      height: calc(100vh - 108.5px);
+    }
+  }
+
+ 
 }
+
