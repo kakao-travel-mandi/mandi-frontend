@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import IconMedal from '@/assets/icon/icon-medal.svg';
 import BadgePageIcon from '@/components/badgepage-icon';
 import BadgePageIconInfo from '@/components/badgepage-icon/badgepage-icon-info';
+import BottomSheet from '@/components/common/bottomsheet';
 import Layout from '@/components/layout';
 
 import styles from './myBadge.module.scss';
@@ -13,6 +14,11 @@ import styles from './myBadge.module.scss';
 const cx = classNames.bind(styles);
 
 const MyBadge = () => {
+  const [isSheetOpen, setSheetOpen] = useState(false);
+
+  const toggleSheet = () => {
+    setSheetOpen(prev => !prev);
+  };
   const [selectedBadge, setSelectedBadge] = useState<{
     text?: string;
     icon?: string;
@@ -23,8 +29,8 @@ const MyBadge = () => {
     icon?: string;
     disable?: boolean;
   }) => {
-    console.log(info);
     setSelectedBadge(info);
+    toggleSheet();
   };
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} title='My Badges'>
@@ -71,14 +77,17 @@ const MyBadge = () => {
             onClick={handleClick}
           />
         </div>
-        {selectedBadge && (
+        <BottomSheet isOpen={isSheetOpen} onClose={toggleSheet}>
           <BadgePageIconInfo
             text={selectedBadge?.text}
             icon={selectedBadge?.icon}
             disable={selectedBadge?.disable}
-            onClick={() => setSelectedBadge(null)}
+            onClick={() => {
+              setSelectedBadge(null);
+              setSheetOpen(prev => !prev);
+            }}
           />
-        )}
+        </BottomSheet>
       </div>
     </Layout>
   );

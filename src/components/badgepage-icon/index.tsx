@@ -14,7 +14,7 @@ export interface BadgePageIconProps {
   icon?: string;
   disable?: boolean;
   onClick?: (details: {
-    text: string;
+    text?: string;
     icon?: string;
     disable?: boolean;
   }) => void; // 수정: text를 매개변수로 받는 onClick
