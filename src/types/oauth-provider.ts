@@ -1,0 +1,1 @@
+export type OauthProvider = 'PROVIDER_GOOGLE' | 'PROVIDER_KAKAO';

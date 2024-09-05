@@ -7,6 +7,7 @@ import QueryProvider from '@/queries/QueryProvider';
 import type { Metadata } from 'next';
 
 import '@/styles/globals.scss';
+import { SnackbarRoot } from '@/components/common/snackbar/snackbar-root';
 
 const Pretendard = localFont({
   src: '../styles/fonts/PretendardVariable.woff2',
@@ -264,6 +265,7 @@ export default function RootLayout({
       <AuthContext>
         <body className={Pretendard.className}>
           <QueryProvider>{children}</QueryProvider>
+          <SnackbarRoot />
           <MSWComponent />
         </body>
       </AuthContext>

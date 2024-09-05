@@ -1,14 +1,11 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import classNames from 'classnames/bind';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import CameraIcon from '@/assets/icon/icon-camera.svg';
-import UserIcon from '@/assets/icon/icon-user-mono.svg';
 import IconXCircle from '@/assets/icon/icon-xcircle.svg';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
@@ -16,112 +13,99 @@ import Input from '@/components/common/input';
 import { SizedBox } from '@/components/common/sizedbox';
 import Textarea from '@/components/common/textarea';
 import Layout from '@/components/layout';
-import { useImagePreview } from '@/hooks/usePreviewImage';
+import {
+  useMyInfoImageMutation,
+  useMyInfoMutation,
+  useMyInfoQuery,
+} from '@/queries/myInfoQuery';
 
 import styles from './page.module.scss';
+import { useQueryClient } from '@tanstack/react-query';
+import { useSnackbar } from '@/hooks/useSnackbar';
+import { BIO_RULES, NICKNAME_RULES } from '@/constants/form';
+import { EditProfileImage } from '../_components/edit-profile-image/edit-profile-image';
+import { EditFormData } from '@/types/form';
 
 const cx = classNames.bind(styles);
-type FormInputs = {
-  nickname: string;
-  introduction: string;
-};
 
 export default function Home() {
+  const queryClient = useQueryClient();
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { createSnackbar } = useSnackbar();
+
+  const { data: userInfo, error } = useMyInfoQuery();
+  const { mutate: updateInfo } = useMyInfoMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['my-info'] });
+      createSnackbar({
+        type: 'check',
+        content: 'Profile has been updated.',
+      });
+      navigateToMyInfo();
+    },
+    onError: error => {
+      if (error.status === 409) {
+        setError('nickname', {
+          type: 'validate',
+          message:
+            'The nickname is already in use. Please choose a different one.',
+        });
+      }
+    },
+  });
+  const { mutate: updateImage } = useMyInfoImageMutation({
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['my-info'] }),
+    onError: error => console.log(error.status),
+  });
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  // TODO: 이미지 url 바로 요청하는 걸로 변경.
-  const [previewImage, setPreviewImage] = useState<FileList | null>(null);
-  const previewImageUrl = useImagePreview(previewImage);
-  const handleImagePickerClick = () => {
-    inputRef.current?.click();
-  };
-  const handleDialogClose = () => setDialogOpen(false);
 
-  const handleConfirmClick = () => router.back();
-  const handleLeaveClick = () => handleDialogClose();
-  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {};
-
-  // react-hook-form
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>({
+    setError,
+    formState: { errors, isValid, isDirty },
+  } = useForm<EditFormData>({
     defaultValues: {
-      nickname: 'Kimmandi',
-      introduction: 'Passionate about exploring and sharing hidden gems!',
+      nickname: userInfo?.response.nickname || '',
+      introduction: userInfo?.response.description || '',
     },
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormInputs) => {
-    console.log(data);
+  const navigateToMyInfo = () => router.push('/my-info');
+  const handleBack = () => (isDirty ? setDialogOpen(true) : navigateToMyInfo());
+  const handleImageChange = (base64: string) =>
+    updateImage({ Base64EncodedImage: base64 });
+  const handleDialogClose = () => setDialogOpen(false);
+  const handleCancelClick = () => handleDialogClose();
+  const handleLeaveClick = () => navigateToMyInfo();
+
+  const onSubmit = (data: EditFormData) => {
+    if (isDirty) {
+      updateInfo({
+        nickname: data.nickname,
+        description: data.introduction,
+      });
+    } else {
+      navigateToMyInfo();
+    }
   };
   const handleSaveButtonClick = () => handleSubmit(onSubmit)();
 
   return (
-    <Layout hasTopNav={true} back={true} hasTabBar={false}>
+    <Layout hasTopNav={true} back={true} hasTabBar={false} onBack={handleBack}>
       <SizedBox height='1.6875rem' />
-      <div className={cx('profile-image')}>
-        {previewImageUrl ? (
-          <Image
-            src={previewImageUrl}
-            width={82}
-            height={82}
-            alt='profile-image'
-            className={cx('profile-image__selected-image')}
-          />
-        ) : (
-          <UserIcon
-            width={40}
-            height={40}
-            className={cx('profile-image__empty-icon')}
-          />
-        )}
-        <button
-          type='button'
-          className={cx('profile-image__picker')}
-          onClick={handleImagePickerClick}
-        >
-          <input
-            type='file'
-            accept='image/*'
-            className={cx('profile-image__input')}
-            ref={inputRef}
-            // onChange={e => setPreviewImage(e.target.files)}
-            onChange={handleChangeFile}
-          />
-          <CameraIcon
-            width={12}
-            height={12}
-            className={cx('profile-image__picker__icon')}
-          />
-        </button>
-      </div>
+      <EditProfileImage
+        imageUrl={userInfo?.response.imgUrl}
+        onImageChange={handleImageChange}
+      />
       <SizedBox height='2.3125rem' />
       <form className={cx('form')}>
         <Controller
           name='nickname'
           control={control}
-          rules={{
-            required: 'Please enter your nickname.',
-            // 2-12글자
-            pattern: {
-              value: /^.{2,12}$/,
-              message: 'Please enter between 2 and 12 characters.',
-            },
-            validate: {
-              // 영문, 숫자만 입력 가능
-              validNickname: value => {
-                return (
-                  /^[a-zA-Z0-9]*$/.test(value) ||
-                  'You can only use letters and numbers.'
-                );
-              },
-            },
-          }}
+          rules={NICKNAME_RULES}
           render={({ field }) => (
             <Input
               label='Nickname'
@@ -139,12 +123,7 @@ export default function Home() {
         <Controller
           name='introduction'
           control={control}
-          rules={{
-            pattern: {
-              value: /^.{0,80}$/,
-              message: 'Please enter up to 80 characters.',
-            },
-          }}
+          rules={BIO_RULES}
           render={({ field }) => (
             <Textarea
               label='One liner'
@@ -169,8 +148,8 @@ export default function Home() {
               gap: '10px',
             }}
           >
-            <Button size='full' color='green' onClick={handleConfirmClick}>
-              Confrim
+            <Button size='full' color='green' onClick={handleCancelClick}>
+              Cancel
             </Button>
             <Button size='full' color='white' onClick={handleLeaveClick}>
               Leave
@@ -184,6 +163,7 @@ export default function Home() {
         color='green'
         className={cx('save-button')}
         onClick={handleSaveButtonClick}
+        disabled={!isValid}
       >
         Save
       </Button>

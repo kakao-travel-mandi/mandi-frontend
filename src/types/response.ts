@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { OauthProvider } from './oauth-provider';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;
@@ -26,13 +27,21 @@ export interface LoginResponse extends BaseResponse {
 }
 
 export interface GetMyInfoResponse extends BaseResponse {
-  nickname: string;
-  profileImageUrl: string;
-  bio: string;
-  oauthInfo: {
-    provider: string;
+  response: {
+    nickname: string;
+    imgUrl: string;
+    description: string;
+    totalReviews: number;
+    completedCourses: number;
     email: string;
+    privder: OauthProvider;
   };
-  totalReviewCount: number;
-  completedCourseCount: number;
+}
+
+export interface UpdateMyInfoResponse extends BaseResponse {
+  response: boolean;
+}
+
+export interface UpdateMyInfoImageResponse extends BaseResponse {
+  response: string;
 }

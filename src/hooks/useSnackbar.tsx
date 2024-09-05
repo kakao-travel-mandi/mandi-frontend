@@ -20,6 +20,8 @@ export const useSnackbar = () => {
     const newItem: Snackbar = {
       id: String(Date.now()),
       isOpen: true,
+      position: 'bottom',
+      full: false,
       ...snackbar,
     };
     upsertSnackbar(newItem); // 스낵바 추가

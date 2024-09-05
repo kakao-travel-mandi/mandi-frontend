@@ -77,8 +77,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
-    console.log(value, onChange);
-    console.log(maxLength);
+    // console.log(value, onChange);
+    // console.log(maxLength);
 
     return (
       <Field>
