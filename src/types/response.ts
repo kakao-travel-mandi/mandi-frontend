@@ -34,7 +34,7 @@ export interface GetMyInfoResponse extends BaseResponse {
     totalReviews: number;
     completedCourses: number;
     email: string;
-    privder: OauthProvider;
+    provider: OauthProvider;
   };
 }
 

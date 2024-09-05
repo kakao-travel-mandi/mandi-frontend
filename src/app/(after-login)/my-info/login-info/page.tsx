@@ -10,27 +10,16 @@ import KakaoIcon from '@/assets/provider/Kakao.svg';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox';
-import { TopNavBar } from '@/components/common/top-navbar';
 import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
-
-const BLOCK = 'page';
+import { useMyInfoQuery } from '@/queries/myInfoQuery';
+import { OauthProviderEnum } from '@/types/oauth-provider';
 
 const cx = classNames.bind(styles);
 
-type OauthProvider = 'Google' | 'Kakao';
-type AccountInfoProps = {
-  oauthProvider: OauthProvider;
-  email: string;
-};
-const infoData: AccountInfoProps = {
-  oauthProvider: 'Google',
-  email: 'abcdef@gmail.com',
-};
-
 export default function Page() {
-  // TODO: 데이터 받아오기
+  const { data: infoData } = useMyInfoQuery();
   const router = useRouter();
   const [logoutConfirmDialog, setLogoutConfirmDialog] = useState(false);
   const handleDialogClose = () => setLogoutConfirmDialog(false);
@@ -57,18 +46,22 @@ export default function Page() {
           <div
             className={cx(`account-info__provider`, {
               'account-info__provider--google':
-                infoData.oauthProvider === 'Google',
+                infoData?.response.provider ===
+                OauthProviderEnum.PROVIDER_GOOGLE,
               'account-info__provider--kakao':
-                infoData.oauthProvider === 'Kakao',
+                infoData?.response.provider === OauthProviderEnum.PROVIDER_KAKAO,
             })}
           >
-            {infoData.oauthProvider === 'Google' ? (
+            {infoData?.response.provider ===
+            OauthProviderEnum.PROVIDER_GOOGLE ? (
               <GoogleIcon className={cx('account-info__provider__icon')} />
             ) : (
               <KakaoIcon className={cx('account-info__provider__icon')} />
             )}
           </div>
-          <span className={cx('account-info__email')}>{infoData.email}</span>
+          <span className={cx('account-info__email')}>
+            {infoData?.response.email}
+          </span>
         </div>
       </div>
       <ul className={cx('menu-list')}>
