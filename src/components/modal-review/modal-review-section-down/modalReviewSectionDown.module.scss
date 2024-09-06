@@ -1,0 +1,67 @@
+@use "/src/styles/color.scss" as *;
+.container__write{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+  padding-top: 1rem;
+  border-top: 1px solid $gray-100;
+}
+
+.container__write__score{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+  text-align: center;
+
+  &:nth-child(2) {
+  color: $gray-700;
+  letter-spacing: -0.015rem;
+}
+
+}
+.container__write__review{
+  color: var(--Gray-gray-700, #4D5159);
+  letter-spacing: -0.0175rem;
+  align-self: stretch;
+
+}
+.container__write__img {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 0.5rem;
+  overflow-x: auto;  // 스크롤 시 자동으로 스크롤바가 나타나게 설정
+  white-space: nowrap;
+  scrollbar-width: none; // Firefox에서 스크롤바 숨김
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera에서 스크롤바 숨김
+  }
+
+  scroll-snap-type: x mandatory; // 스크롤이 부드럽게 한 칸씩 넘어가게 설정
+  padding-bottom: 1rem;
+}
+
+.container__write__img__item{
+  border-radius: 0.5rem;
+  border: 1px solid $gray-400;
+}
+.container__unwrite__button{
+  border: 1px solid $gray-300;
+}
+.container__complete__course{
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1.4375rem;
+  letter-spacing: -0.015rem;
+  :nth-child(1){
+    color:$gray-700;
+  }
+  :nth-child(2){
+    color:$gray-600;
+  }
+}

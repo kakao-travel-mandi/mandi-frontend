@@ -1,8 +1,3 @@
-export type GetListRequest = {
-  page: number;
-  size: number;
-};
-
 export type SignupRequest = {
   token: string;
   nickname: string;
@@ -11,4 +6,8 @@ export type SignupRequest = {
 
 export type LoginRequest = {
   token: string;
+};
+
+export type CheckNicknameRequest = {
+  nickname: string;
 };

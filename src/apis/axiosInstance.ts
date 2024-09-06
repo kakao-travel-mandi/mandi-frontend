@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { redirect } from 'next/navigation';
 
-import { MAX_TIMEOUT_TIME } from '@/constants/api';
-import { getAccessToken } from '@/utils/auth';
+import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
+import { getAccessToken, setAccessToken, setRefreshToken } from '@/utils/auth';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -14,12 +14,16 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  config => {
-    const token = getAccessToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+  request => {
+    const accessToken = getAccessToken();
+
+    const isNoAuthEndpoint = NO_AUTH_ENDPOINTS.includes(request.url ?? '');
+
+    if (accessToken && !isNoAuthEndpoint) {
+      request.headers.Authorization = `Bearer ${accessToken}`;
     }
-    return config;
+
+    return request;
   },
   error => {
     return Promise.reject(error);
@@ -32,6 +36,8 @@ axiosInstance.interceptors.response.use(
   },
   error => {
     if (error.response && error.response.status === 401) {
+      setAccessToken('');
+      setRefreshToken('');
       redirect('/');
     }
     return Promise.reject(error);

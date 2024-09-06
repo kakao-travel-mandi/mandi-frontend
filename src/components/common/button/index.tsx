@@ -1,4 +1,4 @@
-import {Button as HeadlessButton} from '@headlessui/react';
+import { Button as HeadlessButton } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
 import styles from './button.module.scss';
@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   size: 'large' | 'small' | 'xSmall' | 'full';
-  color: 'green' | 'gray' | 'white';
+  color: 'gray__one' | 'gray__two' | 'green' | 'white' | 'red';
   font?: string;
   className?: string;
 }

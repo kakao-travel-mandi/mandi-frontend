@@ -1,10 +1,11 @@
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import classNames from 'classnames/bind';
 
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
+import { useCheckNicknameMutation } from '@/queries/profileQuery';
 
 import styles from './common.module.scss';
 
@@ -20,6 +21,7 @@ const Step1 = ({ onNext }: Step1Props) => {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
     watch,
   } = useForm({
     defaultValues: {
@@ -29,9 +31,20 @@ const Step1 = ({ onNext }: Step1Props) => {
 
   const value = watch('nickname');
 
+  const { mutate: checkNickname } = useCheckNicknameMutation({
+    onSuccess: () => {
+      onNext(value);
+    },
+    onError: () => {
+      setError('nickname', {
+        message:
+          'The nickname is already in use. Please choose a different one.',
+      });
+    },
+  });
+
   const onSubmit = (data: any) => {
-    // TODO: 닉네임 중복 체크
-    onNext(data);
+    checkNickname(data.nickname);
   };
 
   return (
@@ -61,6 +74,10 @@ const Step1 = ({ onNext }: Step1Props) => {
               maxLength: {
                 value: 10,
                 message: 'Nickname cannot exceed 10 characters.',
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9]+$/,
+                message: 'It contains characters that cannot be used.',
               },
             }}
             render={({ field }) => (
