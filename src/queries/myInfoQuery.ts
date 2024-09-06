@@ -1,16 +1,16 @@
 import {  useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 import {
   getMyInfoAPI,
   updateMyInfoAPI,
   updateMyInfoImageAPI,
 } from '@/apis/myInfo';
+import { UpdateMyInfoImageRequest, UpdateMyInfoRequest } from '@/types/request';
 import {
   UpdateMyInfoImageResponse,
   UpdateMyInfoResponse,
 } from '@/types/response';
-import { UpdateMyInfoImageRequest, UpdateMyInfoRequest } from '@/types/request';
-import { AxiosError } from 'axios';
 
 export const useMyInfoQuery = () => {
   return useQuery({

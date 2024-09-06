@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+
 import { OauthProvider } from './oauth-provider';
 
 interface BaseResponse extends AxiosResponse {

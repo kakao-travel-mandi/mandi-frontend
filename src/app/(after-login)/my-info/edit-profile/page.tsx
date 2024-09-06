@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
@@ -13,18 +14,20 @@ import Input from '@/components/common/input';
 import { SizedBox } from '@/components/common/sizedbox';
 import Textarea from '@/components/common/textarea';
 import Layout from '@/components/layout';
+import { BIO_RULES, NICKNAME_RULES } from '@/constants/form';
+import { useSnackbar } from '@/hooks/useSnackbar';
 import {
   useMyInfoImageMutation,
   useMyInfoMutation,
   useMyInfoQuery,
 } from '@/queries/myInfoQuery';
+import { EditFormData } from '@/types/form';
+
+import { EditProfileImage } from '../_components/edit-profile-image/edit-profile-image';
 
 import styles from './page.module.scss';
-import { useQueryClient } from '@tanstack/react-query';
-import { useSnackbar } from '@/hooks/useSnackbar';
-import { BIO_RULES, NICKNAME_RULES } from '@/constants/form';
-import { EditProfileImage } from '../_components/edit-profile-image/edit-profile-image';
-import { EditFormData } from '@/types/form';
+
+
 
 const cx = classNames.bind(styles);
 

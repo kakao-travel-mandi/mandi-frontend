@@ -11,10 +11,10 @@ import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
-
-import styles from './page.module.scss';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { OauthProviderEnum } from '@/types/oauth-provider';
+
+import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
 

@@ -1,10 +1,13 @@
-import Image from 'next/image';
-import styles from './edit-profile-image.module.scss';
-import classNames from 'classnames/bind';
 import { useRef } from 'react';
-import { convertFileToBase64 } from '@/utils/file';
+
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+
 import CameraIcon from '@/assets/icon/icon-camera.svg';
 import UserIcon from '@/assets/icon/icon-user-mono.svg';
+import { convertFileToBase64 } from '@/utils/file';
+
+import styles from './edit-profile-image.module.scss';
 
 const cx = classNames.bind(styles);
 
