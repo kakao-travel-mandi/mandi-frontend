@@ -9,6 +9,14 @@ interface BaseResponse extends AxiosResponse {
   };
 }
 
+export interface LoginResponse extends BaseResponse {
+  response: {
+    accessToken: string;
+    refreshToken: string;
+    isSignUp: boolean;
+  };
+}
+
 export interface SignupResponse extends BaseResponse {
   response: {
     accessToken: string;
@@ -17,12 +25,8 @@ export interface SignupResponse extends BaseResponse {
   } | null;
 }
 
-export interface LoginResponse extends BaseResponse {
-  response: {
-    accessToken: string;
-    refreshToken: string;
-    isSignUp: boolean;
-  };
+export interface CheckNicknameResponse extends BaseResponse {
+  response: boolean;
 }
 
 export interface BadgeResponse extends BaseResponse {
