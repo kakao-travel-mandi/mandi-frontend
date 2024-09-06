@@ -50,3 +50,16 @@ export interface UpdateMyInfoResponse extends BaseResponse {
 export interface UpdateMyInfoImageResponse extends BaseResponse {
   response: string;
 }
+
+export interface BadgeResponse extends BaseResponse {
+  response: {
+    totalBadgeCount: number;
+    userBadgeCount: number;
+    badges: {
+      id: number;
+      name: string;
+      requirements: string;
+      imgUrl: string;
+    }[];
+  };
+}
