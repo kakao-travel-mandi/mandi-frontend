@@ -1,0 +1,11 @@
+@use "/src/styles/color.scss" as *;
+
+.starscope{
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  span{
+  color: $gray-800;
+  letter-spacing: -0.02rem
+  }
+}
