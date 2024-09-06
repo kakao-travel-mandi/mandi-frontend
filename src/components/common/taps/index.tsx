@@ -1,16 +1,16 @@
-import {Tab, TabGroup, TabList, TabPanel, TabPanels} from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
 import styles from './taps.module.scss';
 
 export interface TabItem {
   title: string;
-  content: JSX.Element | string;
+  content?: JSX.Element | string;
 }
 
 interface TabsProps {
   tabs: TabItem[];
-  className: string;
+  className?: string;
   font?: string;
   version?: 1 | 2 | 3 | 4;
 }
@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 
 const Tabs = ({
   tabs,
-  className,
+  className = '',
   font = 'subtitle2-semibold',
   version = 1,
 }: TabsProps) => {
@@ -35,10 +35,10 @@ const Tabs = ({
           {tabs.map((tab, index) => (
             <Tab
               key={index}
-              className={({selected}) =>
+              className={({ selected }) =>
                 cx(
                   'tabs__tab',
-                  {tabs__header__active: selected},
+                  { tabs__header__active: selected },
                   {
                     tabs__header__active__vTwo: version === 2,
                     tabs__header__active__vThree: version === 3,

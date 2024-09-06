@@ -1,6 +1,6 @@
-import {forwardRef} from 'react';
+import { forwardRef } from 'react';
 
-import {Menu, MenuButton, MenuItems} from '@headlessui/react';
+import { Menu, MenuButton, MenuItems } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
 import styles from './index.module.scss';
