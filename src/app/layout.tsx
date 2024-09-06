@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 
+import { MSWComponent } from '@/components/msw/msw';
 import AuthContext from '@/context/AuthContext';
 import QueryProvider from '@/queries/QueryProvider';
 
@@ -263,6 +264,7 @@ export default function RootLayout({
       <AuthContext>
         <body className={Pretendard.className}>
           <QueryProvider>{children}</QueryProvider>
+          <MSWComponent />
         </body>
       </AuthContext>
     </html>
