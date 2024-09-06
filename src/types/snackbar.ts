@@ -1,6 +1,6 @@
-export type SnackbarStatus = 'open' | 'close' | null;
-
-export interface useSnackbarProps {
+export type Snackbar = {
+  id: string;
+  isOpen: boolean;
   content: string;
   type?: 'alert' | 'check';
   full?: boolean;
@@ -9,4 +9,4 @@ export interface useSnackbarProps {
     svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
     fill?: string;
   };
-}
+};

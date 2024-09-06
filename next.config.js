@@ -25,4 +25,12 @@ module.exports = withPWA({
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'mandi-image.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
+  },
 });

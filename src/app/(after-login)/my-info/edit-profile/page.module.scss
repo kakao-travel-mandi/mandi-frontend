@@ -1,0 +1,21 @@
+@use "@/styles/color.scss" as *;
+
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 0 1.25rem;
+}
+
+.x-icon{
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: $gray-400;
+}
+
+.save-button {
+  position: absolute;
+  padding: 0 1.25rem;
+  width: 100%;
+  bottom: 34px;
+}

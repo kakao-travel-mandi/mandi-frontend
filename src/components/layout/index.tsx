@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { TabBar } from '../common/tabbar';
+import  TabBar  from '../common/tabbar';
 import { TopNavBar } from '../common/top-navbar';
 
 import styles from './layout.module.scss';

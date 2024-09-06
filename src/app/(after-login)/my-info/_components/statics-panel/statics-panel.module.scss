@@ -1,0 +1,27 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.statics-panel {
+  width: 100%;
+  display: flex;
+  padding: 1rem 0.75rem;
+  background-color: $gray-50;
+  border-radius: 0.5rem;
+  align-items: center;
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 8px;
+  }
+  &__title {
+    flex-grow: 1;
+    max-width: 5rem; // 텍스트 2줄로 만들기 위해
+    color: $gray-700;
+    @extend .label4-semibold;
+  }
+  &__value {
+    margin-left: auto;
+    color: $gray-800;
+    @extend .body2-semibold;
+  }
+}

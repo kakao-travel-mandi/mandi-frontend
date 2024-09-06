@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 
+import { SnackbarRoot } from '@/components/common/snackbar/snackbar-root';
 import { MSWComponent } from '@/components/msw/msw';
 import AuthContext from '@/context/AuthContext';
 import QueryProvider from '@/queries/QueryProvider';
@@ -264,6 +265,7 @@ export default function RootLayout({
       <AuthContext>
         <body className={Pretendard.className}>
           <QueryProvider>{children}</QueryProvider>
+          <SnackbarRoot />
           <MSWComponent />
         </body>
       </AuthContext>

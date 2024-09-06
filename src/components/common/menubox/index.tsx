@@ -3,8 +3,8 @@ import { forwardRef } from 'react';
 import { Menu, MenuButton, MenuItems } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
-import { ListItem, ListItemProps } from './ListItem';
 import styles from './index.module.scss';
+import {ListItem, ListItemProps} from './list-item';
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +35,7 @@ export const Menubox = ({
     <Menu>
       <MenuButton as={Trigger} />
       <MenuItems
-        anchor={`bottom ${align}`}
+        anchor={`bottom ${align}` as any}
         className={cx(BLOCK)}
         style={{
           transform: `translateX(${translateX}px)`,
