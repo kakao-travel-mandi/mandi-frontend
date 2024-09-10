@@ -8,10 +8,10 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
 import IconXCircle from '@/assets/icon/icon-xcircle.svg';
+import { SizedBox } from '@/components/common/SizedBox';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import Input from '@/components/common/input';
-import { SizedBox } from '@/components/common/sizedbox';
 import Textarea from '@/components/common/textarea';
 import Layout from '@/components/layout';
 import { BIO_RULES, NICKNAME_RULES } from '@/constants/form';
@@ -26,8 +26,6 @@ import { EditFormData } from '@/types/form';
 import { EditProfileImage } from '../_components/edit-profile-image/edit-profile-image';
 
 import styles from './page.module.scss';
-
-
 
 const cx = classNames.bind(styles);
 

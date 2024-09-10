@@ -7,9 +7,9 @@ import { useRouter } from 'next/navigation';
 
 import CdIcon from '@/assets/colored-icon/cd.svg';
 import TrashcanIcon from '@/assets/colored-icon/trashcan.svg';
+import { SizedBox } from '@/components/common/SizedBox';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
@@ -97,7 +97,7 @@ export default function Page() {
             }}
           >
             {/* TODO: 버튼 색상 바꾸기 */}
-            <Button size='full' color='gray' onClick={handleDialogClose}>
+            <Button size='full' color='gray__one' onClick={handleDialogClose}>
               Cancel
             </Button>
             <Button size='full' color='green' onClick={deleteAccount}>
