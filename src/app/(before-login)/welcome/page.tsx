@@ -8,7 +8,7 @@ import Content from './_component/Content';
 
 const Welcome = () => {
   return (
-    <Layout hasTopNav={false} hasTabBar={false} back={true}>
+    <Layout hasTopNav={false} hasTabBar={false}>
       <Suspense fallback={<div>Loading...</div>}>
         <Content />
       </Suspense>
