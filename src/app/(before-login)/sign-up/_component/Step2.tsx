@@ -57,7 +57,7 @@ const Step2 = ({ onNext, onBack }: Step2Props) => {
           <Button
             type='button'
             size='full'
-            color='gray__one'
+            color='darkgray'
             onClick={onSubmit}
             className={cn(`${BLOCK}__button`)}
           >

@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   size: 'large' | 'small' | 'xSmall' | 'full';
-  color: 'gray__one' | 'gray__two' | 'green' | 'white' | 'red';
+  color: 'whitegray' | 'darkgray' | 'green' | 'white' | 'red';
   font?: string;
   className?: string;
 }

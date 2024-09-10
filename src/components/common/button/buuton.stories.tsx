@@ -12,7 +12,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['gray__one', 'gray__two', 'green', 'white', 'red'],
+      options: ['whitegray', 'darkgray', 'green', 'white', 'red'],
     },
     type: {
       control: 'select',
@@ -44,7 +44,7 @@ export const DisabledButton: Story = {
   args: {
     children: 'Disabled Button',
     size: 'large',
-    color: 'gray__one',
+    color: 'whitegray',
     font: 'subtitle1-semibold',
     type: 'button',
     disabled: true,
