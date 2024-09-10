@@ -29,7 +29,7 @@ const tabData = [
   { id: 5, title: 'My', icon: User, url: '/my-info' },
 ];
 
-interface TabBarProps {
+export interface TabBarProps {
   defaultIndex?: number;
   className?: string;
   onChange?: (index: number) => void;
