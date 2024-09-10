@@ -27,8 +27,6 @@ import { EditProfileImage } from '../_components/edit-profile-image/edit-profile
 
 import styles from './page.module.scss';
 
-
-
 const cx = classNames.bind(styles);
 
 export default function Home() {

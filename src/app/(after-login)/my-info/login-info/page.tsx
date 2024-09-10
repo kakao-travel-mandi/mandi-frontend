@@ -49,7 +49,8 @@ export default function Page() {
                 infoData?.response.provider ===
                 OauthProviderEnum.PROVIDER_GOOGLE,
               'account-info__provider--kakao':
-                infoData?.response.provider === OauthProviderEnum.PROVIDER_KAKAO,
+                infoData?.response.provider ===
+                OauthProviderEnum.PROVIDER_KAKAO,
             })}
           >
             {infoData?.response.provider ===
