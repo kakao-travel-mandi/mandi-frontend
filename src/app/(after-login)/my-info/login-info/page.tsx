@@ -7,9 +7,9 @@ import { useRouter } from 'next/navigation';
 
 import GoogleIcon from '@/assets/provider/Google.svg';
 import KakaoIcon from '@/assets/provider/Kakao.svg';
+import { SizedBox } from '@/components/common/SizedBox';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { OauthProviderEnum } from '@/types/oauth-provider';
@@ -49,7 +49,8 @@ export default function Page() {
                 infoData?.response.provider ===
                 OauthProviderEnum.PROVIDER_GOOGLE,
               'account-info__provider--kakao':
-                infoData?.response.provider === OauthProviderEnum.PROVIDER_KAKAO,
+                infoData?.response.provider ===
+                OauthProviderEnum.PROVIDER_KAKAO,
             })}
           >
             {infoData?.response.provider ===
