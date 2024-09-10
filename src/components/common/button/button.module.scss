@@ -39,8 +39,7 @@
         cursor: not-allowed;
     }
 }
-.button__darkgray
-{
+.button__darkgray{
     background-color: $gray-700;
     &:active {
         background-color: $gray-800;
