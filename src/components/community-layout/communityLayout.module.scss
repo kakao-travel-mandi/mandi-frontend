@@ -1,0 +1,31 @@
+
+@use "/src/styles/color.scss" as *;
+.container{
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.container__nav{
+  display: flex;
+  padding: 0.75rem 1.25rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid $gray-200;
+  background: $white;
+  overflow-x: auto; 
+  scrollbar-width: none;
+}
+.container__pencil{
+  position: absolute; 
+  bottom: 1.5rem; 
+  right: 1.25rem; 
+  display: inline-flex;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 6.25rem;
+  background: $green-500;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.24);
+
+}

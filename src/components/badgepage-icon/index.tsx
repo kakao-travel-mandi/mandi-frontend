@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
 
-import styles from './badgepage-icon.module.scss';
+import styles from './badgepageIcon.module.scss';
 
 const cx = classNames.bind(styles);
 
