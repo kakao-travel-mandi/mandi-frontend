@@ -57,10 +57,10 @@ const Main = () => {
     if (session) {
       login({ token: session.accessToken });
     }
-  }, [session]);
+  }, [session, login]);
 
   return (
-    <Layout hasTopNav={false} back={false} hasTabBar={false}>
+    <Layout hasTopNav={false} hasTabBar={false}>
       {isLoading ? (
         <div
           className={cn(`${BLOCK}__container`, {

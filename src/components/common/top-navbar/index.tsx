@@ -14,7 +14,7 @@ const BLOCK = 'top-navbar';
 
 const cx = classNames.bind(styles);
 
-interface TopNavBarProps {
+export interface TopNavBarProps {
   logo?: boolean;
   title?: string;
   actions?: (TextActionButtonProps | IconActionButtonProps)[];

@@ -5,7 +5,7 @@ export const dummyModalReviewsDataUnWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: 'Introduction to JavaScript',
     channel: ['Code Academy', 'Online'],
-    time: 120, // in minutes
+    time: 1,
     distance: 5, // in kilometers (optional)
     modal: 'complete-course',
     review: 'This course was very informative and well-structured.',
@@ -17,7 +17,7 @@ export const dummyModalReviewsDataUnWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: 'Introduction to JavaScript',
     channel: ['Code Academy', 'Online'],
-    time: 120, // in minutes
+    time: 1,
     distance: 5, // in kilometers (optional)
     modal: 'complete-course',
     review: 'This course was very informative and well-structured.',
@@ -29,7 +29,7 @@ export const dummyModalReviewsDataUnWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: 'Introduction to JavaScript',
     channel: ['Code Academy', 'Online'],
-    time: 120, // in minutes
+    time: 1,
     distance: 5, // in kilometers (optional)
     modal: 'complete-course',
     review: 'This course was very informative and well-structured.',
@@ -41,7 +41,7 @@ export const dummyModalReviewsDataUnWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: 'Introduction to JavaScript',
     channel: ['Code Academy', 'Online'],
-    time: 120, // in minutes
+    time: 1,
     distance: 5, // in kilometers (optional)
     modal: 'complete-course',
     review: 'This course was very informative and well-structured.',
@@ -55,7 +55,7 @@ export const dummyModalReviewsDataWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: '해운대 둘레길',
     channel: ['해운대', '봉오리산'],
-    time: 90, // in minutes
+    time: 1,
     modal: 'write',
     review:
       "I recently had the pleasure of visiting Busan, South Korea's bustling port city",
@@ -75,7 +75,7 @@ export const dummyModalReviewsDataWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: '해운대 둘레길',
     channel: ['해운대', '봉오리산'],
-    time: 90, // in minutes
+    time: 1,
     modal: 'write',
     review:
       "I recently had the pleasure of visiting Busan, South Korea's bustling port city",
@@ -95,7 +95,7 @@ export const dummyModalReviewsDataWrite: ModalReviewProps[] = [
     img: '/test/map-ex.png',
     title: '해운대 둘레길',
     channel: ['해운대', '봉오리산'],
-    time: 90, // in minutes
+    time: 1,
     modal: 'write',
     review:
       "I recently had the pleasure of visiting Busan, South Korea's bustling port city",
