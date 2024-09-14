@@ -1,0 +1,100 @@
+@use "@/styles/color.scss" as *;
+.container{
+  display: flex;
+  padding: 0.75rem 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  align-self: stretch;
+  width: 100%;
+  background-color: $white;
+}
+.container__profile{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: stretch;
+}
+.container__profile__image{
+  border-radius: 0.5rem;
+  border: 1px solid $gray-200;
+  background: $gray-50;
+}
+.container__profile__content{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.25rem;
+  flex: 1 0 0;
+}
+.container__profile__text{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: justify;
+  
+  &:nth-child(1){
+    color: $gray-900;
+  }
+  &:nth-child(2){
+    color: $gray-600;
+  }
+}
+
+.container__post {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  align-self: stretch;
+  text-align: justify;
+}
+.container__post__title{
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1; 
+  line-height: 1.4;
+  max-height: calc(1.4rem); 
+}
+.container__post__body{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+  -webkit-line-clamp: 3; 
+  line-height: 1.2;
+  max-height: calc(1.2em * 3); 
+}
+
+
+.container__imagepost{
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 0.75rem;
+  overflow-x: auto; 
+  white-space: nowrap;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.container__imagepost__image{
+  border-radius: 0.75rem;
+}
+.container__reaction{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.container__reaction__section{
+  display: flex;
+  gap: 0.5rem;
+}

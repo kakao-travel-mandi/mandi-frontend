@@ -1,4 +1,4 @@
-import { useState } from 'react';
+'use client';
 
 import { Button as HeadlessButton } from '@headlessui/react';
 import classNames from 'classnames/bind';
@@ -10,10 +10,10 @@ import styles from './chip.module.scss';
 interface ChipProps {
   type?: 'submit' | 'button' | 'reset';
   children: string;
-  font?: string;
   className?: string;
   action?: boolean;
   disabled?: boolean;
+  isActive?: boolean;
   onClick?: () => void;
 }
 
@@ -21,30 +21,26 @@ const cx = classNames.bind(styles);
 
 const Chip = ({
   children,
+  className,
   type = 'button',
-  font = 'label3-medium',
   disabled = false,
   action = false,
+  isActive = false,
   onClick,
 }: ChipProps) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    if (onClick) {
-      onClick();
-    }
-  };
+  const chipFont = action ? 'label4-semibold' : 'label3-medium';
   return (
     <HeadlessButton
       type={type}
       className={cx(
         'chip',
-        action ? font === 'label4-semibold' : font === 'label3-medium',
+        chipFont,
         action && 'chip__action',
-        isClicked && 'chip__clicked',
+        isActive && 'chip__clicked',
+        className,
       )}
       disabled={disabled}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {children}
       {action && <IconArrowDown width='14' height='14' />}
