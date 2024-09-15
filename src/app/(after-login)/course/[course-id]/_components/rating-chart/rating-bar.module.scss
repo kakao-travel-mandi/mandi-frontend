@@ -1,0 +1,32 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.rating-bar{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__label {
+    @extend .label6-regular;
+    color: $gray-800;
+    min-width: 2.875rem;
+  }
+
+  &__bar {
+    width: 5.8125rem;
+    height: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: #D9D9D9; 
+
+    &__fill {
+      height: 100%;
+      border-radius: 0.25rem;
+      background-color: #FFCD00;     
+    }
+  }
+
+  &__count {
+    @extend .label6-regular;
+    color: $gray-600;
+  }
+}
