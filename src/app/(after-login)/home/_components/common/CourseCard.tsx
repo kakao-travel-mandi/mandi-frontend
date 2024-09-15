@@ -43,11 +43,11 @@ const CourseCard = ({ course, index }: CourseCardProps) => {
       />
       <h3 className={cn(`${BLOCK}__title`)}>{course.title}</h3>
       <div className={cn(`${BLOCK}__info`)}>
-        <div className={cn(`${BLOCK}__info-item`)}>
+        <div className={cn(`${BLOCK}__info--item`)}>
           <IconClock />
           {course.time}
         </div>
-        <div className={cn(`${BLOCK}__info-item`)}>
+        <div className={cn(`${BLOCK}__info--item`)}>
           <IconExerciseRunning />
           {course.distance}
         </div>

@@ -20,7 +20,7 @@
     gap: 8px;
     margin-bottom: 8px;
 
-    &-item {
+    &--item {
       @extend .label4-regular;
       color: $gray-500;
       display: flex;
