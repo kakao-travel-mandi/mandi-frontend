@@ -21,7 +21,7 @@ const RecommendCourses = () => {
       <div className={cn(`${BLOCK}__title`)}>
         <p>Mandi&apos;s Recommended Course!</p>
         <IconArrowRight
-          className={cn(`${BLOCK}__title-arrow`)}
+          className={cn(`${BLOCK}__title--arrow`)}
           onClick={() => {
             router.push('/home/recommend-courses');
           }}

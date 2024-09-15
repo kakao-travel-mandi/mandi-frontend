@@ -1,0 +1,66 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.weather {
+  margin-bottom: 8px;
+  padding: 20px;
+  padding-top: 0px;
+  background-color: $white;
+
+  &__title {
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    
+
+    &--text {
+      @extend .title3-semibold;
+      color: $gray-900;
+    }
+
+    &--bar {
+      color: $gray-300;
+      margin: 0 4px;
+    }
+
+    &--reset {
+      cursor: pointer;
+      margin-left: 8px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    padding: 12px;
+    gap:12px;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+  }
+
+  &__item {
+    text-align: center;
+    width: 40px;
+
+    &--time {
+     @extend .caption2-semibold;
+     color: $gray-900;
+     margin-bottom: 8px;
+    }
+    &--icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 2px;
+    }
+    &--temp {
+     @extend .subtitle1-semibold;
+     color: $gray-900;
+     margin-bottom: 4px;
+    }
+    &--humidity {
+      @extend .caption2-semibold;
+      color: #4593FC;
+    }
+  }
+}
