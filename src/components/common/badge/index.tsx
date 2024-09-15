@@ -4,7 +4,7 @@ import styles from './badge.module.scss';
 
 export interface BadgeProps {
   text: string;
-  color: 'gray' | 'green' | 'red' | 'greenDeep';
+  color: 'gray' | 'green' | 'red' | 'greenDeep' | 'orange';
   rounded?: 'small' | 'large';
   font?: string;
   onClick?: () => void;
@@ -12,13 +12,22 @@ export interface BadgeProps {
 
 const cx = classNames.bind(styles);
 
-const Badge = ({ text, color, rounded = "small", font = "label4-regular", onClick }: BadgeProps) => {
-   const colorClass = `badge__${color}`
-   const roundedClass= `badge__round__${rounded}`
+const Badge = ({
+  text,
+  color,
+  rounded = 'small',
+  font = 'label4-regular',
+  onClick,
+}: BadgeProps) => {
+  const colorClass = `badge__${color}`;
+  const roundedClass = `badge__round__${rounded}`;
   return (
-    <div className={cx("badge", font, colorClass, roundedClass)} onClick={onClick}>
+    <div
+      className={cx('badge', font, colorClass, roundedClass)}
+      onClick={onClick}
+    >
       {text}
     </div>
   );
 };
-export default Badge
+export default Badge;
