@@ -1,0 +1,30 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.course-card {
+  border-radius: 8px;
+  width: 133px;
+
+  &__image {
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    @extend .subtitle1-semibold;
+    color: $gray-800;
+    margin-bottom: 4px;
+  }
+
+  &__info {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    &-item {
+      @extend .label4-regular;
+      color: $gray-500;
+      display: flex;
+      gap: 4px;
+    }
+  }
+}

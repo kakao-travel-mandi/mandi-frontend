@@ -33,7 +33,7 @@ const getContentClass = (hasTopNav: boolean, hasTabBar: boolean) => {
 };
 
 export const Layout = (props: LayoutProps) => {
-  const { hasTopNav, hasTabBar, children } = props;
+  const { hasTopNav, hasTabBar, children, backgroundColor } = props;
 
   return (
     <main className={cx(BLOCK, getMainClass(hasTopNav, hasTabBar))}>
@@ -43,6 +43,9 @@ export const Layout = (props: LayoutProps) => {
           `${BLOCK}__content`,
           getContentClass(hasTopNav, hasTabBar),
         )}
+        style={{
+          backgroundColor: backgroundColor,
+        }}
       >
         {children}
       </div>

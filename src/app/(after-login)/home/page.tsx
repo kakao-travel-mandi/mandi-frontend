@@ -15,6 +15,7 @@ const Home = () => {
       back={false}
       logo={<IconMandi />}
       topNavColor='gray'
+      backgroundColor='#F2F3F6'
     >
       <Landing />
       <RecommendCourses />
