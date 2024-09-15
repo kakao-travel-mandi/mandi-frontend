@@ -1,0 +1,25 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.landing {
+  padding: 28px 20px;
+  background-color: $gray-900;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      @extend .title2-bold;
+      color: $white;
+
+      &:first-child {
+        color: $green-500;
+      }
+    }
+  }
+}
+

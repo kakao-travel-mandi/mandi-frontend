@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import classNames from 'classnames/bind';
 
 import { LayoutProps } from '@/types/layout';

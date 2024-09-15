@@ -1,6 +1,10 @@
+@use "@/styles/color.scss" as *;
+
+
 .layout {
   height: 100%;
   position: relative;
+
 
   &__tabbar {
     position: absolute;
