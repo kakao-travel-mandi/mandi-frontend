@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import BottomSheet from '@/components/common/bottomsheet';
 import Button from '@/components/common/button';
 import Chip from '@/components/common/chip';
+import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
 import {
   difficultyMap,
   distanceMap,
@@ -11,7 +12,6 @@ import {
 } from '@/stores/course-filters';
 
 import styles from './filter-bottomsheet.module.scss';
-import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
 
 const cx = classNames.bind(styles);
 

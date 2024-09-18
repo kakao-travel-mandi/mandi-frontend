@@ -1,8 +1,9 @@
-import styles from './course-points.module.scss';
 import classNames from 'classnames/bind';
 
-import LocationIcon from '@/assets/icon/icon-map-pin.svg';
 import CopyIcon from '@/assets/icon/icon-document-mono.svg';
+import LocationIcon from '@/assets/icon/icon-map-pin.svg';
+
+import styles from './course-points.module.scss';
 
 const cx = classNames.bind(styles);
 

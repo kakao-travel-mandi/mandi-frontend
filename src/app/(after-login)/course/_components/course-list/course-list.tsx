@@ -1,11 +1,14 @@
 import classNames from 'classnames/bind';
-import styles from './course-list.module.scss';
+import { useRouter } from 'next/navigation';
+
+import RunningIcon from '@/assets/icon/exercise_running.svg';
+import ClockIcon from '@/assets/icon/icon-clock.svg';
+import StarIcon from '@/assets/icon/icon-star.svg';
 import Badge from '@/components/common/badge';
 
-import ClockIcon from '@/assets/icon/icon-clock.svg';
-import RunningIcon from '@/assets/icon/exercise_running.svg';
-import StarIcon from '@/assets/icon/icon-star.svg';
-import { useRouter } from 'next/navigation';
+import styles from './course-list.module.scss';
+
+
 
 const detailData = [
   {
