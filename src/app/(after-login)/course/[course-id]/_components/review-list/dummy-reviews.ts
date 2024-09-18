@@ -64,4 +64,19 @@ export const dummyReviews: Review[] = [
       // 이미지도 있을 것
     },
   },
+  {
+    id: 4,
+    rating: 5.0,
+    date: '2021.08.01',
+    content: 'Great course!',
+    images: Array.from({ length: 2 }, (_, i) => ({
+      id: i,
+      src: '/dummy-image.png',
+    })),
+    user: {
+      id: 1,
+      name: 'John Doe',
+      // 이미지도 있을 것
+    },
+  },
 ];

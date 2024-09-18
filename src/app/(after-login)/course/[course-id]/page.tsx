@@ -124,7 +124,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
           <ReviewOverview />
         </div>
         <div className={cx('review-list-section')}>
-          <ReviewList />
+          <ReviewList maxCount={2} hasFilter={false} />
           <Button
             color='white'
             size='small'

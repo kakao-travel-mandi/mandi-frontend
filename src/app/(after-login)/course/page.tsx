@@ -9,13 +9,13 @@ import IconXCircle from '@/assets/icon/icon-xcircle.svg';
 import Chip from '@/components/common/chip';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
+import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
 import { useCourseFiltersStore } from '@/stores/course-filters';
+import { formatDifficulty, formatDistance, formatRating } from '@/utils/course';
 
+import CourseListItem from './_components/course-list/course-list';
 import FilterBottomsheet from './_components/filter-bottomsheet/filter-bottomsheet';
 import styles from './page.module.scss';
-import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
-import { formatDifficulty, formatDistance, formatRating } from '@/utils/course';
-import CourseListItem from './_components/course-list/course-list';
 
 const cx = classNames.bind(styles);
 

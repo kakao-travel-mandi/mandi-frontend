@@ -3,8 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames/bind';
+import Image from 'next/image';
 
+import TrashcanIcon from '@/assets/icon/icon-bin-mono 1.svg';
 import MoreIcon from '@/assets/icon/icon-ellipsis-vertical.svg';
+import SirenIcon from '@/assets/icon/icon-siren-mono.svg';
 import { Menubox } from '@/components/common/menubox';
 
 import Star from '../star-raing/star';
@@ -52,15 +55,26 @@ const ReviewItem = ({ id, rating, date, content, images, user }: Review) => {
         <Menubox
           triggerButton={<MoreIcon className={cx(`${BLOCK}__more-icon`)} />}
           items={[
-            { content: 'Edit', onClick: () => console.log('Edit') },
-            { content: 'Delete', onClick: () => console.log('Delete') },
+            // TODO: user store 이용해서 내가 쓴 리뷰인지 확인
+            {
+              icon: TrashcanIcon,
+              content: 'Delete',
+              onClick: () => console.log('Delete'),
+            },
+            {
+              icon: SirenIcon,
+              content: 'Report',
+              onClick: () => console.log('Report'),
+            },
           ]}
         />
       </div>
       <div className={cx(`${BLOCK}__content`)}>
         <div className={cx(`${BLOCK}__images`)}>
           {images.map((image, index) => (
-            <div key={image.id} className={cx(`${BLOCK}__images__item`)} />
+            <div key={image.id} className={cx(`${BLOCK}__images__item`)}>
+              <Image src={image.src} alt='review-image' layout='fill' />
+            </div>
           ))}
         </div>
         <div ref={cloneRef} className={cx(`${BLOCK}__text__clone`)}>
@@ -85,6 +99,7 @@ const ReviewItem = ({ id, rating, date, content, images, user }: Review) => {
           )}
         </div>
       </div>
+      {/* TODO: 리뷰 삭제 dialog */}
     </div>
   );
 };

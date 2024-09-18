@@ -30,7 +30,7 @@ const ReviewFilterMap: Record<ReviewFilter, string> = {
 const ReviewList = ({ hasFilter, maxCount }: ReviewListProps) => {
   const [filter, setFilter] = useState<ReviewFilter>('latest');
   const dummyList = dummyReviews;
-  // const dummyList = [] as Review[];
+  const list = maxCount ? dummyList.slice(0, maxCount) : dummyList;
   return (
     <div className={cx(BLOCK)}>
       {hasFilter && (
@@ -44,13 +44,13 @@ const ReviewList = ({ hasFilter, maxCount }: ReviewListProps) => {
           />
         </div>
       )}
-      {dummyList.length === 0 ? (
+      {list.length === 0 ? (
         <div className={cx(`${BLOCK}__empty`)}>
           <EmptyIcon />
           <span>There is no review yet.</span>
         </div>
       ) : (
-        dummyList.map(review => <ReviewItem key={review.id} {...review} />)
+        list.map(review => <ReviewItem key={review.id} {...review} />)
       )}
     </div>
   );
