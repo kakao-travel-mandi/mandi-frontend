@@ -22,6 +22,7 @@ export interface TopNavBarProps {
   actions?: (TextActionButtonProps | IconActionButtonProps)[];
   back?: boolean;
   topNavColor?: 'white' | 'gray';
+  topNavBarClassName?: string;
   onBack?: () => void;
 }
 
@@ -31,6 +32,7 @@ export const TopNavBar = ({
   actions,
   back,
   topNavColor = 'white',
+  topNavBarClassName: topNavBarClassName,
   onBack,
 }: TopNavBarProps) => {
   const router = useRouter();
@@ -44,7 +46,7 @@ export const TopNavBar = ({
 
   return (
     <div
-      className={cx(BLOCK, topNavColor && `background-color-${topNavColor}`)}
+      className={cx(BLOCK, topNavColor && `background-color-${topNavColor}`, topNavBarClassName)}
     >
       <div className={cx(`${BLOCK}__leading`)}>
         {!!logo && logo}
