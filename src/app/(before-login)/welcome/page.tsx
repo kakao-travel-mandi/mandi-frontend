@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 
 import Layout from '@/components/layout';
 
-import Content from './_component/Content';
+import Content from './_components/Content';
 
 const Welcome = () => {
   return (

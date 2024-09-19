@@ -44,7 +44,7 @@
         cursor: not-allowed;
     }
 }
-.button__gray__one {
+.button__darkgray{
     background-color: $gray-700;
     &:active {
         background-color: $gray-800;
@@ -55,7 +55,7 @@
         cursor: not-allowed;
     }
 }
-.button__gray__two {
+.button__whitegray{
     background-color: $gray-100;
     color: $gray-600;
     &:active {

@@ -4,7 +4,7 @@ import styles from './badge.module.scss';
 
 export interface BadgeProps {
   text: string;
-  color: 'gray' | 'green' | 'red' | 'greenDeep';
+  color: 'gray' | 'green' | 'red' | 'greenDeep' | 'orange';
   rounded?: 'small' | 'large';
   font?: string;
   className?: string;
@@ -22,4 +22,4 @@ const Badge = ({ text, color, rounded = "small", font = "label4-regular",classNa
     </div>
   );
 };
-export default Badge
+export default Badge;

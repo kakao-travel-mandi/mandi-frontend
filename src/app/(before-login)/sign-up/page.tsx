@@ -7,11 +7,11 @@ import { useSession } from 'next-auth/react';
 
 import { useSignupMutation } from '@/queries/authQuery';
 
-import Step1 from './_component/Step1';
-import Step2 from './_component/Step2';
-import Step3 from './_component/Step3';
-import Step4 from './_component/Step4';
-import Step5 from './_component/Step5';
+import Step1 from './_components/Step1';
+import Step2 from './_components/Step2';
+import Step3 from './_components/Step3';
+import Step4 from './_components/Step4';
+import Step5 from './_components/Step5';
 
 const SignUp = () => {
   const router = useRouter();

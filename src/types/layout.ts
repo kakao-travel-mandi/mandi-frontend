@@ -5,6 +5,7 @@ import { TopNavBarProps } from '@/components/common/top-navbar';
 
 type BaseLayoutProps = {
   children: ReactNode;
+  backgroundColor?: string;
 };
 
 type BothNavLayoutProps = BaseLayoutProps &
