@@ -92,7 +92,7 @@ const FilterBottomsheet = ({ isOpen, handleClose }: FilterBottomsheetProps) => {
               ))}
           </div>
         </div>
-        <Button color='gray__one' size='full' onClick={handleClick}>
+        <Button color='whitegray' size='full' onClick={handleClick}>
           Settings complete
         </Button>
       </div>
