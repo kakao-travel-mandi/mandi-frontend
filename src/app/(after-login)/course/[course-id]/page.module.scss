@@ -13,7 +13,7 @@
   z-index: 10;
   transition: background-color 0.5s;
   &--not-scrolled{
-    background-color: transparent;
+    background-color: transparent !important;
     svg{
       path{
         fill: $white;
