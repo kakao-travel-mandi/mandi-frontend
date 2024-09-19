@@ -1,18 +1,21 @@
-import Badge from '@/components/common/badge';
-import styles from './card.module.scss';
 import classNames from 'classnames/bind';
-import Button from '@/components/common/button';
-import { Course, Point } from '@/types/course';
-import DetailInfo from '../../[course-id]/_components/detail-info/detail-info';
 
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
+import Badge from '@/components/common/badge';
+import Button from '@/components/common/button';
+import { CourseType, Point } from '@/types/course';
+
+import DetailInfo from '../../[course-id]/_components/detail-info/detail-info';
+
+import styles from './card.module.scss';
+
 const cx = classNames.bind(styles);
 
 const BLOCK = 'card';
 
 type CourseProps = {
   type: 'course';
-  data: Course;
+  data: CourseType;
 };
 type PointProps = {
   type: 'point';
@@ -62,7 +65,7 @@ const Card = ({ type, data }: CardProps) => {
         )}
       </div>
       <div className={cx(`${BLOCK}__footer`)}>
-        <Button color={type === 'course' ? 'green' : 'gray__one'} size='xSmall'>
+        <Button color={type === 'course' ? 'green' : 'darkgray'} size='xSmall'>
           {type === 'course' ? 'Course Start' : 'Directions'}
         </Button>
       </div>

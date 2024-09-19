@@ -5,7 +5,7 @@ export type Point = {
   address: string;
 };
 
-export type Course = {
+export type CourseType = {
   id: string;
   name: string;
   difficulty: 'easy' | 'normal' | 'hard';
@@ -14,4 +14,13 @@ export type Course = {
   distance: number;
   duration: string;
   ratingAverage: string;
+};
+
+
+export type Course = {
+  title: string;
+  difficulty: string;
+  time: string;
+  distance: string;
+  image: string;
 };

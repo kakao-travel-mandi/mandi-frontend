@@ -14,15 +14,15 @@ import classNames from 'classnames/bind';
 import HomeIcon from '@/assets/colored-icon/current.svg';
 import CurrentIcon from '@/assets/icon/icon-circle-empty-mono.svg';
 import RefreshIcon from '@/assets/icon/icon-refresh-mono.svg';
+import { CourseType, Point } from '@/types/course';
 import { Position } from '@/types/geolocation';
 import { getCurrentPosition } from '@/utils/geolocation';
 
 import { MapProvider } from '../../map-provider';
+import Card from '../card/card';
 import CustomMarker from '../custom-marker/custom-marker';
 
 import styles from './course-mapview.module.scss';
-import { Course, Point } from '@/types/course';
-import Card from '../card/card';
 const cx = classNames.bind(styles);
 
 const dummyPoint: Point = {
@@ -31,7 +31,7 @@ const dummyPoint: Point = {
   name: 'Haeundae',
   address: '59 Bukhang-ro, Nam-gu, Busan',
 };
-const dummyCourse: Course = {
+const dummyCourse: CourseType = {
   id: '1',
   name: 'Sinseondae',
   difficulty: 'easy',
@@ -49,7 +49,7 @@ interface CourseMapViewProps {
 type SelectedMarker =
   | {
       type: 'Course';
-      data: Course;
+      data: CourseType;
     }
   | {
       type: 'Point';

@@ -1,13 +1,14 @@
 import classNames from 'classnames/bind';
-import TagIcon from '@/assets/icon/icon-tag.svg';
-import ClockIcon from '@/assets/icon/icon-clock.svg';
+
 import RunningIcon from '@/assets/icon/exercise_running.svg';
-import StarIcon from '@/assets/icon/icon-star.svg';
-import LocationIcon from '@/assets/icon/icon-map-pin.svg';
+import ClockIcon from '@/assets/icon/icon-clock.svg';
 import EllipsisHorizontalIcon from '@/assets/icon/icon-ellipsis-horizontal.svg';
+import LocationIcon from '@/assets/icon/icon-map-pin.svg';
+import StarIcon from '@/assets/icon/icon-star.svg';
+import TagIcon from '@/assets/icon/icon-tag.svg';
+import Badge from '@/components/common/badge';
 
 import styles from './detail-info.module.scss';
-import Badge from '@/components/common/badge';
 
 const cx = classNames.bind(styles);
 
