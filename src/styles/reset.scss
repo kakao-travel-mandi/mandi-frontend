@@ -198,3 +198,6 @@ textarea:focus {
   outline: none;
 }
 
+
+// 구글맵 포커스 border 제거
+.gm-style iframe + div { border:none!important; }

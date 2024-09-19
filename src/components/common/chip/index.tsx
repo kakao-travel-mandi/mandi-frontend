@@ -1,5 +1,4 @@
-import { on } from 'events';
-import { use, useEffect, useState } from 'react';
+'use client';
 
 import { Button as HeadlessButton } from '@headlessui/react';
 import classNames from 'classnames/bind';
