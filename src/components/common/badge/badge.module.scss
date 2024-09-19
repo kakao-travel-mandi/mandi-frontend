@@ -22,6 +22,10 @@
     background: $gray-100;
     color: $gray-700;
   }
+  &.badge__orange {
+    background: $orange-light;
+    color: $orange;
+  }
   &.badge__round__small {
     border-radius: 0.25rem;
   }
