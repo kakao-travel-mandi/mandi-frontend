@@ -63,3 +63,26 @@ export interface BadgeResponse extends BaseResponse {
     }[];
   };
 }
+
+export interface PostsCategoryResponse {
+  posts: {
+    postId: number;
+    user: {
+      userId: number;
+      nickname: string;
+      imgUrl: string;
+    };
+    category: string;
+    content: string;
+    title: string;
+    imgUrlList: {
+      url: string;
+    }[];
+  }[];
+  pageInfo: {
+    totalCount: number;
+    size: number;
+    currentPage: number;
+    totalPages: number;
+  };
+}

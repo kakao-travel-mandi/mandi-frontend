@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import IconAlarm from '@/assets/icon/icon-alarm.svg';
 import IconSearchMono from '@/assets/icon/icon-search-mono.svg';
@@ -9,18 +10,23 @@ import CommunityFeed from '@/components/community-feed';
 import CommunityLayout from '@/components/community-layout';
 import Layout from '@/components/layout';
 
+// import { usePostCategoryMutation } from '@/queries/postQuery';
+//import { getPostCategory } from '@/apis/post';
 import styles from './community.module.scss';
 import { mockCommunityFeedData } from './dummy';
 
 const cx = classNames.bind(styles);
 
 const Community = () => {
+  const router = useRouter();
   const [activeChip, setActiveChip] = useState<string | null>('All');
   const [sortOption, setSortOption] = useState('Latest');
   const [feedData, setFeedData] = useState(mockCommunityFeedData);
+  const onContentClick = () => {
+    const postId = 1;
+    router.push(`/community/${postId}`);
+  };
 
-  console.log('바뀌자', feedData);
-  // 데이터 정렬 로직
   useEffect(() => {
     const data = [...mockCommunityFeedData] // 원본 배열 복사
       .filter(data => activeChip === 'All' || data.category === activeChip) // 필터링
@@ -34,8 +40,6 @@ const Community = () => {
         }
         return 0;
       });
-
-    console.log('Sorted data:', data); // 확인용
     setFeedData(data); // 상태 업데이트
   }, [sortOption, activeChip]);
 
@@ -65,6 +69,7 @@ const Community = () => {
         {feedData.map((data, index) => (
           <CommunityFeed
             key={index}
+            onContentClick={onContentClick}
             profileImage={data.profileImage}
             nickname={data.nickname}
             uploadDate={data.uploadDate}
@@ -82,3 +87,28 @@ const Community = () => {
 };
 
 export default Community;
+
+/*
+  
+   const { mutate, data, error, isError } = usePostCategoryMutation({
+    onSuccess: data => {
+      console.log('PostCategory fetched successfully:', data);
+    },
+    onError: error => {
+      console.error('Error fetching PostCategory:', error);
+    },
+  });
+
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const testData = await getPostCategory('ALL');
+        console.log('데이터확인', testData);
+      } catch (error) {
+        console.error('에러떴어', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+*/

@@ -6,9 +6,8 @@ import Image from 'next/image';
 import IconChat from '@/assets/icon/icon-chat-bubble-oval-left-ellipsis.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconHeart from '@/assets/icon/icon-heart.svg';
+import Badge from '@/components/common/badge/index';
 import { timeDifference } from '@/utils/community-time';
-
-import Badge from '../common/badge';
 
 import styles from './communityFeed.module.scss';
 
@@ -22,6 +21,7 @@ interface CommunityFeedProps {
   postImage?: string[];
   likesCount: number;
   commentCount: number;
+  onContentClick: () => void;
 }
 
 const cx = classNames.bind(styles);
@@ -36,6 +36,7 @@ const CommunityFeed = ({
   postImage,
   likesCount,
   commentCount,
+  onContentClick,
 }: CommunityFeedProps) => {
   const timeSincePost = timeDifference(uploadDate);
   const [like, setLick] = useState(false);
@@ -68,7 +69,7 @@ const CommunityFeed = ({
         </div>
         <IconEllipsisVertical />
       </div>
-      <div className={cx('container__post')}>
+      <div onClick={onContentClick} className={cx('container__post')}>
         <div className={cx('subtitle1-semibold', 'container__post__title')}>
           {communityPostTitle}
         </div>

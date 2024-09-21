@@ -1,6 +1,7 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import IconPencil from '@/assets/icon/icon-pencil.svg';
 import Chip from '@/components/common/chip/index';
@@ -26,6 +27,10 @@ const CommunityLayout = ({
   sortOption,
   setSortOption,
 }: CommunityLayoutProps) => {
+  const router = useRouter();
+  const handlePencilClick = () => {
+    router.push('/community/create-post'); // 페이지 이동
+  };
   const handleChipClick = (chip: string) => {
     setActiveChip(activeChip === chip ? null : chip);
   };
@@ -88,7 +93,7 @@ const CommunityLayout = ({
       </div>
 
       <div className={cx('container__content')}>{children}</div>
-      <div className={cx('container__pencil')}>
+      <div onClick={handlePencilClick} className={cx('container__pencil')}>
         <IconPencil />
       </div>
     </div>
