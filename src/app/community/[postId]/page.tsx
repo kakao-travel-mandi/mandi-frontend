@@ -1,18 +1,4 @@
 'use client';
-
-import Chip from '@/components/common/chip';
-
-const Test = () => {
-  return (
-    <div>
-      <Chip isActive={false}>안녕</Chip>
-      <Chip isActive={true}>안녕</Chip>
-    </div>
-  );
-};
-export default Test;
-
-/*
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
@@ -30,7 +16,31 @@ import styles from './communityFeed.module.scss';
 
 const cx = classNames.bind(styles);
 
-const SpecificPost = () => {
+interface CommunityFeedProps {
+  profileImage: string;
+  nickname: string;
+  uploadDate: string;
+  category: string;
+  communityPost: string;
+  communityPostTitle: string;
+  postImage?: string[];
+  likesCount: number;
+  commentCount: number;
+  onContentClick: () => void;
+}
+
+const SpecificPost = ({
+  profileImage,
+  nickname,
+  uploadDate,
+  category,
+  communityPostTitle,
+  communityPost,
+  postImage,
+  likesCount,
+  commentCount,
+  onContentClick,
+}: CommunityFeedProps) => {
   const { postId } = useParams();
   const timeSincePost = timeDifference(uploadDate);
   const [like, setLick] = useState(false);
@@ -101,4 +111,3 @@ const SpecificPost = () => {
 };
 
 export default SpecificPost;
-*/

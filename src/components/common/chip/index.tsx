@@ -8,6 +8,7 @@ import IconArrowDown from '@/assets/icon/icon-arrow-down-small-mono.svg';
 import styles from './chip.module.scss';
 
 interface ChipProps {
+  id: string;
   type?: 'submit' | 'button' | 'reset';
   children: string;
   className?: string;
@@ -20,6 +21,7 @@ interface ChipProps {
 const cx = classNames.bind(styles);
 
 const Chip = ({
+  id,
   children,
   className,
   type = 'button',
@@ -31,6 +33,7 @@ const Chip = ({
   const chipFont = action ? 'label4-semibold' : 'label3-medium';
   return (
     <HeadlessButton
+      id={id}
       type={type}
       className={cx(
         'chip',

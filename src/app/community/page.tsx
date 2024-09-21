@@ -9,9 +9,8 @@ import IconSearchMono from '@/assets/icon/icon-search-mono.svg';
 import CommunityFeed from '@/components/community-feed';
 import CommunityLayout from '@/components/community-layout';
 import Layout from '@/components/layout';
+import { usePostCategoryMutation } from '@/queries/postQuery';
 
-// import { usePostCategoryMutation } from '@/queries/postQuery';
-//import { getPostCategory } from '@/apis/post';
 import styles from './community.module.scss';
 import { mockCommunityFeedData } from './dummy';
 
@@ -26,8 +25,17 @@ const Community = () => {
     const postId = 1;
     router.push(`/community/${postId}`);
   };
-
+  const { mutate, data, error, isError } = usePostCategoryMutation({
+    onSuccess: data => {
+      console.log('PostCategory fetched successfully:', data);
+    },
+    onError: error => {
+      console.error('Error fetching PostCategory:', error);
+    },
+  });
+  console.log('데이터', data?.posts);
   useEffect(() => {
+    mutate('ALL');
     const data = [...mockCommunityFeedData] // 원본 배열 복사
       .filter(data => activeChip === 'All' || data.category === activeChip) // 필터링
       .sort((a, b) => {
@@ -40,8 +48,9 @@ const Community = () => {
         }
         return 0;
       });
-    setFeedData(data); // 상태 업데이트
-  }, [sortOption, activeChip]);
+    setFeedData(data);
+    // 상태 업데이트
+  }, [sortOption, activeChip, mutate]);
 
   return (
     <Layout
@@ -90,25 +99,7 @@ export default Community;
 
 /*
   
-   const { mutate, data, error, isError } = usePostCategoryMutation({
-    onSuccess: data => {
-      console.log('PostCategory fetched successfully:', data);
-    },
-    onError: error => {
-      console.error('Error fetching PostCategory:', error);
-    },
-  });
+   
 
-    useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const testData = await getPostCategory('ALL');
-        console.log('데이터확인', testData);
-      } catch (error) {
-        console.error('에러떴어', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    
 */
