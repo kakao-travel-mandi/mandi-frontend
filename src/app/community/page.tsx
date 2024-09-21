@@ -33,9 +33,9 @@ const Community = () => {
       console.error('Error fetching PostCategory:', error);
     },
   });
-  console.log('데이터', data?.posts);
+  //console.log('데이터', data?.posts);
   useEffect(() => {
-    mutate('ALL');
+    //mutate('ALL');
     const data = [...mockCommunityFeedData] // 원본 배열 복사
       .filter(data => activeChip === 'All' || data.category === activeChip) // 필터링
       .sort((a, b) => {
@@ -50,7 +50,7 @@ const Community = () => {
       });
     setFeedData(data);
     // 상태 업데이트
-  }, [sortOption, activeChip, mutate]);
+  }, [sortOption, activeChip]);
 
   return (
     <Layout
