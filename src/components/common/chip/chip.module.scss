@@ -9,10 +9,6 @@
   background: $gray-100;
   color: $gray-700;
 
-  // &:active {
-  //   background-color: $green-50;
-  //   color: $green-500;
-  // }
 
   &:disabled {
     background-color: $gray-100;
@@ -22,9 +18,8 @@
   &.chip__action {
     padding: 0.375rem 0.625rem;
   }
-
-  &--selected {
-    background-color: $green-50;
-    color: $green-500;
-  }
+}
+.chip__clicked {
+  background-color: $green-50;
+  color: $green-500;
 }

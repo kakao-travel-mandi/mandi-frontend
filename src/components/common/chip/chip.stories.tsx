@@ -1,6 +1,6 @@
-import {Meta, StoryObj} from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import Chip from './index'; // Chip 컴포넌트의 경로를 확인하고 조정하세요.
+import Chip from './index'; // Ensure the correct path to Chip component
 
 export default {
   title: 'components/Chip',
@@ -12,25 +12,17 @@ export default {
         options: ['submit', 'button', 'reset'],
       },
     },
-    font: {
-      control: {
-        type: 'text',
-      },
-    },
     className: {
-      control: {
-        type: 'text',
-      },
+      control: 'text',
     },
     action: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
     },
     disabled: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
+    },
+    isActive: {
+      control: 'boolean',
     },
     onClick: {
       action: 'clicked',
@@ -40,35 +32,50 @@ export default {
 
 type Story = StoryObj<typeof Chip>;
 
-// 기본 액션이 아닌 칩
+// Default Chip
 export const DefaultChip: Story = {
   args: {
+    id: 'default-chip',
     children: 'Default Chip',
     type: 'button',
-    font: 'label3-medium', // 기본 폰트 스타일
     disabled: false,
     action: false,
+    isActive: false,
   },
 };
 
-// 액션 칩
+// Action Chip
 export const ActionChip: Story = {
   args: {
+    id: 'action-chip',
     children: 'Action Chip',
     type: 'button',
-    font: 'label4-semibold', // 액션일 때 폰트 스타일
     disabled: false,
     action: true,
+    isActive: false,
   },
 };
 
-// 비활성화된 액션 칩
+// Disabled Action Chip
 export const DisabledActionChip: Story = {
   args: {
+    id: 'disabled-action-chip',
     children: 'Disabled Action Chip',
     type: 'button',
-    font: 'label4-semibold', // 액션일 때 폰트 스타일
     disabled: true,
     action: true,
+    isActive: false,
+  },
+};
+
+// Active Chip
+export const ActiveChip: Story = {
+  args: {
+    id: 'active-chip',
+    children: 'Active Chip',
+    type: 'button',
+    disabled: false,
+    action: false,
+    isActive: true,
   },
 };
