@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -20,13 +20,13 @@ export interface BottomSheetProps {
   /**
    * 바텀 시트 닫힘 함수
    */
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 /**
  * 바텀 시트 컴포넌트
  */
-const BottomSheet = ({children, isOpen, onClose}: BottomSheetProps) => {
+const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
   return (
     <div
       className={cn(BLOCK, {
