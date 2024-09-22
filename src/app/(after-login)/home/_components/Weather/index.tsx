@@ -1,42 +1,100 @@
-import React from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
+import Image from 'next/image';
 
 import IconReset from '@/assets/icon/icon-reset.svg';
+import { WEATHER_ICON_URL } from '@/constants/api';
+import { useWeatherQuery } from '@/queries/weatherQuery';
+import { PositionType } from '@/types/weather';
 
 import styles from './index.module.scss';
 
 const cn = classNames.bind(styles);
 const BLOCK = 'weather';
 
-const weatherData = [
-  { time: 'now', icon: '☀️', temp: '32°', humidity: '20%' },
-  { time: '9:00', icon: '☀️', temp: '32°', humidity: '20%' },
-  { time: '12:00', icon: '🌤️', temp: '32°', humidity: '34%' },
-  { time: '15:00', icon: '☁️', temp: '28°', humidity: '40%' },
-  { time: '18:00', icon: '☁️', temp: '28°', humidity: '60%' },
-  { time: '21:00', icon: '🌧️', temp: '28°', humidity: '80%' },
-];
-
 const Weather = () => {
+  const [position, setPosition] = useState<PositionType>({
+    latitude: 35.179554,
+    longitude: 129.075642,
+  });
+
+  const { data, isLoading, refetch } = useWeatherQuery({
+    request: {
+      lat: position.latitude,
+      lon: position.longitude,
+      appid: process.env.NEXT_PUBLIC_WEATHER_API_KEY as string,
+    },
+  });
+
+  const handleGetCurrentPosition = async () => {
+    await new Promise<GeolocationPosition>((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        position => resolve(position),
+        error => reject(error),
+      );
+    })
+      .then(position => {
+        setPosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [position.latitude, position.longitude]);
+
   return (
     <div className={cn(BLOCK)}>
       <div className={cn(`${BLOCK}__title`)}>
         <p className={cn(`${BLOCK}__title--text`)}>Weather</p>
         <p className={cn(`${BLOCK}__title--bar`)}>|</p>
-        <p className={cn(`${BLOCK}__title--text`)}>Busan</p>
-        <IconReset className={cn(`${BLOCK}__title--reset`)} />
+        <p className={cn(`${BLOCK}__title--text`)}>
+          {isLoading ? 'Loading...' : data?.city.name}
+        </p>
+        <IconReset
+          className={cn(`${BLOCK}__title--reset`)}
+          onClick={handleGetCurrentPosition}
+        />
       </div>
-      <div className={cn(`${BLOCK}__content`)}>
-        {weatherData.map((data, index) => (
-          <div key={index} className={cn(`${BLOCK}__item`)}>
-            <p className={cn(`${BLOCK}__item--time`)}>{data.time}</p>
-            <p className={cn(`${BLOCK}__item--icon`)}>{data.icon}</p>
-            <p className={cn(`${BLOCK}__item--temp`)}>{data.temp}</p>
-            <p className={cn(`${BLOCK}__item--humidity`)}>{data.humidity}</p>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className={cn(`${BLOCK}__skeleton`)}></div>
+      ) : (
+        <div className={cn(`${BLOCK}__content`)}>
+          {data?.list.map((data, index) => (
+            <div key={index} className={cn(`${BLOCK}__item`)}>
+              <p
+                className={cn(`${BLOCK}__item--time`, {
+                  [`${BLOCK}__item--time--now`]: index === 0,
+                })}
+              >
+                {index === 0 ? 'now' : data.dt_txt}
+              </p>
+              <p className={cn(`${BLOCK}__item--icon`)}>
+                <Image
+                  src={`${WEATHER_ICON_URL}${data.weather[0].icon}@2x.png`}
+                  alt={data.weather[0].description}
+                  width={32}
+                  height={32}
+                />
+              </p>
+              <p className={cn(`${BLOCK}__item--temp`)}>
+                {Math.round(data.main.temp)}°
+              </p>
+              <p className={cn(`${BLOCK}__item--humidity`)}>
+                {data.main.humidity}%
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
