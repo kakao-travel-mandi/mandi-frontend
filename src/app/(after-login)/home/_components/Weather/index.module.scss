@@ -30,12 +30,21 @@
     }
   }
 
+  &__skeleton {
+    height: 124px;
+    background-color: $white;
+    border-radius: 12px;
+    animation: skeleton-loading 1.2s infinite ease-in-out;
+    background: linear-gradient(90deg, $white 25%, $gray-100 50%, $white 75%);
+    background-size: 200% 100%;
+  }
+
   &__content {
     display: flex;
     padding: 12px;
     gap:12px;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: $gray-50;
     border-radius: 12px;
   }
 
@@ -45,8 +54,12 @@
 
     &--time {
      @extend .caption2-semibold;
-     color: $gray-900;
+     color: $gray-500;
      margin-bottom: 8px;
+
+     &--now {
+      color: $gray-900;
+     }
     }
     &--icon {
       width: 32px;
@@ -62,5 +75,14 @@
       @extend .caption2-semibold;
       color: #4593FC;
     }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 150% 0;
+  }
+  150% {
+    background-position: 100% 0;
   }
 }

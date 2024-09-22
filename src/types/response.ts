@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { OauthProvider } from './oauth-provider';
+import { WeatherItem } from './weather';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;
@@ -61,5 +62,12 @@ export interface BadgeResponse extends BaseResponse {
       requirements: string;
       imgUrl: string;
     }[];
+  };
+}
+
+export interface WeatherResponse {
+  list: WeatherItem[];
+  city: {
+    name: string;
   };
 }
