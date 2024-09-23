@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { OauthProvider } from './oauth-provider';
+import { CourseDTO, MapCourseDTO } from './course';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;
@@ -61,5 +62,23 @@ export interface BadgeResponse extends BaseResponse {
       requirements: string;
       imgUrl: string;
     }[];
+  };
+}
+
+export interface GetCoursesResponse extends BaseResponse {
+  response: {
+    pageInfo: {
+      totalCount: number;
+      size: number;
+      currentPage: number;
+      totalPages: number;
+    };
+    courses: CourseDTO[];
+  };
+}
+
+export interface GetNearbyCoursesResponse extends BaseResponse {
+  response: {
+    courses: MapCourseDTO[];
   };
 }

@@ -3,15 +3,19 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import Chip from '@/components/common/chip';
 import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
-import { useCourseFiltersStore } from '@/stores/course-filters';
-import { formatDifficulty, formatDistance, formatRating } from '@/utils/course';
+import {
+  formatCourseFilterParams,
+  useCourseFiltersStore,
+} from '@/stores/course-filters';
 
 import CourseListItem from '../course-list/course-list';
 import FilterBottomsheet from '../filter-bottomsheet/filter-bottomsheet';
 
 import styles from './filtered-course.module.scss';
+import { useCoursesQuery } from '@/queries/courseQuery';
+import useInfiniteScroll from '@/queries/useInfiniteScroll';
+import CourseFilter from '../course-filter/course-filter';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +23,11 @@ const FilteredCourse = () => {
   const { setFilters } = useCourseFiltersStore();
   const { filters } = useCourseFiltersWithUrl();
   const [isFilterOpened, setFilterOpened] = useState(false);
+
+  const courseQuery =
+    filters && useCoursesQuery(formatCourseFilterParams(filters));
+  const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
+
   const handleCloseFilter = () => {
     setFilters(filters);
     setFilterOpened(false);
@@ -30,36 +39,17 @@ const FilteredCourse = () => {
   }, [filters, setFilters]);
   return (
     <>
-      <>
-        <div className={cx('filters')}>
-          <Chip
-            action={true}
-            onClick={handleClickFilter}
-            selected={filters.sortBy !== null}
-          >
-            {formatDistance(filters.sortBy)}
-          </Chip>
-          <Chip
-            action={true}
-            onClick={handleClickFilter}
-            selected={filters.difficulty.length > 0}
-          >
-            {formatDifficulty(filters.difficulty)}
-          </Chip>
-          <Chip
-            action={true}
-            onClick={handleClickFilter}
-            selected={filters.stars !== null}
-          >
-            {formatRating(filters.stars)}
-          </Chip>
-        </div>
-        <div className={cx('course-list')}>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <CourseListItem key={index} />
-          ))}
-        </div>
-      </>
+      <CourseFilter filters={filters} handleClickFilter={handleClickFilter} />
+      <div className={cx('course-list')}>
+        {status === 'success' &&
+          data?.pages.map(page =>
+            page.response.courses.map(course => (
+              <CourseListItem key={course.id} course={course} />
+            )),
+          )}
+        <div ref={loadMoreRef} />
+        {/* TODO: spinner 필요 */}
+      </div>
       <FilterBottomsheet
         isOpen={isFilterOpened}
         handleClose={handleCloseFilter}
