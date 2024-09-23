@@ -12,12 +12,13 @@ import CourseMapView from './_components/course-mapview/course-mapview';
 import FilteredCourse from './_components/filtered-course/filtered-course';
 import styles from './page.module.scss';
 import ViewSwitchButton from './_components/view-switch-button/view-switch-button';
+import { useMapCourseStore } from '@/stores/map-course';
 
 const cx = classNames.bind(styles);
 
 const Course = () => {
   const [layout, setLayout] = useState<'list' | 'map'>('map');
-  const [markerSelected, setMarkerSelected] = useState(false);
+  const { selectedItem } = useMapCourseStore();
 
   const handleLayoutChange = () =>
     setLayout(layout === 'list' ? 'map' : 'list');
@@ -42,12 +43,10 @@ const Course = () => {
           </Suspense>
         </div>
       ) : (
-        layout === 'map' && (
-          <CourseMapView setMarkerSelected={setMarkerSelected} />
-        )
+        layout === 'map' && <CourseMapView />
       )}
       <ViewSwitchButton
-        visible={!markerSelected}
+        visible={!(selectedItem !== null && layout === 'map')}
         layout={layout}
         onClick={handleLayoutChange}
         className={cx('layout-switch-button')}

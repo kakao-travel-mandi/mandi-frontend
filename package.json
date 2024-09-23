@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
+    "@react-google-maps/api": "^2.19.3",
     "@tanstack/react-query": "^5.51.23",
     "@tanstack/react-query-devtools": "^5.51.23",
+    "@types/google.maps": "^3.58.0",
     "axios": "^1.7.6",
     "classnames": "^2.5.1",
     "cookies-next": "^4.2.1",

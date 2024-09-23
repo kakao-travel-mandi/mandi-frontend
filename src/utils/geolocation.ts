@@ -43,9 +43,23 @@ export const getBoundsCoordinates = (
   };
 };
 
-export function coordinateToLatLng(coordinate: Coordinate): google.maps.LatLng {
-  return new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
-}
+type CoordinateToLatLngFunction = {
+  (coordinate: Coordinate, literal: true): google.maps.LatLngLiteral;
+  (coordinate: Coordinate, literal?: false): google.maps.LatLng;
+};
+export const coordinateToLatLng: CoordinateToLatLngFunction = function (
+  coordinate: Coordinate,
+  literal?: boolean,
+): google.maps.LatLng | google.maps.LatLngLiteral {
+  if (literal === true) {
+    return {
+      lat: coordinate.latitude,
+      lng: coordinate.longitude,
+    };
+  } else {
+    return new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
+  }
+} as CoordinateToLatLngFunction;
 
 export const getPathCoordinates = (gpxText: any) => {
   const parser = new DOMParser();
