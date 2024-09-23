@@ -1,8 +1,8 @@
 import { axiosInstance } from './axiosInstance';
 
-export const getBadgesAPI = async (userId: string) => {
+export const getBadgesAPI = async () => {
   try {
-    const response = await axiosInstance.get(`/badges/${userId}`);
+    const response = await axiosInstance.get(`/badges`);
     if (response.status === 200) {
       return response.data;
     } else {
