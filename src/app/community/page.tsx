@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
-import { useRouter } from 'next/navigation';
 
 import IconAlarm from '@/assets/icon/icon-alarm.svg';
 import IconSearchMono from '@/assets/icon/icon-search-mono.svg';
@@ -17,14 +16,10 @@ import { mockCommunityFeedData } from './dummy';
 const cx = classNames.bind(styles);
 
 const Community = () => {
-  const router = useRouter();
   const [activeChip, setActiveChip] = useState<string | null>('All');
   const [sortOption, setSortOption] = useState('Latest');
   const [feedData, setFeedData] = useState(mockCommunityFeedData);
-  const onContentClick = () => {
-    const postId = 1;
-    router.push(`/community/${postId}`);
-  };
+
   const { mutate, data, error, isError } = usePostCategoryMutation({
     onSuccess: data => {
       console.log('PostCategory fetched successfully:', data);
@@ -77,8 +72,8 @@ const Community = () => {
       >
         {feedData.map((data, index) => (
           <CommunityFeed
+            postId='1'
             key={index}
-            onContentClick={onContentClick}
             profileImage={data.profileImage}
             nickname={data.nickname}
             uploadDate={data.uploadDate}

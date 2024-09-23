@@ -1,7 +1,7 @@
 // utils/timeUtils.js
 import dayjs from 'dayjs';
 
-export function timeDifference(date: string) {
+export const timeDifference = (date: string) => {
   const now = dayjs();
   const postTime = dayjs(date);
 
@@ -34,4 +34,4 @@ export function timeDifference(date: string) {
       return `${diffInYears} years ago`;
     }
   }
-}
+};
