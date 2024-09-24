@@ -9,7 +9,7 @@ export interface ModalReviewSectionDownProps {
   review?: string;
   reviewImgs?: string[];
   score?: number;
-  date: string | number | undefined;
+  date: string | undefined;
   modal: 'write' | 'unWrite' | 'complete-course';
 }
 

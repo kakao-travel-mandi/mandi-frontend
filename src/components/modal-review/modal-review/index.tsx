@@ -16,7 +16,7 @@ export interface ModalReviewProps {
   reviewImgs?: string[];
   score?: number;
   date: string | number;
-  reviewDate: string | number;
+  reviewDate?: string | undefined;
 }
 
 const cx = classNames.bind(styles);
@@ -47,7 +47,7 @@ const ModalReview = ({
         review={review}
         reviewImgs={reviewImgs}
         score={score}
-        date={date}
+        date={reviewDate}
         modal={modal}
       />
     </div>
