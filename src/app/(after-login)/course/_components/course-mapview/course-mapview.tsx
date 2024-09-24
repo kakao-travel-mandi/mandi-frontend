@@ -1,17 +1,10 @@
 'use client';
 
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
 
-import HomeIcon from '@/assets/colored-icon/current_position.svg';
 import CurrentIcon from '@/assets/icon/icon-circle-empty-mono.svg';
 import RefreshIcon from '@/assets/icon/icon-refresh-mono.svg';
 import { MapCourseDTO, PointDTO } from '@/types/course';
@@ -35,11 +28,7 @@ const cx = classNames.bind(styles);
 interface CourseMapViewProps {}
 
 const CourseMapView = ({}: CourseMapViewProps) => {
-  const [center, setCenter] = useState<google.maps.LatLngLiteral | null>({
-    // TODO: 테스트 후 삭제 -> null로 초기화
-    lat: 35.15996942515816,
-    lng: 129.04904803927445,
-  });
+  const [center, setCenter] = useState<google.maps.LatLngLiteral | null>(null);
   const [currentMarkerPosition, setCurrentMarkerPosition] =
     useState<Position | null>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -103,8 +92,7 @@ const CourseMapView = ({}: CourseMapViewProps) => {
   };
 
   useEffect(() => {
-    //TODO: 테스트 후 활성화
-    // fetchAndSetInitialCenter();
+    fetchAndSetInitialCenter();
     return () => selectItem(null);
   }, [selectItem]);
 
@@ -125,12 +113,7 @@ const CourseMapView = ({}: CourseMapViewProps) => {
             onClick={onClickMap}
           >
             {currentMarkerPosition && (
-              <CurrentPositionMarker
-                position={currentMarkerPosition}
-                icon={<HomeIcon />}
-                selected={true}
-                showRadius={true}
-              />
+              <CurrentPositionMarker position={currentMarkerPosition} />
             )}
             {courses.map(course => (
               <CourseDisplayOnMap

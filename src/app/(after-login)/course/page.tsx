@@ -17,7 +17,7 @@ import { useMapCourseStore } from '@/stores/map-course';
 const cx = classNames.bind(styles);
 
 const Course = () => {
-  const [layout, setLayout] = useState<'list' | 'map'>('map');
+  const [layout, setLayout] = useState<'list' | 'map'>('list');
   const { selectedItem } = useMapCourseStore();
 
   const handleLayoutChange = () =>

@@ -5,7 +5,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 3.375rem);
 }
 
 .list-searchbox {

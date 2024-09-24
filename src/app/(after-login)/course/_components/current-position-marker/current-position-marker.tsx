@@ -1,37 +1,28 @@
-import { useState } from 'react';
-
-import { CircleF, MarkerF } from '@react-google-maps/api';
-import { renderToString } from 'react-dom/server';
+import { CircleF } from '@react-google-maps/api';
+import CustomMarker from '../custom-marker/custom-marker';
+import Icon from '@/assets/colored-icon/current_position.svg';
 
 interface CustomMarkerProps {
-  icon: JSX.Element;
   position: google.maps.LatLngLiteral;
-  selected?: boolean;
   showRadius?: boolean;
 }
 
 const CurrentPositionMarker = ({
-  icon,
   position,
-  selected = false,
-  showRadius = false,
+  showRadius = true,
 }: CustomMarkerProps) => {
-  const [clicked, setClicked] = useState(false);
-  const size = selected ? 36 : 26;
+  const size = 20;
   return (
-    <MarkerF
-      position={position}
-      icon={{
-        url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
-          renderToString(icon),
-        )}`,
-        scaledSize: new window.google.maps.Size(size, size),
-        anchor: new window.google.maps.Point(size / 2, size / 2),
-      }}
-    >
+    <>
+      <CustomMarker
+        position={new google.maps.LatLng(position.lat, position.lng)}
+        icon={<Icon />}
+        size={size}
+        customAnchor={new window.google.maps.Point(size / 2, size / 2 - 2)}
+      />
       <CircleF
         center={position}
-        radius={300}
+        radius={100}
         options={{
           strokeWeight: 0,
           fillColor: '#5483EE',
@@ -40,7 +31,7 @@ const CurrentPositionMarker = ({
           visible: showRadius,
         }}
       />
-    </MarkerF>
+    </>
   );
 };
 

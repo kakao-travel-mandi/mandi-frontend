@@ -13,6 +13,7 @@ interface CustomMarkerProps {
 
   anchor?: boolean;
   onClick?: () => void;
+  customAnchor?: google.maps.Point;
 }
 
 const CustomMarker = ({
@@ -20,6 +21,7 @@ const CustomMarker = ({
   position,
   size = 32,
   anchor = false,
+  customAnchor,
   onClick,
 }: CustomMarkerProps) => {
   const width = typeof size === 'number' ? size : size.width;
@@ -33,9 +35,11 @@ const CustomMarker = ({
           renderToString(icon),
         )}`,
         scaledSize: new window.google.maps.Size(width, height),
-        anchor: anchor
-          ? new window.google.maps.Point(width / 2, width)
-          : new window.google.maps.Point(width / 2, height / 2),
+        anchor:
+          customAnchor ||
+          (anchor
+            ? new window.google.maps.Point(width / 2, width)
+            : new window.google.maps.Point(width / 2, height / 2)),
       }}
     />
   );
