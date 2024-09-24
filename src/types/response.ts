@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import { CourseDTO, MapCourseDTO } from './course';
 import { OauthProvider } from './oauth-provider';
+import { WeatherItem } from './weather';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;
@@ -80,5 +81,12 @@ export interface GetCoursesResponse extends BaseResponse {
 export interface GetNearbyCoursesResponse extends BaseResponse {
   response: {
     courses: MapCourseDTO[];
+  };
+}
+
+export interface WeatherResponse {
+  list: WeatherItem[];
+  city: {
+    name: string;
   };
 }

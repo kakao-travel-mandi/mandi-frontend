@@ -4,7 +4,7 @@ const BEFORE_LOGIN_PATHS = ['/', '/sign-up'];
 
 export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken')?.value;
-
+  console.log('accessToken', accessToken);
   if (BEFORE_LOGIN_PATHS.includes(request.nextUrl.pathname)) {
     if (accessToken) {
       return NextResponse.redirect(new URL(`${request.nextUrl.origin}/home`));

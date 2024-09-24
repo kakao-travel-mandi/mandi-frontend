@@ -1,5 +1,3 @@
-'use client';
-
 import { Button as HeadlessButton } from '@headlessui/react';
 import classNames from 'classnames/bind';
 
@@ -33,6 +31,7 @@ const Chip = ({
   onChanges,
   onClick,
 }: ChipProps) => {
+  const chipFont = action ? 'label4-semibold' : 'label3-medium';
   const handleChange = () => {
     onChanges?.(!selected, id ?? '');
   };
@@ -47,9 +46,9 @@ const Chip = ({
       type={type}
       className={cx(
         'chip',
-        action ? font === 'label4-semibold' : font === 'label3-medium',
+        chipFont,
         action && 'chip__action',
-        selected && 'chip--selected',
+        selected && 'chip__selected',
       )}
       disabled={disabled}
       onClick={handleClick}

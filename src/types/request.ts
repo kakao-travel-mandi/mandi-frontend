@@ -22,6 +22,12 @@ export type CheckNicknameRequest = {
   nickname: string;
 };
 
+export type WeatherRequest = {
+  lat: number;
+  lon: number;
+  appid: string;
+};
+
 export type GetCoursesRequest = {
   page?: string;
   size?: string;
