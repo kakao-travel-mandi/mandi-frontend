@@ -1,7 +1,9 @@
-import styles from './view-switch-button.module.scss';
 import classNames from 'classnames/bind';
+
 import ListIcon from '@/assets/icon/icon-list-bullet.svg';
 import MapIcon from '@/assets/icon/icon-map.svg';
+
+import styles from './view-switch-button.module.scss';
 
 const cx = classNames.bind(styles);
 

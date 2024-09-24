@@ -1,12 +1,16 @@
+import { useMemo } from 'react';
+
+import { PolylineF } from '@react-google-maps/api';
+
+import EndPointSelectedIcon from '@/assets/colored-icon/end-points-selected.svg';
+import EndPointIcon from '@/assets/colored-icon/end-points.svg';
 import { useGPXQuery } from '@/queries/courseQuery';
 import { Coordinate, MapCourseDTO, PointDTO } from '@/types/course';
 import { coordinateToLatLng, getPathCoordinates } from '@/utils/geolocation';
-import { PolylineF } from '@react-google-maps/api';
-import EndPointIcon from '@/assets/colored-icon/end-points.svg';
-import EndPointSelectedIcon from '@/assets/colored-icon/end-points-selected.svg';
-import { CourseMarker } from './course-marker/course-marker';
+
 import CustomMarker from '../custom-marker/custom-marker';
-import { useMemo } from 'react';
+
+import { CourseMarker } from './course-marker/course-marker';
 
 interface CourseMarkerProps {
   course: MapCourseDTO;

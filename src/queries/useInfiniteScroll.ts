@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
+
 import { UseInfiniteQueryResult } from '@tanstack/react-query';
+
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const ioOptions = {
@@ -32,7 +34,7 @@ const useInfiniteScroll = <TData, TError>(
     if (isIntersecting && hasNextPage && !isFetching) {
       fetchNextPage();
     }
-  }, [isIntersecting, hasNextPage, isFetching]);
+  }, [isIntersecting, hasNextPage, isFetching, fetchNextPage]);
 
   return {
     loadMoreRef,

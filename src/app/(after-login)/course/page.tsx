@@ -7,12 +7,12 @@ import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import IconXCircle from '@/assets/icon/icon-xcircle.svg';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
+import { useMapCourseStore } from '@/stores/map-course';
 
 import CourseMapView from './_components/course-mapview/course-mapview';
 import FilteredCourse from './_components/filtered-course/filtered-course';
-import styles from './page.module.scss';
 import ViewSwitchButton from './_components/view-switch-button/view-switch-button';
-import { useMapCourseStore } from '@/stores/map-course';
+import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
 

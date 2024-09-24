@@ -1,9 +1,10 @@
+import { MarkerF, OverlayView, OverlayViewF } from '@react-google-maps/api';
+import classNames from 'classnames/bind';
+import { renderToString } from 'react-dom/server';
+
 import CourseIcon from '@/assets/colored-icon/Surrounding Course.svg';
 
 import styles from './course-marker.module.scss';
-import classNames from 'classnames/bind';
-import { MarkerF, OverlayView, OverlayViewF } from '@react-google-maps/api';
-import { renderToString } from 'react-dom/server';
 
 const cx = classNames.bind(styles);
 

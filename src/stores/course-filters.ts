@@ -1,8 +1,7 @@
-// TODO: 필요 없을 수 있음...
+import { create } from 'zustand';
 
 import { GetCoursesRequest } from '@/types/request';
 import { getDifficultyNumber } from '@/utils/course';
-import { create } from 'zustand';
 
 export type DifficultyType = 'easy' | 'moderate' | 'hard';
 export type SortByType = 'asc' | 'desc' | null;

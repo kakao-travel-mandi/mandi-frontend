@@ -1,9 +1,10 @@
-import styles from './course-filter.module.scss';
 import classNames from 'classnames/bind';
 
 import Chip from '@/components/common/chip';
-import { formatDifficulty, formatDistance, formatRating } from '@/utils/course';
 import { CourseFilters } from '@/stores/course-filters';
+import { formatDifficulty, formatDistance, formatRating } from '@/utils/course';
+
+import styles from './course-filter.module.scss';
 
 const cx = classNames.bind(styles);
 

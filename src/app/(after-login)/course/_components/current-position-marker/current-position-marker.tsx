@@ -1,6 +1,8 @@
 import { CircleF } from '@react-google-maps/api';
-import CustomMarker from '../custom-marker/custom-marker';
+
 import Icon from '@/assets/colored-icon/current_position.svg';
+
+import CustomMarker from '../custom-marker/custom-marker';
 
 interface CustomMarkerProps {
   position: google.maps.LatLngLiteral;

@@ -1,5 +1,6 @@
-import { MapCourseDTO, PointDTO } from '@/types/course';
 import { create } from 'zustand';
+
+import { MapCourseDTO, PointDTO } from '@/types/course';
 
 type SelectedItem =
   | {

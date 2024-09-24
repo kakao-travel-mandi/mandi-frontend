@@ -1,6 +1,8 @@
 import { Sheet } from 'react-modal-sheet';
-import styles from './index.module.scss';
+
 import classNames from 'classnames/bind';
+
+import styles from './index.module.scss';
 
 const snapPoints = [-118, 0.4, 0];
 const initialSnap = 1;

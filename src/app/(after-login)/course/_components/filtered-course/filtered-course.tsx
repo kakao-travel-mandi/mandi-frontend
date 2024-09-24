@@ -4,18 +4,19 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
+import { useCoursesQuery } from '@/queries/courseQuery';
+import useInfiniteScroll from '@/queries/useInfiniteScroll';
 import {
   formatCourseFilterParams,
   useCourseFiltersStore,
 } from '@/stores/course-filters';
 
+import CourseFilter from '../course-filter/course-filter';
 import CourseListItem from '../course-list/course-list';
 import FilterBottomsheet from '../filter-bottomsheet/filter-bottomsheet';
 
 import styles from './filtered-course.module.scss';
-import { useCoursesQuery } from '@/queries/courseQuery';
-import useInfiniteScroll from '@/queries/useInfiniteScroll';
-import CourseFilter from '../course-filter/course-filter';
+
 
 const cx = classNames.bind(styles);
 
@@ -24,8 +25,7 @@ const FilteredCourse = () => {
   const { filters } = useCourseFiltersWithUrl();
   const [isFilterOpened, setFilterOpened] = useState(false);
 
-  const courseQuery =
-    filters && useCoursesQuery(formatCourseFilterParams(filters));
+  const courseQuery = useCoursesQuery(formatCourseFilterParams(filters));
   const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
 
   const handleCloseFilter = () => {

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
-import { OauthProvider } from './oauth-provider';
 import { CourseDTO, MapCourseDTO } from './course';
+import { OauthProvider } from './oauth-provider';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;

@@ -1,5 +1,6 @@
 import { GetNearbyCoursesRequest, GetCoursesRequest } from '@/types/request';
 import { GetNearbyCoursesResponse, GetCoursesResponse } from '@/types/response';
+
 import { axiosInstance } from './axiosInstance';
 
 export const getCoursesAPI = async (

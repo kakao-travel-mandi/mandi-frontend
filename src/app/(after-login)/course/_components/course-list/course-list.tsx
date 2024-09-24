@@ -1,15 +1,15 @@
 import classNames from 'classnames/bind';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import RunningIcon from '@/assets/icon/exercise_running.svg';
 import ClockIcon from '@/assets/icon/icon-clock.svg';
 import StarIcon from '@/assets/icon/icon-star.svg';
 import Badge from '@/components/common/badge';
-
-import styles from './course-list.module.scss';
 import { CourseDTO } from '@/types/course';
 import { getDifficultyColor } from '@/utils/course';
-import Image from 'next/image';
+
+import styles from './course-list.module.scss';
 
 interface CourseListItemProps {
   course: CourseDTO;

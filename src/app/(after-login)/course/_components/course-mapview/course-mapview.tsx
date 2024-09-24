@@ -7,6 +7,8 @@ import classNames from 'classnames/bind';
 
 import CurrentIcon from '@/assets/icon/icon-circle-empty-mono.svg';
 import RefreshIcon from '@/assets/icon/icon-refresh-mono.svg';
+import { useNearbyCoursesMutation } from '@/queries/courseQuery';
+import { useMapCourseStore } from '@/stores/map-course';
 import { MapCourseDTO, PointDTO } from '@/types/course';
 import { Position } from '@/types/geolocation';
 import {
@@ -16,13 +18,11 @@ import {
 } from '@/utils/geolocation';
 
 import { MapProvider } from '../../map-provider';
-
-import styles from './course-mapview.module.scss';
-import MarkerInfoCard from '../marker-info-card/marker-info-card';
-import { useNearbyCoursesMutation } from '@/queries/courseQuery';
-import { useMapCourseStore } from '@/stores/map-course';
 import CourseDisplayOnMap from '../course-display-on-map/course-display-on-map';
 import CurrentPositionMarker from '../current-position-marker/current-position-marker';
+import MarkerInfoCard from '../marker-info-card/marker-info-card';
+
+import styles from './course-mapview.module.scss';
 const cx = classNames.bind(styles);
 
 interface CourseMapViewProps {}

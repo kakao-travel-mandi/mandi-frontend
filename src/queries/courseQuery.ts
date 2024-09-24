@@ -1,3 +1,6 @@
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
 import {
   getCoursesAPI,
   getGPXDataAPI,
@@ -5,8 +8,6 @@ import {
 } from '@/apis/course';
 import { GetCoursesRequest, GetNearbyCoursesRequest } from '@/types/request';
 import { GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 export const useCoursesQuery = (params: GetCoursesRequest) => {
   return useInfiniteQuery<GetCoursesResponse, AxiosError>({
