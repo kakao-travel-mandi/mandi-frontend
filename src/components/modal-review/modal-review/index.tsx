@@ -8,15 +8,15 @@ import styles from './modalReview.module.scss';
 export interface ModalReviewProps {
   img: string;
   title: string;
-  channel: [string, string];
   time?: number | string;
   distance?: number;
 
   modal: 'write' | 'unWrite' | 'complete-course';
   review?: string;
   reviewImgs?: string[];
-  score: number;
+  score?: number;
   date: string | number;
+  reviewDate: string | number;
 }
 
 const cx = classNames.bind(styles);
@@ -25,13 +25,13 @@ const ModalReview = ({
   modal,
   img,
   title,
-  channel,
   time,
   distance,
   review,
   reviewImgs,
   score,
   date,
+  reviewDate,
 }: ModalReviewProps) => {
   return (
     <div className={cx('container')}>
@@ -39,8 +39,8 @@ const ModalReview = ({
         modal={modal}
         img={img}
         title={title}
-        channel={channel}
         time={time}
+        date={date}
         distance={distance}
       />
       <ModalReviewSectionDown

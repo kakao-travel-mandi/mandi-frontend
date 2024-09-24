@@ -1,10 +1,20 @@
+'use client';
 import Layout from '@/components/layout';
 import ReviewCourseList from '@/components/review-course-list/index';
 import ReviewLayout from '@/components/review-layout';
+import {
+  useCourseCompleteQuery,
+  useCourseCompleteReviewQuery,
+} from '@/queries/courseReviewQuery';
 
-import { dummyModalReviewsDataCompleteCourse } from './dummy';
-
-const Review = () => {
+const CompleteReview = () => {
+  const { data, isLoading, error } = useCourseCompleteQuery();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error</div>;
+  }
   return (
     <Layout
       hasTopNav={true}
@@ -12,15 +22,19 @@ const Review = () => {
       back={true}
       title='My course review'
     >
-      <ReviewCourseList completedCourses={0} totalDistance={0} />
+      <ReviewCourseList
+        completedCourses={data?.response.totalCount}
+        totalDistance={data?.response.totalDistance}
+      />
       <div>
         <ReviewLayout
           modal='complete-course'
-          modalReviewsData={dummyModalReviewsDataCompleteCourse}
+          reviewsData={data?.response.completedCourses}
         />
       </div>
     </Layout>
   );
 };
 
-export default Review;
+export default CompleteReview;
+//

@@ -8,8 +8,8 @@ import styles from './modalReviewSectionDown.module.scss';
 export interface ModalReviewSectionDownProps {
   review?: string;
   reviewImgs?: string[];
-  score: number;
-  date: string | number;
+  score?: number;
+  date: string | number | undefined;
   modal: 'write' | 'unWrite' | 'complete-course';
 }
 
@@ -29,7 +29,7 @@ const ModalReviewSectionDown = ({
     return (
       <div className={cx('container__write')}>
         <div className={cx('container__write__score')}>
-          <StarScope score={score} />
+          {score && <StarScope score={score} />}
           <span className={cx('label4-regular')}>{date}</span>
         </div>
         <div className={cx('container__write__review', 'body2-regular')}>
@@ -64,12 +64,7 @@ const ModalReviewSectionDown = ({
       </Button>
     );
   } else if (modal === 'complete-course') {
-    return (
-      <div className={cx('container__complete__course')}>
-        <span className={cx('label4-semibold')}>Date:</span>
-        <span className={cx('label4-regular')}>{date}</span>
-      </div>
-    );
+    return <div></div>;
   } else {
     return <div>error</div>; // modal이 지정되지 않았거나 잘못된 값인 경우
   }

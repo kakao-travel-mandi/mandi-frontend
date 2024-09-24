@@ -33,5 +33,12 @@ module.exports = withPWA({
         hostname: 'mandi-image.s3.ap-northeast-2.amazonaws.com',
       },
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        pathname: '/user-attachments/assets/**',
+      },
+    ],
   },
 });

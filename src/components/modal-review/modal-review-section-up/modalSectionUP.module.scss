@@ -12,6 +12,9 @@
   align-items: flex-start;
   gap: 0.5rem;
   flex: 1 0 0;
+  :first-child{
+    color: $gray-600
+  }
 }
 .container__badge{
   display: flex;
