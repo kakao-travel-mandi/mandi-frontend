@@ -5,6 +5,7 @@ export type PositionType = {
 
 export type WeatherItem = {
   dt_txt: string;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   weather: {
     id: number;
     main: string;

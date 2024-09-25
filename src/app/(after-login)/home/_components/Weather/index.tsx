@@ -6,9 +6,9 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import IconReset from '@/assets/icon/icon-reset.svg';
-import { WEATHER_ICON_URL } from '@/constants/api';
 import { useWeatherQuery } from '@/queries/weatherQuery';
 import { PositionType } from '@/types/weather';
+import { getWeatherIcon } from '@/utils/weather';
 
 import styles from './index.module.scss';
 
@@ -68,28 +68,23 @@ const Weather = () => {
         <div className={cn(`${BLOCK}__skeleton`)}></div>
       ) : (
         <div className={cn(`${BLOCK}__content`)}>
-          {data?.list.map((data, index) => (
+          {data?.list.map((item, index) => (
             <div key={index} className={cn(`${BLOCK}__item`)}>
               <p
                 className={cn(`${BLOCK}__item--time`, {
                   [`${BLOCK}__item--time--now`]: index === 0,
                 })}
               >
-                {index === 0 ? 'now' : data.dt_txt}
+                {index === 0 ? 'now' : item.dt_txt}
               </p>
               <p className={cn(`${BLOCK}__item--icon`)}>
-                <Image
-                  src={`${WEATHER_ICON_URL}${data.weather[0].icon}@2x.png`}
-                  alt={data.weather[0].description}
-                  width={32}
-                  height={32}
-                />
+                {item.Icon && <item.Icon width={32} height={32} />}
               </p>
               <p className={cn(`${BLOCK}__item--temp`)}>
-                {Math.round(data.main.temp)}°
+                {Math.round(item.main.temp)}°
               </p>
               <p className={cn(`${BLOCK}__item--humidity`)}>
-                {data.main.humidity}%
+                {item.main.humidity}%
               </p>
             </div>
           ))}
