@@ -53,7 +53,6 @@ const CommunityFeed = ({
   const likeColor = like ? '#F35E5E' : '#ADB1BA';
 
   const { userId: currentUserId } = useMyIdStore();
-  console.log('주스턴스 잘불러와짐?', currentUserId);
 
   const { mutate: deleteLike, error: deleteLikeError } = useDeletePostLike();
   const { mutate: addLike, error: addLikeError } = usePostPostLike();
@@ -70,7 +69,7 @@ const CommunityFeed = ({
     }
   };
 
-  const onContentClick = () => {
+  const handleContentClick = () => {
     if (!detail) {
       router.push(`/community/${postId}`);
     }
@@ -100,7 +99,7 @@ const CommunityFeed = ({
         <IconEllipsisVertical />
       </div>
 
-      <div onClick={onContentClick} className={cx('container__post')}>
+      <div onClick={handleContentClick} className={cx('container__post')}>
         {/* detail이 false일 때만 클래스 추가 */}
         <div
           className={cx('subtitle1-semibold', {
