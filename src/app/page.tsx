@@ -29,10 +29,10 @@ const Main = () => {
   const { mutate: login } = useLoginMutation({
     onSuccess: data => {
       if (data.response.isSignUp) router.push('/home');
-      else router.push('/sign-up');
     },
     onError: code => {
-      console.error(code);
+      if (code.status === 404) router.push('/sign-up');
+      else alert('Login failed');
     },
   });
 
