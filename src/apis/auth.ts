@@ -57,3 +57,14 @@ export const signupAPI = async (request: SignupRequest) => {
     throw error;
   }
 };
+
+export const refreshTokenAPI = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post('/auth/reissue', {
+      refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

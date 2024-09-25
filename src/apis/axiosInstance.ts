@@ -2,7 +2,14 @@ import axios from 'axios';
 import { signOut } from 'next-auth/react';
 
 import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
-import { getAccessToken, setAccessToken, setRefreshToken } from '@/utils/auth';
+import {
+  getAccessToken,
+  getRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+} from '@/utils/auth';
+
+import { refreshTokenAPI } from './auth';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -40,21 +47,35 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  response => {
+  async response => {
     return response;
   },
-  error => {
-    if (
-      error.response &&
-      (error.response.status === 401 || error.response.status === 403)
-    ) {
-      setAccessToken('');
-      setRefreshToken('');
-      signOut({
-        redirect: true,
-        callbackUrl: '/',
-      });
+  async error => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = getRefreshToken();
+
+      if (refreshToken) {
+        try {
+          const data = await refreshTokenAPI(refreshToken);
+          const { accessToken, refreshToken: newRefreshToken } = data.response;
+
+          setAccessToken(accessToken);
+          setRefreshToken(newRefreshToken);
+
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          return axiosInstance(originalRequest);
+        } catch (refreshError) {
+          setAccessToken('');
+          setRefreshToken('');
+          signOut();
+          return Promise.reject(refreshError);
+        }
+      }
     }
+
     return Promise.reject(error);
   },
 );
