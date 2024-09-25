@@ -1,0 +1,55 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.course-item {
+  display: flex;
+  gap: 1.25rem;
+  cursor: pointer;
+
+  &__image {
+    width: 7.5rem;
+    height: 5.625rem;
+    border-radius: 0.5rem;
+    background-color: $gray-200;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      &__title {
+        @extend .title3-semibold;
+        color: $gray-800;
+      }
+      &__address {
+        @extend .caption2-regular;
+        color: $gray-500;
+      }
+    }
+    &__details{
+      display: flex;
+      gap: 0.5rem;
+      &__item {
+        display: flex;
+        gap: 0.25rem;
+        &__icon {
+          width: 0.875rem;
+          height: 0.875rem;
+          fill: $gray-500;
+        }
+        &__text {
+          color: $gray-800;
+          @extend .label5-regular;
+        }
+      }
+    }
+    &__difficulty{
+      width: fit-content;
+    }
+  }
+}

@@ -97,7 +97,7 @@ export default function Page() {
             }}
           >
             {/* TODO: 버튼 색상 바꾸기 */}
-            <Button size='full' color='gray__one' onClick={handleDialogClose}>
+            <Button size='full' color='darkgray' onClick={handleDialogClose}>
               Cancel
             </Button>
             <Button size='full' color='green' onClick={deleteAccount}>

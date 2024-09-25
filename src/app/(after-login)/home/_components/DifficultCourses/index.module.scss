@@ -1,0 +1,39 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.difficult-courses {
+  background-color: $white;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 45px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &--text {
+      @extend .title3-semibold;
+      color: $gray-900;
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 20px;
+    }
+
+    &--chips {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    gap: 16px;
+  }
+}

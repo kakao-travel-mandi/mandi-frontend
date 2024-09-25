@@ -1,5 +1,7 @@
 'use client';
 
+import { ReactNode } from 'react';
+
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
@@ -15,10 +17,12 @@ const BLOCK = 'top-navbar';
 const cx = classNames.bind(styles);
 
 export interface TopNavBarProps {
-  logo?: boolean;
+  logo?: ReactNode;
   title?: string;
   actions?: (TextActionButtonProps | IconActionButtonProps)[];
   back?: boolean;
+  topNavColor?: 'white' | 'gray';
+  topNavBarClassName?: string;
   onBack?: () => void;
 }
 
@@ -27,6 +31,8 @@ export const TopNavBar = ({
   title,
   actions,
   back,
+  topNavColor = 'white',
+  topNavBarClassName: topNavBarClassName,
   onBack,
 }: TopNavBarProps) => {
   const router = useRouter();
@@ -39,9 +45,11 @@ export const TopNavBar = ({
   };
 
   return (
-    <div className={cx(BLOCK)}>
+    <div
+      className={cx(BLOCK, topNavColor && `background-color-${topNavColor}`, topNavBarClassName)}
+    >
       <div className={cx(`${BLOCK}__leading`)}>
-        {logo && <Mandi />}
+        {!!logo && logo}
         {back && <IconButton icon={Back} onClick={handleBack} />}
       </div>
       <div className={cx(`${BLOCK}__height`)} />

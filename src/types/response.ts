@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { OauthProvider } from './oauth-provider';
+import { WeatherItem } from './weather';
 
 interface BaseResponse extends AxiosResponse {
   success: boolean;
@@ -95,5 +96,12 @@ export interface PostsCategoryResponse {
     message: string; // 에러 메시지
     status: number; // 에러 상태 코드
     errorCode: string; // 에러 코드
+  };
+}
+
+export interface WeatherResponse {
+  list: WeatherItem[];
+  city: {
+    name: string;
   };
 }

@@ -1,0 +1,26 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.filter-container{
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0.625rem 0 1.25rem 1.25rem;
+
+  &__section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    &__name {
+      @extend .subtitle1-semibold;
+      color: $gray-800;
+    }
+    &__filter-list{
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -26,3 +26,8 @@ export type PostsCreateRequest = {
   title: string;
   Base64EncodedImageList: string[];
 };
+export type WeatherRequest = {
+  lat: number;
+  lon: number;
+  appid: string;
+};

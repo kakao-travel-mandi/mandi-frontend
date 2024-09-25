@@ -9,7 +9,7 @@ export const dummyModalReviewsDataUnWrite: ModalReviewProps[] = [
     distance: 5, // in kilometers (optional)
     modal: 'complete-course',
     review: 'This course was very informative and well-structured.',
-    reviewImgs: ['/test/map-ex.png', '/test/map-ex.png'],
+    reviewImgs: ['/dummy-image.png', '/test/map-ex.png'],
     score: 4.5,
     date: '2023-08-15',
   },

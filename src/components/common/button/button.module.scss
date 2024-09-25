@@ -1,4 +1,5 @@
 @use "/src/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
 
 @mixin size($width, $height, $padding, $radius) {
     width: $width;
@@ -15,15 +16,19 @@
     color: #fff;
 
     &.button__large {
+        @extend .subtitle1-semibold;
         @include size(auto, 3.25rem, 0.875rem 1.25rem, 0.5rem);
     }
     &.button__small {
+        @extend .label3-medium;
         @include size(auto, auto, 0.75rem 1rem, 0.5rem);
     }
     &.button__xSmall {
+        @extend .label3-medium;
         @include size(auto, 2rem, 0.375rem 0.75rem, 0.625rem);
     }
     &.button__full {
+        @extend .subtitle1-semibold;
         @include size(100%, 3.25rem, 0.875rem 1.25rem, 0.5rem);
     }
 }
@@ -39,7 +44,7 @@
         cursor: not-allowed;
     }
 }
-.button__gray__one {
+.button__darkgray{
     background-color: $gray-700;
     &:active {
         background-color: $gray-800;
@@ -50,7 +55,7 @@
         cursor: not-allowed;
     }
 }
-.button__gray__two {
+.button__whitegray{
     background-color: $gray-100;
     color: $gray-600;
     &:active {
@@ -71,6 +76,24 @@
 
     &:disabled {
         color: $red-light;
+        cursor: not-allowed;
+    }
+}
+.button__white {
+    color: $gray-800;
+    background-color: white;
+    border: 1px solid $gray-800;
+
+    &:active {
+        color: $gray-700;
+        background-color: $gray-50;
+        border: 1px solid $gray-500;
+    }
+
+    &:disabled {
+        background-color: white;
+        border: 1px solid $gray-200;
+        color: $gray-300;
         cursor: not-allowed;
     }
 }

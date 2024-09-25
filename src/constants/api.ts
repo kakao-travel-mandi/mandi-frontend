@@ -5,3 +5,7 @@ export const NO_AUTH_ENDPOINTS = [
   '/auth/google/signup',
   '/profile/check-nickname',
 ];
+
+export const WEATHER_ICON_URL = 'https://openweathermap.org/img/wn/';
+
+export const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/forecast';

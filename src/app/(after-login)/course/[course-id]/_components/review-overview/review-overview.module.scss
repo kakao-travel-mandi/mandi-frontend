@@ -1,0 +1,41 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.review-overview{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &__header{
+    @extend .subtitle2-semibold;
+    color: $gray-900;
+
+    &__review-counts{
+      color: $gray-500;
+      @extend .caption2-regular;
+      margin-left: 0.5rem;
+    }
+  }
+
+  &__content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 1rem 0;
+    background-color: $gray-50;
+    border-radius: 0.5rem;
+  }
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    &__number{
+      color: $gray-800;
+      @extend .title1-bold;
+    }
+  }
+}
+
