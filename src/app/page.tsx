@@ -44,8 +44,9 @@ const Main = () => {
         setIsModal(true);
       }
     },
-    onError: code => {
-      console.log(code);
+    onError: error => {
+      if (error.status === 404) router.push('/sign-up');
+      else alert('Login failed');
     },
   });
 

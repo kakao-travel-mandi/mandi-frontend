@@ -20,7 +20,7 @@ export const loginAPI = async (request: LoginRequest) => {
 
       return response.data;
     } else {
-      throw response.status;
+      throw response;
     }
   } catch (error) {
     throw error;

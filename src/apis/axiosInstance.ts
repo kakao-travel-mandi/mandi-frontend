@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { redirect } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
@@ -49,15 +48,12 @@ axiosInstance.interceptors.response.use(
       error.response &&
       (error.response.status === 401 || error.response.status === 403)
     ) {
-      const token = getAccessToken();
-      console.log('token', token);
-      //TODO: token 이슈 해결 후, 주석 해제
-      // setAccessToken('');
-      // setRefreshToken('');
-      // signOut({
-      //   redirect: true,
-      //   callbackUrl: '/',
-      // });
+      setAccessToken('');
+      setRefreshToken('');
+      signOut({
+        redirect: true,
+        callbackUrl: '/',
+      });
     }
     return Promise.reject(error);
   },
