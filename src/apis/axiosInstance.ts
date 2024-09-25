@@ -3,6 +3,8 @@ import { signOut } from 'next-auth/react';
 
 import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
 import {
+  deleteAccessToken,
+  deleteRefreshToken,
   getAccessToken,
   getRefreshToken,
   setAccessToken,
@@ -66,11 +68,13 @@ axiosInstance.interceptors.response.use(
           setRefreshToken(newRefreshToken);
 
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
           return axiosInstance(originalRequest);
         } catch (refreshError) {
-          setAccessToken('');
-          setRefreshToken('');
+          deleteAccessToken();
+          deleteRefreshToken();
           signOut();
+
           return Promise.reject(refreshError);
         }
       }
