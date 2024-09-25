@@ -1,24 +1,36 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import classNames from 'classnames/bind';
-
 import IconAlarm from '@/assets/icon/icon-alarm.svg';
 import IconSearchMono from '@/assets/icon/icon-search-mono.svg';
 import CommunityFeed from '@/components/community-feed';
 import CommunityLayout from '@/components/community-layout';
 import Layout from '@/components/layout';
+import { useGetAuthId } from '@/queries/authQuery';
 import { usePostCategoryMutation } from '@/queries/postQuery';
+import { useMyIdStore } from '@/stores/userId';
 
-import styles from './community.module.scss';
-import { mockCommunityFeedData } from './dummy';
-
-const cx = classNames.bind(styles);
+interface FeedData {
+  postId: number;
+  userId: number;
+  nickname: string;
+  imgUrl: string;
+  category: string;
+  content: string;
+  title: string;
+  uploadDate: string;
+  likeCnt: number;
+  commentCnt: number;
+  imgUrlList: string[];
+}
+[];
 
 const Community = () => {
-  const [activeChip, setActiveChip] = useState<string | null>('All');
+  const [activeChip, setActiveChip] = useState<string | null>('ALL');
   const [sortOption, setSortOption] = useState('Latest');
-  const [feedData, setFeedData] = useState(mockCommunityFeedData);
+  const [feedData, setFeedData] = useState<FeedData[]>([]);
+  const { data: userId } = useGetAuthId();
+  const { setUserId } = useMyIdStore();
 
   const { mutate, data, error, isError } = usePostCategoryMutation({
     onSuccess: data => {
@@ -28,25 +40,52 @@ const Community = () => {
       console.error('Error fetching PostCategory:', error);
     },
   });
-  //console.log('데이터', data?.posts);
-  useEffect(() => {
-    //mutate('ALL');
-    const data = [...mockCommunityFeedData] // 원본 배열 복사
-      .filter(data => activeChip === 'All' || data.category === activeChip) // 필터링
-      .sort((a, b) => {
-        if (sortOption === 'Latest') {
-          return (
-            new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime() // 최신순
-          );
-        } else if (sortOption === 'Popular') {
-          return Number(b.likesCount) - Number(a.likesCount); // 인기순
-        }
-        return 0;
-      });
-    setFeedData(data);
-    // 상태 업데이트
-  }, [sortOption, activeChip]);
 
+  useEffect(() => {
+    if (data?.response?.posts) {
+      const transformedData = data.response.posts.map(post => ({
+        postId: post.postId,
+        userId: post.user.userId,
+        nickname: post.user.nickname,
+        imgUrl: post.user.imgUrl,
+        category: post.category,
+        content: post.content,
+        title: post.title,
+        uploadDate: post.uploadDate,
+        likeCnt: post.likeCnt,
+        commentCnt: post.commentCnt,
+        imgUrlList: post.imgUrlList.map(img => img.url),
+      }));
+
+      const filteredAndSortedData = transformedData
+        .filter(post => activeChip === 'ALL' || post.category === activeChip)
+        .sort((a, b) => {
+          if (sortOption === 'Latest') {
+            return (
+              new Date(b.uploadDate).getTime() -
+              new Date(a.uploadDate).getTime()
+            );
+          } else if (sortOption === 'Popular') {
+            return Number(b.likeCnt) - Number(a.likeCnt);
+          }
+          return 0;
+        });
+
+      setFeedData(filteredAndSortedData);
+    }
+  }, [data, activeChip, sortOption]);
+
+  useEffect(() => {
+    mutate('ALL');
+
+    if (userId) {
+      setUserId(userId.response);
+    }
+  }, [mutate, userId, setUserId]);
+
+  if (isError) {
+    return <div>Error: {error?.message}</div>;
+  }
   return (
     <Layout
       title='Community'
@@ -72,17 +111,18 @@ const Community = () => {
       >
         {feedData.map((data, index) => (
           <CommunityFeed
-            postId='1'
+            userId={data.userId}
+            postId={data.postId}
             key={index}
-            profileImage={data.profileImage}
+            profileImage={data.imgUrl}
             nickname={data.nickname}
             uploadDate={data.uploadDate}
             category={data.category}
-            communityPostTitle={data.communityPostTitle}
-            communityPost={data.communityPost}
-            postImage={data.postImage}
-            likesCount={data.likesCount}
-            commentCount={data.commentCount}
+            communityPostTitle={data.title}
+            communityPost={data.content}
+            postImage={data.imgUrlList}
+            likesCount={data.likeCnt}
+            commentCount={data.commentCnt}
           />
         ))}
       </CommunityLayout>
@@ -91,10 +131,3 @@ const Community = () => {
 };
 
 export default Community;
-
-/*
-  
-   
-
-    
-*/

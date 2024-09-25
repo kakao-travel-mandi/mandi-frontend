@@ -49,38 +49,38 @@ const CommunityLayout = ({
     <div className={cx('container')}>
       <div className={cx('container__nav')}>
         <Chip
-          selected={activeChip === 'All'}
-          onClick={() => handleChipClick('All')}
+          selected={activeChip === 'ALL'}
+          onClick={() => handleChipClick('ALL')}
         >
-          All
+          ALL
         </Chip>
         <Chip
-          selected={activeChip === 'Tourism'}
-          onClick={() => handleChipClick('Tourism')}
+          selected={activeChip === 'TOURISM'}
+          onClick={() => handleChipClick('TOURISM')}
         >
           Tourism
         </Chip>
         <Chip
-          selected={activeChip === 'Trekking'}
-          onClick={() => handleChipClick('Trekking')}
+          selected={activeChip === 'TREKKING'}
+          onClick={() => handleChipClick('TREKKING')}
         >
           Trekking
         </Chip>
         <Chip
-          selected={activeChip === 'Dining'}
-          onClick={() => handleChipClick('Dining')}
+          selected={activeChip === 'DINNING'}
+          onClick={() => handleChipClick('DINNING')}
         >
           Dining
         </Chip>
         <Chip
-          selected={activeChip === 'Accommodation'}
-          onClick={() => handleChipClick('Accommodation')}
+          selected={activeChip === 'ACCOMMODATION'}
+          onClick={() => handleChipClick('ACCOMMODATION')}
         >
           Accommodation
         </Chip>
         <Chip
-          selected={activeChip === 'Other'}
-          onClick={() => handleChipClick('Other')}
+          selected={activeChip === 'OTHER'}
+          onClick={() => handleChipClick('OTHER')}
         >
           Other
         </Chip>

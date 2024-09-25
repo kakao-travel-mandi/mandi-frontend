@@ -19,3 +19,10 @@ export type UpdateMyInfoImageRequest = {
 export type CheckNicknameRequest = {
   nickname: string;
 };
+
+export type PostsCreateRequest = {
+  category: string;
+  content: string;
+  title: string;
+  Base64EncodedImageList: string[];
+};

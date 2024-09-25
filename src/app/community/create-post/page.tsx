@@ -16,6 +16,7 @@ import IconX from '@/assets/icon/icon-x-img.svg';
 import BottomSheet from '@/components/common/bottomsheet';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
+import { useCreatePostMutation } from '@/queries/postQuery';
 
 import styles from './createPost.module.scss';
 
@@ -28,6 +29,14 @@ const CreatePost = () => {
   const [title, setTitle] = useState<string>(''); // 제목 상태 관리
   const [post, setPost] = useState<string>(''); // 설명 상태 관리
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const { mutate, isError, error } = useCreatePostMutation({
+    onSuccess: data => {
+      console.log('Post created successfully:', data);
+    },
+    onError: error => {
+      console.error('Error creating post:', error);
+    },
+  });
 
   // 파일 선택 다이얼로그를 열기 위한 핸들러
   const handleIconClick = () => {
@@ -66,21 +75,19 @@ const CreatePost = () => {
   };
 
   const handleSubmit = () => {
-    const formData = new FormData();
-
-    formData.append('title', title); // 제목 추가
-    formData.append('description', post); // 설명 추가
-    formData.append('category', selectedCategory); // 선택된 카테고리 추가
-
-    images.forEach((image, index) => {
-      formData.append(`image-${index}`, image); // 이미지들 추가
-    });
-
-    console.log('Form Data:', Object.fromEntries(formData.entries()));
-
-    // 서버에 제출하려면 fetch 등을 사용하여 요청을 보낼 수 있습니다.
-    // 예: fetch('/api/create-post', { method: 'POST', body: formData });
+    const formData = {
+      category: selectedCategory, // 선택된 카테고리
+      content: post, // 설명
+      title: title, // 제목
+      Base64EncodedImageList: images, // Base64 인코딩된 이미지 리스트
+    };
+    console.log(formData);
+    mutate(formData);
   };
+
+  if (isError) {
+    return <div>Error: {error?.message}</div>;
+  }
 
   return (
     <Layout
@@ -169,7 +176,6 @@ const CreatePost = () => {
           onChange={e => setPost(e.target.value)}
         />
       </div>
-
       <BottomSheet
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}

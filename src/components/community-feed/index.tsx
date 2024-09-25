@@ -9,6 +9,8 @@ import IconChat from '@/assets/icon/icon-chat-bubble-oval-left-ellipsis.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconHeart from '@/assets/icon/icon-heart.svg';
 import Badge from '@/components/common/badge/index';
+import { useDeletePostLike, usePostPostLike } from '@/queries/postQuery';
+import { useMyIdStore } from '@/stores/userId';
 import { timeDifference } from '@/utils/community-time';
 
 import styles from './communityFeed.module.scss';
@@ -16,7 +18,8 @@ import styles from './communityFeed.module.scss';
 const cx = classNames.bind(styles);
 
 interface CommunityFeedProps {
-  postId: string;
+  userId: number;
+  postId: string | number;
   profileImage: string;
   nickname: string;
   uploadDate: string;
@@ -30,6 +33,7 @@ interface CommunityFeedProps {
 }
 
 const CommunityFeed = ({
+  userId,
   postId,
   profileImage,
   nickname,
@@ -48,9 +52,22 @@ const CommunityFeed = ({
   const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
   const likeColor = like ? '#F35E5E' : '#ADB1BA';
 
+  const { userId: currentUserId } = useMyIdStore();
+  console.log('주스턴스 잘불러와짐?', currentUserId);
+
+  const { mutate: deleteLike, error: deleteLikeError } = useDeletePostLike();
+  const { mutate: addLike, error: addLikeError } = usePostPostLike();
+
   const handleLikeClick = () => {
     setLike(prevState => !prevState);
     setCurrentLikesCount(prevCount => (like ? prevCount - 1 : prevCount + 1));
+    if (like) {
+      deleteLike(`${postId}`);
+      console.log('에러?', addLikeError);
+    } else {
+      addLike(`${postId}`);
+      console.log('에러?', deleteLikeError);
+    }
   };
 
   const onContentClick = () => {

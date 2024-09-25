@@ -1,6 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { loginAPI, signupAPI } from '@/apis/auth';
+import { getAuthId, loginAPI, signupAPI } from '@/apis/auth';
 import { LoginRequest, SignupRequest } from '@/types/request';
 import { LoginResponse, SignupResponse } from '@/types/response';
 
@@ -37,5 +37,12 @@ export const useSignupMutation = ({
     onError: (error: number) => {
       onError(error);
     },
+  });
+};
+
+export const useGetAuthId = () => {
+  return useQuery({
+    queryKey: ['auth-id'],
+    queryFn: () => getAuthId(),
   });
 };

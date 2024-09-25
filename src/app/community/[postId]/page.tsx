@@ -78,6 +78,7 @@ const DetailFeed = () => {
           ? prevState.filter(i => i !== index) // 이미 열려 있으면 닫기
           : [...prevState, index], // 없으면 배열에 추가
     );
+    // 다시
   };
 
   return (
@@ -144,57 +145,58 @@ const DetailFeed = () => {
                       Reply
                     </button>
                   </div>
-
-                  {visibleReplyIndexes.includes(index) && (
-                    <div className={cx('container__comment__frame')}>
-                      {comment.childComments.map((child, childIndex) => (
-                        <div
-                          className={cx('container__comment__box')}
-                          key={childIndex}
-                        >
-                          <Image
-                            src={child.imgUrl}
-                            width={30}
-                            height={30}
-                            alt='Reply Profile Image'
-                          />
-                          <div className={cx('container__comment__profilebox')}>
-                            <div className={cx('container__comment__profile')}>
-                              <span className={cx('subtitle2-regular')}>
-                                {child.nickname}
-                              </span>
-                              <div className={cx('label6-regular')}>
-                                {timeDifference(child.uploadDate)}
+                  <div className={cx('container__comment__frame')}>
+                    {comment.childComments.map((child, childIndex) => (
+                      <div
+                        className={cx('container__comment__box')}
+                        key={childIndex}
+                      >
+                        <Image
+                          src={child.imgUrl}
+                          width={30}
+                          height={30}
+                          alt='Reply Profile Image'
+                        />
+                        <div className={cx('container__comment__profilebox')}>
+                          <div className={cx('container__comment__profile')}>
+                            <span className={cx('subtitle2-regular')}>
+                              {child.nickname}
+                            </span>
+                            <div className={cx('label6-regular')}>
+                              {timeDifference(child.uploadDate)}
+                            </div>
+                          </div>
+                          <div
+                            className={cx(
+                              'container__reply__content',
+                              'body2-regular',
+                            )}
+                          >
+                            {child.content}
+                          </div>
+                          <div className={cx('container__comment__reaction')}>
+                            <div className={cx('container__comment__likecut')}>
+                              <IconHeart
+                                fill={child.isLiked ? '#F35E5E' : '#ADB1BA'}
+                                onClick={() =>
+                                  handleLikeClick(index, true, childIndex)
+                                }
+                              />
+                              <div className={cx('label5-regular')}>
+                                {child.likeCnt + child.add}
                               </div>
-                            </div>
-                            <div
-                              className={cx(
-                                'container__reply__content',
-                                'body2-regular',
-                              )}
-                            >
-                              {child.content}
-                            </div>
-                            <div className={cx('container__comment__reaction')}>
-                              <div
-                                className={cx('container__comment__likecut')}
+                              <button
+                                className={cx('label5-regular')}
+                                onClick={() => handleReplyClick(index)}
                               >
-                                <IconHeart
-                                  fill={child.isLiked ? '#F35E5E' : '#ADB1BA'}
-                                  onClick={() =>
-                                    handleLikeClick(index, true, childIndex)
-                                  }
-                                />
-                                <div className={cx('label5-regular')}>
-                                  {child.likeCnt + child.add}
-                                </div>
-                              </div>
+                                Reply
+                              </button>
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
