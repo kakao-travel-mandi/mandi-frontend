@@ -21,7 +21,7 @@ import {
 import { useMyIdStore } from '@/stores/userId';
 import { timeDifference } from '@/utils/community-time';
 
-import BottomSheet from '../common/bottomsheet';
+import BottomSheet from '../../../../../components/common/bottomsheet';
 
 import styles from './communityFeed.module.scss';
 

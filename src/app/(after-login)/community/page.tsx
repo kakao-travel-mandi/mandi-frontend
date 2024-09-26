@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+import CommunityFeed from '@/app/(after-login)/community/_components/community-feed';
+import CommunityLayout from '@/app/(after-login)/community/_components/community-layout';
 import IconAlarm from '@/assets/icon/icon-alarm.svg';
 import IconSearchMono from '@/assets/icon/icon-search-mono.svg';
-import CommunityFeed from '@/components/community-feed';
-import CommunityLayout from '@/components/community-layout';
 import Layout from '@/components/layout';
 import { useGetAuthId } from '@/queries/authQuery';
 import { usePostCategoryMutation } from '@/queries/postQuery';

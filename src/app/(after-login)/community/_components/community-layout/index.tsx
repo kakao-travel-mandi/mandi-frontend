@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import IconPencil from '@/assets/icon/icon-pencil.svg';
 import Chip from '@/components/common/chip/index';
-
-import { Menubox } from '../common/menubox';
+import { Menubox } from '@/components/common/menubox/index';
 
 import styles from './communityLayout.module.scss';
 

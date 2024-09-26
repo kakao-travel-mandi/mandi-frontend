@@ -8,8 +8,8 @@ import { useParams } from 'next/navigation';
 import CommentItem, {
   Comment,
 } from '@/app/(after-login)/community/_components/comment-item/index';
+import CommunityFeed from '@/app/(after-login)/community/_components/community-feed/index';
 import IconPaperAirplane from '@/assets/icon/icon-paper-airplane.svg';
-import CommunityFeed from '@/components/community-feed';
 import Layout from '@/components/layout';
 import { useGetAuthId } from '@/queries/authQuery';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
