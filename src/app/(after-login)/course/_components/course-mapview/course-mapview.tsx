@@ -79,6 +79,7 @@ const CourseMapView = ({}: CourseMapViewProps) => {
   });
   const onClickCourse = (course: MapCourseDTO) => {
     selectItem({ type: 'course', data: course });
+    setCourses([course]);
     map?.panTo(coordinateToLatLng(course.midPoint));
   };
   const onClickEndPoints = (point: PointDTO) => {
