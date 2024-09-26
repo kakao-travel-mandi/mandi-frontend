@@ -1,62 +1,47 @@
 'use client';
 
-import { useRef, useState } from 'react';
-
+import { useRef } from 'react';
 import classNames from 'classnames/bind';
-import { useRouter } from 'next/navigation';
 
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
 import { useCourseNamesQuery } from '@/queries/courseQuery';
-import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
 
 import AutoCompleteList from './_components/autocomplete-list/autocomplete-list';
 import SearchHistory from './_components/search-history/search-history';
 import SearchedCourses from './_components/searched-courses/searched-courses';
 import styles from './page.module.scss';
+import { useSearchCourses } from '@/hooks/useSearchCourses';
 
 const cx = classNames.bind(styles);
 
-const CourseSearchPage = ({
-  searchParams: { keyword },
-}: {
+interface CourseSearchPageProps {
   searchParams: {
     keyword: string;
   };
-}) => {
-  const [inputValue, setInputValue] = useState(
-    keyword === undefined ? '' : keyword,
-  );
-  const [focused, setFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const { addSearch } = useCourseSearchHistoryStore();
-  const router = useRouter();
-  const { data: courseNames } = useCourseNamesQuery();
+}
 
-  const handleChange = (value: string) => {
-    setInputValue(value);
-    setShowAutocomplete(value.length > 0);
-  };
-  const search = (value: string) => {
-    setInputValue(value);
-    addSearch(value);
-    router.push(`/course/search?keyword=${value}`);
-    inputRef.current?.blur();
-    setShowAutocomplete(false);
-  };
+const CourseSearchPage = ({
+  searchParams: { keyword },
+}: CourseSearchPageProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { data: courseNames } = useCourseNamesQuery();
+  const {
+    inputValue,
+    isFocused,
+    showAutocomplete,
+    performSearch,
+    handleChange,
+    handleFocus,
+    handleBlur,
+  } = useSearchCourses(keyword || '', inputRef);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputValue.length === 0) return;
-    search(inputValue);
+    performSearch(inputValue);
   };
-  const handleFocus = () => {
-    setFocused(true);
-    setShowAutocomplete(inputValue.length > 0);
-  };
-  const handleBlur = () => setFocused(false);
-  const showResult = !focused && inputValue.length !== 0 && !showAutocomplete;
 
   return (
     <Layout
@@ -81,17 +66,17 @@ const CourseSearchPage = ({
       }
     >
       <div className={cx('container')}>
-        {inputValue.length === 0 && (
-          <SearchHistory handleClickListItem={search} />
-        )}
-        {showAutocomplete && inputValue.length !== 0 && (
+        {inputValue.length === 0 ? (
+          <SearchHistory handleClickListItem={performSearch} />
+        ) : showAutocomplete ? (
           <AutoCompleteList
             list={courseNames?.response!}
             keyword={inputValue}
-            handleClickListItem={search}
+            handleClickListItem={performSearch}
           />
-        )}
-        {showResult && <SearchedCourses keyword={keyword} />}
+        ) : !isFocused && keyword ? (
+          <SearchedCourses keyword={keyword} />
+        ) : null}
       </div>
     </Layout>
   );
