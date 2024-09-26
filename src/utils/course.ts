@@ -1,3 +1,5 @@
+import { setCookie } from 'cookies-next';
+
 import {
   DifficultyType,
   SortByType,
@@ -6,7 +8,6 @@ import {
   distanceMap,
   starsMap,
 } from '@/stores/course-filters';
-import { setCookie } from 'cookies-next';
 
 const difficultyOrder: DifficultyType[] = ['easy', 'moderate', 'hard'];
 

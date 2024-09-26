@@ -10,7 +10,7 @@ import {
 import { GetCoursesRequest, GetNearbyCoursesRequest } from '@/types/request';
 import { GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
 
-export const useCoursesQuery = (params: GetCoursesRequest, enabled = false) => {
+export const useCoursesQuery = (params: GetCoursesRequest, enabled = true) => {
   return useInfiniteQuery<GetCoursesResponse, AxiosError>({
     queryKey: ['courses', params],
     initialPageParam: 1,
