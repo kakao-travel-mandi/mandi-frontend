@@ -4,7 +4,7 @@ const useIntersectionObserver = (
   elemRef: RefObject<HTMLElement>,
   options: IntersectionObserverInit,
 ) => {
-  const observerRef = useRef<IntersectionObserver>(); 
+  const observerRef = useRef<IntersectionObserver>();
   const [entries, setEntries] = useState<IntersectionObserverEntry[]>([]);
 
   useEffect(() => {
@@ -12,13 +12,13 @@ const useIntersectionObserver = (
     if (!node) return;
 
     observerRef.current = new IntersectionObserver(setEntries, options);
-    observerRef.current.observe(node); 
+    observerRef.current.observe(node);
 
     return () => observerRef.current?.disconnect();
   }, [elemRef, options]);
 
   return {
-    entries, 
+    entries,
     observerRef,
   };
 };

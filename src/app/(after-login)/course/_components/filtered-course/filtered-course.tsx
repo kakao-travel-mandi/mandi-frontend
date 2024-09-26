@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 
 import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
 import { useCoursesQuery } from '@/queries/courseQuery';
-import useInfiniteScroll from '@/queries/useInfiniteScroll';
 import {
   formatCourseFilterParams,
   useCourseFiltersStore,
@@ -16,7 +15,7 @@ import CourseListItem from '../course-list/course-list';
 import FilterBottomsheet from '../filter-bottomsheet/filter-bottomsheet';
 
 import styles from './filtered-course.module.scss';
-
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +25,8 @@ const FilteredCourse = () => {
   const [isFilterOpened, setFilterOpened] = useState(false);
 
   const courseQuery = useCoursesQuery(formatCourseFilterParams(filters));
-  const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
+  const { loadMoreRef, data, status, isFetching } =
+    useInfiniteScroll(courseQuery);
 
   const handleCloseFilter = () => {
     setFilters(filters);
