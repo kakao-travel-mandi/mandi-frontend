@@ -1,14 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import Input from '@/components/common/input';
 
 const SearchInput = () => {
+  const router = useRouter();
   return (
     <button
       onClick={() => {
-        //TODO: 검색 페이지로 이동 추가 필요
-        alert('검색 페이지로 이동 추가 필요');
+        router.push('/course/search');
       }}
     >
       <Input

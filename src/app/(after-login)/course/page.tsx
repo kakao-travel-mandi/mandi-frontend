@@ -2,6 +2,7 @@
 import { Suspense, useState } from 'react';
 
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import IconXCircle from '@/assets/icon/icon-xcircle.svg';
@@ -19,14 +20,17 @@ const cx = classNames.bind(styles);
 const Course = () => {
   const [layout, setLayout] = useState<'list' | 'map'>('list');
   const { selectedItem } = useMapCourseStore();
+  const router = useRouter();
 
   const handleLayoutChange = () =>
     setLayout(layout === 'list' ? 'map' : 'list');
+  const handleClickSearch = () => router.push('/course/search');
 
   return (
     <Layout hasTopNav={false} hasTabBar={true}>
       <div
         className={cx(layout === 'list' ? 'list-searchbox' : 'map-searchbox')}
+        onClick={handleClickSearch}
       >
         <Input
           placeholder='Course name, Location or Other.'
