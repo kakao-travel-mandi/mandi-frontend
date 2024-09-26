@@ -31,7 +31,13 @@ const TrakingPage = () => {
   const [nearbyPlaces, setNearbyPlaces] = useState<NearbyPoint[] | null>(null);
   const [selectedNearby, selectNearby] = useState<NearbyFilter | null>(null);
   const [selectedMarker, selectMarker] = useState<NearbyPoint | null>(null);
-  const onClickMarker = (point: NearbyPoint) => selectMarker(point);
+  const onClickMarker = (point: NearbyPoint) => {
+    selectMarker(point);
+    map?.panTo({
+      lat: point.coordinate.latitude,
+      lng: point.coordinate.longitude,
+    });
+  };
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const onLoad = useCallback((map: google.maps.Map) => {
@@ -81,11 +87,10 @@ const TrakingPage = () => {
         fields: ['id', 'location', 'displayName', 'formattedAddress'], // 경로를 위해 id 필요. 마커 표시 위해 location 필요, 이름 표시 위해 displayName 필요
         locationRestriction: {
           center: currentMarkerPosition!,
-          radius: 500,
+          radius: 1000,
         },
         includedPrimaryTypes: category,
-        // TODO: 지정 필요
-        maxResultCount: 10,
+        maxResultCount: 15,
         rankPreference: SearchNearbyRankPreference.POPULARITY,
       };
       const { places } = await Place.searchNearby(request);
@@ -178,7 +183,7 @@ const TrakingPage = () => {
         isOpen={!!nearbyPlaces && selectedMarker === null}
         onClose={handleClose}
       >
-        <NearbyPlacesList list={nearbyPlaces} />
+        <NearbyPlacesList list={nearbyPlaces} handleClickItem={onClickMarker} />
       </DraggableBottomSheet>
       <DraggableBottomSheet
         isOpen={nearbyPlaces == null && selectedMarker === null}

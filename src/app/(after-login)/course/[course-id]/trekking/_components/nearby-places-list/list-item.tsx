@@ -10,13 +10,18 @@ const BLOCK = 'item';
 
 interface ListItemsProps {
   point: NearbyPoint;
+  onClick: (point: NearbyPoint) => void;
 }
 
-const ListItems = ({ point }: ListItemsProps) => (
-  <div className={cx(BLOCK)}>
-    <h3 className={cx(`${BLOCK}__name`)}>{point.name}</h3>
-    <span className={cx(`${BLOCK}__address`)}>{point.address}</span>
-  </div>
-);
+const ListItems = ({ point, onClick }: ListItemsProps) => {
+  const handleClick = () => onClick(point);
+
+  return (
+    <div className={cx(BLOCK)} onClick={handleClick}>
+      <h3 className={cx(`${BLOCK}__name`)}>{point.name}</h3>
+      <span className={cx(`${BLOCK}__address`)}>{point.address}</span>
+    </div>
+  );
+};
 
 export default ListItems;
