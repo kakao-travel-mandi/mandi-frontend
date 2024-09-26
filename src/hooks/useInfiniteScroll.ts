@@ -5,7 +5,7 @@ import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const ioOptions = {
-  threshold: 1,
+  threshold: 0,
   delay: 0,
 };
 
@@ -21,26 +21,25 @@ const useInfiniteScroll = <TData, TError>(
     isFetching,
   } = query;
   const loadMoreRef = useRef<HTMLDivElement>(null);
-
   const {
     entries: [entry],
+    observerRef,
   } = useIntersectionObserver(loadMoreRef, ioOptions);
 
   const isIntersecting = entry?.isIntersecting;
   console.log('isIntersecting', isIntersecting);
+  // console.log('data', data);
   useEffect(() => {
     if (isIntersecting) {
       fetchNextPage();
     }
-  }, [isIntersecting]);
+  }, [isIntersecting, fetchNextPage]);
 
   return {
     loadMoreRef,
-    data,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-    isFetching,
+    isIntersecting,
+    observerRef,
+    ...query,
   };
 };
 

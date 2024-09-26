@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useCoursesQuery } from '@/queries/courseQuery';
 import {
   formatCourseFilterParams,
@@ -15,7 +16,6 @@ import CourseListItem from '../course-list/course-list';
 import FilterBottomsheet from '../filter-bottomsheet/filter-bottomsheet';
 
 import styles from './filtered-course.module.scss';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 const cx = classNames.bind(styles);
 

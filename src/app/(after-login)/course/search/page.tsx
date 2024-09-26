@@ -1,20 +1,23 @@
 'use client';
 
-import Layout from '@/components/layout';
-import IconSearch from '@/assets/icon/icon-search-mono.svg';
-import Input from '@/components/common/input';
-import { useRef, useState } from 'react';
-import SearchHistory from './_components/search-history/search-history';
-import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
+import { useEffect, useRef, useState } from 'react';
+
+import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
-import styles from './page.module.scss';
-import classNames from 'classnames/bind';
+import IconSearch from '@/assets/icon/icon-search-mono.svg';
+import Input from '@/components/common/input';
+import Layout from '@/components/layout';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useCourseNamesQuery, useCoursesQuery } from '@/queries/courseQuery';
+import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
+
 import CourseListItem from '../_components/course-list/course-list';
-import useInfiniteScroll from '@/queries/useInfiniteScroll';
-import { Autocomplete } from '@react-google-maps/api';
+
 import AutoCompleteList from './_components/autocomplete-list/autocomplete-list';
+import NoResult from './_components/no-result/no-result';
+import SearchHistory from './_components/search-history/search-history';
+import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -38,6 +41,7 @@ const CourseSearchPage = ({
   const courseQuery = useCoursesQuery({ keyword: searchKeyword }, fetch);
   const { loadMoreRef, data } = useInfiniteScroll(courseQuery);
   const { data: courseNames } = useCourseNamesQuery();
+
   const handleChange = (value: string) => {
     setInputValue(value);
     setShowAutocomplete(value.length > 0);
@@ -57,9 +61,25 @@ const CourseSearchPage = ({
     setShowAutocomplete(inputValue.length > 0);
   };
   const handleBlur = () => setFocused(false);
-  console.log(loadMoreRef);
+  const showResult = !focused && inputValue.length !== 0 && !showAutocomplete;
+
+  useEffect(() => {
+    if (keyword) {
+      setInputValue(keyword);
+      setSearchKeyword(keyword);
+      setFetch(true);
+    }
+  }, [keyword]);
+
+  useEffect(() => {
+    if (loadMoreRef.current) {
+      console.log('loadMoreRef.current', loadMoreRef.current);
+    }
+  }, [loadMoreRef]);
+
   return (
     <Layout
+      key={searchKeyword}
       hasTabBar={false}
       hasTopNav={true}
       back={true}
@@ -80,7 +100,11 @@ const CourseSearchPage = ({
         </form>
       }
     >
-      <div className={cx('container')}>
+      <div
+        className={cx('container', {
+          'container--result': showResult,
+        })}
+      >
         {inputValue.length === 0 && <SearchHistory />}
         {showAutocomplete && inputValue.length !== 0 && (
           <AutoCompleteList
@@ -88,23 +112,19 @@ const CourseSearchPage = ({
             keyword={inputValue}
           />
         )}
-        {!focused && inputValue.length !== 0 && !showAutocomplete && (
-          <div className={cx('result')}>
-            {data?.pages.map(page =>
+        {showResult &&
+          (data?.pages.some(page => page.response.courses.length > 0) ? (
+            data.pages.map(page =>
               page.response.courses.map(course => (
                 <CourseListItem key={course.id} course={course} />
               )),
-            )}
-          </div>
-        )}
-        <div
-          ref={loadMoreRef}
-          style={{
-            height: '20px',
-            backgroundColor: 'red',
-            flexShrink: 0,
-          }}
-        />
+            )
+          ) : (
+            <div className={cx('no-results')}>
+              <NoResult />
+            </div>
+          ))}
+        <div ref={loadMoreRef} />
       </div>
     </Layout>
   );
