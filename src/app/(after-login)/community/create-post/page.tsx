@@ -1,7 +1,5 @@
 'use client';
-//CreatePost
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';

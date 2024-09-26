@@ -38,8 +38,8 @@ interface CommentItemProps {
 
 const CommentItem = ({
   comment,
-  isReply = false, // 댓글인지 대댓글인지 구분
-  handleReplyClick, // 대댓글 열기/닫기 핸들러
+  isReply = false,
+  handleReplyClick,
 }: CommentItemProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.likeCnt);
@@ -90,7 +90,7 @@ const CommentItem = ({
       <Image
         className={cx('container__profile__img')}
         src={comment.imgUrl || '/default-profile.png'}
-        width={isReply ? 30 : 40} // 대댓글은 이미지 크기 작게
+        width={isReply ? 30 : 40}
         height={isReply ? 30 : 40}
         alt={isReply ? 'Reply Profile Image' : 'Comment Profile Image'}
       />

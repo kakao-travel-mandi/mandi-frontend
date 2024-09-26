@@ -28,7 +28,7 @@ const DetailFeed = () => {
   const feedData = data?.response;
 
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newReply, setNewReply] = useState<string>(''); // 인풋 필드 상태
+  const [newReply, setNewReply] = useState<string>('');
   const [selectedComment, setSelectedComment] = useState<{
     parentIndex: number | null;
     childIndex: number | null;
@@ -45,7 +45,7 @@ const DetailFeed = () => {
     nickname: string,
   ) => {
     setSelectedComment({ parentIndex, childIndex, tag: nickname });
-    setNewReply(`@${nickname} `); // @태그 넣기
+    setNewReply(`@${nickname} `);
   };
 
   const handleReplyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,16 +71,14 @@ const DetailFeed = () => {
     };
 
     if (selectedComment.parentIndex === null) {
-      // 새로운 댓글 추가 (Reply 버튼을 클릭하지 않은 경우)
       setComments(prevComments => [
         ...prevComments,
         {
           ...newComment,
-          parentCommentId: null, // 최상위 댓글로 추가
+          parentCommentId: null,
         },
       ]);
     } else {
-      // 대댓글 추가 (Reply 버튼을 클릭한 경우)
       setComments(prevComments =>
         prevComments.map((comment, index) => {
           if (index === selectedComment.parentIndex) {
@@ -94,7 +92,6 @@ const DetailFeed = () => {
       );
     }
 
-    // 상태 초기화
     setNewReply('');
     setSelectedComment({ parentIndex: null, childIndex: null, tag: null });
   };
@@ -124,8 +121,8 @@ const DetailFeed = () => {
             uploadDate: child.uploadDate,
             content: child.content,
             likeCnt: child.likeCnt,
-            childComments: [], // 대댓글은 비워두기
-          })) || [], // undefined일 경우 빈 배열로 처리
+            childComments: [],
+          })) || [],
       }));
 
       setComments(transformedComments);

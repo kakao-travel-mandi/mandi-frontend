@@ -12,7 +12,7 @@ import styles from './communityLayout.module.scss';
 interface CommunityLayoutProps {
   children: ReactNode;
   activeChip: string | null;
-  setActiveChip: (chip: string | null) => void; // 상태를 업데이트할 함수
+  setActiveChip: (chip: string | null) => void;
   sortOption: string;
   setSortOption: (sortOption: string) => void;
 }
@@ -28,7 +28,7 @@ const CommunityLayout = ({
 }: CommunityLayoutProps) => {
   const router = useRouter();
   const handlePencilClick = () => {
-    router.push('/community/create-post'); // 페이지 이동
+    router.push('/community/create-post');
   };
   const handleChipClick = (chip: string) => {
     setActiveChip(activeChip === chip ? null : chip);

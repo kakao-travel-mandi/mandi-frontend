@@ -165,7 +165,10 @@ const CommunityFeed = ({
           <IconHeart fill={likeColor} onClick={handleLikeClick} />
           {currentLikesCount}
         </div>
-        <div className={cx('container__reaction__section', 'label3-regular')}>
+        <div
+          onClick={handleContentClick}
+          className={cx('container__reaction__section', 'label3-regular')}
+        >
           <IconChat />
           {commentCount}
         </div>

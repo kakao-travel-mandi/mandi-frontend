@@ -23,7 +23,7 @@ const CreatePostCategory = ({
 
   const handleCategorySelect = (category: string) => {
     onSelect(category);
-    setIsBottomSheetOpen(false); // 선택 후 바텀 시트 닫기
+    setIsBottomSheetOpen(false);
   };
 
   return (
