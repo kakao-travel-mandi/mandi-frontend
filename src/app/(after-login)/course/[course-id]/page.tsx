@@ -17,6 +17,7 @@ import DetailInfo from './_components/detail-info/detail-info';
 import ReviewList from './_components/review-list/review-list';
 import ReviewOverview from './_components/review-overview/review-overview';
 import styles from './page.module.scss';
+import { setTrekkingIdCookie } from '@/utils/course';
 
 const cx = classNames.bind(styles);
 
@@ -41,6 +42,11 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
       }
     }
   }, [scrolled]);
+  const handleStartButton = () => {
+    // TODO: api로 여부 한번 확인하기.
+    setTrekkingIdCookie(Number(courseId));
+    router.push(`/course/${courseId}/trekking`);
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -94,7 +100,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
           <CoursePoints type='start' address='Yongdang-dong, Nam-gu, Busan' />
           <CoursePoints type='end' address='Yongdang-dong, Nam-gu, Busan' />
           <div className={cx('course-image')}></div>
-          <Button color='green' size='full'>
+          <Button color='green' size='full' onClick={handleStartButton}>
             Course Start
           </Button>
         </div>

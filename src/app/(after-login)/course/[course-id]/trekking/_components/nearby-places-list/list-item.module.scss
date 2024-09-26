@@ -1,0 +1,20 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  
+  &__name {
+    @extend .title3-semibold;
+    color: $gray-800;
+  }
+  &__address {
+    @extend .caption2-regular;
+    color: $gray-500;
+  }
+}

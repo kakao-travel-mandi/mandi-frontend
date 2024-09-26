@@ -1,0 +1,24 @@
+<svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Parking Lot" filter="url(#filter0_d_2009_25957)">
+<rect x="2" width="24" height="24" rx="12" fill="#FF4B4B"/>
+<rect x="3" y="1" width="22" height="22" rx="11" stroke="white" stroke-width="2"/>
+<g id="Parking Lot_2">
+<g id="Group">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M14.7239 10.2461H13.4573V12.0562H14.7239C15.2231 12.0562 15.629 11.6509 15.629 11.1512C15.629 10.652 15.2237 10.2461 14.7239 10.2461Z" fill="white"/>
+<path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd" d="M14.7239 13.1433H13.4573V14.5913C13.4497 14.7302 13.3892 14.861 13.2881 14.9567C13.1871 15.0524 13.0532 15.1058 12.9141 15.1058C12.7749 15.1058 12.641 15.0524 12.54 14.9567C12.4389 14.861 12.3784 14.7302 12.3709 14.5913V9.16032H14.7239C15.252 9.16089 15.7582 9.37098 16.1315 9.74446C16.5048 10.1179 16.7146 10.6243 16.7149 11.1523C16.7143 11.6802 16.5044 12.1863 16.1311 12.5595C15.7579 12.9328 15.2518 13.1427 14.7239 13.1433ZM14.0002 6.02539C10.701 6.02539 8.02686 8.70006 8.02686 11.9987C8.02686 15.2979 10.701 17.9721 14.0002 17.9721C17.2989 17.9721 19.9735 15.2979 19.9735 11.9987C19.9735 8.70006 17.2989 6.02539 14.0002 6.02539Z" fill="white"/>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_2009_25957" x="0" y="0" width="28" height="29" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="3"/>
+<feGaussianBlur stdDeviation="1"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_25957"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_25957" result="shape"/>
+</filter>
+</defs>
+</svg>

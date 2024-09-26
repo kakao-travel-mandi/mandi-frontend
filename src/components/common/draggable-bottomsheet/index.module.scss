@@ -1,7 +1,11 @@
 .draggable-bottom-sheet {
   width: 100%;
   position: absolute !important;
-  overflow: visible !important;
+  // overflow: visible !important;
+  overflow-y: scroll !important;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   &__container  {
     box-shadow: none !important;

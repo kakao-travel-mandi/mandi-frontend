@@ -4,11 +4,15 @@ import classNames from 'classnames/bind';
 
 import styles from './index.module.scss';
 
-const snapPoints = [-118, 0.4, 0];
-const initialSnap = 1;
+const baseSnapPoints = [-118, 0.4, 0];
+const baseInitialSnap = 1;
 
 interface DraggableBottomSheetProps {
   isOpen: boolean;
+  disableDrag?: boolean;
+  hasHeader?: boolean;
+  snapPoints?: number[];
+  initialSnap?: number;
   onClose: () => void;
   children: React.ReactNode;
 }
@@ -18,6 +22,10 @@ const BLOCK = 'draggable-bottom-sheet';
 
 const DraggableBottomSheet = ({
   isOpen,
+  snapPoints = baseSnapPoints,
+  initialSnap = baseInitialSnap,
+  disableDrag,
+  hasHeader = true,
   onClose,
   children,
 }: DraggableBottomSheetProps) => {
@@ -27,11 +35,12 @@ const DraggableBottomSheet = ({
       onClose={onClose}
       snapPoints={snapPoints}
       initialSnap={initialSnap}
+      disableDrag={disableDrag}
       detent='full-height'
       className={cx(BLOCK)}
     >
       <Sheet.Container className={cx(`${BLOCK}__container`)}>
-        <Sheet.Header />
+        {hasHeader && <Sheet.Header />}
         <Sheet.Content>
           <Sheet.Scroller draggableAt='both'>{children}</Sheet.Scroller>
         </Sheet.Content>

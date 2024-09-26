@@ -1,3 +1,5 @@
+import { NearbyFilter } from './nearby-filter';
+
 export type Point = {
   lat: number;
   lng: number;
@@ -50,6 +52,11 @@ export type PointDTO = {
   coordinate: Coordinate;
 };
 
+export type NearbyPoint = PointDTO & {
+  id: string;
+  filterName: NearbyFilter;
+};
+
 export type MapCourseDTO = Omit<
   CourseDTO,
   'startPointName' | 'endPointName' | 'imgUrl'
@@ -58,4 +65,9 @@ export type MapCourseDTO = Omit<
   midPoint: Coordinate;
   endPoint: PointDTO;
   gpxUrl: string;
+};
+
+export type CourseNameDTO = {
+  id: number;
+  name: string;
 };
