@@ -6,6 +6,7 @@ export const NO_AUTH_ENDPOINTS = [
   '/profile/check-nickname',
   '/courses',
   '/courses/nearby',
+  '/courses/names',
 ];
 
 export const WEATHER_ICON_URL = 'https://openweathermap.org/img/wn/';

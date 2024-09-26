@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import {
+  getCourseNamesAPI,
   getCoursesAPI,
   getGPXDataAPI,
   getNearbyCoursesAPI,
@@ -9,7 +10,7 @@ import {
 import { GetCoursesRequest, GetNearbyCoursesRequest } from '@/types/request';
 import { GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
 
-export const useCoursesQuery = (params: GetCoursesRequest) => {
+export const useCoursesQuery = (params: GetCoursesRequest, enabled = false) => {
   return useInfiniteQuery<GetCoursesResponse, AxiosError>({
     queryKey: ['courses', params],
     initialPageParam: 1,
@@ -23,6 +24,7 @@ export const useCoursesQuery = (params: GetCoursesRequest) => {
       const { currentPage, totalPages } = lastPage.response.pageInfo;
       return currentPage < totalPages ? currentPage + 1 : undefined;
     },
+    enabled,
   });
 };
 
@@ -54,5 +56,12 @@ export const useGPXQuery = (gpxUrl: string) => {
   return useQuery<string, AxiosError>({
     queryKey: ['gpx', gpxUrl],
     queryFn: () => getGPXDataAPI(gpxUrl),
+  });
+};
+
+export const useCourseNamesQuery = () => {
+  return useQuery({
+    queryKey: ['course-names'],
+    queryFn: () => getCourseNamesAPI(),
   });
 };

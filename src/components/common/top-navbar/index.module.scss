@@ -23,11 +23,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 0.625rem;
   }
 
   &__height {
     display: inline-block;
     height: 1.5rem;
+    flex-grow: 1;
+  }
+
+  &__contents{
     flex-grow: 1;
   }
 

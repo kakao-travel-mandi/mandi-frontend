@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { CourseDTO, MapCourseDTO } from './course';
+import { CourseDTO, CourseNameDTO, MapCourseDTO } from './course';
 import { OauthProvider } from './oauth-provider';
 import { WeatherItem } from './weather';
 
@@ -89,4 +89,8 @@ export interface WeatherResponse {
   city: {
     name: string;
   };
+}
+
+export interface CourseNamesResponse extends BaseResponse {
+  response: CourseNameDTO[];
 }
