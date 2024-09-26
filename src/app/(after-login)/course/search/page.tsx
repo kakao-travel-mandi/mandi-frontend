@@ -1,23 +1,19 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
-import NoResultIcon from '@/assets/colored-icon/empty_course.svg';
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useCourseNamesQuery, useCoursesQuery } from '@/queries/courseQuery';
+import { useCourseNamesQuery } from '@/queries/courseQuery';
 import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
 
-import CourseListItem from '../_components/course-list/course-list';
-
 import AutoCompleteList from './_components/autocomplete-list/autocomplete-list';
-import NoResult from './_components/no-result/no-result';
 import SearchHistory from './_components/search-history/search-history';
+import SearchedCourses from './_components/searched-courses/searched-courses';
 import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
@@ -33,14 +29,10 @@ const CourseSearchPage = ({
     keyword === undefined ? '' : keyword,
   );
   const [focused, setFocused] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState(keyword || '');
-  const [fetch, setFetch] = useState(!!keyword);
   const inputRef = useRef<HTMLInputElement>(null);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const { addSearch } = useCourseSearchHistoryStore();
   const router = useRouter();
-  const courseQuery = useCoursesQuery({ keyword: searchKeyword }, fetch);
-  const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
   const { data: courseNames } = useCourseNamesQuery();
 
   const handleChange = (value: string) => {
@@ -49,8 +41,6 @@ const CourseSearchPage = ({
   };
   const search = (value: string) => {
     setInputValue(value);
-    setSearchKeyword(value);
-    setFetch(true);
     addSearch(value);
     router.push(`/course/search?keyword=${value}`);
     inputRef.current?.blur();
@@ -68,17 +58,8 @@ const CourseSearchPage = ({
   const handleBlur = () => setFocused(false);
   const showResult = !focused && inputValue.length !== 0 && !showAutocomplete;
 
-  useEffect(() => {
-    if (keyword) {
-      setInputValue(keyword);
-      setSearchKeyword(keyword);
-      setFetch(true);
-    }
-  }, [keyword]);
-
   return (
     <Layout
-      key={searchKeyword}
       hasTabBar={false}
       hasTopNav={true}
       back={true}
@@ -99,11 +80,7 @@ const CourseSearchPage = ({
         </form>
       }
     >
-      <div
-        className={cx('container', {
-          'container--result': showResult,
-        })}
-      >
+      <div className={cx('container')}>
         {inputValue.length === 0 && (
           <SearchHistory handleClickListItem={search} />
         )}
@@ -114,24 +91,7 @@ const CourseSearchPage = ({
             handleClickListItem={search}
           />
         )}
-        {showResult &&
-          status === 'success' &&
-          (data?.pages.some(page => page.response.courses.length > 0) ? (
-            data.pages.map(page =>
-              page.response.courses.map(course => (
-                <CourseListItem key={course.id} course={course} />
-              )),
-            )
-          ) : (
-            <div className={cx('no-results')}>
-              <NoResult
-                title='No results found'
-                desc='Ensure the spelling of your search term is correct.'
-                icon={NoResultIcon}
-              />
-            </div>
-          ))}
-        <div ref={loadMoreRef} />
+        {showResult && <SearchedCourses keyword={keyword} />}
       </div>
     </Layout>
   );
