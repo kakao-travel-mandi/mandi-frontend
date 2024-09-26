@@ -1,8 +1,11 @@
-import styles from './history-list-item.module.scss';
+import { SyntheticEvent } from 'react';
+
 import classNames from 'classnames/bind';
+
 import TimeIcon from '@/assets/icon/icon-clock.svg';
 import DeleteIcon from '@/assets/icon/icon-x.svg';
-import { SyntheticEvent } from 'react';
+
+import styles from './history-list-item.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +23,7 @@ const HistoryListItem = ({
   onClickDelete,
 }: HistoryListItemProps) => {
   const handleClick = () => onClickListItem?.(text);
-  const handleClickDelete = (e:SyntheticEvent) => {
+  const handleClickDelete = (e: SyntheticEvent) => {
     e.stopPropagation();
     onClickDelete?.(text);
   };

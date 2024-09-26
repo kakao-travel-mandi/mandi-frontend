@@ -1,17 +1,21 @@
 import classNames from 'classnames/bind';
-import styles from './search-history.module.scss';
+
 import TimeIcon from '@/assets/icon/icon-clock.svg';
 import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
+
 import HistoryListItem from './history-list-item/history-list-item';
+import styles from './search-history.module.scss';
 
 const cx = classNames.bind(styles);
 
 const BLOCK = 'search-history';
+interface SearchHistoryProps {
+  handleClickListItem: (search: string) => void;
+}
 
-const SearchHistory = () => {
-  const { history, addSearch, deleteSearch, clearHistory } =
-    useCourseSearchHistoryStore();
-  const handleClickListItem = (search: string) => addSearch(search);
+const SearchHistory = ({ handleClickListItem }: SearchHistoryProps) => {
+  const { history, deleteSearch, clearHistory } = useCourseSearchHistoryStore();
+  // const handleClickListItem = (search: string) => addSearch(search);
   const handleClickDelete = (search: string) => deleteSearch(search);
   const handleClickClear = () => clearHistory();
 

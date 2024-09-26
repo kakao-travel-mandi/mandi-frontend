@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
+import NoResultIcon from '@/assets/colored-icon/empty_course.svg';
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
@@ -39,22 +40,26 @@ const CourseSearchPage = ({
   const { addSearch } = useCourseSearchHistoryStore();
   const router = useRouter();
   const courseQuery = useCoursesQuery({ keyword: searchKeyword }, fetch);
-  const { loadMoreRef, data } = useInfiniteScroll(courseQuery);
+  const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
   const { data: courseNames } = useCourseNamesQuery();
 
   const handleChange = (value: string) => {
     setInputValue(value);
     setShowAutocomplete(value.length > 0);
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (inputValue.length === 0) return;
-    setSearchKeyword(inputValue);
+  const search = (value: string) => {
+    setInputValue(value);
+    setSearchKeyword(value);
     setFetch(true);
-    e.preventDefault();
-    addSearch(inputValue);
-    router.push(`/course/search?keyword=${inputValue}`);
+    addSearch(value);
+    router.push(`/course/search?keyword=${value}`);
     inputRef.current?.blur();
     setShowAutocomplete(false);
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (inputValue.length === 0) return;
+    search(inputValue);
   };
   const handleFocus = () => {
     setFocused(true);
@@ -70,12 +75,6 @@ const CourseSearchPage = ({
       setFetch(true);
     }
   }, [keyword]);
-
-  useEffect(() => {
-    if (loadMoreRef.current) {
-      console.log('loadMoreRef.current', loadMoreRef.current);
-    }
-  }, [loadMoreRef]);
 
   return (
     <Layout
@@ -105,14 +104,18 @@ const CourseSearchPage = ({
           'container--result': showResult,
         })}
       >
-        {inputValue.length === 0 && <SearchHistory />}
+        {inputValue.length === 0 && (
+          <SearchHistory handleClickListItem={search} />
+        )}
         {showAutocomplete && inputValue.length !== 0 && (
           <AutoCompleteList
             list={courseNames?.response!}
             keyword={inputValue}
+            handleClickListItem={search}
           />
         )}
         {showResult &&
+          status === 'success' &&
           (data?.pages.some(page => page.response.courses.length > 0) ? (
             data.pages.map(page =>
               page.response.courses.map(course => (
@@ -121,7 +124,11 @@ const CourseSearchPage = ({
             )
           ) : (
             <div className={cx('no-results')}>
-              <NoResult />
+              <NoResult
+                title='No results found'
+                desc='Ensure the spelling of your search term is correct.'
+                icon={NoResultIcon}
+              />
             </div>
           ))}
         <div ref={loadMoreRef} />
