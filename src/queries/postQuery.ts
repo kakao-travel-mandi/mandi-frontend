@@ -1,17 +1,15 @@
-import {
-  useMutation,
-  UseMutationResult,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 import {
   getPostCategory,
   postPostsCreate,
   deletePostLike,
   postPostLike,
+  deletePostId,
+  getPostId,
 } from '@/apis/post';
 import { PostsCreateRequest } from '@/types/request';
-import { PostsCategoryResponse } from '@/types/response';
+import { GetPostIdResponse, PostsCategoryResponse } from '@/types/response';
 
 export const usePostCategoryMutation = ({
   onSuccess,
@@ -68,6 +66,30 @@ export const usePostPostLike = () => {
     mutationFn: (postId: string) => postPostLike(postId),
     onSuccess: () => {
       console.log('좋아요 성공');
+    },
+    onError: error => {
+      console.error('Error posting post like:', error);
+    },
+  });
+};
+
+export const useDeletePostId = () => {
+  return useMutation({
+    mutationFn: (postId: string) => deletePostId(postId),
+    onSuccess: () => {
+      console.log('게시글 삭제 성공');
+    },
+    onError: error => {
+      console.error('게시글 삭제 실패', error);
+    },
+  });
+};
+
+export const useGetPostId = () => {
+  return useMutation<GetPostIdResponse, Error, string>({
+    mutationFn: (postId: string) => getPostId(postId),
+    onSuccess: () => {
+      console.log('특정게시물 불러오기 성공');
     },
     onError: error => {
       console.error('Error posting post like:', error);

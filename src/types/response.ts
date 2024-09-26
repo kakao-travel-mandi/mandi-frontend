@@ -66,16 +66,16 @@ export interface BadgeResponse extends BaseResponse {
 }
 
 export interface PostsCategoryResponse {
-  success: boolean; // 요청 성공 여부
+  success: boolean;
   response: {
     posts: {
-      postId: number; // 게시물 ID
+      postId: number;
       user: {
-        userId: number; // 사용자 ID
-        nickname: string; // 사용자 닉네임
-        imgUrl: string; // 사용자 프로필 이미지 URL
+        userId: number;
+        nickname: string;
+        imgUrl: string;
       };
-      category: string; // 카테고리 (예: TOURISM)
+      category: string;
       content: string; // 게시물 내용
       title: string; // 게시물 제목
       uploadDate: string; // 업로드 날짜 (ISO 포맷)
@@ -103,5 +103,46 @@ export interface WeatherResponse {
   list: WeatherItem[];
   city: {
     name: string;
+  };
+}
+interface User {
+  userId: number; // 유저 ID
+  nickname: string; // 유저 닉네임
+  imgUrl: string; // 유저 프로필 이미지 URL
+}
+
+export interface Comment {
+  commentId: number; // 댓글 ID
+  parentCommentId: number | null; // 부모 댓글 ID (최상위 댓글이면 null)
+  childComments: Comment[] | []; // 대댓글 배열 (Comment 타입을 재귀적으로 포함)
+  user: User; // 댓글 작성자 정보 (User 타입)
+  uploadDate: string; // 댓글 작성 시간
+  content: string; // 댓글 내용
+  likeCnt: number; // 좋아요 수
+}
+export interface GetPostIdResponse {
+  success: boolean;
+  response?: {
+    postId: number;
+    user: {
+      userId: number;
+      nickname: string;
+      imgUrl: string;
+    };
+    category: string;
+    content: string;
+    title: string;
+    likeCnt: number;
+    CommentCnt: number;
+    uploadDate: string;
+    imgUrlList: {
+      url: string;
+    }[];
+    commentList: Comment[];
+  };
+  error?: {
+    message: string;
+    status: number;
+    errorCode: string;
   };
 }

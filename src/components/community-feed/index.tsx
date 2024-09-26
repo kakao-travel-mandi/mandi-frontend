@@ -1,3 +1,4 @@
+// 삭제시 토스트
 'use client';
 import { useEffect, useState } from 'react';
 
@@ -8,10 +9,19 @@ import { useRouter } from 'next/navigation';
 import IconChat from '@/assets/icon/icon-chat-bubble-oval-left-ellipsis.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconHeart from '@/assets/icon/icon-heart.svg';
+import IconPencil from '@/assets/icon/icon-pencil-mono-small.svg';
+import IconSirenMono from '@/assets/icon/icon-siren-mono.svg';
+import IconTrashRed from '@/assets/icon/icon-trash-red.svg';
 import Badge from '@/components/common/badge/index';
-import { useDeletePostLike, usePostPostLike } from '@/queries/postQuery';
+import {
+  useDeletePostId,
+  useDeletePostLike,
+  usePostPostLike,
+} from '@/queries/postQuery';
 import { useMyIdStore } from '@/stores/userId';
 import { timeDifference } from '@/utils/community-time';
+
+import BottomSheet from '../common/bottomsheet';
 
 import styles from './communityFeed.module.scss';
 
@@ -19,7 +29,7 @@ const cx = classNames.bind(styles);
 
 interface CommunityFeedProps {
   userId: number;
-  postId: string | number;
+  postId: number;
   profileImage: string;
   nickname: string;
   uploadDate: string;
@@ -50,22 +60,25 @@ const CommunityFeed = ({
   const timeSincePost = timeDifference(uploadDate);
   const [like, setLike] = useState(false);
   const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const likeColor = like ? '#F35E5E' : '#ADB1BA';
 
   const { userId: currentUserId } = useMyIdStore();
 
   const { mutate: deleteLike, error: deleteLikeError } = useDeletePostLike();
   const { mutate: addLike, error: addLikeError } = usePostPostLike();
+  const { mutate: deletePost } = useDeletePostId();
 
   const handleLikeClick = () => {
     setLike(prevState => !prevState);
     setCurrentLikesCount(prevCount => (like ? prevCount - 1 : prevCount + 1));
     if (like) {
       deleteLike(`${postId}`);
-      console.log('에러?', addLikeError);
+      console.log('좋아요삭제 에러', addLikeError);
     } else {
       addLike(`${postId}`);
-      console.log('에러?', deleteLikeError);
+      console.log('좋아요추가 에러', deleteLikeError);
     }
   };
 
@@ -74,16 +87,32 @@ const CommunityFeed = ({
       router.push(`/community/${postId}`);
     }
   };
+  const handleDeleteClick = () => {
+    deletePost(`${postId}`, {
+      onSuccess: () => {
+        setDeleteSuccess(true);
+      },
+    });
+    setIsBottomSheetOpen(false);
+  };
+  const handleEditClick = () => {
+    router.push(`/community/create-post/${postId}`);
+    setIsBottomSheetOpen(false);
+  };
+  const handleReportClick = () => {
+    alert('아직 미완');
+    setIsBottomSheetOpen(false);
+  };
 
   useEffect(() => {
     setCurrentLikesCount(likesCount);
   }, [likesCount]);
-
+  if (deleteSuccess) return null;
   return (
     <div className={cx('container')}>
       <div className={cx('container__profile')}>
         <Image
-          src={profileImage}
+          src={profileImage || '/default-profile.png'}
           className={cx('container__profile__image')}
           width={40}
           height={40}
@@ -96,11 +125,10 @@ const CommunityFeed = ({
           </div>
           <Badge text={category} color='green' />
         </div>
-        <IconEllipsisVertical />
+        <IconEllipsisVertical onClick={() => setIsBottomSheetOpen(true)} />
       </div>
 
       <div onClick={handleContentClick} className={cx('container__post')}>
-        {/* detail이 false일 때만 클래스 추가 */}
         <div
           className={cx('subtitle1-semibold', {
             container__post__title: !detail,
@@ -142,6 +170,40 @@ const CommunityFeed = ({
           {commentCount}
         </div>
       </div>
+      {userId === Number(currentUserId) ? (
+        <BottomSheet
+          isOpen={isBottomSheetOpen}
+          onClose={() => setIsBottomSheetOpen(false)}
+        >
+          <div
+            onClick={handleEditClick}
+            className={cx('container__bottomsheet')}
+          >
+            <IconPencil />
+            <div className={cx('subtitle1-semibold')}>Edit</div>
+          </div>
+          <div
+            onClick={handleDeleteClick}
+            className={cx('container__bottomsheet')}
+          >
+            <IconTrashRed />
+            <div className={cx('subtitle1-semibold')}>Delete Post</div>
+          </div>
+        </BottomSheet>
+      ) : (
+        <BottomSheet
+          isOpen={isBottomSheetOpen}
+          onClose={() => setIsBottomSheetOpen(false)}
+        >
+          <div
+            onClick={handleReportClick}
+            className={cx('container__bottomsheet', 'subtitle1-semibold')}
+          >
+            <IconSirenMono width='20' height='20' fill='#F35E5E' />
+            Report
+          </div>
+        </BottomSheet>
+      )}
     </div>
   );
 };

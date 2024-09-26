@@ -5,7 +5,7 @@ import { axiosInstance } from './axiosInstance';
 export const getPostCategory = async (
   category: string,
   page: number = 1,
-  size: number = 10,
+  size: number = 100,
 ) => {
   try {
     const response = await axiosInstance.get(`/posts/category/${category}`, {
@@ -65,6 +65,16 @@ export const postPostLike = async (postId: string) => {
     return response.data;
   } catch (error) {
     console.error('Error post like:', error);
+    throw error;
+  }
+};
+export const deletePostId = async (postId: string) => {
+  try {
+    const response = await axiosInstance.delete(`/posts/${postId}`);
+    console.log('게시글 삭제', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('게시글 삭제 실패(에러)', error);
     throw error;
   }
 };
