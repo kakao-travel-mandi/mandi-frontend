@@ -31,7 +31,7 @@ const Template: Story = args => {
 
   const handleClose = () => {
     setIsOpen(false);
-    args.onClose();
+    args.onClose?.();
   };
 
   useEffect(() => {
