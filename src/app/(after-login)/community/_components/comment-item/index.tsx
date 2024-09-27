@@ -7,7 +7,10 @@ import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical-small.svg
 import IconHeart from '@/assets/icon/icon-heart-small.svg';
 import IconSiren from '@/assets/icon/icon-siren-mono.svg';
 import IconTrash from '@/assets/icon/icon-trash.svg';
+import Button from '@/components/common/button';
+import Dialog from '@/components/common/dialog';
 import { Menubox } from '@/components/common/menubox';
+import { useSnackbar } from '@/hooks/useSnackbar';
 import { useGetAuthId } from '@/queries/authQuery';
 import {
   useDeleteCommentLike,
@@ -41,13 +44,16 @@ const CommentItem = ({
   isReply = false,
   handleReplyClick,
 }: CommentItemProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(comment.likeCnt);
-  const [commentDelete, setCommentDelete] = useState(false);
-
+  const { createSnackbar } = useSnackbar();
   const { data: currentUserId } = useGetAuthId();
   const { mutate: deleteLike } = usePostCommentLike();
   const { mutate: addLike } = useDeleteCommentLike();
+
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(comment.likeCnt);
+  const [commentDelete, setCommentDelete] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
   const menuBoxItem =
     Number(currentUserId.response) === comment.userId
       ? [
@@ -55,8 +61,7 @@ const CommentItem = ({
             content: 'Delete',
             icon: IconTrash,
             onClick: () => {
-              alert('api 연결 필요');
-              setCommentDelete(true);
+              setDialogOpen(true);
             },
           },
         ]
@@ -81,12 +86,22 @@ const CommentItem = ({
       deleteLike(`${comment.commentId}`);
     }
   };
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+  const handleDeleteSubmit = () => {
+    //api 댓글삭제
+    alert('api 연결 필요');
+    setCommentDelete(true);
+    createSnackbar({ type: 'alert', content: 'The comment has been deleted.' });
+  };
+
   if (commentDelete) {
     return null;
   }
 
   return (
-    <div className={cx('container', { reply: isReply })}>
+    <div className={cx('container', { container__reply: isReply })}>
       <Image
         className={cx('container__profile__img')}
         src={comment.imgUrl || '/default-profile.png'}
@@ -133,6 +148,22 @@ const CommentItem = ({
           </button>
         </div>
       </div>
+      <Dialog
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        title='Delete the comment?'
+        description=''
+        buttons={
+          <div className={cx('container__dialog')}>
+            <Button size='full' color='whitegray' onClick={handleCloseDialog}>
+              Cancel
+            </Button>
+            <Button size='full' color='red' onClick={handleDeleteSubmit}>
+              Delete
+            </Button>
+          </div>
+        }
+      />
     </div>
   );
 };

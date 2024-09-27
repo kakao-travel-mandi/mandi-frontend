@@ -15,7 +15,7 @@ import { useGetAuthId } from '@/queries/authQuery';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { useGetPostId } from '@/queries/postQuery';
 
-import styles from './DetailFeed.module.scss';
+import styles from './detailFeed.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -155,14 +155,15 @@ const DetailFeed = () => {
           <div className={cx('label4-semibold')}>Comment</div>
           <div className={cx('container__comment__frame')}>
             {comments?.map((comment, index) => (
-              <div className={cx('container__comment__box')} key={index}>
+              <>
                 <CommentItem
+                  key={index}
                   comment={comment}
                   handleReplyClick={() =>
                     handleReplyClick(index, null, comment.nickname)
                   }
                 />
-                <div className={cx('container__reply')}>
+                <>
                   {comment.childComments?.map((child, childIndex) => (
                     <CommentItem
                       key={childIndex}
@@ -173,8 +174,8 @@ const DetailFeed = () => {
                       }
                     />
                   ))}
-                </div>
-              </div>
+                </>
+              </>
             ))}
           </div>
         </div>

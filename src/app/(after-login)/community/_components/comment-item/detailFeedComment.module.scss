@@ -9,7 +9,7 @@
 }
 .container__comment{
   display: flex;
-  width: 100%;
+  flex:1;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
@@ -25,7 +25,7 @@
     color: $gray-900;
   }
   :nth-child(2){
-    width: 100%;
+    flex: 1; 
     color: $gray-600;
   }
 }
@@ -50,4 +50,19 @@
   border-radius: 0.5rem;
 border: $gray-200;
 background: $gray-50;
+}
+
+.container__dialog{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6875rem;
+  align-self: stretch;
+}
+.container__reply {
+  display: flex;
+  align-items: flex-start;
+  gap:1.25rem;
+  padding-left: 3.25rem;
+  padding-top: 1.25rem;
+  width: 100%;
 }
