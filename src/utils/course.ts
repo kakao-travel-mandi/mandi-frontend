@@ -8,6 +8,7 @@ import {
   distanceMap,
   starsMap,
 } from '@/stores/course-filters';
+import { CourseDTO } from '@/types/course';
 
 const difficultyOrder: DifficultyType[] = ['easy', 'moderate', 'hard'];
 

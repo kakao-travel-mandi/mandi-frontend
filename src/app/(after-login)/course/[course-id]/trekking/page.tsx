@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
@@ -20,17 +20,34 @@ import NearbyMarker from './_components/nearby-marker/nearby-marker';
 import NearbyPlacesList from './_components/nearby-places-list/nearby-places-list';
 import Trekker from './_components/trekker/trekker';
 import styles from './page.module.scss';
+import { useMap } from '@/hooks/useMap';
+import { useTrekking } from '@/hooks/useTrekking';
+import { useRouter } from 'next/navigation';
+import { useNearbyPlaces } from '@/hooks/useNearbyPlaces';
+import ResultPage from './_components/result-page/result-page';
+import { deleteCookie } from 'cookies-next';
 
 const cx = classNames.bind(styles);
 
 const TrakingPage = () => {
-  // TODO: center 상태는 나중에 없애기
-  const [center, setCenter] = useState<google.maps.LatLngLiteral | null>(null);
+  const { map, onLoad, onUnmount, center } = useMap();
+  const {
+    showResult,
+    state,
+    displayTime,
+    totalDistance,
+    updateTracking,
+    handleClickPlayAndPause,
+    handleClickStop,
+    resetTracking,
+  } = useTrekking();
   const [currentMarkerPosition, setCurrentMarkerPosition] =
     useState<google.maps.LatLngLiteral | null>(null);
-  const [nearbyPlaces, setNearbyPlaces] = useState<NearbyPoint[] | null>(null);
-  const [selectedNearby, selectNearby] = useState<NearbyFilter | null>(null);
+  const { nearbyPlaces, selectedNearby, selectNearbyChip, removeNearbyPlaces } =
+    useNearbyPlaces(currentMarkerPosition);
   const [selectedMarker, selectMarker] = useState<NearbyPoint | null>(null);
+  const router = useRouter();
+
   const onClickMarker = (point: NearbyPoint) => {
     selectMarker(point);
     map?.panTo({
@@ -38,99 +55,61 @@ const TrakingPage = () => {
       lng: point.coordinate.longitude,
     });
   };
-
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const onLoad = useCallback((map: google.maps.Map) => {
-    setMap(map);
-  }, []);
-  const onUnmount = useCallback((map: google.maps.Map) => {
-    setMap(null);
-  }, []);
-
-  const handleClose = () => {
-    setNearbyPlaces(null);
-    selectNearby(null);
-  };
+  const handleClose = () => removeNearbyPlaces();
   const handleClickNearbyChip = async (
     id: NearbyFilter,
     category: string[],
   ) => {
     selectMarker(null);
-    if (selectedNearby === id) {
-      selectNearby(null);
-      setNearbyPlaces(null);
-      return;
-    }
-    selectNearby(id);
-    const places = await nearbySearch(category);
-    const nearbyPoints = places.map(place => ({
-      id: place.id,
-      name: place.displayName!,
-      address: place.formattedAddress!,
-      coordinate: {
-        latitude: place.location?.lat()!,
-        longitude: place.location?.lng()!,
-      },
-      filterName: id as NearbyFilter,
-    }));
-    setNearbyPlaces(nearbyPoints);
+    selectNearbyChip(id, category);
   };
-  const nearbySearch = useCallback(
-    async (category: string[]) => {
-      const { Place, SearchNearbyRankPreference } =
-        (await google.maps.importLibrary(
-          'places',
-        )) as google.maps.PlacesLibrary;
 
-      const request: google.maps.places.SearchNearbyRequest = {
-        // required parameters
-        fields: ['id', 'location', 'displayName', 'formattedAddress'], // 경로를 위해 id 필요. 마커 표시 위해 location 필요, 이름 표시 위해 displayName 필요
-        locationRestriction: {
-          center: currentMarkerPosition!,
-          radius: 1000,
-        },
-        includedPrimaryTypes: category,
-        maxResultCount: 15,
-        rankPreference: SearchNearbyRankPreference.POPULARITY,
-      };
-      const { places } = await Place.searchNearby(request);
-      console.log(places);
-      return places;
-    },
-    [currentMarkerPosition],
-  );
-  const fetchAndSetInitialCenter = async () => {
-    const currentPosition = await getCurrentPosition();
-    setCenter({
-      lat: currentPosition.latitude,
-      lng: currentPosition.longitude,
-    });
-    // TODO:임시로 현재 위치 마커를 표시하기 위해
-    setCurrentMarkerPosition({
-      lat: currentPosition.latitude,
-      lng: currentPosition.longitude,
-    });
-  };
-  const onClickBack = () => {
-    if (selectedNearby) {
-      selectNearby(null);
-      setNearbyPlaces(null);
-    }
-  };
-  const onClickMap = () => {
+  const clearSelections = () => {
     if (selectedMarker) {
       selectMarker(null);
-      return;
+      return true;
     }
     if (selectedNearby) {
-      selectNearby(null);
-      setNearbyPlaces(null);
+      removeNearbyPlaces();
+      return true;
     }
+    return false;
   };
+  const onClickBack = () => {
+    if (!clearSelections()) router.back();
+  };
+  const onClickMap = () => clearSelections();
 
   useEffect(() => {
-    fetchAndSetInitialCenter();
-  }, []);
+    setCurrentMarkerPosition(center);
+  }, [center]);
+
+  useEffect(() => {
+    let updateIntervalId: NodeJS.Timeout;
+
+    updateIntervalId = setInterval(async () => {
+      const currentPosition = await getCurrentPosition();
+      setCurrentMarkerPosition({
+        lat: currentPosition.latitude,
+        lng: currentPosition.longitude,
+      });
+      if (state === 'Running') updateTracking(currentPosition, Date.now());
+    }, 60000);
+
+    return () => clearInterval(updateIntervalId);
+  }, [state]);
+
+  // 언마운트 시, showResult가 true일 경우 트래킹 데이터 초기화
+  useEffect(() => {
+    return () => {
+      if (showResult) {
+        resetTracking();
+        deleteCookie('trekkingId');
+      }
+    };
+  }, [showResult]);
+
+  if (showResult) return <ResultPage />;
 
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} onBack={onClickBack}>
@@ -193,7 +172,15 @@ const TrakingPage = () => {
         initialSnap={0}
         snapPoints={[230]}
       >
-        <Trekker />
+        <Trekker
+          // TODO: 코스 데이터 받아와서 넣기
+          courseName='Course Name'
+          state={state}
+          time={displayTime}
+          distance={totalDistance}
+          handleClickStop={handleClickStop}
+          handleClickPlayAndPause={handleClickPlayAndPause}
+        />
       </DraggableBottomSheet>
     </Layout>
   );

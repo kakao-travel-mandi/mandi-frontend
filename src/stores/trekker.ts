@@ -3,7 +3,7 @@ import { getDistance } from '@/utils/geolocation';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type TrekkerState = 'Running' | 'Paused' | 'Stopped';
+export type TrekkerState = 'Running' | 'Paused' | 'Stopped';
 
 type TrekkerStoreType = {
   state: TrekkerState;
