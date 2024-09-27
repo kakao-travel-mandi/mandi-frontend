@@ -7,6 +7,7 @@ import {
   postPostLike,
   deletePostId,
   getPostId,
+  putPostsCreate,
 } from '@/apis/post';
 import { PostsCreateRequest } from '@/types/request';
 import { GetPostIdResponse, PostsCategoryResponse } from '@/types/response';
@@ -38,6 +39,30 @@ export const useCreatePostMutation = ({
 }) => {
   return useMutation({
     mutationFn: (request: PostsCreateRequest) => postPostsCreate(request),
+    onSuccess, // 성공 시 호출될 함수
+    onError, // 실패 시 호출될 함수
+    retry: 2, // 실패 시 최대 2번 재시도
+    onSettled: (data, error) => {
+      // 성공 또는 실패 후 처리
+      console.log('Mutation settled', { data, error });
+    },
+  });
+};
+export const usePutPostMutation = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess: (data: any) => void;
+  onError: (error: Error) => void;
+}) => {
+  return useMutation({
+    mutationFn: ({
+      postId,
+      request,
+    }: {
+      postId: string;
+      request: PostsCreateRequest;
+    }) => putPostsCreate(postId, request),
     onSuccess, // 성공 시 호출될 함수
     onError, // 실패 시 호출될 함수
     retry: 2, // 실패 시 최대 2번 재시도

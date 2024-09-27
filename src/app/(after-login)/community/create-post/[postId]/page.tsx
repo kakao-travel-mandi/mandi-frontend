@@ -9,7 +9,7 @@ import CreatePostCategory from '@/app/(after-login)/community/_components/create
 import CreatePostEditor from '@/app/(after-login)/community/_components/create-post-editor/index';
 import CreatePostImageUploader from '@/app/(after-login)/community/_components/create-post-image-uploader/index';
 import Layout from '@/components/layout';
-import { useCreatePostMutation, useGetPostId } from '@/queries/postQuery';
+import { useGetPostId, usePutPostMutation } from '@/queries/postQuery';
 
 import styles from './createPostPut.module.scss';
 
@@ -26,7 +26,7 @@ const CreatePostPut = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   const { mutate: GetPostMutate, data: getPostData } = useGetPostId();
-  const { mutate, isError, error } = useCreatePostMutation({
+  const { mutate, isError, error } = usePutPostMutation({
     onSuccess: data => {
       console.log('Post created successfully:', data);
       router.push(`/community`);
@@ -65,7 +65,7 @@ const CreatePostPut = () => {
       title: title,
       Base64EncodedImageList: base64EncodedImageList,
     };
-    mutate(formData);
+    mutate({ postId: `${postId}`, request: formData });
   };
 
   useEffect(() => {
