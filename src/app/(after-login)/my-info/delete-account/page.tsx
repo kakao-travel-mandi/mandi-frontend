@@ -9,7 +9,7 @@ import CdIcon from '@/assets/colored-icon/cd.svg';
 import TrashcanIcon from '@/assets/colored-icon/trashcan.svg';
 import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
-import { SizedBox } from '@/components/common/sizedBox';
+import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
 
 import styles from './page.module.scss';
