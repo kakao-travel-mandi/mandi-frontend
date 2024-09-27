@@ -1,7 +1,7 @@
 'use client';
+import ReviewLayout from '@/app/(after-login)/my-info/_components/review-layout';
 import Tabs from '@/components/common/taps';
 import Layout from '@/components/layout';
-import ReviewLayout from '@/components/review-layout';
 import { useCourseCompleteReviewQuery } from '@/queries/courseReviewQuery';
 
 const Review = () => {

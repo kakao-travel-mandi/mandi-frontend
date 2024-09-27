@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
-import ModalReviewSectionDown from '@/components/modal-review/modal-review-section-down/index';
-import ModalReviewSectionUp from '@/components/modal-review/modal-review-section-up/index';
+import ModalReviewSectionDown from '@/app/(after-login)/my-info/_components/modal-review/modal-review-section-down/index';
+import ModalReviewSectionUp from '@/app/(after-login)/my-info/_components/modal-review/modal-review-section-up/index';
 
 import styles from './modalReview.module.scss';
 

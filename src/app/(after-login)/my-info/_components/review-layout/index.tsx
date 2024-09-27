@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import ModalReview from '@/components/modal-review/modal-review/index';
+import ModalReview from '@/app/(after-login)/my-info/_components/modal-review/modal-review/index';
 
 import styles from './reviewLayout.module.scss';
 

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import IconClock from '@/assets/icon/icon-clock.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconExerciseRunning from '@/assets/icon/icon-exercise_running.svg';
-import IconMapPin from '@/assets/icon/icon-map-pin.svg';
 import IconTrash from '@/assets/icon/icon-trash.svg';
 import { Menubox } from '@/components/common/menubox';
 

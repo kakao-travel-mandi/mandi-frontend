@@ -1,11 +1,8 @@
 'use client';
+import ReviewCourseList from '@/app/(after-login)/my-info/_components/review-course-list/index';
+import ReviewLayout from '@/app/(after-login)/my-info/_components/review-layout';
 import Layout from '@/components/layout';
-import ReviewCourseList from '@/components/review-course-list/index';
-import ReviewLayout from '@/components/review-layout';
-import {
-  useCourseCompleteQuery,
-  useCourseCompleteReviewQuery,
-} from '@/queries/courseReviewQuery';
+import { useCourseCompleteQuery } from '@/queries/courseReviewQuery';
 
 const CompleteReview = () => {
   const { data, isLoading, error } = useCourseCompleteQuery();
