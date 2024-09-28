@@ -90,3 +90,60 @@ export interface WeatherResponse {
     name: string;
   };
 }
+export interface CourseCompleteReviewResponse {
+  success: boolean;
+  response: {
+    totalCompletedCourseCount: number;
+    totalReviewCount: number;
+    reviewedCourses: {
+      completedCourse: {
+        id: number;
+        courseName: string;
+        duration: string;
+        distance: number;
+        trekkingPathImageUrl: string;
+        completedAt: string;
+      };
+      isReviewed: boolean;
+      content: string;
+      score: number;
+      reviewedAt: string;
+      imageUrlList: {
+        url: string;
+      }[];
+    }[];
+    notReviewedCourses: {
+      id: number;
+      courseName: string;
+      duration: string;
+      distance: number;
+      trekkingPathImageUrl: string;
+      completedAt: string;
+    }[];
+  };
+  error: {
+    message: string;
+    status: number;
+    errorCode: string;
+  };
+}
+export interface CourseCompleteResponse {
+  success: boolean;
+  response: {
+    totalCount: number;
+    totalDistance: number;
+    completedCourses: {
+      id: number;
+      courseName: string;
+      duration: string;
+      distance: number;
+      trekkingPathImageUrl: string;
+      completedAt: string;
+    }[];
+  };
+  error: {
+    message: string;
+    status: number;
+    errorCode: string;
+  };
+}

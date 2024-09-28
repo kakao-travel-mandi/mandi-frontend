@@ -38,5 +38,12 @@ module.exports = withPWA({
         hostname: 'shorturl.at',
       },
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        pathname: '/user-attachments/assets/**',
+      },
+    ],
   },
 });

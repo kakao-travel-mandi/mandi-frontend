@@ -6,8 +6,8 @@ import IconTotalDistance from '@/assets/icon/icon-total-distance.svg';
 import styles from './listReviewCourse.module.scss';
 
 interface ListReviewCourseProps {
-  completedCourses: number;
-  totalDistance: number;
+  completedCourses: number | undefined;
+  totalDistance: number | undefined;
 }
 
 const cx = classNames.bind(styles);

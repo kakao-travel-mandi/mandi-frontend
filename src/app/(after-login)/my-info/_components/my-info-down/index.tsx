@@ -16,13 +16,28 @@ const MyInfoDown = () => {
   const handleClick = () => {
     router.push('/');
   };
+  const handleMyBadgeClick = () => {
+    router.push('/my-info/my-badge');
+  };
+  const handleTermsUseClick = () => {
+    router.push('/my-info/privacy-policy');
+  };
+  const handlePrivacyPolicyClick = () => {
+    router.push('/my-info/privacy-policy');
+  };
+  const handleOpenSourceLicenseClick = () => {
+    alert('오픈 소스 라이선스는 필요시 추가합니다.');
+  };
+  const handleLoginInfoClick = () => {
+    router.push('/my-info/login-info');
+  };
   return (
     <div className={cx('container')}>
       <span className={cx('container__inventory', 'body2-semibold')}>
         <IconMedal />
         My Collection
       </span>
-      <div onClick={handleClick} className={cx('label3-regular')}>
+      <div onClick={handleMyBadgeClick} className={cx('label3-regular')}>
         My Badges
         <IconArrowRightSmall />
       </div>
@@ -30,15 +45,18 @@ const MyInfoDown = () => {
         <IconNote />
         Policies & Agreements
       </span>
-      <div onClick={handleClick} className={cx('label3-regular')}>
+      <div onClick={handleTermsUseClick} className={cx('label3-regular')}>
         Terms of Use
         <IconArrowRightSmall />
       </div>
-      <div onClick={handleClick} className={cx('label3-regular')}>
+      <div onClick={handlePrivacyPolicyClick} className={cx('label3-regular')}>
         Privacy Policy
         <IconArrowRightSmall />
       </div>
-      <div onClick={handleClick} className={cx('label3-regular')}>
+      <div
+        onClick={handleOpenSourceLicenseClick}
+        className={cx('label3-regular')}
+      >
         Open Source License
         <IconArrowRightSmall />
       </div>
@@ -50,11 +68,7 @@ const MyInfoDown = () => {
         <IconSetting />
         Setting
       </span>
-      <div onClick={handleClick} className={cx('label3-regular')}>
-        Notifications
-        <IconArrowRightSmall />
-      </div>
-      <div onClick={handleClick} className={cx('label3-regular')}>
+      <div onClick={handleLoginInfoClick} className={cx('label3-regular')}>
         Login Information
         <div className={cx('container__info')}>
           <div className={cx('container__info__google')}>

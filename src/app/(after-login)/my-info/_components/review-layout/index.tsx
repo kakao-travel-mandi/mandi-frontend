@@ -1,36 +1,55 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import ModalReview, {
-  ModalReviewProps,
-} from '@/components/modal-review/modal-review/index';
+import ModalReview from '@/app/(after-login)/my-info/_components/modal-review/modal-review/index';
 
 import styles from './reviewLayout.module.scss';
 
+interface ReviewsData {
+  id: number;
+  courseName: string;
+  duration: string;
+  distance: number;
+  trekkingPathImageUrl: string;
+  completedAt: string;
+
+  isReviewed?: boolean;
+  content?: string;
+  reviewedAt?: string;
+  score?: number;
+  imageUrlList?: string[];
+}
+
 interface ReviewLayoutProps {
-  modalReviewsData?: ModalReviewProps[]; // API가 데이터 제공하기 전까지 타입
+  reviewsData?: ReviewsData[] | undefined; // API가 데이터 제공하기 전까지 타입
+
   modal: 'write' | 'unWrite' | 'complete-course';
 }
 
 const cx = classNames.bind(styles);
 
-const ReviewLayout = ({ modalReviewsData, modal }: ReviewLayoutProps) => {
+const ReviewLayout = ({ reviewsData, modal }: ReviewLayoutProps) => {
+  const testUrl = [
+    'https://github.com/user-attachments/assets/03fea9d2-c196-4a8a-84e0-4e10c36ecfc6',
+    'https://github.com/user-attachments/assets/03fea9d2-c196-4a8a-84e0-4e10c36ecfc6',
+  ];
+
   return (
     <div className={cx('container')}>
-      {modalReviewsData && modalReviewsData.length > 0 ? (
-        modalReviewsData.map((data, index) => (
+      {reviewsData && reviewsData.length > 0 ? (
+        reviewsData.map((data, index) => (
           <ModalReview
             key={index}
-            img={data.img}
-            title={data.title}
-            channel={data.channel}
-            time={data.time}
+            img={data.trekkingPathImageUrl}
+            title={data.courseName}
+            time={data.duration}
             distance={data.distance}
-            modal={data.modal}
-            review={data.review}
-            reviewImgs={data.reviewImgs}
+            modal={modal}
+            date={data.completedAt}
+            review={data.content}
             score={data.score}
-            date={data.date}
+            reviewDate={data.reviewedAt}
+            reviewImgs={testUrl}
           />
         ))
       ) : (
