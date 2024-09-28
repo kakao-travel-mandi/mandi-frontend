@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getWeatherAPI } from '@/apis/weather';
 import { WeatherRequest } from '@/types/request';
 import { WeatherResponse } from '@/types/response';
+import { getWeatherIcon } from '@/utils/weather';
 
 export const useWeatherQuery = ({ request }: { request: WeatherRequest }) => {
   return useQuery<WeatherResponse>({
@@ -21,6 +22,7 @@ export const useWeatherQuery = ({ request }: { request: WeatherRequest }) => {
         .map((entry: any) => {
           return {
             ...entry,
+            Icon: getWeatherIcon(entry.weather[0].icon),
             dt_txt: new Date(entry.dt * 1000).toLocaleTimeString('ko-KR', {
               hour: '2-digit',
               minute: '2-digit',

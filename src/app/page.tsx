@@ -40,12 +40,11 @@ const Main = () => {
   const { mutate: login } = useLoginMutation({
     onSuccess: data => {
       if (data.response.isSignUp) router.push('/home');
-      if (!data.response.isSignUp) {
+    },
+    onError: error => {
+      if (error.status === 404) {
         setIsModal(true);
       }
-    },
-    onError: code => {
-      console.log(code);
     },
   });
 
