@@ -2,7 +2,7 @@
 @use "@/styles/font.scss" as *;
 
 .detail-info{
-  display: flex;
+  display: inline-flex;
   gap: 0.5rem;
   align-items: center;
   
@@ -14,6 +14,12 @@
 
   &__text{
     color: $gray-600;
-    @extend .body2-regular;
+    @extend .body2-regular 
   }
+}
+
+.course-points{
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }

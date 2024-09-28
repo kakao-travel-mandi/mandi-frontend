@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 
+import { CourseDTO, MapCourseDTO } from './course';
 import { OauthProvider } from './oauth-provider';
 import { WeatherItem } from './weather';
 
@@ -62,6 +63,24 @@ export interface BadgeResponse extends BaseResponse {
       requirements: string;
       imgUrl: string;
     }[];
+  };
+}
+
+export interface GetCoursesResponse extends BaseResponse {
+  response: {
+    pageInfo: {
+      totalCount: number;
+      size: number;
+      currentPage: number;
+      totalPages: number;
+    };
+    courses: CourseDTO[];
+  };
+}
+
+export interface GetNearbyCoursesResponse extends BaseResponse {
+  response: {
+    courses: MapCourseDTO[];
   };
 }
 

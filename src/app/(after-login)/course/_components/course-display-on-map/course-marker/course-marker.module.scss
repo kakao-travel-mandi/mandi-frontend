@@ -1,0 +1,27 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.marker-name{
+  position: relative;
+  @extend .label4-semibold;
+  font-size: 4rem;
+  color: $gray-900;
+  text-align: center;
+  cursor: pointer;
+}
+.text_clone{
+  position: absolute;
+  @extend .label4-semibold;
+  left: 50%;
+  transform: translateX(-50%);
+  color: transparent;
+  -webkit-text-stroke: 4px $white;
+}
+.text{
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $gray-900;
+  @extend .label4-semibold;
+}

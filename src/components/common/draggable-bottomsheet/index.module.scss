@@ -1,0 +1,10 @@
+.draggable-bottom-sheet {
+  width: 100%;
+  position: absolute !important;
+  overflow: visible !important;
+  
+  &__container  {
+    box-shadow: none !important;
+    border-radius: 2rem 2rem 0 0 !important;
+  }
+}

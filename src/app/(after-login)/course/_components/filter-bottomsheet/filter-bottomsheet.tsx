@@ -27,12 +27,11 @@ const FilterBottomsheet = ({ isOpen, handleClose }: FilterBottomsheetProps) => {
     useCourseFiltersStore();
   const { updateUrlWithFilters } = useCourseFiltersWithUrl();
   const handleClick = () => {
-    // console.log(filters);
     updateUrlWithFilters(filters);
     handleClose();
   };
   const handleDistanceChange = (selected: boolean, key: string) => {
-    setSortBy(selected ? (key as 'asc' | 'desc' | 'default') : null);
+    setSortBy(selected ? (key as 'asc' | 'desc') : null);
   };
   const handleDifficultyChange = (selected: boolean, key: string) => {
     setDifficulty(key as 'easy' | 'moderate' | 'hard');
@@ -92,7 +91,7 @@ const FilterBottomsheet = ({ isOpen, handleClose }: FilterBottomsheetProps) => {
               ))}
           </div>
         </div>
-        <Button color='whitegray' size='full' onClick={handleClick}>
+        <Button color='darkgray' size='full' onClick={handleClick}>
           Settings complete
         </Button>
       </div>

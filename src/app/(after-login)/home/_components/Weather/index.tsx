@@ -49,7 +49,7 @@ const Weather = () => {
 
   useEffect(() => {
     refetch();
-  }, [position.latitude, position.longitude, refetch]);
+  }, [refetch, position.latitude, position.longitude]);
 
   return (
     <div className={cn(BLOCK)}>

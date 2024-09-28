@@ -74,6 +74,7 @@ interface InputProps
    * 에러 함수
    */
   onError?: (error: string) => void;
+  className?: string;
 }
 
 /**
@@ -94,6 +95,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       error = '',
       onChange,
       onError,
+      className,
       ...props
     },
     ref,
@@ -137,13 +139,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             maxLength={maxLength}
             type={type}
             placeholder={placeholder}
-            className={cn(`${BLOCK}__form`, {
-              [`${BLOCK}__form--leftIcon`]: !!leftIcon,
-              [`${BLOCK}__form--rightIcon`]: !!rightIcon,
-              [`${BLOCK}__form--focused`]: isFocused,
-              [`${BLOCK}__form--value`]: !!value.trim(),
-              [`${BLOCK}__form--error`]: !!error,
-            })}
+            className={cn(
+              `${BLOCK}__form`,
+              {
+                [`${BLOCK}__form--leftIcon`]: !!leftIcon,
+                [`${BLOCK}__form--rightIcon`]: !!rightIcon,
+                [`${BLOCK}__form--focused`]: isFocused,
+                [`${BLOCK}__form--value`]: !!value.trim(),
+                [`${BLOCK}__form--error`]: !!error,
+              },
+              className,
+            )}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChange={handleChange}
