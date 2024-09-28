@@ -1,6 +1,8 @@
-import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
-import { useRouter } from 'next/navigation';
 import { RefObject, useCallback, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import { useCourseSearchHistoryStore } from '@/stores/course-search-history';
 
 export const useSearchCourses = (
   initialKeyword: string = '',
@@ -20,7 +22,7 @@ export const useSearchCourses = (
       setShowAutocomplete(false);
       ref.current?.blur();
     },
-    [addSearch, router],
+    [ref, addSearch, router],
   );
 
   const handleChange = useCallback((value: string) => {

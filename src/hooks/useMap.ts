@@ -1,5 +1,6 @@
-import { getCurrentPosition } from '@/utils/geolocation';
 import { useCallback, useEffect, useState } from 'react';
+
+import { getCurrentPosition } from '@/utils/geolocation';
 
 export const useMap = () => {
   const [center, setCenter] = useState<google.maps.LatLngLiteral | null>(null);

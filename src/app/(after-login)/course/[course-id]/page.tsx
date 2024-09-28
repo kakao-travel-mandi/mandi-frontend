@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -9,21 +10,21 @@ import { useRouter } from 'next/navigation';
 import BookmarkIconStroke from '@/assets/icon/icon-bookmark-Stroke.svg';
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Button from '@/components/common/button';
+import Dialog from '@/components/common/dialog';
 import Divider from '@/components/common/divider';
 import Layout from '@/components/layout';
+import { useCourseStart } from '@/hooks/useCourseStart';
+import { useCourseDetailQuery } from '@/queries/courseQuery';
+import { setTrekkingIdCookie } from '@/utils/course';
+
+import CourseDisplayOnMap from '../_components/course-display-on-map/course-display-on-map';
+import { MapProvider } from '../map-provider';
 
 import CoursePoints from './_components/course-points/course-points';
 import DetailInfo from './_components/detail-info/detail-info';
 import ReviewList from './_components/review-list/review-list';
 import ReviewOverview from './_components/review-overview/review-overview';
 import styles from './page.module.scss';
-import { setTrekkingIdCookie } from '@/utils/course';
-import { useCourseDetailQuery } from '@/queries/courseQuery';
-import { MapProvider } from '../map-provider';
-import { GoogleMap } from '@react-google-maps/api';
-import CourseDisplayOnMap from '../_components/course-display-on-map/course-display-on-map';
-import { useCourseStart } from '@/hooks/useCourseStart';
-import Dialog from '@/components/common/dialog';
 
 const cx = classNames.bind(styles);
 
@@ -51,17 +52,17 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
         setScrolled(isScrolled);
       }
     }
-  }, [scrolled, status]);
+  }, [scrolled]);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
+    if (container && status === 'success') {
       container.addEventListener('scroll', handleScroll);
       return () => {
         container.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [handleScroll]);
+  }, [status, handleScroll]);
 
   useEffect(() => {
     if (status === 'error' && error.status === 404) {

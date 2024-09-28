@@ -1,16 +1,20 @@
+import { GoogleMap } from '@react-google-maps/api';
+import classNames from 'classnames/bind';
+
+import CourseDisplayOnMap from '@/app/(after-login)/course/_components/course-display-on-map/course-display-on-map';
+import CurrentPositionMarker from '@/app/(after-login)/course/_components/current-position-marker/current-position-marker';
+import { MapProvider } from '@/app/(after-login)/course/map-provider';
+import CompleteIcon from '@/assets/colored-icon/complete_course.svg';
+import Button from '@/components/common/button';
 import Layout from '@/components/layout';
+import { CourseDetailDTO } from '@/types/course';
+import { formatDistance, formatTime } from '@/utils/trekker';
+
+import { TrekkingData } from '../trekker/trekker';
 
 import styles from './result-page.module.scss';
-import classNames from 'classnames/bind';
-import CompleteIcon from '@/assets/colored-icon/complete_course.svg';
-import { TrekkingData } from '../trekker/trekker';
-import { MapProvider } from '@/app/(after-login)/course/map-provider';
-import { GoogleMap } from '@react-google-maps/api';
-import Button from '@/components/common/button';
-import { formatDistance, formatTime } from '@/utils/trekker';
-import CurrentPositionMarker from '@/app/(after-login)/course/_components/current-position-marker/current-position-marker';
-import { CourseDetailDTO } from '@/types/course';
-import CourseDisplayOnMap from '@/app/(after-login)/course/_components/course-display-on-map/course-display-on-map';
+
+
 
 const cx = classNames.bind(styles);
 

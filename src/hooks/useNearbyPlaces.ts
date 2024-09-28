@@ -1,6 +1,7 @@
+import { useCallback, useState } from 'react';
+
 import { NearbyPoint } from '@/types/course';
 import { NearbyFilter } from '@/types/nearby-filter';
-import { useCallback, useState } from 'react';
 
 export const useNearbyPlaces = (
   currentMarkerPosition: google.maps.LatLngLiteral | null,

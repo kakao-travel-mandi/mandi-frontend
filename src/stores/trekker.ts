@@ -1,7 +1,8 @@
-import { Coordinate } from '@/types/course';
-import { getDistance } from '@/utils/geolocation';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+
+import { Coordinate } from '@/types/course';
+import { getDistance } from '@/utils/geolocation';
 
 export type TrekkerState = 'Running' | 'Paused' | 'Stopped';
 

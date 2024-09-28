@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Badge from '@/components/common/badge';
 import Button from '@/components/common/button';
+import { useCourseStart } from '@/hooks/useCourseStart';
 import { MapCourseDTO, NearbyPoint, PointDTO } from '@/types/course';
 import { getDifficultyColor } from '@/utils/course';
 
 import DetailInfo from '../../[course-id]/_components/detail-info/detail-info';
 
 import styles from './marker-info-card.module.scss';
-import { useCourseStart } from '@/hooks/useCourseStart';
 
 const cx = classNames.bind(styles);
 

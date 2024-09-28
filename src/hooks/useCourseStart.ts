@@ -1,10 +1,15 @@
-import { getCurrentPosition } from '@/utils/geolocation';
-import { useSnackbar } from './useSnackbar';
-import { useStartTrekkingMutation } from '@/queries/trekkingQuery';
+import { useState } from 'react';
+
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+
+import { useStartTrekkingMutation } from '@/queries/trekkingQuery';
 import { useTrekkerStore } from '@/stores/trekker';
+import { getCurrentPosition } from '@/utils/geolocation';
+
+import { useSnackbar } from './useSnackbar';
+
+
 
 export const useCourseStart = (courseId: number) => {
   const [loading, setLoading] = useState(false);

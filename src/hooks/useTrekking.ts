@@ -1,8 +1,10 @@
+import { useCallback, useEffect, useState } from 'react';
+
+import { deleteCookie, getCookie } from 'cookies-next';
+
 import { useFinishTrekkingMutation } from '@/queries/trekkingQuery';
 import { useTrekkerStore } from '@/stores/trekker';
 import { getCurrentPosition } from '@/utils/geolocation';
-import { deleteCookie, getCookie } from 'cookies-next';
-import { useCallback, useEffect, useState } from 'react';
 
 export const useTrekking = () => {
   const {
@@ -60,7 +62,7 @@ export const useTrekking = () => {
       },
       completedAt: new Date(currentTime).toISOString(),
     });
-  }, []);
+  }, [mutate]);
   const closeDialog = () => setShowDialog(false);
 
   useEffect(() => {

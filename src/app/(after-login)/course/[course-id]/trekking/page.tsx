@@ -4,13 +4,22 @@ import { useEffect, useState } from 'react';
 
 import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 
+import Button from '@/components/common/button';
+import Dialog from '@/components/common/dialog';
 import DraggableBottomSheet from '@/components/common/draggable-bottomsheet';
 import Layout from '@/components/layout';
+import { useMap } from '@/hooks/useMap';
+import { useNearbyPlaces } from '@/hooks/useNearbyPlaces';
+import { useTrekking } from '@/hooks/useTrekking';
+import { useCourseDetailQuery } from '@/queries/courseQuery';
 import { NearbyPoint } from '@/types/course';
 import { NearbyFilter } from '@/types/nearby-filter';
 import { getCurrentPosition } from '@/utils/geolocation';
 
+import CourseDisplayOnMap from '../../_components/course-display-on-map/course-display-on-map';
 import CurrentPositionMarker from '../../_components/current-position-marker/current-position-marker';
 import MarkerInfoCard from '../../_components/marker-info-card/marker-info-card';
 import { MapProvider } from '../../map-provider';
@@ -18,18 +27,14 @@ import { MapProvider } from '../../map-provider';
 import NearbyChips from './_components/nearby-chips/nearby-chips';
 import NearbyMarker from './_components/nearby-marker/nearby-marker';
 import NearbyPlacesList from './_components/nearby-places-list/nearby-places-list';
+import ResultPage from './_components/result-page/result-page';
 import Trekker from './_components/trekker/trekker';
 import styles from './page.module.scss';
-import { useMap } from '@/hooks/useMap';
-import { useTrekking } from '@/hooks/useTrekking';
-import { useRouter } from 'next/navigation';
-import { useNearbyPlaces } from '@/hooks/useNearbyPlaces';
-import ResultPage from './_components/result-page/result-page';
-import { useCourseDetailQuery } from '@/queries/courseQuery';
-import CourseDisplayOnMap from '../../_components/course-display-on-map/course-display-on-map';
-import Dialog from '@/components/common/dialog';
-import Button from '@/components/common/button';
-import { deleteCookie } from 'cookies-next';
+
+
+
+
+
 
 const cx = classNames.bind(styles);
 
@@ -115,7 +120,7 @@ const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
     }, 60000);
 
     return () => clearInterval(updateIntervalId);
-  }, [state]);
+  }, [state, updateTracking]);
 
   useEffect(() => {
     if (courseStatus === 'error' && CourseError.status === 404) {

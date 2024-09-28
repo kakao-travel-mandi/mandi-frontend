@@ -1,8 +1,9 @@
+import { useCallback } from 'react';
+
 import { useNearbyCoursesMutation } from '@/queries/courseQuery';
 import { useMapCourseStore } from '@/stores/map-course';
 import { Coordinate, MapCourseDTO, PointDTO } from '@/types/course';
 import { coordinateToLatLng, getBoundsCoordinates } from '@/utils/geolocation';
-import { useCallback } from 'react';
 
 export const useNearbyCourse = (map: google.maps.Map | null) => {
   const { courses, setCourses, selectedItem, selectItem } = useMapCourseStore();
@@ -13,7 +14,7 @@ export const useNearbyCourse = (map: google.maps.Map | null) => {
 
   const panTo = useCallback(
     (position: Coordinate) => map?.panTo(coordinateToLatLng(position)),
-    [map, coordinateToLatLng],
+    [map],
   );
   const handleSearchButtonClick = useCallback(() => {
     const bounds = map?.getBounds();
@@ -27,14 +28,14 @@ export const useNearbyCourse = (map: google.maps.Map | null) => {
       setCourses([course]);
       panTo(course.midPoint);
     },
-    [selectItem, setCourses, map],
+    [panTo, selectItem, setCourses],
   );
   const handleClickEndPoints = useCallback(
     (point: PointDTO) => {
       selectItem({ type: 'point', data: point });
       panTo(point.coordinate);
     },
-    [selectItem, map],
+    [panTo, selectItem],
   );
   const handleClickMap = useCallback(() => selectItem(null), [selectItem]);
 

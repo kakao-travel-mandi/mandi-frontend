@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 
-import Button from './button/button';
-import styles from './trekker.module.scss';
 import { TrekkerState } from '@/stores/trekker';
 import { formatDistance, formatTime } from '@/utils/trekker';
+
+import Button from './button/button';
+import styles from './trekker.module.scss';
 
 const cx = classNames.bind(styles);
 

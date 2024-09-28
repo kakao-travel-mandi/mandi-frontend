@@ -2,9 +2,9 @@ import classNames from 'classnames/bind';
 
 import CopyIcon from '@/assets/icon/icon-document-mono.svg';
 import LocationIcon from '@/assets/icon/icon-map-pin.svg';
+import { useSnackbar } from '@/hooks/useSnackbar';
 
 import styles from './course-points.module.scss';
-import { useSnackbar } from '@/hooks/useSnackbar';
 
 const cx = classNames.bind(styles);
 

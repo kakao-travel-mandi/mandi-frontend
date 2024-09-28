@@ -1,4 +1,5 @@
 import { FinishTrekkingRequest, StartTrekkingRequest } from '@/types/request';
+
 import { axiosInstance } from './axiosInstance';
 
 export const startTrekkingAPI = async (

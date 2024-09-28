@@ -1,11 +1,12 @@
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
 import { finishTrekkingAPI, startTrekkingAPI } from '@/apis/trekking';
 import { FinishTrekkingRequest, StartTrekkingRequest } from '@/types/request';
 import {
   FinishTrekkingResponse,
   StartTrekkingResponse,
 } from '@/types/response';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 export const useStartTrekkingMutation = (
   courseId: number,

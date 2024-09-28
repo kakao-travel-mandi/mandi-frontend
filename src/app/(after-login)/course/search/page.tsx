@@ -1,18 +1,19 @@
 'use client';
 
 import { useRef } from 'react';
+
 import classNames from 'classnames/bind';
 
 import IconSearch from '@/assets/icon/icon-search-mono.svg';
 import Input from '@/components/common/input';
 import Layout from '@/components/layout';
+import { useSearchCourses } from '@/hooks/useSearchCourses';
 import { useCourseNamesQuery } from '@/queries/courseQuery';
 
 import AutoCompleteList from './_components/autocomplete-list/autocomplete-list';
 import SearchHistory from './_components/search-history/search-history';
 import SearchedCourses from './_components/searched-courses/searched-courses';
 import styles from './page.module.scss';
-import { useSearchCourses } from '@/hooks/useSearchCourses';
 
 const cx = classNames.bind(styles);
 
