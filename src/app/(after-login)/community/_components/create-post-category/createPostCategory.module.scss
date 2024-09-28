@@ -1,0 +1,10 @@
+@use "/src/styles/color.scss" as *;
+.container__bottomsheet{
+  display: flex;
+  padding: 1.25rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-self: stretch;
+  color: $gray-800;
+
+}

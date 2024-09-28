@@ -1,0 +1,39 @@
+@use "/src/styles/color.scss" as *;
+.container{
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+.container__picture{
+  display: flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.6875rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid $gray-400;
+  background: $white;
+}
+
+
+.container__image{
+  position: relative; 
+}
+.container__image__remove{
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.125rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: $gray-600;
+  
+  position: absolute;
+  bottom: 2.75rem; 
+  left: 2.75rem; 
+  cursor: pointer; 
+}

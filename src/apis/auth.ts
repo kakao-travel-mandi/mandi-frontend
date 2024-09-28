@@ -68,3 +68,17 @@ export const refreshTokenAPI = async (refreshToken: string) => {
     throw error;
   }
 };
+
+export const getAuthId = async () => {
+  try {
+    const response = await axiosInstance.get('/auth/id');
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(`Error: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
