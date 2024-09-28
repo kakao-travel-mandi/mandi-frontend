@@ -1,22 +1,12 @@
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { getBadgesAPI } from '@/apis/badge';
 import { BadgeResponse } from '@/types/response';
-export const useBadgesMutation = ({
-  onSuccess,
-  onError,
-}: {
-  onSuccess: (data: BadgeResponse) => void;
-  onError: (error: Error) => void;
-}) => {
-  return useMutation<BadgeResponse, Error, string>({
-    mutationKey: ['badges'],
-    mutationFn: (userId: string) => getBadgesAPI(userId),
-    onSuccess,
-    onError,
-    retry: 2,
-    onSettled: (data, error) => {
-      console.log('Mutation settled', { data, error });
-    },
-  }) as UseMutationResult<BadgeResponse, Error, string>; // Ensure correct type
+
+export const useBadgesQuery = () => {
+  return useQuery<BadgeResponse, Error>({
+    queryKey: ['badges'],
+    queryFn: getBadgesAPI, // getBadgesAPI를 호출하는 함수 전달
+    retry: 2, // 실패 시 재시도 횟수
+  });
 };

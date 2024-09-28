@@ -1,14 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
+import BadgePageIcon from '@/app/(after-login)/my-info/_components/badgepage-icon';
+import BadgePageIconInfo from '@/app/(after-login)/my-info/_components/badgepage-icon/badgepage-icon-info';
 import IconMedal from '@/assets/icon/icon-medal.svg';
-import BadgePageIcon from '@/components/badgepage-icon';
-import BadgePageIconInfo from '@/components/badgepage-icon/badgepage-icon-info';
 import BottomSheet from '@/components/common/bottomsheet';
 import Layout from '@/components/layout';
-import { useBadgesMutation } from '@/queries/badgeQuery';
+import { useBadgesQuery } from '@/queries/badgeQuery';
 
 import styles from './myBadge.module.scss';
 
@@ -16,14 +16,7 @@ const cx = classNames.bind(styles);
 
 const MyBadge = () => {
   const [isSheetOpen, setSheetOpen] = useState(false);
-  const { mutate, data, error, isError } = useBadgesMutation({
-    onSuccess: data => {
-      console.log('Badges fetched successfully:', data);
-    },
-    onError: error => {
-      console.error('Error fetching badges:', error);
-    },
-  });
+  const { data, isError, error } = useBadgesQuery();
   const toggleSheet = () => {
     setSheetOpen(prev => !prev);
   };
@@ -41,10 +34,6 @@ const MyBadge = () => {
     toggleSheet();
   };
 
-  useEffect(() => {
-    mutate('1');
-  }, [mutate]);
-
   if (isError) {
     return <div>Error: {error?.message}</div>;
   }
@@ -55,7 +44,9 @@ const MyBadge = () => {
       <div className={cx('container')}>
         <div className={cx('container__medal')}>
           <IconMedal />
-          <span className={cx('body1-semibold')}>0 / 6</span>
+          <span className={cx('body1-semibold')}>
+            {`${data?.response.userBadgeCount}`} / 6
+          </span>
           <span className={cx('label3-regular')}>
             Check the requirements and
             <br />
@@ -64,34 +55,36 @@ const MyBadge = () => {
         </div>
         <div className={cx('container__content')}>
           <BadgePageIcon
-            icon='/test/icon-hole-cup.svg'
+            icon={undefined ?? '/badge/mountain.svg'}
             disable={false}
-            text='Mandi Starter'
+            text={`${data?.response.badges[0].name}` ?? 'Mandi Starter'}
             onClick={handleClick}
           />
           <BadgePageIcon
             disable={true}
-            text='Course Collector'
+            text={`${data?.response.badges[1].name}` ?? 'Course Collector'}
             onClick={handleClick}
           />
           <BadgePageIcon
             disable={true}
-            text='Joy of Sharing'
+            text={`${data?.response.badges[2].name}` ?? 'Joy of Sharing'}
             onClick={handleClick}
           />
           <BadgePageIcon
             disable={true}
-            text='Beginning of Completion'
+            text={
+              `${data?.response.badges[3].name}` ?? 'Beginning of Completion'
+            }
             onClick={handleClick}
           />
           <BadgePageIcon
             disable={true}
-            text='Walked 10,000 Steps'
+            text={`${data?.response.badges[4].name}` ?? 'Walked 10,000 Steps'}
             onClick={handleClick}
           />
           <BadgePageIcon
             disable={true}
-            text='Mandiholic'
+            text={`${data?.response.badges[5].name}` ?? 'Mandiholic'}
             onClick={handleClick}
           />
         </div>
