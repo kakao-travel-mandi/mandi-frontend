@@ -108,6 +108,9 @@ export interface CourseCompleteReviewResponse {
       content: string;
       score: number;
       reviewedAt: string;
+      imageUrlList: {
+        url: string;
+      }[];
     }[];
     notReviewedCourses: {
       id: number;

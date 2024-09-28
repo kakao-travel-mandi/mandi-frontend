@@ -12,6 +12,7 @@ const Review = () => {
     content: course.content,
     score: course.score,
     reviewedAt: course.reviewedAt,
+    // imageUrlList: course.imageUrlList.map(image => image.url),
   }));
   if (isLoading) {
     return <div>Loading...</div>;

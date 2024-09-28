@@ -17,6 +17,7 @@ interface ReviewsData {
   content?: string;
   reviewedAt?: string;
   score?: number;
+  imageUrlList?: string[];
 }
 
 interface ReviewLayoutProps {
@@ -28,6 +29,11 @@ interface ReviewLayoutProps {
 const cx = classNames.bind(styles);
 
 const ReviewLayout = ({ reviewsData, modal }: ReviewLayoutProps) => {
+  const testUrl = [
+    'https://github.com/user-attachments/assets/03fea9d2-c196-4a8a-84e0-4e10c36ecfc6',
+    'https://github.com/user-attachments/assets/03fea9d2-c196-4a8a-84e0-4e10c36ecfc6',
+  ];
+
   return (
     <div className={cx('container')}>
       {reviewsData && reviewsData.length > 0 ? (
@@ -43,6 +49,7 @@ const ReviewLayout = ({ reviewsData, modal }: ReviewLayoutProps) => {
             review={data.content}
             score={data.score}
             reviewDate={data.reviewedAt}
+            reviewImgs={testUrl}
           />
         ))
       ) : (
