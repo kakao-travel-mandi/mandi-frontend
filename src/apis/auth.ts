@@ -20,7 +20,7 @@ export const loginAPI = async (request: LoginRequest) => {
 
       return response.data;
     } else {
-      throw response.status;
+      throw response;
     }
   } catch (error) {
     throw error;
@@ -53,6 +53,17 @@ export const signupAPI = async (request: SignupRequest) => {
     } else {
       throw response.status;
     }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const refreshTokenAPI = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post('/auth/reissue', {
+      refreshToken,
+    });
+    return response.data;
   } catch (error) {
     throw error;
   }

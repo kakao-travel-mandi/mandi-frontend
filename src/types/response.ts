@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 
+import { CourseDTO, MapCourseDTO } from './course';
 import { OauthProvider } from './oauth-provider';
 import { WeatherItem } from './weather';
 
@@ -99,6 +100,24 @@ export interface PostsCategoryResponse {
   };
 }
 
+export interface GetCoursesResponse extends BaseResponse {
+  response: {
+    pageInfo: {
+      totalCount: number;
+      size: number;
+      currentPage: number;
+      totalPages: number;
+    };
+    courses: CourseDTO[];
+  };
+}
+
+export interface GetNearbyCoursesResponse extends BaseResponse {
+  response: {
+    courses: MapCourseDTO[];
+  };
+}
+
 export interface WeatherResponse {
   list: WeatherItem[];
   city: {
@@ -141,6 +160,63 @@ export interface GetPostIdResponse {
     commentList: Comment[];
   };
   error?: {
+    message: string;
+    status: number;
+    errorCode: string;
+  };
+}
+export interface CourseCompleteReviewResponse {
+  success: boolean;
+  response: {
+    totalCompletedCourseCount: number;
+    totalReviewCount: number;
+    reviewedCourses: {
+      completedCourse: {
+        id: number;
+        courseName: string;
+        duration: string;
+        distance: number;
+        trekkingPathImageUrl: string;
+        completedAt: string;
+      };
+      isReviewed: boolean;
+      content: string;
+      score: number;
+      reviewedAt: string;
+      imageUrlList: {
+        url: string;
+      }[];
+    }[];
+    notReviewedCourses: {
+      id: number;
+      courseName: string;
+      duration: string;
+      distance: number;
+      trekkingPathImageUrl: string;
+      completedAt: string;
+    }[];
+  };
+  error: {
+    message: string;
+    status: number;
+    errorCode: string;
+  };
+}
+export interface CourseCompleteResponse {
+  success: boolean;
+  response: {
+    totalCount: number;
+    totalDistance: number;
+    completedCourses: {
+      id: number;
+      courseName: string;
+      duration: string;
+      distance: number;
+      trekkingPathImageUrl: string;
+      completedAt: string;
+    }[];
+  };
+  error: {
     message: string;
     status: number;
     errorCode: string;

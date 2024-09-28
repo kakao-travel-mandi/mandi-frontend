@@ -1,9 +1,17 @@
 import axios from 'axios';
-import { redirect } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
-import { getAccessToken, setAccessToken, setRefreshToken } from '@/utils/auth';
+import {
+  deleteAccessToken,
+  deleteRefreshToken,
+  getAccessToken,
+  getRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+} from '@/utils/auth';
+
+import { refreshTokenAPI } from './auth';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -41,24 +49,37 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  response => {
+  async response => {
     return response;
   },
-  error => {
-    if (
-      error.response &&
-      (error.response.status === 401 || error.response.status === 403)
-    ) {
-      const token = getAccessToken();
-      console.log('token', token);
-      //TODO: token 이슈 해결 후, 주석 해제
-      // setAccessToken('');
-      // setRefreshToken('');
-      // signOut({
-      //   redirect: true,
-      //   callbackUrl: '/',
-      // });
+  async error => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = getRefreshToken();
+
+      if (refreshToken) {
+        try {
+          const data = await refreshTokenAPI(refreshToken);
+          const { accessToken, refreshToken: newRefreshToken } = data.response;
+
+          setAccessToken(accessToken);
+          setRefreshToken(newRefreshToken);
+
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
+          return axiosInstance(originalRequest);
+        } catch (refreshError) {
+          deleteAccessToken();
+          deleteRefreshToken();
+          signOut();
+
+          return Promise.reject(refreshError);
+        }
+      }
     }
+
     return Promise.reject(error);
   },
 );

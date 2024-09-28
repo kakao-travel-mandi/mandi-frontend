@@ -23,17 +23,13 @@ const Step1 = ({ onNext }: Step1Props) => {
     formState: { errors },
     setError,
     watch,
-  } = useForm({
-    defaultValues: {
-      nickname: '',
-    },
-  });
+  } = useForm();
 
   const value = watch('nickname');
 
   const { mutate: checkNickname } = useCheckNicknameMutation({
     onSuccess: () => {
-      onNext(value);
+      onNext({ nickname: value });
     },
     onError: () => {
       setError('nickname', {
@@ -95,7 +91,7 @@ const Step1 = ({ onNext }: Step1Props) => {
           type='submit'
           size='full'
           color='green'
-          disabled={!value.length}
+          disabled={!value || !value.length}
           className={cn(`${BLOCK}__button`)}
         >
           Next
