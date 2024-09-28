@@ -1,8 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
 import classNames from 'classnames/bind';
 
 import Chip from '@/components/common/chip';
+import { DIFFICULTY_LEVELS } from '@/constants/course';
+import { useCoursesQuery } from '@/queries/courseQuery';
 
 import CourseCard from '../common/CourseCard';
 
@@ -12,56 +16,50 @@ const cn = classNames.bind(styles);
 const BLOCK = 'difficult-courses';
 
 const DifficultCourses = () => {
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>(
+    DIFFICULTY_LEVELS.EASY,
+  );
+  const courseQuery = useCoursesQuery({
+    levels: selectedDifficulty,
+  });
+
   return (
     <div className={cn(BLOCK)}>
       <div className={cn(`${BLOCK}__title`)}>
         <p className={cn(`${BLOCK}__title--text`)}>Course by Difficulty</p>
         <div className={cn(`${BLOCK}__title--chips`)}>
-          <Chip type='button' onClick={() => {}}>
-            3 hours
+          <Chip
+            type='button'
+            selected={selectedDifficulty === DIFFICULTY_LEVELS.EASY}
+            onClick={() => setSelectedDifficulty(DIFFICULTY_LEVELS.EASY)}
+          >
+            Easy
           </Chip>
-          <Chip type='button' onClick={() => {}}>
-            4 hours
+          <Chip
+            type='button'
+            selected={selectedDifficulty === DIFFICULTY_LEVELS.MODERATE}
+            onClick={() => setSelectedDifficulty(DIFFICULTY_LEVELS.MODERATE)}
+          >
+            Moderate
           </Chip>
-          <Chip type='button' onClick={() => {}}>
-            5 hours
-          </Chip>
-          <Chip type='button' onClick={() => {}}>
-            more than
+          <Chip
+            type='button'
+            selected={selectedDifficulty === DIFFICULTY_LEVELS.DIFFICULT}
+            onClick={() => setSelectedDifficulty(DIFFICULTY_LEVELS.DIFFICULT)}
+          >
+            Difficult
           </Chip>
         </div>
       </div>
       <div className={cn(`${BLOCK}__list`)}>
-        {courses.map((course, index) => (
-          <CourseCard key={index} course={course} index={index} />
-        ))}
+        {courseQuery.data?.pages.map((page, index) =>
+          page.response.courses.map((course, index) => (
+            <CourseCard key={index} course={course} index={index} />
+          )),
+        )}
       </div>
     </div>
   );
 };
 
 export default DifficultCourses;
-
-const courses = [
-  {
-    title: 'Sinseondae',
-    difficulty: 'Easy',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-  {
-    title: 'Dongbaek Island',
-    difficulty: 'Hard',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-  {
-    title: 'Haeparang',
-    difficulty: 'Moderate',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-];

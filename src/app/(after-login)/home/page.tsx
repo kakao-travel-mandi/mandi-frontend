@@ -20,7 +20,7 @@ const Home = () => {
       <Landing />
       <RecommendCourses />
       <Weather />
-      <LeadTimeCourses />
+      {/* <LeadTimeCourses /> */}
       <DifficultCourses />
     </Layout>
   );

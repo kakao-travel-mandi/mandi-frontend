@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 import CdIcon from '@/assets/colored-icon/cd.svg';
 import TrashcanIcon from '@/assets/colored-icon/trashcan.svg';
@@ -11,6 +12,8 @@ import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
+import { useWithdrawalMutation } from '@/queries/authQuery';
+import { deleteAccessToken, deleteRefreshToken } from '@/utils/auth';
 
 import styles from './page.module.scss';
 
@@ -34,11 +37,23 @@ export default function Page() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const handleDialogClose = () => setDeleteDialogOpen(false);
 
+  const withdraw = useWithdrawalMutation({
+    onSuccess: () => {
+      deleteAccessToken();
+      deleteRefreshToken();
+
+      signOut({ callbackUrl: '/' });
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
   const handleContinueClick = () => router.push('/my-info');
   const handleDeleteClick = () => setDeleteDialogOpen(true);
-
-  // TODO: 계정 삭제 API 호출 후, 로그인 페이지로 이동
-  const deleteAccount = () => {};
+  const deleteAccount = () => {
+    withdraw.mutate();
+  };
 
   return (
     <Layout
