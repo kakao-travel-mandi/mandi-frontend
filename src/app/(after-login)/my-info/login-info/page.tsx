@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 import GoogleIcon from '@/assets/provider/Google.svg';
 import KakaoIcon from '@/assets/provider/Kakao.svg';
@@ -11,8 +12,10 @@ import Button from '@/components/common/button';
 import Dialog from '@/components/common/dialog';
 import { SizedBox } from '@/components/common/sizedbox';
 import Layout from '@/components/layout';
+import { useLogoutMutation } from '@/queries/authQuery';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { OauthProviderEnum } from '@/types/oauth-provider';
+import { deleteAccessToken, deleteRefreshToken } from '@/utils/auth';
 
 import styles from './page.module.scss';
 
@@ -22,6 +25,19 @@ export default function Page() {
   const { data: infoData } = useMyInfoQuery();
   const router = useRouter();
   const [logoutConfirmDialog, setLogoutConfirmDialog] = useState(false);
+
+  const logout = useLogoutMutation({
+    onSuccess: () => {
+      deleteAccessToken();
+      deleteRefreshToken();
+
+      signOut({ callbackUrl: '/' });
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
   const handleDialogClose = () => setLogoutConfirmDialog(false);
 
   const handleLogoutMenuClick = () => setLogoutConfirmDialog(true);
@@ -29,7 +45,7 @@ export default function Page() {
     router.push('/my-info/delete-account');
 
   const handleDialogLogout = () => {
-    // TODO: 모달 창의 로그아웃 버튼 눌렀을 때의 동작 구현
+    logout.mutate();
   };
   const handleDialogCancel = () => setLogoutConfirmDialog(false);
 

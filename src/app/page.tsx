@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 
 import IconCheckCircleGreen from '@/assets/icon/heroicons-solid/check-circle-green.svg';
@@ -27,6 +28,9 @@ const cn = classNames.bind(styles);
 const BLOCK = 'main';
 
 const Main = () => {
+  const searchParams = useSearchParams();
+  const callback = searchParams.get('callback');
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [fade, setFade] = useState(false);
@@ -51,7 +55,7 @@ const Main = () => {
   const handleGoogleLogin = async () => {
     try {
       await signIn('google', {
-        callbackUrl: '/',
+        callbackUrl: '/?callback=true',
       });
     } catch (error) {
       console.error(error);
@@ -87,10 +91,10 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (session) {
+    if (callback === 'true' && session) {
       login({ token: session.accessToken });
     }
-  }, [session, login]);
+  }, [callback, session]);
 
   return (
     <Layout hasTopNav={false} hasTabBar={false}>

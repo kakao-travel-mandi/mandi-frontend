@@ -27,6 +27,15 @@ export const loginAPI = async (request: LoginRequest) => {
   }
 };
 
+export const logoutAPI = async () => {
+  try {
+    const response = await axiosInstance.post('/auth/logout');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const signupAPI = async (request: SignupRequest) => {
   const { token, nickname, description } = request;
 
@@ -63,6 +72,15 @@ export const refreshTokenAPI = async (refreshToken: string) => {
     const response = await axiosInstance.post('/auth/reissue', {
       refreshToken,
     });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const withdrawalAPI = async () => {
+  try {
+    const response = await axiosInstance.delete('/auth/withdrawal');
     return response.data;
   } catch (error) {
     throw error;
