@@ -8,6 +8,7 @@ import Layout from '@/components/layout';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { StaticsPanelType } from '@/types/static-panel';
 
+import MyInfoDown from './_components/my-info-down';
 import { ProfileInfo } from './_components/profile-info/profile-info';
 import { StaticsPanel } from './_components/statics-panel/statics-panel';
 import styles from './page.module.scss';
@@ -52,6 +53,7 @@ const MyInfo = () => {
             />
           ))}
         </div>
+        <MyInfoDown></MyInfoDown>
       </div>
     </Layout>
   );

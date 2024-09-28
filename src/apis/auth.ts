@@ -20,7 +20,7 @@ export const loginAPI = async (request: LoginRequest) => {
 
       return response.data;
     } else {
-      throw response.status;
+      throw response;
     }
   } catch (error) {
     throw error;
@@ -54,6 +54,31 @@ export const signupAPI = async (request: SignupRequest) => {
       throw response.status;
     }
   } catch (error) {
+    throw error;
+  }
+};
+
+export const refreshTokenAPI = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post('/auth/reissue', {
+      refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAuthId = async () => {
+  try {
+    const response = await axiosInstance.get('/auth/id');
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(`Error: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
     throw error;
   }
 };

@@ -1,0 +1,68 @@
+@use "/src/styles/color.scss" as *;
+
+.container{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+
+}
+.container__comment{
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.container__profile{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  span{
+    width: 3.2rem;
+    color: $gray-900;
+  }
+  :nth-child(2){
+    flex: 1; 
+    color: $gray-600;
+  }
+}
+.container__comment__content{
+  color: $gray-700
+}
+.container__comment__likecut{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 0.25rem;
+  color: $gray-700;
+  text-align: justify;
+}
+.container__comment__reaction{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+.container__profile__img{
+  border-radius: 0.5rem;
+border: $gray-200;
+background: $gray-50;
+}
+
+.container__dialog{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6875rem;
+  align-self: stretch;
+}
+.container__reply {
+  display: flex;
+  align-items: flex-start;
+  gap:1.25rem;
+  padding-left: 3.25rem;
+  padding-top: 1.25rem;
+  width: 100%;
+}

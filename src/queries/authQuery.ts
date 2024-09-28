@@ -1,6 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
-import { loginAPI, signupAPI } from '@/apis/auth';
+import { getAuthId, loginAPI, signupAPI } from '@/apis/auth';
 import { LoginRequest, SignupRequest } from '@/types/request';
 import { LoginResponse, SignupResponse } from '@/types/response';
 
@@ -9,15 +10,15 @@ export const useLoginMutation = ({
   onError,
 }: {
   onSuccess: (data: LoginResponse) => void;
-  onError: (error: number) => void;
+  onError: (error: AxiosError) => void;
 }) => {
-  return useMutation<LoginResponse, number, LoginRequest>({
+  return useMutation<LoginResponse, AxiosError, LoginRequest>({
     mutationKey: ['login'],
     mutationFn: (request: LoginRequest) => loginAPI(request),
     onSuccess: (data: LoginResponse) => {
       onSuccess(data);
     },
-    onError: (error: number) => {
+    onError: (error: AxiosError) => {
       onError(error);
     },
   });
@@ -37,5 +38,12 @@ export const useSignupMutation = ({
     onError: (error: number) => {
       onError(error);
     },
+  });
+};
+
+export const useGetAuthId = () => {
+  return useQuery({
+    queryKey: ['auth-id'],
+    queryFn: () => getAuthId(),
   });
 };

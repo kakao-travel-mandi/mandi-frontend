@@ -13,8 +13,8 @@ const cx = classNames.bind(styles);
 const StarScope = ({ score }: StarScopeProps) => {
   return (
     <div className={cx('starscope')}>
-      <IconStar fill='#FFCD00' />
-      <span className={cx('body1-semibold')}>{score}</span>
+      <IconStar width='16' height='16' fill='#FFCD00' />
+      <span className={cx('body1-semibold')}>{score}.0</span>
     </div>
   );
 };

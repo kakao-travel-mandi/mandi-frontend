@@ -62,3 +62,29 @@
   color: $gray-600 !important;
   border: none !important;
 }
+
+.dialog-buttons {
+  display: flex;
+  gap: 0.6875rem;
+}
+
+.page{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.content{
+  width: 100%;
+  height: calc(100% - 5.875rem);
+  overflow-y: scroll;
+}
+
+.bottom-area {
+  display: flex;
+  position: absolute;
+  padding: 0 1.25rem;
+  width: 100%;
+  bottom: 2rem;
+  gap: 0.6875rem;
+}
