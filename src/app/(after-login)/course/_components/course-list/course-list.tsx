@@ -1,45 +1,57 @@
 import classNames from 'classnames/bind';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import RunningIcon from '@/assets/icon/exercise_running.svg';
 import ClockIcon from '@/assets/icon/icon-clock.svg';
 import StarIcon from '@/assets/icon/icon-star.svg';
 import Badge from '@/components/common/badge';
+import { CourseDTO } from '@/types/course';
+import { getDifficultyColor } from '@/utils/course';
 
 import styles from './course-list.module.scss';
 
-
-
-const detailData = [
-  {
-    icon: ClockIcon,
-    content: '1:30',
-  },
-  {
-    icon: RunningIcon,
-    content: '1.93 km',
-  },
-  {
-    icon: StarIcon,
-    content: '4.75',
-  },
-];
+interface CourseListItemProps {
+  course: CourseDTO;
+}
 
 const cx = classNames.bind(styles);
 
 const BLOCK = 'course-item';
 
-const CourseListItem = () => {
+const CourseListItem = ({ course }: CourseListItemProps) => {
   const router = useRouter();
+  const detailData = [
+    {
+      icon: ClockIcon,
+      content: course.duration,
+    },
+    {
+      icon: RunningIcon,
+      content: `${course.distance} km`,
+    },
+    {
+      icon: StarIcon,
+      content: course.ratingAverage.toFixed(2),
+    },
+  ];
   const handleClick = () => router.push('/course/1');
+
   return (
     <div className={cx(BLOCK)} onClick={handleClick}>
-      <div className={cx(`${BLOCK}__image`)}></div>
+      <div className={cx(`${BLOCK}__image`)}>
+        <Image
+          src={course.imgUrl}
+          alt='course'
+          width={120}
+          height={90}
+          priority
+        />
+      </div>
       <div className={cx(`${BLOCK}__content`)}>
         <div className={cx(`${BLOCK}__content__info`)}>
-          <h2 className={cx(`${BLOCK}__content__info__title`)}>Sinseondae</h2>
-          <h2 className={cx(`${BLOCK}__content__info__address`)}>
-            Yongdang-dong, Nam-gu, Busan
+          <h2 className={cx(`${BLOCK}__content__info__title`)}>
+            {course.courseName}
           </h2>
         </div>
         <div className={cx(`${BLOCK}__content__details`)}>
@@ -55,8 +67,8 @@ const CourseListItem = () => {
           ))}
         </div>
         <Badge
-          text='Easy'
-          color='green'
+          color={getDifficultyColor(course.difficulty)}
+          text={course.difficulty}
           rounded='small'
           className={cx(`${BLOCK}__content__difficulty`)}
         />

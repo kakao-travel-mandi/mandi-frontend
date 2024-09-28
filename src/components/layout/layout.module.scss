@@ -5,8 +5,9 @@
   height: 100%;
   position: relative;
 
-
   &__tabbar {
+    // TODO: 새로 고침 시에, 화면이 max-width 벗어남.
+    // position: absolute; 를 없애면 해결. 일단 보류
     position: absolute;
     bottom: 0;
     left: 0;

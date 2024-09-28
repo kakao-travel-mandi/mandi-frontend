@@ -6,34 +6,19 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import RunningIcon from '@/assets/icon/exercise_running.svg';
 import BookmarkIconStroke from '@/assets/icon/icon-bookmark-Stroke.svg';
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
-import ClockIcon from '@/assets/icon/icon-clock.svg';
-import EllipsisHorizontalIcon from '@/assets/icon/icon-ellipsis-horizontal.svg';
-import LocationIcon from '@/assets/icon/icon-map-pin.svg';
-import TagIcon from '@/assets/icon/icon-tag.svg';
-import Badge from '@/components/common/badge';
 import Button from '@/components/common/button';
 import Divider from '@/components/common/divider';
 import Layout from '@/components/layout';
 
 import CoursePoints from './_components/course-points/course-points';
 import DetailInfo from './_components/detail-info/detail-info';
-import { Rating } from './_components/rating-chart/rating-chart';
 import ReviewList from './_components/review-list/review-list';
 import ReviewOverview from './_components/review-overview/review-overview';
 import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
-
-const ratings: Rating[] = [
-  { label: 'Excellent', count: 17 },
-  { label: 'Very Good', count: 3 },
-  { label: 'Average', count: 0 },
-  { label: 'Poor', count: 1 },
-  { label: 'Terrible', count: 0 },
-];
 
 const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
   const { 'course-id': courseId } = params;
@@ -94,18 +79,12 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
         <div className={cx('overview-section')}>
           <h1 className={cx('course-name')}>Sinseondea</h1>
           <div className={cx('course-details')}>
-            <DetailInfo icon={TagIcon} content='Easy' />
-            <DetailInfo icon={ClockIcon} content='1:30' />
-            <DetailInfo icon={RunningIcon} content='1.93 km' />
+            <DetailInfo type='difficulty' content='Easy' />
+            <DetailInfo type='duration' content='1:30' />
+            <DetailInfo type='distance' content='1.93 km' />
             <DetailInfo
-              icon={LocationIcon}
-              content={
-                <div className={cx('course-points')}>
-                  <Badge text='해운대' color='gray' />
-                  <EllipsisHorizontalIcon />
-                  <Badge text='봉오리산' color='gray' />
-                </div>
-              }
+              type='points'
+              content={{ startPoint: '해운대', endPoint: '봉오리산' }}
             />
           </div>
         </div>
