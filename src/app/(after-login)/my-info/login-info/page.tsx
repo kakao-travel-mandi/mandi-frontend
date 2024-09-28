@@ -28,8 +28,9 @@ export default function Page() {
   const handleDeleteAccountMenuClick = () =>
     router.push('/my-info/delete-account');
 
-  // TODO: 모달 창의 로그아웃 confirm 버튼 눌렀을 때의 동작 구현
-  const handleDialogConfirm = () => {};
+  const handleDialogLogout = () => {
+    // TODO: 모달 창의 로그아웃 버튼 눌렀을 때의 동작 구현
+  };
   const handleDialogCancel = () => setLogoutConfirmDialog(false);
 
   return (
@@ -78,8 +79,8 @@ export default function Page() {
       </ul>
       <Dialog
         isOpen={logoutConfirmDialog}
-        title='Change it later?'
-        description='Changes have not been saved.'
+        title='Log out'
+        description='Are you sure you want to log out?'
         onClose={handleDialogClose}
         buttons={
           <div
@@ -88,12 +89,11 @@ export default function Page() {
               gap: '10px',
             }}
           >
-            {/* TODO: 모달 버튼 바꿔야됨 */}
-            <Button size='full' color='green' onClick={handleDialogConfirm}>
-              Confrim
+            <Button size='full' color='whitegray' onClick={handleDialogCancel}>
+              Cancel
             </Button>
-            <Button size='full' color='white' onClick={handleDialogCancel}>
-              Leave
+            <Button size='full' color='red' onClick={handleDialogLogout}>
+              Log out
             </Button>
           </div>
         }

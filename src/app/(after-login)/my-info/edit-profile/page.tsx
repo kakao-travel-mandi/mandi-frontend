@@ -96,47 +96,66 @@ export default function Home() {
 
   return (
     <Layout hasTopNav={true} back={true} hasTabBar={false} onBack={handleBack}>
-      <SizedBox height='1.6875rem' />
-      <EditProfileImage
-        imageUrl={userInfo?.response.imgUrl}
-        onImageChange={handleImageChange}
-      />
-      <SizedBox height='2.3125rem' />
-      <form className={cx('form')}>
-        <Controller
-          name='nickname'
-          control={control}
-          rules={NICKNAME_RULES}
-          render={({ field }) => (
-            <Input
-              label='Nickname'
-              helper='You can use 2 to 12 characters, including letters and numbers'
-              placeholder='Please enter your nickname.'
-              value={field.value}
-              onChange={field.onChange}
-              rightIcon={
-                <IconXCircle width={12} height={12} className={cx('x-icon')} />
-              }
-              error={errors.nickname && errors.nickname.message}
+      <div className={cx('page')}>
+        <div className={cx('content')}>
+          <SizedBox height='1.6875rem' />
+          <EditProfileImage
+            imageUrl={userInfo?.response.imgUrl}
+            onImageChange={handleImageChange}
+          />
+          <SizedBox height='2.3125rem' />
+          <form className={cx('form')}>
+            <Controller
+              name='nickname'
+              control={control}
+              rules={NICKNAME_RULES}
+              render={({ field }) => (
+                <Input
+                  label='Nickname'
+                  helper='You can use 2 to 12 characters, including letters and numbers'
+                  placeholder='Please enter your nickname.'
+                  value={field.value}
+                  onChange={field.onChange}
+                  rightIcon={
+                    <IconXCircle
+                      width={12}
+                      height={12}
+                      className={cx('x-icon')}
+                    />
+                  }
+                  error={errors.nickname && errors.nickname.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name='introduction'
-          control={control}
-          rules={BIO_RULES}
-          render={({ field }) => (
-            <Textarea
-              label='One liner'
-              placeholder='Introduce yourself in a short text (up to 80 characters, including spaces).'
-              value={field.value}
-              onChange={field.onChange}
-              error={errors.introduction && errors.introduction.message}
-              maxLength={80}
+            <Controller
+              name='introduction'
+              control={control}
+              rules={BIO_RULES}
+              render={({ field }) => (
+                <Textarea
+                  label='One liner'
+                  placeholder='Introduce yourself in a short text (up to 80 characters, including spaces).'
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.introduction && errors.introduction.message}
+                  maxLength={80}
+                />
+              )}
             />
-          )}
-        />
-      </form>
+          </form>
+        </div>
+        <div className={cx('bottom-area')}>
+          <Button
+            type='submit'
+            size='full'
+            color='green'
+            onClick={handleSaveButtonClick}
+            disabled={!isValid}
+          >
+            Save
+          </Button>
+        </div>
+      </div>
       <Dialog
         isOpen={dialogOpen}
         title='Change it later?'
@@ -149,25 +168,15 @@ export default function Home() {
               gap: '10px',
             }}
           >
-            <Button size='full' color='green' onClick={handleCancelClick}>
+            <Button size='full' color='whitegray' onClick={handleCancelClick}>
               Cancel
             </Button>
-            <Button size='full' color='white' onClick={handleLeaveClick}>
+            <Button size='full' color='red' onClick={handleLeaveClick}>
               Leave
             </Button>
           </div>
         }
       />
-      <Button
-        type='submit'
-        size='full'
-        color='green'
-        className={cx('save-button')}
-        onClick={handleSaveButtonClick}
-        disabled={!isValid}
-      >
-        Save
-      </Button>
     </Layout>
   );
 }
