@@ -51,7 +51,12 @@ const DifficultCourses = () => {
           </Chip>
         </div>
       </div>
-      <div className={cn(`${BLOCK}__list`)}>
+      <div
+        className={cn([
+          `${BLOCK}__list`,
+          courseQuery.isLoading && `${BLOCK}__list--isLoading`,
+        ])}
+      >
         {courseQuery.data?.pages.map((page, index) =>
           page.response.courses.map((course, index) => (
             <CourseCard key={index} course={course} index={index} />

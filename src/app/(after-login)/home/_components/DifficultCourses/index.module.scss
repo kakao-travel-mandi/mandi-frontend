@@ -36,5 +36,14 @@
     overflow-x: scroll;
     scrollbar-width: none;
     gap: 16px;
+    min-height: 200px;
+
+      &--isLoading {
+      background-color: $white;
+      border-radius: 12px;
+      animation: skeleton-loading 1.2s infinite ease-in-out;
+      background: linear-gradient(90deg, $white 25%, $gray-100 50%, $white 75%);
+      background-size: 200% 100%;
+    }
   }
 }

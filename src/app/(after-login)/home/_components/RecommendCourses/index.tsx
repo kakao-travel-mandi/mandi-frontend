@@ -23,7 +23,12 @@ const RecommendCourses = () => {
       <div className={cn(`${BLOCK}__title`)}>
         <p>{userInfo?.response.nickname}&apos;s Recommended Course!</p>
       </div>
-      <div className={cn(`${BLOCK}__list`)}>
+      <div
+        className={cn([
+          `${BLOCK}__list`,
+          courseQuery.isLoading && `${BLOCK}__list--isLoading`,
+        ])}
+      >
         {courseQuery.data?.pages.map((page, index) =>
           page.response.courses.map((course, index) => (
             <CourseCard key={index} course={course} index={index} />
@@ -35,26 +40,3 @@ const RecommendCourses = () => {
 };
 
 export default RecommendCourses;
-const courses = [
-  {
-    title: 'Sinseondae',
-    difficulty: 'Easy',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-  {
-    title: 'Dongbaek Island',
-    difficulty: 'Hard',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-  {
-    title: 'Haeparang',
-    difficulty: 'Moderate',
-    time: '1:30',
-    distance: '1.93 km',
-    image: '/test/course.png',
-  },
-];
