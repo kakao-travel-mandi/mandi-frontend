@@ -1,8 +1,13 @@
-import { GetNearbyCoursesRequest, GetCoursesRequest } from '@/types/request';
+import {
+  GetNearbyCoursesRequest,
+  GetCoursesRequest,
+  GetCourseDetailRequest,
+} from '@/types/request';
 import {
   GetNearbyCoursesResponse,
   GetCoursesResponse,
   CourseNamesResponse,
+  GetCourseDetailResponse,
 } from '@/types/response';
 
 import { axiosInstance } from './axiosInstance';
@@ -70,6 +75,22 @@ export const getCourseNamesAPI = async (): Promise<CourseNamesResponse> => {
   try {
     const response = await axiosInstance.get('/courses/names');
     console.log('response', response);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(response.data.error.message);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCourseDetailAPI = async (
+  request: GetCourseDetailRequest,
+): Promise<GetCourseDetailResponse> => {
+  const { courseId } = request;
+  try {
+    const response = await axiosInstance.get(`/courses/${courseId}`);
     if (response.status === 200) {
       return response.data;
     } else {

@@ -41,3 +41,7 @@ export type GetNearbyCoursesRequest = {
   sw: Coordinate;
   ne: Coordinate;
 };
+
+export type GetCourseDetailRequest = {
+  courseId: number;
+};

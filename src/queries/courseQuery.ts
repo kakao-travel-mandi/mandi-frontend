@@ -2,13 +2,18 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import {
+  getCourseDetailAPI,
   getCourseNamesAPI,
   getCoursesAPI,
   getGPXDataAPI,
   getNearbyCoursesAPI,
 } from '@/apis/course';
-import { GetCoursesRequest, GetNearbyCoursesRequest } from '@/types/request';
-import { GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
+import {
+  GetCourseDetailRequest,
+  GetCoursesRequest,
+  GetNearbyCoursesRequest,
+} from '@/types/request';
+import { GetCourseDetailResponse, GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
 
 export const useCoursesQuery = (params: GetCoursesRequest, enabled = true) => {
   return useInfiniteQuery<GetCoursesResponse, AxiosError>({
@@ -63,5 +68,12 @@ export const useCourseNamesQuery = () => {
   return useQuery({
     queryKey: ['course-names'],
     queryFn: () => getCourseNamesAPI(),
+  });
+};
+
+export const useCourseDetailQuery = (params: GetCourseDetailRequest) => {
+  return useQuery<GetCourseDetailResponse, AxiosError>({
+    queryKey: ['course-detail', params],
+    queryFn: () => getCourseDetailAPI(params),
   });
 };

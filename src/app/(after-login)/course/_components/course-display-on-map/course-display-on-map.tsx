@@ -16,6 +16,8 @@ interface CourseMarkerProps {
   course: MapCourseDTO;
   selected?: boolean;
   selectedPointCoordinate?: Coordinate;
+  visibleMidPoint?: boolean;
+  visibleEndPoints?: boolean;
   onClickCourse?: (course: MapCourseDTO) => void;
   onClickEndPoints?: (point: PointDTO) => void;
 }
@@ -24,6 +26,8 @@ const CourseDisplayOnMap = ({
   course,
   selected,
   selectedPointCoordinate,
+  visibleMidPoint = true,
+  visibleEndPoints = true,
   onClickCourse,
   onClickEndPoints,
 }: CourseMarkerProps) => {
@@ -54,25 +58,28 @@ const CourseDisplayOnMap = ({
         options={{ strokeColor: '#00B288', strokeWeight: 4 }}
         onClick={handleClickCourse}
       />
-      <CourseMarker
-        name={course.courseName}
-        position={coordinateToLatLng(course.midPoint)}
-        size={selected ? 42 : 32}
-        onClick={handleClickCourse}
-      />
-      {points.map((point, index) => {
-        const { icon, size, anchor } = getMarkerProps(point);
-        return (
-          <CustomMarker
-            key={index}
-            icon={icon}
-            size={size}
-            position={coordinateToLatLng(point.coordinate)}
-            onClick={() => onClickEndPoints?.(point)}
-            anchor={anchor}
-          />
-        );
-      })}
+      {visibleMidPoint && (
+        <CourseMarker
+          name={course.courseName}
+          position={coordinateToLatLng(course.midPoint)}
+          size={selected ? 42 : 32}
+          onClick={handleClickCourse}
+        />
+      )}
+      {visibleEndPoints &&
+        points.map((point, index) => {
+          const { icon, size, anchor } = getMarkerProps(point);
+          return (
+            <CustomMarker
+              key={index}
+              icon={icon}
+              size={size}
+              position={coordinateToLatLng(point.coordinate)}
+              onClick={() => onClickEndPoints?.(point)}
+              anchor={anchor}
+            />
+          );
+        })}
     </>
   );
 };

@@ -2,7 +2,11 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
-import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
+import {
+  MAX_TIMEOUT_TIME,
+  NO_AUTH_ENDPOINTS,
+  NO_AUTH_PATTERNS,
+} from '@/constants/api';
 import { getAccessToken, setAccessToken, setRefreshToken } from '@/utils/auth';
 
 export const axiosInstance = axios.create({
@@ -27,8 +31,9 @@ axiosInstance.interceptors.request.use(
   request => {
     const accessToken = getAccessToken();
 
-    const isNoAuthEndpoint = NO_AUTH_ENDPOINTS.includes(request.url ?? '');
-
+    const isNoAuthEndpoint =
+      NO_AUTH_ENDPOINTS.includes(request.url ?? '') ||
+      NO_AUTH_PATTERNS.some(pattern => pattern.test(request.url ?? ''));
     if (accessToken && !isNoAuthEndpoint) {
       request.headers.Authorization = `Bearer ${accessToken}`;
     }

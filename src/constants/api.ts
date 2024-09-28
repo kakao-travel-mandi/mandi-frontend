@@ -9,6 +9,8 @@ export const NO_AUTH_ENDPOINTS = [
   '/courses/names',
 ];
 
+export const NO_AUTH_PATTERNS = [/^\/courses\/[^\/]+$/];
+
 export const WEATHER_ICON_URL = 'https://openweathermap.org/img/wn/';
 
 export const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/forecast';
