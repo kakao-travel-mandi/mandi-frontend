@@ -22,6 +22,8 @@ import { useCourseDetailQuery } from '@/queries/courseQuery';
 import { MapProvider } from '../map-provider';
 import { GoogleMap } from '@react-google-maps/api';
 import CourseDisplayOnMap from '../_components/course-display-on-map/course-display-on-map';
+import { useCourseStart } from '@/hooks/useCourseStart';
+import Dialog from '@/components/common/dialog';
 
 const cx = classNames.bind(styles);
 
@@ -30,6 +32,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
   const { data, status, error } = useCourseDetailQuery({
     courseId: Number(courseId),
   });
+  const { loading, handleClickStart } = useCourseStart(Number(courseId));
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
@@ -49,11 +52,6 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
       }
     }
   }, [scrolled, status]);
-  const handleStartButton = () => {
-    // TODO: api로 여부 한번 확인하기.
-    setTrekkingIdCookie(Number(courseId));
-    router.push(`/course/${courseId}/trekking`);
-  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -150,8 +148,8 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
                 </GoogleMap>
               </MapProvider>
             </div>
-            <Button color='green' size='full' onClick={handleStartButton}>
-              Course Start
+            <Button color='green' size='full' onClick={handleClickStart}>
+              {loading ? 'Loading...' : 'Start Course'}
             </Button>
           </div>
           <Divider />

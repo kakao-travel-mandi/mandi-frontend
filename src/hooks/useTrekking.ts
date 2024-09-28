@@ -1,7 +1,8 @@
+import { useFinishTrekkingMutation } from '@/queries/trekkingQuery';
 import { useTrekkerStore } from '@/stores/trekker';
 import { getCurrentPosition } from '@/utils/geolocation';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useCallback, useEffect, useState } from 'react';
-import { set } from 'react-hook-form';
 
 export const useTrekking = () => {
   const {
@@ -15,7 +16,25 @@ export const useTrekking = () => {
     startTracking,
     resetTracking,
   } = useTrekkerStore();
-  const [showResult, setShowResult] = useState(true);
+  const courseId = Number(getCookie('trekkingId'));
+  const [showResult, setShowResult] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const { mutate } = useFinishTrekkingMutation(courseId, {
+    onSuccess: (data, variables) => {
+      if (data.response.enabled) {
+        pauseTracking(
+          variables.userLocation,
+          new Date(variables.completedAt).getTime(),
+        );
+        setShowResult(true);
+      } else {
+        setShowDialog(true);
+      }
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
   const [displayTime, setDisplayTime] = useState(totalTime);
   const handleClickPlayAndPause = useCallback(async () => {
     const currentPosition = await getCurrentPosition();
@@ -25,11 +44,24 @@ export const useTrekking = () => {
     if (state === 'Paused') resumeTracking(currentPosition, currentTime);
   }, [state, startTracking, pauseTracking, resumeTracking]);
   const handleClickStop = useCallback(async () => {
-    //TODO: 구현 필요 - api로 여부에 따라서 다른 다이얼로그(상태필요) 보여주고
-    // 여부(false)에 따라 홈으로 이동하면서 데이터 초기화.
-    // 여부(true)면 showResult를 true로 변경
-    setShowResult(true);
+    const currentPosition = await getCurrentPosition();
+    // 코스 11번 테스트용 코드
+    // const currentPosition = {
+    //   latitude: 35.073949,
+    //   longitude: 129.015331,
+    // };
+
+    const currentTime = Date.now();
+
+    mutate({
+      userLocation: {
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+      },
+      completedAt: new Date(currentTime).toISOString(),
+    });
   }, []);
+  const closeDialog = () => setShowDialog(false);
 
   useEffect(() => {
     setDisplayTime(totalTime);
@@ -39,7 +71,6 @@ export const useTrekking = () => {
     let intervalId: NodeJS.Timeout;
 
     if (state === 'Running') {
-      // 1초마다 표시시간 업데이트
       intervalId = setInterval(() => {
         setDisplayTime(prevTime => prevTime + 1);
       }, 1000);
@@ -47,6 +78,21 @@ export const useTrekking = () => {
 
     return () => clearInterval(intervalId);
   }, [state, updateTracking]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (showResult) {
+        resetTracking();
+        deleteCookie('trekkingId');
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [showResult, resetTracking]);
 
   useEffect(() => {
     const handleBeforeUnload = async (event: BeforeUnloadEvent) => {
@@ -65,6 +111,8 @@ export const useTrekking = () => {
   }, [state, updateTracking]);
 
   return {
+    showDialog,
+    closeDialog,
     showResult,
     state,
     lastPosition,

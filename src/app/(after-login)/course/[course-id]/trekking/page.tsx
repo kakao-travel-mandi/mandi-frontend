@@ -25,22 +25,35 @@ import { useTrekking } from '@/hooks/useTrekking';
 import { useRouter } from 'next/navigation';
 import { useNearbyPlaces } from '@/hooks/useNearbyPlaces';
 import ResultPage from './_components/result-page/result-page';
+import { useCourseDetailQuery } from '@/queries/courseQuery';
+import CourseDisplayOnMap from '../../_components/course-display-on-map/course-display-on-map';
+import Dialog from '@/components/common/dialog';
+import Button from '@/components/common/button';
 import { deleteCookie } from 'cookies-next';
 
 const cx = classNames.bind(styles);
 
-const TrakingPage = () => {
+const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
   const { map, onLoad, onUnmount, center } = useMap();
   const {
     showResult,
     state,
     displayTime,
     totalDistance,
+    showDialog,
+    resetTracking,
+    closeDialog,
     updateTracking,
     handleClickPlayAndPause,
     handleClickStop,
-    resetTracking,
   } = useTrekking();
+  const {
+    data: course,
+    status: courseStatus,
+    error: CourseError,
+  } = useCourseDetailQuery({
+    courseId: Number(params['course-id']),
+  });
   const [currentMarkerPosition, setCurrentMarkerPosition] =
     useState<google.maps.LatLngLiteral | null>(null);
   const { nearbyPlaces, selectedNearby, selectNearbyChip, removeNearbyPlaces } =
@@ -79,6 +92,11 @@ const TrakingPage = () => {
     if (!clearSelections()) router.back();
   };
   const onClickMap = () => clearSelections();
+  const handleClickDialogEnd = () => {
+    resetTracking();
+    deleteCookie('trekkingId');
+    router.push('/');
+  };
 
   useEffect(() => {
     setCurrentMarkerPosition(center);
@@ -99,17 +117,21 @@ const TrakingPage = () => {
     return () => clearInterval(updateIntervalId);
   }, [state]);
 
-  // 언마운트 시, showResult가 true일 경우 트래킹 데이터 초기화
   useEffect(() => {
-    return () => {
-      if (showResult) {
-        resetTracking();
-        deleteCookie('trekkingId');
-      }
-    };
-  }, [showResult]);
+    if (courseStatus === 'error' && CourseError.status === 404) {
+      router.push('/'); // 홈으로 리다이렉트
+    }
+  }, [courseStatus, CourseError, router]);
 
-  if (showResult) return <ResultPage />;
+  if (showResult)
+    return (
+      <ResultPage
+        courseData={course!.response}
+        totalTime={displayTime}
+        totalDistance={totalDistance}
+        lastPosition={currentMarkerPosition!}
+      />
+    );
 
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} onBack={onClickBack}>
@@ -149,6 +171,13 @@ const TrakingPage = () => {
                   selected={selectedMarker?.id === point.id}
                 />
               ))}
+              {courseStatus === 'success' && (
+                <CourseDisplayOnMap
+                  course={course.response as any}
+                  visibleMidPoint={false}
+                  visibleEndPoints={false}
+                />
+              )}
             </GoogleMap>
           )}
         </MapProvider>
@@ -173,8 +202,7 @@ const TrakingPage = () => {
         snapPoints={[230]}
       >
         <Trekker
-          // TODO: 코스 데이터 받아와서 넣기
-          courseName='Course Name'
+          courseName={course?.response.courseName!}
           state={state}
           time={displayTime}
           distance={totalDistance}
@@ -182,6 +210,22 @@ const TrakingPage = () => {
           handleClickPlayAndPause={handleClickPlayAndPause}
         />
       </DraggableBottomSheet>
+      <Dialog
+        title='No courses completed yet.'
+        description='Incomplete records will not be saved.'
+        isOpen={showDialog}
+        onClose={closeDialog}
+        buttons={
+          <div className={cx('dialog-buttons')}>
+            <Button color='whitegray' size='full' onClick={closeDialog}>
+              Cancel
+            </Button>
+            <Button color='red' size='full' onClick={handleClickDialogEnd}>
+              End
+            </Button>
+          </div>
+        }
+      />
     </Layout>
   );
 };

@@ -10,6 +10,7 @@ import { getDifficultyColor } from '@/utils/course';
 import DetailInfo from '../../[course-id]/_components/detail-info/detail-info';
 
 import styles from './marker-info-card.module.scss';
+import { useCourseStart } from '@/hooks/useCourseStart';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ type MarkerInfoCardProps =
     };
 const MarkerInfoCard = ({ type, data }: MarkerInfoCardProps) => {
   const router = useRouter();
+  const { handleClickStart } = useCourseStart((data as MapCourseDTO).id);
   const handleClickButton = () => {
     if (type === 'point') {
       let url;
@@ -38,6 +40,8 @@ const MarkerInfoCard = ({ type, data }: MarkerInfoCardProps) => {
       }
 
       window.open(url, '_blank');
+    } else if (type === 'course') {
+      handleClickStart();
     }
   };
   const handleClickName = () => {

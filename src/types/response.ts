@@ -103,3 +103,15 @@ export interface CourseNamesResponse extends BaseResponse {
 export interface GetCourseDetailResponse extends BaseResponse {
   response: CourseDetailDTO;
 }
+
+export interface StartTrekkingResponse extends BaseResponse {
+  response: {
+    enabled: boolean;
+  };
+}
+
+export interface FinishTrekkingResponse extends BaseResponse {
+  response: {
+    enabled: boolean;
+  };
+}

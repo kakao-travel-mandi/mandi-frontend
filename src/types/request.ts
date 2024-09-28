@@ -45,3 +45,18 @@ export type GetNearbyCoursesRequest = {
 export type GetCourseDetailRequest = {
   courseId: number;
 };
+
+export type StartTrekkingRequest = {
+  userLocation: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
+export type FinishTrekkingRequest = {
+  userLocation: {
+    latitude: number;
+    longitude: number;
+  };
+  completedAt: string;
+}

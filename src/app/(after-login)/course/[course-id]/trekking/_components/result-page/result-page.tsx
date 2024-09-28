@@ -7,14 +7,26 @@ import { TrekkingData } from '../trekker/trekker';
 import { MapProvider } from '@/app/(after-login)/course/map-provider';
 import { GoogleMap } from '@react-google-maps/api';
 import Button from '@/components/common/button';
+import { formatDistance, formatTime } from '@/utils/trekker';
+import CurrentPositionMarker from '@/app/(after-login)/course/_components/current-position-marker/current-position-marker';
+import { CourseDetailDTO } from '@/types/course';
+import CourseDisplayOnMap from '@/app/(after-login)/course/_components/course-display-on-map/course-display-on-map';
 
 const cx = classNames.bind(styles);
 
-const ResultPage = () => {
-  // 마지막 위치로 현재위치 표시하자.
-  // 누적시간, 거리 가져오자
+interface ResultPageProps {
+  courseData: CourseDetailDTO;
+  totalTime: number;
+  totalDistance: number;
+  lastPosition: google.maps.LatLngLiteral;
+}
 
-  // 경로는 받아오자.
+const ResultPage = ({
+  courseData,
+  totalTime,
+  totalDistance,
+  lastPosition,
+}: ResultPageProps) => {
   return (
     <Layout hasTabBar={false} hasTopNav={true} back={true}>
       <div className={cx('container')}>
@@ -23,25 +35,35 @@ const ResultPage = () => {
             <CompleteIcon className={cx('result__icon')} />
             <div className={cx('result__text')}>
               <h2>Corse Completed</h2>
-              <span>Sinseondae</span>
+              <span>{courseData.courseName}</span>
             </div>
           </div>
           <div className={cx('data')}>
             <div className={cx('data__row')}>
-              <TrekkingData title='Time' content={'00:12:34'} />
+              <TrekkingData title='Time' content={formatTime(totalTime)} />
               <div className={cx('divider')} />
               <div className={cx('divider')} />
-              <TrekkingData title='Distance' content={'1.25km'} />
+              <TrekkingData
+                title='Distance'
+                content={formatDistance(totalDistance)}
+              />
             </div>
             <div className={cx('map')}>
               <MapProvider>
                 <GoogleMap
                   mapContainerClassName={cx('map-container')}
-                  center={{ lat: 37.5665, lng: 126.978 }}
+                  center={lastPosition}
                   zoom={10}
                   options={{ disableDefaultUI: true }}
                   clickableIcons={false}
-                />
+                >
+                  <CurrentPositionMarker position={lastPosition} />
+                  <CourseDisplayOnMap
+                    course={courseData as any}
+                    visibleMidPoint={false}
+                    visibleEndPoints={false}
+                  />
+                </GoogleMap>
               </MapProvider>
             </div>
           </div>

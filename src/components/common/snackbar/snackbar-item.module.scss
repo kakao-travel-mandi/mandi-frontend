@@ -11,6 +11,7 @@
   align-items: center;
   gap: 0.625rem;
   opacity: 0;
+  z-index: 9999;
  
   &--center {
     top: 50%;
@@ -47,6 +48,7 @@
   &__message {
     @extend .body2-semibold;
     color: white;
+    white-space: pre-line;
   }
 }
 @keyframes enter {
