@@ -14,10 +14,7 @@ const useCourseFiltersWithUrl = () => {
     const stars = searchParams.get('stars');
 
     return {
-      sortBy:
-        sortBy === 'asc' || sortBy === 'desc' || sortBy === 'default'
-          ? sortBy
-          : null,
+      sortBy: sortBy === 'asc' || sortBy === 'desc' ? sortBy : null,
       difficulty: difficulty.filter(
         (d): d is 'easy' | 'moderate' | 'hard' =>
           d === 'easy' || d === 'moderate' || d === 'hard',

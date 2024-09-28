@@ -1,9 +1,10 @@
-// TODO: 필요 없을 수 있음...
-
 import { create } from 'zustand';
 
+import { GetCoursesRequest } from '@/types/request';
+import { getDifficultyNumber } from '@/utils/course';
+
 export type DifficultyType = 'easy' | 'moderate' | 'hard';
-export type SortByType = 'asc' | 'desc' | 'default' | null;
+export type SortByType = 'asc' | 'desc' | null;
 export type StarsType = 1 | 2 | 3 | 4 | 5 | null;
 
 export type CourseFilters = {
@@ -15,9 +16,9 @@ export type CourseFilters = {
 type CourseFiltersStoreType = {
   filters: CourseFilters;
   setFilters: (filters: CourseFilters) => void;
-  setSortBy: (sortBy: 'asc' | 'desc' | 'default' | null) => void;
-  setDifficulty: (difficulty: 'easy' | 'moderate' | 'hard') => void;
-  setStars: (stars: (1 | 2 | 3 | 4 | 5) | null) => void;
+  setSortBy: (sortBy: SortByType) => void;
+  setDifficulty: (difficulty: DifficultyType) => void;
+  setStars: (stars: StarsType) => void;
 };
 
 const initialFilters: CourseFilters = {
@@ -49,7 +50,6 @@ export const filterNamesMap = {
   stars: 'Stars',
 };
 export const distanceMap = {
-  default: 'Default',
   desc: 'High to Low',
   asc: 'Low to High',
 };
@@ -64,4 +64,20 @@ export const starsMap = {
   3: '3 or more',
   2: '2 or more',
   1: '1 or more',
+};
+
+export const formatCourseFilterParams = (
+  filters: CourseFilters,
+): Pick<GetCoursesRequest, 'orderByDirection' | 'rating' | 'levels'> => {
+  const { sortBy, difficulty, stars } = filters;
+  const levels = difficulty.map(d => getDifficultyNumber(d));
+  return {
+    orderByDirection:
+      sortBy !== null ? (sortBy.toUpperCase() as 'ASC' | 'DESC') : undefined,
+    rating:
+      stars !== null
+        ? (stars.toString() as '1' | '2' | '3' | '4' | '5')
+        : undefined,
+    levels: levels.length > 0 ? levels.join(',') : undefined,
+  };
 };

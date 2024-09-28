@@ -28,3 +28,29 @@ export const formatRating = (stars: StarsType) => {
   if (stars === null) return 'Rating';
   return starsMap[stars];
 };
+
+export const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty) {
+    case 'Easy':
+      return 'green';
+    case 'Moderate':
+      return 'orange';
+    case 'Hard':
+      return 'red';
+    default:
+      return 'gray';
+  }
+};
+
+export const getDifficultyNumber = (difficulty: string) => {
+  switch (difficulty) {
+    case 'easy':
+      return 1;
+    case 'moderate':
+      return 2;
+    case 'hard':
+      return 3;
+    default:
+      return 0;
+  }
+};

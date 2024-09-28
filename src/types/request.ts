@@ -1,3 +1,5 @@
+import { Coordinate } from './course';
+
 export type SignupRequest = {
   token: string;
   nickname: string;
@@ -24,4 +26,18 @@ export type WeatherRequest = {
   lat: number;
   lon: number;
   appid: string;
+};
+
+export type GetCoursesRequest = {
+  page?: string;
+  size?: string;
+  rating?: '0' | '1' | '2' | '3' | '4' | '5';
+  keyword?: string;
+  orderByDirection?: 'ASC' | 'DESC';
+  levels?: string;
+};
+
+export type GetNearbyCoursesRequest = {
+  sw: Coordinate;
+  ne: Coordinate;
 };

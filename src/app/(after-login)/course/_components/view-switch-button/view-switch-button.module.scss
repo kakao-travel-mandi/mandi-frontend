@@ -1,0 +1,32 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.layout-button{
+  // z-index: 10;
+  // position: absolute;
+  // left: 50%;             
+  // transform: translateX(-50%);
+  // bottom: 1.25rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6.25rem;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem;
+  @extend .label2-semibold;
+  &__icon{
+    width: 1rem;
+    height: 1rem;
+  }
+  &--green{
+    color:white;
+    background-color: $green-500;
+    fill: white;
+  }
+  &--white{
+    color: $gray-700;
+    background-color: white;
+    fill: $gray-700;
+  }
+}
