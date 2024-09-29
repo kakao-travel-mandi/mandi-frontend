@@ -94,7 +94,7 @@ const Main = () => {
     if (callback === 'true' && session) {
       login({ token: session.accessToken });
     }
-  }, [callback, session]);
+  }, [login, callback, session]);
 
   return (
     <Layout hasTopNav={false} hasTabBar={false}>

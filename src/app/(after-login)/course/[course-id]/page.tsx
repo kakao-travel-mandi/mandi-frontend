@@ -7,15 +7,13 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import BookmarkIconStroke from '@/assets/icon/icon-bookmark-Stroke.svg';
-import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
+// import BookmarkIconStroke from '@/assets/icon/icon-bookmark-Stroke.svg';
+// import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Button from '@/components/common/button';
-import Dialog from '@/components/common/dialog';
 import Divider from '@/components/common/divider';
 import Layout from '@/components/layout';
 import { useCourseStart } from '@/hooks/useCourseStart';
 import { useCourseDetailQuery } from '@/queries/courseQuery';
-import { setTrekkingIdCookie } from '@/utils/course';
 
 import CourseDisplayOnMap from '../_components/course-display-on-map/course-display-on-map';
 import { MapProvider } from '../map-provider';
@@ -78,13 +76,6 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
       topNavBarClassName={cx('navbar', {
         'navbar--not-scrolled': !scrolled,
       })}
-      // TODO: 북마크 부분 기능, 디자인 수정 필요
-      actions={[
-        {
-          icon: bookmarked ? BookmarkIcon : BookmarkIconStroke,
-          onClick: handleBookmarkClick,
-        },
-      ]}
     >
       {status === 'success' && (
         <div className={cx('container')} ref={containerRef}>
@@ -153,7 +144,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
               {loading ? 'Loading...' : 'Start Course'}
             </Button>
           </div>
-          <Divider />
+          {/* <Divider />
           <div className={cx('review-overview-section')}>
             <ReviewOverview />
           </div>
@@ -166,7 +157,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
             >
               more reviews
             </Button>
-          </div>
+          </div> */}
         </div>
       )}
     </Layout>
