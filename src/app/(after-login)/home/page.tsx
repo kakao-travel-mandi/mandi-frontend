@@ -2,8 +2,8 @@ import IconMandi from '@/assets/icon/icon-mandi.svg';
 import Layout from '@/components/layout';
 
 import DifficultCourses from './_components/DifficultCourses';
+import DistanceCourses from './_components/DistanceCourse';
 import Landing from './_components/Landing';
-import LeadTimeCourses from './_components/LeadTimeCourses';
 import RecommendCourses from './_components/RecommendCourses';
 import Weather from './_components/Weather';
 
@@ -20,7 +20,7 @@ const Home = () => {
       <Landing />
       <RecommendCourses />
       <Weather />
-      <LeadTimeCourses />
+      <DistanceCourses />
       <DifficultCourses />
     </Layout>
   );

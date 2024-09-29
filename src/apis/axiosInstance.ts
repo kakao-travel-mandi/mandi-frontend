@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { signOut } from 'next-auth/react';
 
-import { MAX_TIMEOUT_TIME, NO_AUTH_ENDPOINTS } from '@/constants/api';
+import {
+  MAX_TIMEOUT_TIME,
+  NO_AUTH_ENDPOINTS,
+  REFRESH_TOKEN_ENDPOINT,
+} from '@/constants/api';
 import {
   deleteAccessToken,
   deleteRefreshToken,
@@ -38,7 +42,12 @@ axiosInstance.interceptors.request.use(
     const isNoAuthEndpoint = NO_AUTH_ENDPOINTS.includes(request.url ?? '');
 
     if (accessToken && !isNoAuthEndpoint) {
-      request.headers.Authorization = `Bearer ${accessToken}`;
+      if (REFRESH_TOKEN_ENDPOINT.includes(request.url ?? '')) {
+        console.log(request.url);
+        request.headers.Authorization = `${accessToken}`;
+      } else {
+        request.headers.Authorization = `Bearer ${accessToken}`;
+      }
     }
 
     return request;

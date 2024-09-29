@@ -6,7 +6,11 @@
   width: 133px;
 
   &__image {
+    border-radius: 0.5rem;
+    background-color: $gray-200;
+    overflow: hidden;
     margin-bottom: 8px;
+    cursor: pointer;
   }
 
   &__title {
@@ -22,9 +26,17 @@
 
     &--item {
       @extend .label4-regular;
-      color: $gray-500;
       display: flex;
-      gap: 4px;
+        gap: 0.25rem;
+        &__icon {
+          width: 0.875rem;
+          height: 0.875rem;
+          fill: $gray-500;
+        }
+        &__text {
+          @extend .label5-regular;
+          color: $gray-500;
+        }
     }
   }
 }

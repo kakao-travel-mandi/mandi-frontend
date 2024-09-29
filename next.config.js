@@ -26,7 +26,11 @@ module.exports = withPWA({
     return config;
   },
   images: {
-    domains: ['openweathermap.org'],
+    domains: [
+      'openweathermap.org',
+      'mandi-courses.s3.ap-northeast-2.amazonaws.com',
+      'mandi-image.s3.ap-northeast-2.amazonaws.com',
+    ],
     remotePatterns: [
       {
         protocol: 'https',
