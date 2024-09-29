@@ -1,0 +1,120 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5625rem;
+  
+  &__header {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  } 
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: $gray-200;
+  }
+
+  &__user-rating{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  &__username {
+    @extend .subtitle2-semibold;
+    color: $gray-900;
+  }
+
+  &__rating{
+    display: flex;
+    gap: 0.25rem;
+    @extend .label4-semibold;
+    color: $gray-800;
+  }
+
+  &__date {
+    @extend .label4-regular;
+    color: $gray-600;
+  }
+
+  &__more-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $gray-500;
+    cursor: pointer;
+  }
+
+  &__content{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__images{
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    &__item{
+      position: relative;
+      flex-shrink: 0;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 8px;
+      border: 1px solid $gray-400;
+      background-color: white;
+      overflow: hidden;
+
+      img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &__text {
+    color: $gray-900;
+    @extend .body2-regular;
+    display: -webkit-box;
+    
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    &--expanded {
+      line-clamp: unset;
+      -webkit-line-clamp: unset;
+    }
+  }
+
+  &__text__clone {
+    color: $gray-900;
+    @extend .body2-regular;
+    display: -webkit-box;
+    // 숨기기
+    position: absolute;
+    top: 0;
+    white-space: pre-line;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &__expand-button {
+    color: $gray-500;
+    @extend .body2-regular;
+    cursor: pointer;
+  }
+}

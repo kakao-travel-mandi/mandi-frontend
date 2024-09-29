@@ -1,5 +1,5 @@
 :root {
-  background: #eaedf2;
+  background: #ffffff;
 }
 
 * {
@@ -114,9 +114,28 @@ section {
 *[hidden] {
   display: none;
 }
+
+html {
+  overscroll-behavior: none;
+}
+
+
 body {
   line-height: 1;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100dvh;
+  
+  @media all and (display-mode: standalone) {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 20px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  }
 }
+
 menu,
 ol,
 ul {
@@ -170,3 +189,15 @@ input:-webkit-autofill:active {
   -webkit-transition: background-color 9999s ease-out;
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+
+// 구글맵 포커스 border 제거
+.gm-style iframe + div { border:none!important; }

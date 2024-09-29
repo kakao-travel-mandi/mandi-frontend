@@ -1,0 +1,15 @@
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: scroll;
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.no-results {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,35 @@
+@use "/src/styles/color.scss" as *;
+.badge {
+  display: inline-flex;
+  padding: 0.125rem 0.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+
+  &.badge__green {
+    background: $green-50;
+    color: $green-500;
+  }
+  &.badge__greenDeep {
+    background: $green-500;
+    color: $white;
+  }
+  &.badge__red {
+    background: $red-light;
+    color: $red;
+  }
+  &.badge__gray {
+    background: $gray-100;
+    color: $gray-700;
+  }
+  &.badge__orange {
+    background: $orange-light;
+    color: $orange;
+  }
+  &.badge__round__small {
+    border-radius: 0.25rem;
+  }
+  &.badge__round__large {
+    border-radius: 6.25rem;
+  }
+}

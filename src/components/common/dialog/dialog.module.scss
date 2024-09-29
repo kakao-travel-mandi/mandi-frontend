@@ -1,0 +1,46 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.dialog {
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 10;
+  }
+
+  &__container {
+    z-index: 10;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+  }
+
+  &__panel {
+    background-color: white;
+    padding: 16px;
+    padding-top: 28px;
+    border-radius: 0.5rem;
+    width: 311px;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+
+    &__title {
+      @extend .title3-semibold;
+      color: $gray-800;
+    }
+
+    &__description {
+      @extend .body2-regular;
+      color: $gray-600;
+    }
+  }
+}

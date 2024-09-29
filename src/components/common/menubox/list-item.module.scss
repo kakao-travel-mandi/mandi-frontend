@@ -1,0 +1,20 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.list-item{
+  padding: 0.625rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  &__content {
+    color: $gray-800;
+    @extend .label3-regular;
+  }
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    fill: $gray-700;
+  }
+}

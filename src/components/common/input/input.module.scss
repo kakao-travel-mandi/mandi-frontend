@@ -1,0 +1,134 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.input {
+
+  &__field {
+    position: relative;
+  }
+
+  &__label {
+    @extend .label4-regular;
+    color: $gray-700;
+    margin-bottom: 4px;
+
+    &--error {
+      color: $red;
+    }
+  }
+
+  &__helper {
+    @extend .label4-regular;
+    color: $gray-700;
+    margin-top: 8px;
+    display: none;
+    transition: height 0.3s ease;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  &__error {
+    @extend .label4-regular;
+    color: $red;
+    margin-top: 8px;
+    display: none;
+    transition: height 0.3s ease;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+ &__length {
+    @extend .label4-regular;
+    color: $gray-700;
+    display: flex;
+    justify-content: flex-end;
+
+    &--error {
+      color: $red;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__bottom-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:nth-child(2) {
+      margin-left: auto;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > span {
+    }
+
+    &--left {
+      left: 16px;
+    }
+
+    &--right {
+      right: 16px;
+      opacity: 0;
+
+    }
+
+    &--focused {
+      opacity: 1;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  &__form {
+    @extend .body1-regular;
+    width: 100%;
+    min-width: 300px;
+    border: 1px solid $gray-300;
+    border-radius: 8px;
+    padding: 11px 16px;
+    transition: all 0.3s ease;
+    color: $gray-500;
+    border-color: $gray-100;
+    background-color: $gray-50;
+
+    &--leftIcon {
+      padding-left: 46px;
+    }
+
+    &--rightIcon {
+      padding-right: 46px;
+    }
+
+    &--focused {
+      border-color: $gray-400;
+      background-color: $gray-100;
+    }
+
+    &--value {
+      color: $gray-700;
+    }
+
+    &--error {
+      background-color: $red-light;
+    }
+  }
+
+ 
+}

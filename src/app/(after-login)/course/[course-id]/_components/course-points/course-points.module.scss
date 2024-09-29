@@ -1,0 +1,27 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.points {
+  display: flex;
+  align-items: center;
+
+  &__location-icon{
+    width: 1rem;
+    height: 1rem;
+    fill: $gray-600;
+    margin-right: 0.5rem;
+  }
+
+  &__address{
+    color: $gray-700;
+    @extend .body2-regular;
+  }
+
+  &__copy-icon{
+    margin-left: 0.25rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: $gray-500;
+    cursor: pointer;
+  }
+}

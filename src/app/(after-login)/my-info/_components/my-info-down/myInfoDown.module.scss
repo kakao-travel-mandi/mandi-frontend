@@ -1,0 +1,48 @@
+@use "/src/styles/color.scss" as *;
+.container{
+  display: flex;
+  flex-direction: column;
+  
+  > div{
+    display: flex;
+    padding: 0.75rem 1.25rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+}
+.container__inventory{
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  border-top: 2px solid $gray-50;
+  gap: 0.25rem;
+
+}
+.container__version{
+  display: flex;
+  align-items: center;
+
+  span{
+    color: #B0B8C1
+  }
+
+}
+.container__info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
+.container__info__google{
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.3125rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  border: 1px solid $gray-300;
+  background: #FFF;
+}

@@ -1,0 +1,40 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.recommend-courses {
+  background-color: $white;
+  padding: 20px;
+  padding-right: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    @extend .title3-semibold;
+    color: $gray-900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+
+    &--arrow {
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    gap: 16px;
+    min-height: 200px;
+
+      &--isLoading {
+      background-color: $white;
+      border-radius: 12px;
+      animation: skeleton-loading 1.2s infinite ease-in-out;
+      background: linear-gradient(90deg, $white 25%, $gray-100 50%, $white 75%);
+      background-size: 200% 100%;
+    }
+  }
+}

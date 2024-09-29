@@ -1,0 +1,42 @@
+@use '@/styles/color.scss' as *;
+@use '@/styles/font.scss' as *;
+
+.course-card {
+  border-radius: 8px;
+  width: 133px;
+
+  &__image {
+    border-radius: 0.5rem;
+    background-color: $gray-200;
+    overflow: hidden;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  &__title {
+    @extend .subtitle1-semibold;
+    color: $gray-800;
+    margin-bottom: 4px;
+  }
+
+  &__info {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    &--item {
+      @extend .label4-regular;
+      display: flex;
+        gap: 0.25rem;
+        &__icon {
+          width: 0.875rem;
+          height: 0.875rem;
+          fill: $gray-500;
+        }
+        &__text {
+          @extend .label5-regular;
+          color: $gray-500;
+        }
+    }
+  }
+}

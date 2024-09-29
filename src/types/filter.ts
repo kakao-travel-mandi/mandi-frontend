@@ -1,0 +1,1 @@
+export type ReviewFilter = 'latest' | 'highest' | 'lowest';

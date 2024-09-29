@@ -1,0 +1,77 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.card {
+  padding: 1rem 1.25rem;
+  background-color: white;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    &__name {
+      color: $gray-900;
+      @extend .title2-bold;    
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+
+    &__bookmark-button {
+      background-color: $gray-100;
+      border-radius: 3.125rem;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      display: flex;
+      padding: 0.375rem;
+      &__icon{
+        width: 1.25rem;
+        height: 1.25rem;
+        fill: $gray-500;
+        stroke: $gray-500;
+        &--selected {
+          fill: white;
+          stroke: white;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    margin-left: auto;
+  }
+}
+
+.course-content{
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+  
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    svg {
+      fill: $gray-500;
+    }
+    span {
+      color: $gray-800;
+    }
+    div {
+      gap: 0.25rem;
+    }
+  }
+}
+
+.points-content {
+  @extend .body2-regular;
+  color: $gray-600;
+  margin-bottom: 2.625rem;
+}

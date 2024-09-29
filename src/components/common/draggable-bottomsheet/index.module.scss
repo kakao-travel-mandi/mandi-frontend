@@ -1,0 +1,15 @@
+.draggable-bottom-sheet {
+  width: 100%;
+  position: absolute !important;
+  // overflow: visible !important;
+  overflow-y: scroll !important;
+  z-index: 10 !important;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  &__container  {
+    box-shadow: none !important;
+    border-radius: 2rem 2rem 0 0 !important;
+  }
+}

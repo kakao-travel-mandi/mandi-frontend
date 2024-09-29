@@ -1,0 +1,26 @@
+@use "/src/styles/color.scss" as *;
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.container__title{
+  display: flex;
+  padding: 0.75rem 1.25rem;
+
+  border: none;
+  border-bottom: 1px solid $gray-200;
+  outline: none; 
+  input::placeholder {
+    color: $gray-500;
+  }
+}
+.container__post{
+  display: flex;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  outline: none; 
+  input::placeholder {
+    color: $gray-500;
+  }
+}

@@ -1,0 +1,51 @@
+@use "/src/styles/color.scss" as *;
+.tabs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: $gray-500;
+}
+
+.tabs__header {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  &.tabs__header__vThree {
+    background-color: $gray-200;
+    border-radius: 0.5rem;
+  }
+  &.tabs__header__vFour button {
+    border-bottom: 1px solid $gray-200;
+  }
+
+  .tabs__header__active {
+    background-color: $white;
+    color: $gray-800;
+    &.tabs__header__active__vTwo {
+      div {
+        height: 100%;
+        border-bottom: 2px solid #000;
+      }
+    }
+    &.tabs__header__active__vThree {
+      border-radius: 0.25rem;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    }
+    &.tabs__header__active__vFour {
+      border-bottom: 2px solid #000;
+    }
+  }
+}
+
+.tabs__tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+}
