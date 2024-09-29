@@ -39,6 +39,7 @@ const ReviewLayout = ({ reviewsData, modal }: ReviewLayoutProps) => {
       {reviewsData && reviewsData.length > 0 ? (
         reviewsData.map((data, index) => (
           <ModalReview
+            CourseId={data.id}
             key={index}
             img={data.trekkingPathImageUrl}
             title={data.courseName}

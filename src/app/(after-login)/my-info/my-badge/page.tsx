@@ -37,7 +37,7 @@ const MyBadge = () => {
   if (isError) {
     return <div>Error: {error?.message}</div>;
   }
-  console.log(data?.response.badges[0].imgUrl);
+  console.log('이미지', data?.response.badges[0].imgUrl);
 
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} title='My Badges'>
@@ -55,35 +55,34 @@ const MyBadge = () => {
         </div>
         <div className={cx('container__content')}>
           <BadgePageIcon
-            icon={undefined ?? '/badge/mountain.svg'}
-            disable={false}
+            icon={data?.response.badges[0].imgUrl}
             text={`${data?.response.badges[0].name}` ?? 'Mandi Starter'}
             onClick={handleClick}
           />
           <BadgePageIcon
-            disable={true}
+            icon={data?.response.badges[1].imgUrl}
             text={`${data?.response.badges[1].name}` ?? 'Course Collector'}
             onClick={handleClick}
           />
           <BadgePageIcon
-            disable={true}
+            icon={data?.response.badges[2].imgUrl}
             text={`${data?.response.badges[2].name}` ?? 'Joy of Sharing'}
             onClick={handleClick}
           />
           <BadgePageIcon
-            disable={true}
+            icon={data?.response.badges[3].imgUrl}
             text={
               `${data?.response.badges[3].name}` ?? 'Beginning of Completion'
             }
             onClick={handleClick}
           />
           <BadgePageIcon
-            disable={true}
+            icon={data?.response.badges[4].imgUrl}
             text={`${data?.response.badges[4].name}` ?? 'Walked 10,000 Steps'}
             onClick={handleClick}
           />
           <BadgePageIcon
-            disable={true}
+            icon={data?.response.badges[5].imgUrl}
             text={`${data?.response.badges[5].name}` ?? 'Mandiholic'}
             onClick={handleClick}
           />

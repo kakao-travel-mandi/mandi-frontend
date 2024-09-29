@@ -12,6 +12,7 @@ import CommunityFeed from '@/app/(after-login)/community/_components/community-f
 import IconPaperAirplane from '@/assets/icon/icon-paper-airplane.svg';
 import Layout from '@/components/layout';
 import { useGetAuthId } from '@/queries/authQuery';
+import { usePostCommentAdd } from '@/queries/commentQuery';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { useGetPostId } from '@/queries/postQuery';
 
@@ -25,26 +26,45 @@ const DetailFeed = () => {
   const { mutate, data } = useGetPostId();
   const { data: myInfoData } = useMyInfoQuery();
   const { data: userId } = useGetAuthId();
-  const feedData = data?.response;
-
+  const { mutate: addComment } = usePostCommentAdd();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newReply, setNewReply] = useState<string>('');
   const [selectedComment, setSelectedComment] = useState<{
     parentIndex: number | null;
     childIndex: number | null;
     tag: string | null;
+    valueParentIndex: number | null | undefined;
   }>({
     parentIndex: null,
     childIndex: null,
     tag: null,
+    valueParentIndex: null,
   });
 
+  const feedData = data?.response;
+  const remainingParentCommentsCount = comments.length;
+  const remainingChildCommentsCount = comments.reduce(
+    (count, comment) =>
+      count +
+      (comment.childComments
+        ? comment.childComments.filter(child => !child.isDeleted).length
+        : 0),
+    0,
+  );
+
   const handleReplyClick = (
-    parentIndex: number,
+    parentIndex: number | null,
     childIndex: number | null = null,
     nickname: string,
+    valueParentIndex: number | null | undefined,
   ) => {
-    setSelectedComment({ parentIndex, childIndex, tag: nickname });
+    setSelectedComment({
+      parentIndex,
+      childIndex,
+      tag: nickname,
+      valueParentIndex,
+    });
+    console.log('버튼클릭', selectedComment);
     setNewReply(`@${nickname} `);
   };
 
@@ -54,7 +74,6 @@ const DetailFeed = () => {
 
   const handleReplySubmit = () => {
     if (!newReply.trim()) return;
-
     const newComment = {
       userId: userId.response,
       commentId: Date.now(),
@@ -78,6 +97,11 @@ const DetailFeed = () => {
           parentCommentId: null,
         },
       ]);
+      addComment({
+        commentId: String(postId),
+        parentCommentId: null,
+        content: newReply,
+      });
     } else {
       setComments(prevComments =>
         prevComments.map((comment, index) => {
@@ -90,10 +114,20 @@ const DetailFeed = () => {
           return comment;
         }),
       );
+      addComment({
+        commentId: String(selectedComment.valueParentIndex),
+        parentCommentId: Number(selectedComment.valueParentIndex),
+        content: newReply,
+      });
     }
 
     setNewReply('');
-    setSelectedComment({ parentIndex: null, childIndex: null, tag: null });
+    setSelectedComment({
+      parentIndex: null,
+      childIndex: null,
+      tag: null,
+      valueParentIndex: null,
+    });
   };
 
   useEffect(() => {
@@ -102,7 +136,15 @@ const DetailFeed = () => {
 
   useEffect(() => {
     if (feedData?.commentList) {
-      const transformedComments = feedData.commentList.map(list => ({
+      // 삭제되지 않은 댓글을 필터링하고, 날짜순으로 정렬
+      const filteredAndSortedComments = feedData.commentList
+        .filter(comment => !comment.isDeleted) // isDeleted가 false인 댓글만 남김
+        .sort(
+          (a, b) =>
+            new Date(a.uploadDate).getTime() - new Date(b.uploadDate).getTime(),
+        );
+
+      const transformedComments = filteredAndSortedComments.map(list => ({
         userId: list.user.userId,
         commentId: list.commentId,
         parentCommentId: list.parentCommentId,
@@ -112,17 +154,19 @@ const DetailFeed = () => {
         content: list.content,
         likeCnt: list.likeCnt,
         childComments:
-          list.childComments?.map(child => ({
-            userId: child.user.userId,
-            commentId: child.commentId,
-            parentCommentId: child.parentCommentId,
-            imgUrl: child.user.imgUrl,
-            nickname: child.user.nickname,
-            uploadDate: child.uploadDate,
-            content: child.content,
-            likeCnt: child.likeCnt,
-            childComments: [],
-          })) || [],
+          list.childComments
+            ?.filter(child => !child.isDeleted) // 자식 댓글도 isDeleted 필터링
+            .map(child => ({
+              userId: child.user.userId,
+              commentId: child.commentId,
+              parentCommentId: child.parentCommentId,
+              imgUrl: child.user.imgUrl,
+              nickname: child.user.nickname,
+              uploadDate: child.uploadDate,
+              content: child.content,
+              likeCnt: child.likeCnt,
+              childComments: [],
+            })) || [],
       }));
 
       setComments(transformedComments);
@@ -147,7 +191,9 @@ const DetailFeed = () => {
           communityPost={feedData.content}
           postImage={feedData.imgUrlList.map(item => item.url)}
           likesCount={feedData.likeCnt}
-          commentCount={feedData.CommentCnt}
+          commentCount={
+            remainingParentCommentsCount + remainingChildCommentsCount
+          }
           detail={true}
         />
 
@@ -160,7 +206,12 @@ const DetailFeed = () => {
                   key={index}
                   comment={comment}
                   handleReplyClick={() =>
-                    handleReplyClick(index, null, comment.nickname)
+                    handleReplyClick(
+                      index,
+                      null,
+                      comment.nickname,
+                      comment.commentId,
+                    )
                   }
                 />
                 <>
@@ -170,7 +221,12 @@ const DetailFeed = () => {
                       comment={child}
                       isReply={true}
                       handleReplyClick={() =>
-                        handleReplyClick(index, childIndex, child.nickname)
+                        handleReplyClick(
+                          index,
+                          childIndex,
+                          child.nickname,
+                          comment.commentId,
+                        )
                       }
                     />
                   ))}

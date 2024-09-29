@@ -6,14 +6,17 @@ import { useCourseCompleteReviewQuery } from '@/queries/courseReviewQuery';
 
 const Review = () => {
   const { data, isLoading, error } = useCourseCompleteReviewQuery();
+  const totalReviewCount = data?.response.totalReviewCount;
+  const totalCompletedCourseCount = data?.response.totalCompletedCourseCount;
   const reviewData = data?.response.reviewedCourses.map(course => ({
     ...course.completedCourse, // completedCourse 속성 내의 데이터를 병합
     isReviewed: course.isReviewed,
     content: course.content,
     score: course.score,
     reviewedAt: course.reviewedAt,
-    // imageUrlList: course.imageUrlList.map(image => image.url),
+    imageUrlList: course.imageUrlList.map(image => image.url),
   }));
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -30,7 +33,7 @@ const Review = () => {
       <Tabs
         tabs={[
           {
-            title: 'Unwritten Review()',
+            title: `Unwritten Review(${Number(totalCompletedCourseCount) - Number(totalReviewCount)})`,
             content: (
               <ReviewLayout
                 modal='unWrite'
@@ -39,7 +42,7 @@ const Review = () => {
             ),
           },
           {
-            title: 'written Review()',
+            title: `written Review(${totalReviewCount})`,
             content: <ReviewLayout modal='write' reviewsData={reviewData} />,
           },
         ]}

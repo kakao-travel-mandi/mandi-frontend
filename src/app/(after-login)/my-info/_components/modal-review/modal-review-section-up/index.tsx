@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
@@ -5,11 +7,15 @@ import IconClock from '@/assets/icon/icon-clock.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
 import IconExerciseRunning from '@/assets/icon/icon-exercise_running.svg';
 import IconTrash from '@/assets/icon/icon-trash.svg';
+import Button from '@/components/common/button';
+import Dialog from '@/components/common/dialog';
 import { Menubox } from '@/components/common/menubox';
+import { useDeleteCompletedReview } from '@/queries/courseQuery';
 
 import styles from './modalSectionUP.module.scss';
 
 export interface ModalReviewSectionUpProps {
+  CourseId: number;
   img: string;
   title: string;
   time?: number | string;
@@ -21,6 +27,7 @@ export interface ModalReviewSectionUpProps {
 const cx = classNames.bind(styles);
 
 const ModalReviewSectionUp = ({
+  CourseId,
   modal,
   img,
   title,
@@ -28,6 +35,24 @@ const ModalReviewSectionUp = ({
   distance,
   date,
 }: ModalReviewSectionUpProps) => {
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [deleteReview, setDeleteReview] = useState(false);
+  const { mutate } = useDeleteCompletedReview();
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+  const handleDelete = () => {
+    mutate(`${CourseId}`, {
+      onSuccess: () => {
+        console.log('리뷰 삭제 성공!');
+        setDeleteReview(true);
+      },
+    });
+    setDialogOpen(false);
+  };
+  if (deleteReview) {
+    return null;
+  }
   return (
     <>
       {modal === 'write' ? (
@@ -51,9 +76,32 @@ const ModalReviewSectionUp = ({
               {
                 content: 'Delete',
                 icon: IconTrash,
-                onClick: () => alert('삭제되었습니다(수정필요)'),
+                onClick: () => {
+                  setDialogOpen(true);
+                  console.log('되겨');
+                },
               },
             ]}
+          />
+          <Dialog
+            isOpen={isDialogOpen}
+            onClose={handleCloseDialog}
+            title='Delete the review?'
+            description='Deleted reviews cannot be recovered.'
+            buttons={
+              <div className={cx('container__dialog')}>
+                <Button
+                  size='full'
+                  color='whitegray'
+                  onClick={handleCloseDialog}
+                >
+                  Cancel
+                </Button>
+                <Button size='full' color='red' onClick={handleDelete}>
+                  Delete
+                </Button>
+              </div>
+            }
           />
         </div>
       ) : (

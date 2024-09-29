@@ -72,3 +72,9 @@
   align-items: center;
   gap: 0.25rem;
 }
+.container__dialog{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6875rem;
+  align-self: stretch;
+}

@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import {
+  deleteCompletedReview,
   getCourseDetailAPI,
   getCourseNamesAPI,
   getCoursesAPI,
@@ -13,7 +14,11 @@ import {
   GetCoursesRequest,
   GetNearbyCoursesRequest,
 } from '@/types/request';
-import { GetCourseDetailResponse, GetCoursesResponse, GetNearbyCoursesResponse } from '@/types/response';
+import {
+  GetCourseDetailResponse,
+  GetCoursesResponse,
+  GetNearbyCoursesResponse,
+} from '@/types/response';
 
 export const useCoursesQuery = (params: GetCoursesRequest, enabled = true) => {
   return useInfiniteQuery<GetCoursesResponse, AxiosError>({
@@ -75,5 +80,18 @@ export const useCourseDetailQuery = (params: GetCourseDetailRequest) => {
   return useQuery<GetCourseDetailResponse, AxiosError>({
     queryKey: ['course-detail', params],
     queryFn: () => getCourseDetailAPI(params),
+  });
+};
+
+export const useDeleteCompletedReview = () => {
+  return useMutation({
+    mutationFn: (completedCourseId: string) =>
+      deleteCompletedReview(completedCourseId),
+    onSuccess: () => {
+      console.log('완성된 리뷰 삭제 성공');
+    },
+    onError: error => {
+      console.error('완성된 리뷰 삭제 실패', error);
+    },
   });
 };

@@ -6,12 +6,11 @@ import { useCourseCompleteQuery } from '@/queries/courseReviewQuery';
 
 const CompleteReview = () => {
   const { data, isLoading, error } = useCourseCompleteQuery();
+  console.log(data);
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (error) {
-    return <div>Error</div>;
-  }
+  console.log(data);
   return (
     <Layout
       hasTopNav={true}

@@ -100,3 +100,16 @@ export const getCourseDetailAPI = async (
     throw error;
   }
 };
+
+export const deleteCompletedReview = async (completedCourseId: string) => {
+  try {
+    const response = await axiosInstance.delete(
+      `/reviews/${completedCourseId}`,
+    );
+    console.log('completed review deleted:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error completed review deleted:', error);
+    throw error;
+  }
+};
