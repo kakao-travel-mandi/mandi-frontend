@@ -156,6 +156,11 @@ const DetailFeed = () => {
         childComments:
           list.childComments
             ?.filter(child => !child.isDeleted) // 자식 댓글도 isDeleted 필터링
+            .sort(
+              (a, b) =>
+                new Date(a.uploadDate).getTime() -
+                new Date(b.uploadDate).getTime(),
+            )
             .map(child => ({
               userId: child.user.userId,
               commentId: child.commentId,
@@ -165,7 +170,7 @@ const DetailFeed = () => {
               uploadDate: child.uploadDate,
               content: child.content,
               likeCnt: child.likeCnt,
-              childComments: [],
+              childComments: [], // 중첩된 자식 댓글을 처리하는 로직
             })) || [],
       }));
 
