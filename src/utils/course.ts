@@ -1,3 +1,5 @@
+import { setCookie } from 'cookies-next';
+
 import {
   DifficultyType,
   SortByType,
@@ -6,6 +8,7 @@ import {
   distanceMap,
   starsMap,
 } from '@/stores/course-filters';
+import { CourseDTO } from '@/types/course';
 
 const difficultyOrder: DifficultyType[] = ['easy', 'moderate', 'hard'];
 
@@ -53,4 +56,9 @@ export const getDifficultyNumber = (difficulty: string) => {
     default:
       return 0;
   }
+};
+
+export const setTrekkingIdCookie = (id: number) => {
+  const convertedId = id.toString();
+  setCookie('trekkingId', id);
 };

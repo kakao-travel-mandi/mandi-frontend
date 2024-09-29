@@ -9,18 +9,27 @@
 }
 
 .chips {
+  z-index: 10;
   position: absolute;
-  top: 0.75rem;
-  display: flex;
-  gap: 0.75rem;
-  overflow-x: scroll;
+}
+
+// .marker-info-card{
+//   position: absolute;
+//   z-index: 10;
+//   bottom: 10px;
+//   margin: 10px;
+// }
+.bottom-area {
+  position: absolute;
   width: 100%;
-  padding: 0 1.3125rem;
-  overflow: visible;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  * {
-    flex-shrink: 0;
-  }
+  bottom: 0;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.dialog-buttons{
+  display: flex;
+  gap: 0.6875rem;
 }

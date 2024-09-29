@@ -1,21 +1,18 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
 
 import CurrentIcon from '@/assets/icon/icon-circle-empty-mono.svg';
 import RefreshIcon from '@/assets/icon/icon-refresh-mono.svg';
-import { useNearbyCoursesMutation } from '@/queries/courseQuery';
+import { useMap } from '@/hooks/useMap';
+import { useNearbyCourse } from '@/hooks/useNearbyCourse';
 import { useMapCourseStore } from '@/stores/map-course';
-import { MapCourseDTO, PointDTO } from '@/types/course';
+import { PointDTO } from '@/types/course';
 import { Position } from '@/types/geolocation';
-import {
-  coordinateToLatLng,
-  getBoundsCoordinates,
-  getCurrentPosition,
-} from '@/utils/geolocation';
+import { getCurrentPosition } from '@/utils/geolocation';
 
 import { MapProvider } from '../../map-provider';
 import CourseDisplayOnMap from '../course-display-on-map/course-display-on-map';
@@ -25,27 +22,18 @@ import MarkerInfoCard from '../marker-info-card/marker-info-card';
 import styles from './course-mapview.module.scss';
 const cx = classNames.bind(styles);
 
-interface CourseMapViewProps {}
-
-const CourseMapView = ({}: CourseMapViewProps) => {
-  const [center, setCenter] = useState<google.maps.LatLngLiteral | null>(null);
+const CourseMapView = () => {
+  const { center, map, onLoad, onUnmount } = useMap();
   const [currentMarkerPosition, setCurrentMarkerPosition] =
     useState<Position | null>(null);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const { courses, selectedItem } = useMapCourseStore();
+  const {
+    handleClickCourse,
+    handleClickEndPoints,
+    handleSearchButtonClick,
+    handleClickMap,
+  } = useNearbyCourse(map);
 
-  const onLoad = useCallback((map: google.maps.Map) => {
-    setMap(map);
-  }, []);
-  const onUnmount = useCallback((map: google.maps.Map) => {
-    setMap(null);
-  }, []);
-  const fetchAndSetInitialCenter = async () => {
-    const currentPosition = await getCurrentPosition();
-    setCenter({
-      lat: currentPosition.latitude,
-      lng: currentPosition.longitude,
-    });
-  };
   const handleCurrentButtonClick = async () => {
     if (!map) return;
     if (currentMarkerPosition === null) {
@@ -58,43 +46,6 @@ const CourseMapView = ({}: CourseMapViewProps) => {
       setCurrentMarkerPosition(null);
     }
   };
-  const handleSearchButtonClick = () => {
-    const bounds = map?.getBounds();
-    if (!bounds) return;
-
-    const coordinates = getBoundsCoordinates(bounds);
-    mutate(coordinates);
-  };
-  const { courses, setCourses, selectedItem, selectItem, resetStore } =
-    useMapCourseStore();
-
-  const { mutate } = useNearbyCoursesMutation({
-    onSuccess: data => {
-      console.log(data);
-      setCourses(data.response.courses);
-    },
-    onError: error => {
-      console.log(error);
-    },
-  });
-  const onClickCourse = (course: MapCourseDTO) => {
-    selectItem({ type: 'course', data: course });
-    map?.panTo(coordinateToLatLng(course.midPoint));
-  };
-  const onClickEndPoints = (point: PointDTO) => {
-    console.log(point);
-    selectItem({ type: 'point', data: point });
-    map?.panTo(coordinateToLatLng(point.coordinate));
-  };
-
-  const onClickMap = () => {
-    selectItem(null);
-  };
-
-  useEffect(() => {
-    fetchAndSetInitialCenter();
-    return () => selectItem(null);
-  }, [selectItem]);
 
   return (
     <div className={cx('container')}>
@@ -110,7 +61,7 @@ const CourseMapView = ({}: CourseMapViewProps) => {
               disableDefaultUI: true,
               clickableIcons: false,
             }}
-            onClick={onClickMap}
+            onClick={handleClickMap}
           >
             {currentMarkerPosition && (
               <CurrentPositionMarker position={currentMarkerPosition} />
@@ -119,8 +70,8 @@ const CourseMapView = ({}: CourseMapViewProps) => {
               <CourseDisplayOnMap
                 key={course.id}
                 course={course}
-                onClickCourse={onClickCourse}
-                onClickEndPoints={onClickEndPoints}
+                onClickCourse={handleClickCourse}
+                onClickEndPoints={handleClickEndPoints}
                 selected={
                   selectedItem?.type === 'course' &&
                   selectedItem.data.id === course.id

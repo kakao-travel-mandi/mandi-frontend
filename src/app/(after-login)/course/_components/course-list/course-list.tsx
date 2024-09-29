@@ -35,7 +35,7 @@ const CourseListItem = ({ course }: CourseListItemProps) => {
       content: course.ratingAverage.toFixed(2),
     },
   ];
-  const handleClick = () => router.push('/course/1');
+  const handleClick = () => router.push(`/course/${course.id}`);
 
   return (
     <div className={cx(BLOCK)} onClick={handleClick}>

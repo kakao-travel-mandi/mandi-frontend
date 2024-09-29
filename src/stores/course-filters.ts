@@ -70,7 +70,9 @@ export const formatCourseFilterParams = (
   filters: CourseFilters,
 ): Pick<GetCoursesRequest, 'orderByDirection' | 'rating' | 'levels'> => {
   const { sortBy, difficulty, stars } = filters;
-  const levels = difficulty.map(d => getDifficultyNumber(d));
+  const levels = difficulty
+    .map(d => getDifficultyNumber(d))
+    .sort((a, b) => a - b);
   return {
     orderByDirection:
       sortBy !== null ? (sortBy.toUpperCase() as 'ASC' | 'DESC') : undefined,

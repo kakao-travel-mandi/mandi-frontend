@@ -6,7 +6,10 @@ export const NO_AUTH_ENDPOINTS = [
   '/profile/check-nickname',
   '/courses',
   '/courses/nearby',
+  '/courses/names',
 ];
+
+export const NO_AUTH_PATTERNS = [/^\/courses\/[^\/]+$/];
 
 export const REFRESH_TOKEN_ENDPOINT = ['/auth/logout', '/auth/withdrawal'];
 

@@ -1,6 +1,11 @@
 import { AxiosResponse } from 'axios';
 
-import { CourseDTO, MapCourseDTO } from './course';
+import {
+  CourseDetailDTO,
+  CourseDTO,
+  CourseNameDTO,
+  MapCourseDTO,
+} from './course';
 import { OauthProvider } from './oauth-provider';
 import { WeatherItem } from './weather';
 
@@ -220,5 +225,26 @@ export interface CourseCompleteResponse {
     message: string;
     status: number;
     errorCode: string;
+  };
+}
+
+
+export interface CourseNamesResponse extends BaseResponse {
+  response: CourseNameDTO[];
+}
+
+export interface GetCourseDetailResponse extends BaseResponse {
+  response: CourseDetailDTO;
+}
+
+export interface StartTrekkingResponse extends BaseResponse {
+  response: {
+    enabled: boolean;
+  };
+}
+
+export interface FinishTrekkingResponse extends BaseResponse {
+  response: {
+    enabled: boolean;
   };
 }

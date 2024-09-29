@@ -53,3 +53,22 @@ export type GetNearbyCoursesRequest = {
   sw: Coordinate;
   ne: Coordinate;
 };
+
+export type GetCourseDetailRequest = {
+  courseId: number;
+};
+
+export type StartTrekkingRequest = {
+  userLocation: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
+export type FinishTrekkingRequest = {
+  userLocation: {
+    latitude: number;
+    longitude: number;
+  };
+  completedAt: string;
+}

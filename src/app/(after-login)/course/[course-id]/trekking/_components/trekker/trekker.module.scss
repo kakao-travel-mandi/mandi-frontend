@@ -1,0 +1,51 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.trekker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0;
+
+  &__name{
+    @extend .label4-semibold;
+    color: $gray-900;
+    margin-bottom: 0.5rem;
+  }
+
+  &__data {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 1.625rem;
+  }
+
+  &__buttons{
+    display: flex;
+    gap: 1.5rem;
+  }
+}
+
+.trekking_data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  flex-basis: 0;
+    &__title{
+      @extend .label3-regular;
+      color: $gray-600;
+    }
+    &__content{
+      @extend .title1-bold;
+      color: $gray-900;
+    }
+}
+
+.divider {
+  width: 1px;
+  height: 2.0625rem;
+  background-color: $gray-200;
+}

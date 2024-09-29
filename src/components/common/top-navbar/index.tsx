@@ -23,6 +23,7 @@ export interface TopNavBarProps {
   back?: boolean;
   topNavColor?: 'white' | 'gray';
   topNavBarClassName?: string;
+  topNavBarContents?: ReactNode;
   onBack?: () => void;
 }
 
@@ -32,7 +33,8 @@ export const TopNavBar = ({
   actions,
   back,
   topNavColor = 'white',
-  topNavBarClassName: topNavBarClassName,
+  topNavBarContents,
+  topNavBarClassName,
   onBack,
 }: TopNavBarProps) => {
   const router = useRouter();
@@ -46,13 +48,21 @@ export const TopNavBar = ({
 
   return (
     <div
-      className={cx(BLOCK, topNavColor && `background-color-${topNavColor}`, topNavBarClassName)}
+      className={cx(
+        BLOCK,
+        topNavColor && `background-color-${topNavColor}`,
+        topNavBarClassName,
+      )}
     >
       <div className={cx(`${BLOCK}__leading`)}>
         {!!logo && logo}
         {back && <IconButton icon={Back} onClick={handleBack} />}
       </div>
-      <div className={cx(`${BLOCK}__height`)} />
+      {topNavBarContents !== undefined ? (
+        <div className={cx(`${BLOCK}__contents`)}>{topNavBarContents}</div>
+      ) : (
+        <div className={cx(`${BLOCK}__height`)}></div>
+      )}
       <div className={cx(`${BLOCK}__title`)}>{title}</div>
       <div className={cx(`${BLOCK}__actions`)}>
         {actions &&

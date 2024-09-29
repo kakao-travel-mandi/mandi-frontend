@@ -1,9 +1,12 @@
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Badge from '@/components/common/badge';
 import Button from '@/components/common/button';
-import { MapCourseDTO, PointDTO } from '@/types/course';
+import { useCourseStart } from '@/hooks/useCourseStart';
+import { MapCourseDTO, NearbyPoint, PointDTO } from '@/types/course';
+import { getDifficultyColor } from '@/utils/course';
 
 import DetailInfo from '../../[course-id]/_components/detail-info/detail-info';
 
@@ -23,23 +26,43 @@ type MarkerInfoCardProps =
       data: PointDTO;
     };
 const MarkerInfoCard = ({ type, data }: MarkerInfoCardProps) => {
+  const router = useRouter();
+  const { handleClickStart } = useCourseStart((data as MapCourseDTO).id);
   const handleClickButton = () => {
     if (type === 'point') {
-      const { latitude, longitude } = data.coordinate;
-      const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+      let url;
+      if (data.hasOwnProperty('id')) {
+        const id = (data as NearbyPoint).id;
+        url = `https://www.google.com/maps/place/?q=place_id:${id}`;
+      } else {
+        const { latitude, longitude } = data.coordinate;
+        url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+      }
+
       window.open(url, '_blank');
+    } else if (type === 'course') {
+      handleClickStart();
     }
+  };
+  const handleClickName = () => {
+    if (type === 'course') router.push(`/course/${data.id}`);
   };
   const handleClickCard = () => {};
   return (
     <div className={cx(BLOCK)} onClick={handleClickCard}>
       <div className={cx(`${BLOCK}__header`)}>
-        <span className={cx(`${BLOCK}__header__name`)}>
+        <span
+          className={cx(`${BLOCK}__header__name`)}
+          onClick={handleClickName}
+        >
           {type === 'course' ? data.courseName : data.name}
         </span>
         {type === 'course' && (
           <>
-            <Badge text='Easy' color='green' />
+            <Badge
+              text={data.difficulty}
+              color={getDifficultyColor(data.difficulty)}
+            />
             <div className={cx(`${BLOCK}__header__bookmark-button`)}>
               <BookmarkIcon
                 className={cx(`${BLOCK}__header__bookmark-button__icon`)}

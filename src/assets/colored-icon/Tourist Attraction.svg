@@ -1,0 +1,21 @@
+<svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Tourist Attraction" filter="url(#filter0_d_2009_25962)">
+<rect x="2" width="24" height="24" rx="12" fill="#FF4BB5"/>
+<rect x="3" y="1" width="22" height="22" rx="11" stroke="white" stroke-width="2"/>
+<g id="Tourist Attraction_2">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M17.2341 12.2466L16.0391 12.6268C15.3873 12.8441 14.8984 13.333 14.6811 13.9848L14.2466 15.2341C14.138 15.5057 13.812 15.5057 13.7577 15.2341L13.3775 14.0391C13.1602 13.3873 12.6714 12.8984 12.0195 12.6811L10.7159 12.2466C10.4443 12.138 10.4443 11.812 10.7159 11.7577L11.9109 11.3775C12.5627 11.1602 13.0516 10.6714 13.2689 10.0195L13.7034 8.71591C13.812 8.44432 14.138 8.44432 14.1923 8.71591L14.5725 9.91091C14.7898 10.5627 15.2786 11.0516 15.9305 11.2689L17.1255 11.6491C17.5057 11.812 17.5057 12.138 17.2341 12.2466ZM13.975 6C10.6616 6 8 8.66159 8 11.975C8 15.2884 10.6616 17.95 13.975 17.95C17.2884 17.95 19.95 15.2884 19.95 11.975C19.95 8.66159 17.2884 6 13.975 6Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_2009_25962" x="0" y="0" width="28" height="29" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="3"/>
+<feGaussianBlur stdDeviation="1"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2009_25962"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2009_25962" result="shape"/>
+</filter>
+</defs>
+</svg>

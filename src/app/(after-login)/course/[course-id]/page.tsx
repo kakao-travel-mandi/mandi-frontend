@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -9,8 +10,15 @@ import { useRouter } from 'next/navigation';
 import BookmarkIconStroke from '@/assets/icon/icon-bookmark-Stroke.svg';
 import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Button from '@/components/common/button';
+import Dialog from '@/components/common/dialog';
 import Divider from '@/components/common/divider';
 import Layout from '@/components/layout';
+import { useCourseStart } from '@/hooks/useCourseStart';
+import { useCourseDetailQuery } from '@/queries/courseQuery';
+import { setTrekkingIdCookie } from '@/utils/course';
+
+import CourseDisplayOnMap from '../_components/course-display-on-map/course-display-on-map';
+import { MapProvider } from '../map-provider';
 
 import CoursePoints from './_components/course-points/course-points';
 import DetailInfo from './_components/detail-info/detail-info';
@@ -22,6 +30,10 @@ const cx = classNames.bind(styles);
 
 const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
   const { 'course-id': courseId } = params;
+  const { data, status, error } = useCourseDetailQuery({
+    courseId: Number(courseId),
+  });
+  const { loading, handleClickStart } = useCourseStart(Number(courseId));
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
@@ -44,13 +56,20 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
+    if (container && status === 'success') {
       container.addEventListener('scroll', handleScroll);
       return () => {
         container.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [handleScroll]);
+  }, [status, handleScroll]);
+
+  useEffect(() => {
+    if (status === 'error' && error.status === 404) {
+      router.push('/'); // 홈으로 리다이렉트
+    }
+  }, [status, error, router]);
+
   return (
     <Layout
       hasTopNav={true}
@@ -67,52 +86,89 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
         },
       ]}
     >
-      <div className={cx('container')} ref={containerRef}>
-        <div className={cx('representative-image')}>
-          <Image
-            src={'/dummy-image.png'}
-            alt='shinsundea'
-            layout='fill'
-            objectFit='cover'
-          />
-        </div>
-        <div className={cx('overview-section')}>
-          <h1 className={cx('course-name')}>Sinseondea</h1>
-          <div className={cx('course-details')}>
-            <DetailInfo type='difficulty' content='Easy' />
-            <DetailInfo type='duration' content='1:30' />
-            <DetailInfo type='distance' content='1.93 km' />
-            <DetailInfo
-              type='points'
-              content={{ startPoint: '해운대', endPoint: '봉오리산' }}
+      {status === 'success' && (
+        <div className={cx('container')} ref={containerRef}>
+          <div className={cx('representative-image')}>
+            <Image
+              src={data.response.imgUrl}
+              alt={data.response.courseName}
+              layout='fill'
+              objectFit='cover'
             />
           </div>
+          <div className={cx('overview-section')}>
+            <h1 className={cx('course-name')}>{data.response.courseName}</h1>
+            <div className={cx('course-details')}>
+              <DetailInfo
+                type='difficulty'
+                content={data.response.difficulty}
+              />
+              <DetailInfo type='duration' content={data.response.duration} />
+              <DetailInfo
+                type='distance'
+                content={`${data.response.distance}km`}
+              />
+              <DetailInfo
+                type='points'
+                content={{
+                  startPoint: data.response.startPoint.name,
+                  endPoint: data.response.endPoint.name,
+                }}
+              />
+            </div>
+          </div>
+          <Divider />
+          <div className={cx('location-section')}>
+            <h3 className={cx('section-title')}>Course Location</h3>
+            <CoursePoints
+              type='start'
+              address={data.response.startPoint.address}
+            />
+            <CoursePoints type='end' address={data.response.endPoint.address} />
+            <div className={cx('course-image')}>
+              <MapProvider>
+                <GoogleMap
+                  mapContainerStyle={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  center={{
+                    lat: data.response.startPoint.coordinate.latitude,
+                    lng: data.response.startPoint.coordinate.longitude,
+                  }}
+                  zoom={13}
+                  options={{
+                    disableDefaultUI: true,
+                    clickableIcons: false,
+                  }}
+                >
+                  <CourseDisplayOnMap
+                    course={data.response as any}
+                    visibleMidPoint={false}
+                  />
+                </GoogleMap>
+              </MapProvider>
+            </div>
+            <Button color='green' size='full' onClick={handleClickStart}>
+              {loading ? 'Loading...' : 'Start Course'}
+            </Button>
+          </div>
+          <Divider />
+          <div className={cx('review-overview-section')}>
+            <ReviewOverview />
+          </div>
+          <div className={cx('review-list-section')}>
+            <ReviewList maxCount={2} hasFilter={false} />
+            <Button
+              color='white'
+              size='small'
+              onClick={handleMoreRewiewsButtonClick}
+            >
+              more reviews
+            </Button>
+          </div>
         </div>
-        <Divider />
-        <div className={cx('location-section')}>
-          <h3 className={cx('section-title')}>Course Location</h3>
-          <CoursePoints type='start' address='Yongdang-dong, Nam-gu, Busan' />
-          <CoursePoints type='end' address='Yongdang-dong, Nam-gu, Busan' />
-          <div className={cx('course-image')}></div>
-          <Button color='green' size='full'>
-            Course Start
-          </Button>
-        </div>
-        <Divider />
-        <div className={cx('review-overview-section')}>
-          <ReviewOverview />
-        </div>
-        <div className={cx('review-list-section')}>
-          <ReviewList maxCount={2} hasFilter={false} />
-          <Button
-            color='white'
-            size='small'
-            onClick={handleMoreRewiewsButtonClick}
-          >
-            more reviews
-          </Button>
-        </div>
-      </div>
+      )}
     </Layout>
   );
 };

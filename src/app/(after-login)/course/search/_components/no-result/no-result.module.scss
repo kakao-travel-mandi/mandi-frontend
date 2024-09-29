@@ -1,0 +1,30 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.no-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+
+  &__icon{
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+  &__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    width: 8.5rem;
+    &__title{
+      @extend .body2-semibold;
+      color: $gray-800;
+    }
+    &__desc{
+      @extend .label4-regular;
+      color: $gray-600;
+      text-align: center;
+    }
+  }
+}

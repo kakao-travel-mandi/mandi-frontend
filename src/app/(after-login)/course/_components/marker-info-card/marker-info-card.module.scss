@@ -19,6 +19,7 @@
       color: $gray-900;
       @extend .title2-bold;    
       margin-right: 0.5rem;
+      cursor: pointer;
     }
 
     &__bookmark-button {

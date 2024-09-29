@@ -4,6 +4,7 @@ import { signOut } from 'next-auth/react';
 import {
   MAX_TIMEOUT_TIME,
   NO_AUTH_ENDPOINTS,
+  NO_AUTH_PATTERNS,
   REFRESH_TOKEN_ENDPOINT,
 } from '@/constants/api';
 import {
@@ -39,8 +40,9 @@ axiosInstance.interceptors.request.use(
   request => {
     const accessToken = getAccessToken();
 
-    const isNoAuthEndpoint = NO_AUTH_ENDPOINTS.includes(request.url ?? '');
-
+    const isNoAuthEndpoint =
+      NO_AUTH_ENDPOINTS.includes(request.url ?? '') ||
+      NO_AUTH_PATTERNS.some(pattern => pattern.test(request.url ?? ''));
     if (accessToken && !isNoAuthEndpoint) {
       if (REFRESH_TOKEN_ENDPOINT.includes(request.url ?? '')) {
         console.log(request.url);

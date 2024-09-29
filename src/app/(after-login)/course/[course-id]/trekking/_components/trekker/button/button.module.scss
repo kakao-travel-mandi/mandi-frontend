@@ -1,0 +1,34 @@
+@use "@/styles/color.scss" as *;
+@use "@/styles/font.scss" as *;
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.button {
+  padding: 0.75rem;
+  border-radius: 6.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &--red {
+    background-color: $red;
+  }
+  &--black {
+    background-color: $gray-800;
+  }
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: white;
+  }
+}
+
+
+.description {
+  @extend .label6-semibold;
+  color: $gray-700;
+}

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import useCourseFiltersWithUrl from '@/hooks/useCourseFiltersWithUrl';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useCoursesQuery } from '@/queries/courseQuery';
-import useInfiniteScroll from '@/queries/useInfiniteScroll';
 import {
   formatCourseFilterParams,
   useCourseFiltersStore,
@@ -17,7 +17,6 @@ import FilterBottomsheet from '../filter-bottomsheet/filter-bottomsheet';
 
 import styles from './filtered-course.module.scss';
 
-
 const cx = classNames.bind(styles);
 
 const FilteredCourse = () => {
@@ -26,7 +25,8 @@ const FilteredCourse = () => {
   const [isFilterOpened, setFilterOpened] = useState(false);
 
   const courseQuery = useCoursesQuery(formatCourseFilterParams(filters));
-  const { loadMoreRef, data, status } = useInfiniteScroll(courseQuery);
+  const { loadMoreRef, data, status, isFetching } =
+    useInfiniteScroll(courseQuery);
 
   const handleCloseFilter = () => {
     setFilters(filters);

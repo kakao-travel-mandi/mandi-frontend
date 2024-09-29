@@ -37,12 +37,9 @@ module.exports = withPWA({
         hostname: 'mandi-image.s3.ap-northeast-2.amazonaws.com',
       },
       {
-        // TODO: 백엔드 분들도 임시로 준거라 추후 사라져야함.
         protocol: 'https',
-        hostname: 'shorturl.at',
+        hostname: 'mandi-courses.s3.ap-northeast-2.amazonaws.com',
       },
-    ],
-    remotePatterns: [
       {
         protocol: 'https',
         hostname: 'github.com',
