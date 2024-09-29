@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import IconClock from '@/assets/icon/icon-clock.svg';
 import IconEllipsisVertical from '@/assets/icon/icon-ellipsis-vertical.svg';
@@ -35,8 +36,8 @@ const ModalReviewSectionUp = ({
   distance,
   date,
 }: ModalReviewSectionUpProps) => {
+  const router = useRouter();
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [deleteReview, setDeleteReview] = useState(false);
   const { mutate } = useDeleteCompletedReview();
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -45,14 +46,12 @@ const ModalReviewSectionUp = ({
     mutate(`${CourseId}`, {
       onSuccess: () => {
         console.log('리뷰 삭제 성공!');
-        setDeleteReview(true);
+        router.push('/my-info/course-review');
       },
     });
     setDialogOpen(false);
   };
-  if (deleteReview) {
-    return null;
-  }
+
   return (
     <>
       {modal === 'write' ? (
