@@ -1,9 +1,13 @@
+import { Suspense } from 'react';
+
 import localFont from 'next/font/local';
 
 import { SnackbarRoot } from '@/components/common/snackbar/snackbar-root';
 import { MSWComponent } from '@/components/msw/msw';
 import AuthContext from '@/context/AuthContext';
 import QueryProvider from '@/queries/QueryProvider';
+
+import Loading from './loading';
 
 import type { Metadata } from 'next';
 
@@ -264,7 +268,9 @@ export default function RootLayout({
     <html lang='ko'>
       <AuthContext>
         <body className={Pretendard.className}>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </QueryProvider>
           <SnackbarRoot />
           <MSWComponent />
         </body>
