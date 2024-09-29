@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import styles from './statics-panel.module.scss';
 
@@ -6,12 +7,11 @@ const BLOCK = 'statics-panel';
 
 const cx = classNames.bind(styles);
 
-// TODO: 아이콘이미지를 받아오는건지? 그리고 api 확인
-
 interface StaticsPanelProps {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   title: string;
   value: number;
+  route: string;
   className?: string;
 }
 
@@ -19,10 +19,13 @@ export const StaticsPanel = ({
   icon: Icon,
   title,
   value,
+  route,
   className,
 }: StaticsPanelProps) => {
+  const router = useRouter();
+  const handleClick = () => router.push(route);
   return (
-    <div className={cx(BLOCK, className)}>
+    <div className={cx(BLOCK, className)} onClick={handleClick}>
       <div className={cx(`${BLOCK}__icon`)}>
         <Icon />
       </div>

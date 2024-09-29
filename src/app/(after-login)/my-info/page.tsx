@@ -27,11 +27,13 @@ const MyInfo = () => {
       icon: Pencil,
       title: 'My course review',
       value: userInfo.response.totalReviews,
+      route: '/my-info/course-review',
     },
     {
       icon: Flag,
       title: 'Completed Courses',
       value: userInfo.response.completedCourses,
+      route: '/my-info/complete-course-review',
     },
   ];
 
@@ -53,7 +55,7 @@ const MyInfo = () => {
             />
           ))}
         </div>
-        <MyInfoDown></MyInfoDown>
+        <MyInfoDown />
       </div>
     </Layout>
   );

@@ -9,8 +9,6 @@ import { getCurrentPosition } from '@/utils/geolocation';
 
 import { useSnackbar } from './useSnackbar';
 
-
-
 export const useCourseStart = (courseId: number) => {
   const [loading, setLoading] = useState(false);
   const { createSnackbar } = useSnackbar();
@@ -22,6 +20,7 @@ export const useCourseStart = (courseId: number) => {
         setCookie('trekkingId', courseId.toString());
         resetTracking();
         router.push(`/course/${courseId}/trekking`);
+        return;
       } else {
         createSnackbar({
           type: 'alert',
