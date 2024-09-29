@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
-import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
+// import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Badge from '@/components/common/badge';
 import Button from '@/components/common/button';
 import { useCourseStart } from '@/hooks/useCourseStart';
@@ -63,11 +63,11 @@ const MarkerInfoCard = ({ type, data }: MarkerInfoCardProps) => {
               text={data.difficulty}
               color={getDifficultyColor(data.difficulty)}
             />
-            <div className={cx(`${BLOCK}__header__bookmark-button`)}>
+            {/* <div className={cx(`${BLOCK}__header__bookmark-button`)}>
               <BookmarkIcon
                 className={cx(`${BLOCK}__header__bookmark-button__icon`)}
               />
-            </div>
+            </div> */}
           </>
         )}
       </div>

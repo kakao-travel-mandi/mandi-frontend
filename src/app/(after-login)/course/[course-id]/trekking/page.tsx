@@ -31,11 +31,6 @@ import ResultPage from './_components/result-page/result-page';
 import Trekker from './_components/trekker/trekker';
 import styles from './page.module.scss';
 
-
-
-
-
-
 const cx = classNames.bind(styles);
 
 const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
@@ -110,17 +105,27 @@ const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
   useEffect(() => {
     let updateIntervalId: NodeJS.Timeout;
 
-    updateIntervalId = setInterval(async () => {
-      const currentPosition = await getCurrentPosition();
-      setCurrentMarkerPosition({
-        lat: currentPosition.latitude,
-        lng: currentPosition.longitude,
-      });
-      if (state === 'Running') updateTracking(currentPosition, Date.now());
-    }, 60000);
+    if (!showResult) {
+      updateIntervalId = setInterval(async () => {
+        try {
+          const currentPosition = await getCurrentPosition();
+          setCurrentMarkerPosition({
+            lat: currentPosition.latitude,
+            lng: currentPosition.longitude,
+          });
+          if (state === 'Running') {
+            updateTracking(currentPosition, Date.now());
+          }
+        } catch (error) {
+          console.error('Error getting current position:', error);
+        }
+      }, 60000);
+    }
 
-    return () => clearInterval(updateIntervalId);
-  }, [state, updateTracking]);
+    return () => {
+      if (updateIntervalId) clearInterval(updateIntervalId);
+    };
+  }, [state, updateTracking, showResult]);
 
   useEffect(() => {
     if (courseStatus === 'error' && CourseError.status === 404) {

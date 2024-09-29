@@ -38,6 +38,9 @@ const Course = () => {
           leftIcon={<IconSearch width={20} height={20} />}
           rightIcon={<IconXCircle width={20} height={20} />}
           className={cx(layout === 'map' && 'map-searchbox__input')}
+          style={{
+            pointerEvents: 'none',
+          }}
         />
       </div>
       {layout === 'list' ? (
