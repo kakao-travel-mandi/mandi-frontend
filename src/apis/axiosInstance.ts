@@ -5,6 +5,7 @@ import {
   MAX_TIMEOUT_TIME,
   NO_AUTH_ENDPOINTS,
   NO_AUTH_PATTERNS,
+  REFRESH_TOKEN_ENDPOINT,
 } from '@/constants/api';
 import {
   deleteAccessToken,
@@ -43,7 +44,12 @@ axiosInstance.interceptors.request.use(
       NO_AUTH_ENDPOINTS.includes(request.url ?? '') ||
       NO_AUTH_PATTERNS.some(pattern => pattern.test(request.url ?? ''));
     if (accessToken && !isNoAuthEndpoint) {
-      request.headers.Authorization = `Bearer ${accessToken}`;
+      if (REFRESH_TOKEN_ENDPOINT.includes(request.url ?? '')) {
+        console.log(request.url);
+        request.headers.Authorization = `${accessToken}`;
+      } else {
+        request.headers.Authorization = `Bearer ${accessToken}`;
+      }
     }
 
     return request;

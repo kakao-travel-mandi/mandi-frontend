@@ -6,12 +6,10 @@ import { TabGroup, TabList } from '@headlessui/react';
 import classNames from 'classnames/bind';
 import { usePathname } from 'next/navigation';
 
-import Scrap from '@/assets/tabbar/icon-bookmark.svg';
 import Community from '@/assets/tabbar/icon-chat-bubble-oval-left-ellipsis.svg';
 import Home from '@/assets/tabbar/icon-home.svg';
 import Course from '@/assets/tabbar/icon-map.svg';
 import User from '@/assets/tabbar/icon-user-mono.svg';
-import { PATHNAME } from '@/constants/pathname';
 
 import styles from './index.module.scss';
 import { TabItem } from './tab-item';
@@ -24,9 +22,8 @@ const BLOCK = 'tab-bar';
 const tabData = [
   { id: 1, title: 'Home', icon: Home, url: '/home' },
   { id: 2, title: 'Course', icon: Course, url: '/course' },
-  { id: 3, title: 'Scrap', icon: Scrap, url: '/scrap' },
-  { id: 4, title: 'Community', icon: Community, url: '/community' },
-  { id: 5, title: 'My', icon: User, url: '/my-info' },
+  { id: 3, title: 'Community', icon: Community, url: '/community' },
+  { id: 4, title: 'My', icon: User, url: '/my-info' },
 ];
 
 export interface TabBarProps {
