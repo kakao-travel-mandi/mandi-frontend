@@ -13,6 +13,7 @@ import { Menubox } from '@/components/common/menubox';
 import { useSnackbar } from '@/hooks/useSnackbar';
 import { useGetAuthId } from '@/queries/authQuery';
 import {
+  useDeleteComment,
   useDeleteCommentLike,
   usePostCommentLike,
 } from '@/queries/commentQuery';
@@ -32,6 +33,7 @@ export interface Comment {
   content: string;
   likeCnt: number;
   childComments?: Comment[];
+  isDeleted?: boolean;
 }
 interface CommentItemProps {
   comment: Comment;
@@ -48,6 +50,7 @@ const CommentItem = ({
   const { data: currentUserId } = useGetAuthId();
   const { mutate: deleteLike } = usePostCommentLike();
   const { mutate: addLike } = useDeleteCommentLike();
+  const { mutate: deleteComment } = useDeleteComment();
 
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.likeCnt);
@@ -55,7 +58,7 @@ const CommentItem = ({
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const menuBoxItem =
-    Number(currentUserId.response) === comment.userId
+    Number(currentUserId?.response) === comment.userId
       ? [
           {
             content: 'Delete',
@@ -90,8 +93,8 @@ const CommentItem = ({
     setDialogOpen(false);
   };
   const handleDeleteSubmit = () => {
-    //api 댓글삭제
-    alert('api 연결 필요');
+    console.log(comment.commentId);
+    deleteComment(`${comment.commentId}`);
     setCommentDelete(true);
     createSnackbar({ type: 'alert', content: 'The comment has been deleted.' });
   };

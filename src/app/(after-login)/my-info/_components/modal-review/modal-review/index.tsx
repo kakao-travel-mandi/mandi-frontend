@@ -6,6 +6,7 @@ import ModalReviewSectionUp from '@/app/(after-login)/my-info/_components/modal-
 import styles from './modalReview.module.scss';
 
 export interface ModalReviewProps {
+  CourseId?: number;
   img: string;
   title: string;
   time?: number | string;
@@ -22,6 +23,7 @@ export interface ModalReviewProps {
 const cx = classNames.bind(styles);
 
 const ModalReview = ({
+  CourseId,
   modal,
   img,
   title,
@@ -36,6 +38,7 @@ const ModalReview = ({
   return (
     <div className={cx('container')}>
       <ModalReviewSectionUp
+        CourseId={CourseId ?? 1}
         modal={modal}
         img={img}
         title={title}

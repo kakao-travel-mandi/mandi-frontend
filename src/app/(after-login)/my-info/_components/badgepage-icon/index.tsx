@@ -3,8 +3,6 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import IconLockClosed from '@/assets/icon/icon-lock-closed.svg';
-
 import styles from './badgepageIcon.module.scss';
 
 const cx = classNames.bind(styles);
@@ -23,7 +21,7 @@ export interface BadgePageIconProps {
 const BadgePageIcon = ({
   text,
   icon,
-  disable = false,
+  disable,
   onClick,
 }: BadgePageIconProps) => {
   const handleClick = () => {
@@ -34,18 +32,12 @@ const BadgePageIcon = ({
 
   return (
     <div onClick={handleClick} className={cx('badgePageIcon')}>
-      <div
-        className={cx(
-          'badgePageIcon__content',
-          disable && 'badgePageIcon__content__disable',
-        )}
-      >
-        {disable ? (
-          <IconLockClosed />
-        ) : (
-          icon && <Image src={icon} width={40} height={40} alt='badge' />
-        )}
-      </div>
+      <Image
+        src={icon ?? '/badge/mountain.svg'}
+        width={82}
+        height={82}
+        alt='badge'
+      />
       <div className={cx('badgePageIcon__text', 'label3-regular')}>{text}</div>
     </div>
   );

@@ -23,14 +23,14 @@ const ReviewCourseList = ({
           <IconCompletedCourses />
           Completed Courses
         </span>
-        <span className={cx('body2-semibold ')}>{completedCourses}</span>
+        <span className={cx('body2-semibold ')}>{completedCourses ?? 0}</span>
       </div>
       <div className={cx('container__conetent')}>
         <span className={cx('label6-semibold')}>
           <IconTotalDistance />
           Total Distance
         </span>
-        <span className={cx('body2-semibold ')}>{totalDistance} km</span>
+        <span className={cx('body2-semibold ')}>{totalDistance ?? 0} km</span>
       </div>
     </div>
   );
