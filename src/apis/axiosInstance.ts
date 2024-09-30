@@ -19,7 +19,7 @@ import {
 import { refreshTokenAPI } from './auth';
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_PROXY_BASE_URL,
   timeout: MAX_TIMEOUT_TIME,
   headers: {
     'Content-Type': 'application/json',
