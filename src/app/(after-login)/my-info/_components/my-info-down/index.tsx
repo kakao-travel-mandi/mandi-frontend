@@ -20,7 +20,7 @@ const MyInfoDown = () => {
     router.push('/my-info/my-badge');
   };
   const handleTermsUseClick = () => {
-    router.push('/privacy-policy');
+    router.push('/terms-use');
   };
   const handlePrivacyPolicyClick = () => {
     router.push('/privacy-policy');
