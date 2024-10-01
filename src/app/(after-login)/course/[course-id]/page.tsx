@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 // import BookmarkIcon from '@/assets/icon/icon-bookmark.svg';
 import Button from '@/components/common/button';
 import Divider from '@/components/common/divider';
+import { TopNavBar } from '@/components/common/top-navbar';
 import Layout from '@/components/layout';
 import { useCourseStart } from '@/hooks/useCourseStart';
 import { useCourseDetailQuery } from '@/queries/courseQuery';
@@ -70,13 +71,19 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
 
   return (
     <Layout
-      hasTopNav={true}
+      hasTopNav={false}
       hasTabBar={false}
-      back={true}
-      topNavBarClassName={cx('navbar', {
-        'navbar--not-scrolled': !scrolled,
-      })}
+      // back={true}
+      // topNavBarClassName={cx('navbar', {
+      //   'navbar--not-scrolled': !scrolled,
+      // })}
     >
+      <TopNavBar
+        back={true}
+        topNavBarClassName={cx('navbar', {
+          'navbar--not-scrolled': !scrolled,
+        })}
+      />
       {status === 'success' && (
         <div className={cx('container')} ref={containerRef}>
           <div className={cx('representative-image')}>
@@ -145,6 +152,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
               {loading ? 'Loading...' : 'Start Course'}
             </Button>
           </div>
+          <div style={{ height: '20px' }} />
           {/* <Divider />
           <div className={cx('review-overview-section')}>
             <ReviewOverview />
