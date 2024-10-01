@@ -1,5 +1,6 @@
 import { GoogleMap } from '@react-google-maps/api';
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 
 import CourseDisplayOnMap from '@/app/(after-login)/course/_components/course-display-on-map/course-display-on-map';
 import CurrentPositionMarker from '@/app/(after-login)/course/_components/current-position-marker/current-position-marker';
@@ -13,8 +14,6 @@ import { formatDistance, formatTime } from '@/utils/trekker';
 import { TrekkingData } from '../trekker/trekker';
 
 import styles from './result-page.module.scss';
-
-
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +30,14 @@ const ResultPage = ({
   totalDistance,
   lastPosition,
 }: ResultPageProps) => {
+  const router = useRouter();
+
+  const handleClickSkip = () => {
+    router.push('/');
+  };
+  const handleClickReview = () => {
+    //TODO: 구현 필요
+  };
   return (
     <Layout hasTabBar={false} hasTopNav={true} back={true}>
       <div className={cx('container')}>
@@ -73,10 +80,10 @@ const ResultPage = ({
           </div>
         </div>
         <div className={cx('bottom-buttons')}>
-          <Button size='full' color='whitegray'>
+          <Button size='full' color='whitegray' onClick={handleClickSkip}>
             Skip
           </Button>
-          <Button size='full' color='green'>
+          <Button size='full' color='green' onClick={handleClickReview}>
             Review
           </Button>
         </div>

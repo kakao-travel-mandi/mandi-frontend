@@ -26,11 +26,12 @@ const BadgePageIconInfo = ({
       <div
         className={cx('container__icon', disable && 'container__icon__disable')}
       >
-        {disable ? (
-          <IconLockClosed />
-        ) : (
-          icon && <Image src={icon} width={40} height={40} alt='badge' />
-        )}
+        <Image
+          src={icon ?? '/badge/mountain.svg'}
+          width={82}
+          height={82}
+          alt='badge'
+        />
       </div>
       <div className={cx('container__text')}>
         <span className={cx('label1-semibold')}>{text}</span>

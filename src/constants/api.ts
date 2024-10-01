@@ -7,6 +7,7 @@ export const NO_AUTH_ENDPOINTS = [
   '/courses',
   '/courses/nearby',
   '/courses/names',
+  '/auth/reissue',
 ];
 
 export const NO_AUTH_PATTERNS = [/^\/courses\/[^\/]+$/];

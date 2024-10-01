@@ -91,6 +91,7 @@ const CommunityFeed = ({
     deletePost(`${postId}`, {
       onSuccess: () => {
         setDeleteSuccess(true);
+        router.push(`/community`);
       },
     });
     setIsBottomSheetOpen(false);

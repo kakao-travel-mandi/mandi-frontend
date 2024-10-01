@@ -143,6 +143,7 @@ export interface Comment {
   uploadDate: string; // 댓글 작성 시간
   content: string; // 댓글 내용
   likeCnt: number; // 좋아요 수
+  isDeleted: boolean;
 }
 export interface GetPostIdResponse {
   success: boolean;
@@ -227,7 +228,6 @@ export interface CourseCompleteResponse {
     errorCode: string;
   };
 }
-
 
 export interface CourseNamesResponse extends BaseResponse {
   response: CourseNameDTO[];
