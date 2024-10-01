@@ -26,7 +26,8 @@ export const useCourseStart = (courseId: number) => {
           type: 'alert',
           position: 'center',
           content:
-            '코스를 시작하려면 시작 지점으로부터 100m 이내에 있어야 합니다. 현재 위치를 확인해주세요.',
+            // '코스를 시작하려면 시작 지점으로부터 100m 이내에 있어야 합니다. 현재 위치를 확인해주세요.',
+            'You must be within 100 meters of the starting point to begin the course. Please check your current location.',
           full: true,
         });
       }
@@ -56,7 +57,7 @@ export const useCourseStart = (courseId: number) => {
     } catch (error) {
       createSnackbar({
         type: 'alert',
-        content: '위치 정보를 가져오는데 실패했습니다.',
+        content: 'Failed to retrieve location information.',
       });
     }
   };
