@@ -162,6 +162,7 @@ const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
               options={{
                 disableDefaultUI: true,
                 clickableIcons: false,
+                gestureHandling: 'greedy',
               }}
               onLoad={onLoad}
               onUnmount={onUnmount}
@@ -209,7 +210,8 @@ const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
         disableDrag={true}
         hasHeader={false}
         initialSnap={0}
-        snapPoints={[230]}
+        snapPoints={[225]}
+        contentHeight={true}
       >
         <Trekker
           courseName={course?.response.courseName!}
@@ -218,6 +220,11 @@ const TrakingPage = ({ params }: { params: { 'course-id': string } }) => {
           distance={totalDistance}
           handleClickStop={handleClickStop}
           handleClickPlayAndPause={handleClickPlayAndPause}
+        />
+        <div
+          style={{
+            height: '10px',
+          }}
         />
       </DraggableBottomSheet>
       <Dialog
