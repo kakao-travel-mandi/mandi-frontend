@@ -181,17 +181,12 @@ const Main = () => {
                   <p className={cn(`${BLOCK}__modal--terms-button-text`)}>
                     (Required) Agree to Personal Information Collection and Use
                   </p>
-                  <button
+                  <IconArrowRightSmallMono
+                    width={20}
+                    height={20}
                     className={cn(`${BLOCK}__modal--terms-button-icon`)}
                     onClick={() => router.push('/privacy-policy')}
-                  >
-                    <IconArrowRightSmallMono
-                      width={20}
-                      height={20}
-                      className={cn(`${BLOCK}__modal--terms-button-icon`)}
-                      onClick={() => router.push('/privacy-policy')}
-                    />
-                  </button>
+                  />
                 </button>
               </div>
               <Button
