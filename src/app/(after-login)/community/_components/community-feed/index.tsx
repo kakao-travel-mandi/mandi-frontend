@@ -139,9 +139,13 @@ const CommunityFeed = ({
         </div>
 
         <div
-          className={cx('body2-regular', {
-            container__post__body: !detail,
-          })}
+          className={cx(
+            'body2-regular',
+            {
+              container__post__body: !detail,
+            },
+            'container__post__body__style',
+          )}
         >
           {communityPost}
         </div>

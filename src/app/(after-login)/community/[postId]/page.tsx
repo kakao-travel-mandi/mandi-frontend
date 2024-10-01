@@ -16,7 +16,7 @@ import { usePostCommentAdd } from '@/queries/commentQuery';
 import { useMyInfoQuery } from '@/queries/myInfoQuery';
 import { useGetPostId } from '@/queries/postQuery';
 
-import styles from './detailFeed.module.scss';
+import styles from './detailFeeds.module.scss';
 
 const cx = classNames.bind(styles);
 
