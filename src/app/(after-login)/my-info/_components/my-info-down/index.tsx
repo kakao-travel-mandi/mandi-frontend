@@ -20,10 +20,10 @@ const MyInfoDown = () => {
     router.push('/my-info/my-badge');
   };
   const handleTermsUseClick = () => {
-    router.push('/my-info/privacy-policy');
+    router.push('/terms-use');
   };
   const handlePrivacyPolicyClick = () => {
-    router.push('/my-info/privacy-policy');
+    router.push('/privacy-policy');
   };
   const handleOpenSourceLicenseClick = () => {
     alert('오픈 소스 라이선스는 필요시 추가합니다.');
