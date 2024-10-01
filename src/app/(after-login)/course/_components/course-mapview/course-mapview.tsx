@@ -60,6 +60,7 @@ const CourseMapView = () => {
             options={{
               disableDefaultUI: true,
               clickableIcons: false,
+              gestureHandling: 'greedy',
             }}
             onClick={handleClickMap}
           >

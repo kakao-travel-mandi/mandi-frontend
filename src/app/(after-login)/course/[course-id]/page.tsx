@@ -131,6 +131,7 @@ const CourseDetailPage = ({ params }: { params: { 'course-id': string } }) => {
                   options={{
                     disableDefaultUI: true,
                     clickableIcons: false,
+                    gestureHandling: 'greedy',
                   }}
                 >
                   <CourseDisplayOnMap

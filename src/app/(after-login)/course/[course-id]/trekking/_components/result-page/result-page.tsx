@@ -37,6 +37,7 @@ const ResultPage = ({
   };
   const handleClickReview = () => {
     //TODO: 구현 필요
+    router.push('/my-info/complete-course-review');
   };
   return (
     <Layout hasTabBar={false} hasTopNav={true} back={true}>

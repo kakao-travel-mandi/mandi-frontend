@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { Sheet } from 'react-modal-sheet';
 
 import classNames from 'classnames/bind';
 
 import styles from './index.module.scss';
 
-const baseSnapPoints = [-118, 0.4, 0];
+const baseSnapPoints = [-118, 0.35, 0];
 const baseInitialSnap = 1;
 
 interface DraggableBottomSheetProps {
@@ -13,6 +14,7 @@ interface DraggableBottomSheetProps {
   hasHeader?: boolean;
   snapPoints?: number[];
   initialSnap?: number;
+  contentHeight?: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
@@ -26,9 +28,21 @@ const DraggableBottomSheet = ({
   initialSnap = baseInitialSnap,
   disableDrag,
   hasHeader = true,
+  contentHeight = false,
   onClose,
   children,
 }: DraggableBottomSheetProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
   return (
     <Sheet
       isOpen={isOpen}
@@ -36,7 +50,7 @@ const DraggableBottomSheet = ({
       snapPoints={snapPoints}
       initialSnap={initialSnap}
       disableDrag={disableDrag}
-      detent='full-height'
+      detent={contentHeight ? 'content-height' : 'full-height'}
       className={cx(BLOCK)}
     >
       <Sheet.Container className={cx(`${BLOCK}__container`)}>
