@@ -2,29 +2,20 @@
 
 
 .layout {
-  height: 100%;
-  position: relative;
+  height: 100vh;
 
- 
   &__content {
-    position: relative;
-    height: 100%;
-    overflow-y: scroll;
-    scrollbar-width: none;
-
-    &--top-nav {
-      height: calc(100vh - 56px);
-    }
-
-    &--tabbar {
-      height: calc(100vh - 52.5px);
-    }
-
-    &--both-nav {
-      height: calc(100vh - 108.5px);
-    }
+   flex-grow: 1;
+   height: 100%;
+   overflow-y: auto; 
+   scrollbar-width: none;
   }
 
+  &__tabbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+  }
  
 }
 
