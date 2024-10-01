@@ -28,10 +28,10 @@ const cn = classNames.bind(styles);
 const BLOCK = 'main';
 
 const Main = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const callback = searchParams.get('callback');
 
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [fade, setFade] = useState(false);
 
@@ -166,6 +166,7 @@ const Main = () => {
                     width={20}
                     height={20}
                     className={cn(`${BLOCK}__modal--terms-button-icon`)}
+                    onClick={() => router.push('/terms-use')}
                   />
                 </button>
                 <button
@@ -180,11 +181,17 @@ const Main = () => {
                   <p className={cn(`${BLOCK}__modal--terms-button-text`)}>
                     (Required) Agree to Personal Information Collection and Use
                   </p>
-                  <IconArrowRightSmallMono
-                    width={20}
-                    height={20}
+                  <button
                     className={cn(`${BLOCK}__modal--terms-button-icon`)}
-                  />
+                    onClick={() => router.push('/privacy-policy')}
+                  >
+                    <IconArrowRightSmallMono
+                      width={20}
+                      height={20}
+                      className={cn(`${BLOCK}__modal--terms-button-icon`)}
+                      onClick={() => router.push('/privacy-policy')}
+                    />
+                  </button>
                 </button>
               </div>
               <Button
