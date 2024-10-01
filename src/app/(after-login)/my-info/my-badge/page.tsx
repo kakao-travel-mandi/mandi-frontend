@@ -37,7 +37,6 @@ const MyBadge = () => {
   if (isError) {
     return <div>Error: {error?.message}</div>;
   }
-  console.log('이미지', data?.response.badges[0].imgUrl);
 
   return (
     <Layout hasTopNav={true} hasTabBar={false} back={true} title='My Badges'>
