@@ -5,6 +5,16 @@
   height: 100%;
   position: relative;
 
+
+  &__tabbar {
+   
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+
  
   &__content {
     position: relative;
