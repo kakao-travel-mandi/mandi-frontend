@@ -47,4 +47,12 @@ module.exports = withPWA({
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/apis/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+      },
+    ];
+  },
 });
